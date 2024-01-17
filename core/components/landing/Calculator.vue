@@ -1,0 +1,92 @@
+<template>
+  <v-card color="n800" rounded="0" class="mt-n2 bottom-background-calculator">
+    <v-container class="py-lg-10 py-6">
+      <v-row justify="space-between">
+        <v-col cols="12" lg="6" class="d-flex flex-column">
+          <h4 class="text-h4 text-text-low-emphasis">
+            {{ $t("calculate_average_income") }}
+          </h4>
+          <h2 class="text-h2 text-text-low-emphasis my-2">
+            {{ $t("with_selling_in_digikala") }}
+          </h2>
+          <div class="text-body-1 text-text-light">
+            {{ $t("with_selling_in_digikala_description") }}
+          </div>
+          <div class="mt-auto">
+            <v-btn
+              variant="text"
+              color="text-light"
+              min-width="fit-content"
+              class="px-0 text-h4"
+            >
+              <v-icon
+                color="text-light"
+                icon="custom:info"
+                class="me-2"
+              ></v-icon>
+              <h4 class="text-h4">{{ $t("do_you_need_more_info") }}</h4>
+            </v-btn>
+            <div class="text-body-1 text-text-light my-2">
+              {{ $t("for_more_info_about_your_intended_group") }}
+            </div>
+            <v-btn class="text-button" color="primary-base">
+              {{ $t("request_more_info") }}
+            </v-btn>
+          </div>
+        </v-col>
+        <v-col cols="12" lg="5">
+          <v-card rounded="lg" height="459">
+            <v-card-text>
+              <div class="text-center">
+                <v-avatar tile size="85">
+                  <v-img
+                    src="/images/logo/1.svg"
+                    max-height="31.26px"
+                    max-width="55.36"
+                    contain
+                    alt="logo"
+                  />
+                </v-avatar>
+                <h4 class="text-h4 text-text-heading mb-6">
+                  {{ $t("your_average_income") }}
+                </h4>
+              </div>
+              <span class="text-text-low-emphasis text-body-1">{{ $t("in_which_category_you_want_to_buy") }}</span>
+              <v-text-field
+                flat
+                base-color="n300"
+                density="compact"
+                variant="outlined"
+                dir="ltr"
+                :label="$t('category')"
+                type="email"
+                persistent-placeholder
+                class="mt-4 mb-6"
+              ></v-text-field>
+              <div class="d-flex justify-space-between mb-4">
+                <span class="text-text-low-emphasis text-body-1">{{ $t('average_income') }}</span>
+                <span class="text-text-heading text-body-1 font-weight-bold">۳۰ تا ۴۰ میلیون تومان</span>
+              </div>
+              <div class="d-flex justify-space-between mb-4">
+                <span class="text-text-low-emphasis text-body-1">{{ $t('commission_margin') }}</span>
+                <span class="text-text-heading text-body-1 font-weight-bold">۳ تا ۵ میلیون تومان</span>
+              </div>
+              <div class="d-flex justify-space-between mb-4">
+                <span class="text-text-low-emphasis text-body-1">{{ $t('shiiping_fee_margin') }}</span>
+                <span class="text-text-heading text-body-1 font-weight-bold">۱ تا ۲ میلیون تومان</span>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
+</template>
+
+<style lang="scss">
+.bottom-background-calculator {
+  background: url("../../public/images/two-circle.svg") no-repeat !important;
+  background-position: left 20% center !important;
+  background-color: rgba(var(--v-theme-n800)) !important;
+}
+</style>

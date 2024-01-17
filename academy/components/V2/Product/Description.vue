@@ -1,0 +1,64 @@
+<template>
+  <v-row>
+    <v-col cols="12" md="5">
+      <v-card image="/images/BG-light-opacity.svg" color="secondary-lighten1">
+        <v-card-text>
+          <v-row>
+            <v-col cols="12" md="6">
+              <div class="text-body-1 text-text-heading">
+                {{ $t("course_capacity") }}
+              </div>
+              <div class="text-subtitle font-weight-bold text-text-heading">
+                {{ item?.sessionCapacity }}
+              </div>
+            </v-col>
+            <v-col cols="12" md="6">
+              <div class="text-body-1 text-text-heading">
+                {{ $t("payment_method") }}
+                <v-icon
+                  color="text-high-emphasis"
+                  icon="custom:messageQuestion"
+                ></v-icon>
+              </div>
+              <div class="text-subtitle font-weight-bold text-text-heading">
+                {{ $t(item?.paymentType || '') }}
+              </div>
+            </v-col>
+            <v-col cols="12" md="12">
+              <div class="text-body-1 text-text-heading">
+                {{ $t("price_for_paticipate_in_course") }}
+              </div>
+              <div class="text-subtitle font-weight-bold text-text-heading">
+                {{ item?.fee }} {{ $t("money_unit") }}
+              </div>
+            </v-col>
+            <v-col cols="12" md="12">
+              <v-btn
+                color="secondary-base"
+                height="48"
+                class="text-text-light text-button"
+                flat
+              >
+                {{ $t("participate_in_the_course") }}
+                <v-icon end icon="custom:chevronLeft"></v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col cols="12" md="7">
+      <v-card>
+        <span class="text-body-1 text-text-high-emphasis">
+          {{ item?.description }}
+        </span>
+      </v-card>
+    </v-col>
+  </v-row>
+</template>
+
+<script setup>
+const props = defineProps({
+  item: Object,
+});
+</script>

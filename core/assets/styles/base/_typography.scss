@@ -1,0 +1,127 @@
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-Thin.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-UltraLight.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-UltraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-Light.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-Regular.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-Medium.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-DemiBold.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanX-DemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-Bold.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-ExtraBold.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-Bold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-Black.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-Bold.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-ExtraBlack.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-Bold.ttf") format("truetype");
+  font-weight: 950;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IRANYekanX";
+  src: url("@core/public/fonts/IRANYekanX-Heavy.ttf") format("truetype");
+  src: url("@core/public/fonts/IRANYekanXFaNum-Bold.ttf") format("truetype");
+  font-weight: 1000;
+  font-style: normal;
+}
+
+.truncate-4 {
+  padding: 0 !important;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+  height: content-fit;
+}
+
+.truncate-3 {
+  padding: 0 !important;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  height: content-fit;
+}
+
+.truncate-2 {
+  padding: 0 !important;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  height: content-fit;
+}
+
+html {
+  font-size: 100% !important; // 1rem = 14px, 8/14 = 56.25%
+
+  @include respond(xxl) {
+    font-size: 100% !important; // 1rem = 8px, 8/16 = 56.25%
+  }
+  @include respond(xl) {
+    font-size: 100% !important; // 1rem = 8px, 8/16 = 56.25%
+  }
+  //   @include respond(lg) {
+  //       font-size: 50% !important;       // 1rem = 8px, 8/16 = 56.25%
+  //   }
+  //   @include respond(md) {
+  //       font-size: 75% !important;       // 1rem = 12px, 10/16 = 50%
+  //   }
+  @include respond(sm) {
+    font-size: 85% !important; // 1rem = 7px, 7/16 = 50%
+  }
+  @include respond(xs) {
+    font-size: 85% !important; // 1rem = 8px, 8/16 = 56.25%
+  }
+}
