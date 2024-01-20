@@ -6,7 +6,8 @@ COPY package*.json /app/
 WORKDIR /app
 # RUN npm set registry https://npm.iranrepo.ir
 RUN npm install -g pnpm
-RUN pnpm i --prefer-offline -P
+# RUN pnpm i --prefer-offline -P
+RUN pnpm run build
 
 ARG API_BASE_URL
 ARG APP_NAME
