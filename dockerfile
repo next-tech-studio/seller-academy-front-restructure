@@ -7,8 +7,7 @@ WORKDIR /app
 # RUN npm set registry https://npm.iranrepo.ir
 RUN npm install -g pnpm
 # RUN pnpm i --prefer-offline -P
-RUN pnpm install
-RUN pnpm run build
+
 
 ARG API_BASE_URL
 ARG APP_NAME
@@ -21,6 +20,10 @@ ARG MODULE
 
 COPY ./${MODULE} /app/${MODULE}
 WORKDIR /app/${MODULE}
+
+WORKDIR /app
+RUN pnpm install
+RUN pnpm run build
 
 EXPOSE 3000
 ADD https://github.com/krallin/tini/releases/download/v0.19.0/tini /tini
