@@ -22,9 +22,8 @@ COPY ./${MODULE} /app/${MODULE}
 WORKDIR /app/${MODULE}
 
 WORKDIR /app
-# RUN pnpm install
-# RUN pnpm run build
-RUN pnpm install --prefer-offline -P
+RUN pnpm install
+RUN pnpm run build
 
 EXPOSE 3000
 ADD https://github.com/krallin/tini/releases/download/v0.19.0/tini /tini
