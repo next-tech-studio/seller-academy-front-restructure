@@ -4,7 +4,7 @@
     :prepend-avatar="item.avatarUrl"
     :title="item.name"
     :subtitle="item.subtitle"
-    :class="{ 'hover': hover, 'active': active }"
+    :class="{ hover: hover, active: active }"
   >
     <template v-slot:prepend>
       <slot name="prepend">
@@ -86,7 +86,8 @@ const props = defineProps({
     }
   }
 }
-#profile-list-item.hover.v-list-item:hover, #profile-list-item.hover.v-list-item.active {
+#profile-list-item.hover.v-list-item:hover,
+#profile-list-item.hover.v-list-item.active {
   .v-list-item-title {
     color: rgba(var(--v-theme-text-light)) !important;
   }

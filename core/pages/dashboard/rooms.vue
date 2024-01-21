@@ -1,48 +1,15 @@
 <template>
-  <v-card :title="$t('rooms')">
-    <v-list
-      :max-width="smAndDown ? '100%' : 300"
-      class="pt-4 px-4"
-      color="secondary"
-    >
-      <template v-for="(item, index) in rooms" :key="index">
-        <app-profile-list-item
-          avatar-size="40px"
-          :item="item"
-          @click="$emit('to:item', item)"
-          :class="{ 'bg-white rounded-md mb-1': smAndDown }"
-        >
-          <template #title>
-            <span class="text-caption text-text-heading font-weight-bold">{{
-              item.title
-            }}</span>
-          </template>
-          <template #subtitle>
-            <span class="text-caption text-text-high-emphasis">{{
-              item?.lastMessage.text || "هیچ پیامی وجود ندارد!"
-            }}</span>
-          </template>
-          <template #append>
-            <div class="d-flex flex-column align-end">
-              <div class="text-caption text-text-high-emphasis">
-                {{ item.lastMessage.since }}
-              </div>
-              <div style="min-height: 30px">
-                <v-btn
-                  icon
-                  size="16"
-                  v-if="item.unreadCount > 0"
-                  flat
-                  class="text-caption d-flex"
-                  >{{ item.unreadCount }}</v-btn
-                >
-              </div>
-            </div>
-          </template>
-          <v-divider></v-divider>
-        </app-profile-list-item>
-      </template>
-    </v-list>
+  <v-card :title="$t('rooms')" class="px-6 py-4">
+    <v-row>
+      <v-col cols="12" md="6" lg="4" v-for="(room,index) in rooms" :key="index">
+      <app-room-card
+        :max-width="296"
+        :item="room"
+        @to:item="toRoom"
+      ></app-room-card>
+      </v-col>
+    </v-row>
+
   </v-card>
 </template>
 <script setup>

@@ -1,4 +1,6 @@
 import panelTable from "~/mappers/models/schema/panelTable";
+import panelRoom from "~/mappers/models/schema/panelRoom";
+
 
 export default (request) => ({
   questionsList(payload) {
@@ -108,6 +110,7 @@ export default (request) => ({
       path: `/panel/chat/show/${payload}`,
       loading: true,
       alert: false,
+      model: { name: panelRoom, dataPath:'data'},
     });
   },
   updateRoomStatus(payload) {
@@ -123,6 +126,7 @@ export default (request) => ({
     );
   },
   saveRoom(payload) {
+    console.log('44444',payload)
     return request(
       {
         name: "saveRoom",

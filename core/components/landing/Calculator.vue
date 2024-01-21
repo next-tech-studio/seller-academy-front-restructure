@@ -51,29 +51,47 @@
                   {{ $t("your_average_income") }}
                 </h4>
               </div>
-              <span class="text-text-low-emphasis text-body-1">{{ $t("in_which_category_you_want_to_buy") }}</span>
-              <v-text-field
+              <span class="text-text-low-emphasis text-body-1">{{
+                $t("in_which_category_you_want_to_buy")
+              }}</span>
+              <v-select
+                v-model="current"
+                :items="items"
+                :label="$t('category')"
                 flat
                 base-color="n300"
                 density="compact"
                 variant="outlined"
-                dir="ltr"
-                :label="$t('category')"
-                type="email"
-                persistent-placeholder
                 class="mt-4 mb-6"
-              ></v-text-field>
+                item-value="id"
+                item-title="title"
+                return-object
+              ></v-select>
               <div class="d-flex justify-space-between mb-4">
-                <span class="text-text-low-emphasis text-body-1">{{ $t('average_income') }}</span>
-                <span class="text-text-heading text-body-1 font-weight-bold">۳۰ تا ۴۰ میلیون تومان</span>
+                <span class="text-text-low-emphasis text-body-1">{{
+                  $t("average_income")
+                }}</span>
+                <span class="text-text-heading text-body-1 font-weight-bold">{{
+                  currentValue?.averageIncome || '-'
+                }}</span>
               </div>
               <div class="d-flex justify-space-between mb-4">
-                <span class="text-text-low-emphasis text-body-1">{{ $t('commission_margin') }}</span>
-                <span class="text-text-heading text-body-1 font-weight-bold">۳ تا ۵ میلیون تومان</span>
+                <span class="text-text-low-emphasis text-body-1">{{
+                  $t("commission_margin")
+                }}</span>
+                <span class="text-text-heading text-body-1 font-weight-bold">
+                  {{ currentValue?.shippingFeeMin }} تا
+                  {{ currentValue?.shippingFeeMax }} میلیون تومان
+                </span>
               </div>
               <div class="d-flex justify-space-between mb-4">
-                <span class="text-text-low-emphasis text-body-1">{{ $t('shiiping_fee_margin') }}</span>
-                <span class="text-text-heading text-body-1 font-weight-bold">۱ تا ۲ میلیون تومان</span>
+                <span class="text-text-low-emphasis text-body-1">{{
+                  $t("shiiping_fee_margin")
+                }}</span>
+                <span class="text-text-heading text-body-1 font-weight-bold">
+                  {{ currentValue?.commission_min }} تا
+                  {{ currentValue?.commission_max }} میلیون تومان
+                </span>
               </div>
             </v-card-text>
           </v-card>
@@ -82,6 +100,27 @@
     </v-container>
   </v-card>
 </template>
+
+<script setup>
+const props = defineProps({
+  items: Array,
+});
+
+let current = ref(1);
+
+onMounted(() => {
+  console.log('-==-=-=-==-=-=-=', current.value, props.items);
+})
+
+let currentValue = computed(() => {
+  if (typeof current.value == 'number') {
+    console.log('number');
+    return props.items[0]
+  } else {
+    return current.value
+  }
+})
+</script>
 
 <style lang="scss">
 .bottom-background-calculator {

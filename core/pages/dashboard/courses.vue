@@ -1,5 +1,5 @@
 <template>
-  <v-card :title="$t('your_courses')">
+  <v-card :title="$t('your_courses')" class="px-6 py-4">
     <dashboard-menu
       v-model="tabs"
       :menu="menu"

@@ -1,5 +1,5 @@
 <template>
-  <v-card :title="$t('posts')">
+  <v-card :title="$t('posts')" class="px-6 py-4">
     <dashboard-menu
       v-model="tabs"
       :menu="menu"
@@ -10,7 +10,28 @@
       <v-window-item value="myPosts">
         <app-content-card-listing
           :content="myPosts"
-          :horizontal="mdAndUp?true:false"
+          :horizontal="mdAndUp ? true : false"
+          grid="12"
+          :image-square="true"
+          @to:item="navigateToItem"
+          :show-see-more="false"
+          :show-filter="false"
+        >
+          <template #icon="{ item }">
+            <div
+              class="icon-slot-position text-truncate remove-article-position px-4 pb-4"
+              :class="sharedStore.statusColor(item.status)"
+            >
+              <v-icon icon="custom:dot" size="12" class="me-2" />
+              <span class="text-body-1">{{ $t(item.status) }}</span>
+            </div>
+          </template>
+        </app-content-card-listing>
+      </v-window-item>
+      <v-window-item value="Bookmarks">
+        <app-content-card-listing
+          :content="bookmarked"
+          :horizontal="mdAndUp ? true : false"
           grid="12"
           :image-square="true"
           @to:item="navigateToItem"
@@ -32,40 +53,15 @@
           </template>
         </app-content-card-listing>
       </v-window-item>
-      <v-window-item value="Bookmarks">
-        <app-content-card-listing
-          :content="bookmarked"
-          :horizontal="mdAndUp?true:false"
-          grid="12"
-          :image-square="true"
-          @to:item="navigateToItem"
-          :show-see-more="false"
-          :show-filter="false"
-        >
-          <template #icon = {item}>
-            <div class="text-truncate remove-article-position px-4 pb-4" :class="sharedStore.statusColor(item.status)">
-              <v-icon
-                icon="custom:dot"
-                size="12"
-                class="me-2"
-              />
-              <span
-                class="text-body-1"
-                >{{ $t(item.status) }}</span
-              >
-            </div>
-          </template>
-        </app-content-card-listing>
-      </v-window-item>
     </v-window>
   </v-card>
 </template>
 <script setup>
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
-import { useDisplay } from 'vuetify';
+import { useDisplay } from "vuetify";
 const sharedStore = useSharedPanelStore();
 const localePath = useLocalePath();
-const {mdAndUp} = useDisplay()
+const { mdAndUp } = useDisplay();
 let myPosts = ref({});
 let bookmarked = ref({});
 let tabs = ref(null);

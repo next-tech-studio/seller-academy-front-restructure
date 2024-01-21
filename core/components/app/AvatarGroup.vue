@@ -1,5 +1,5 @@
 <template>
-  <div style="width: fit-content" v-if="members.length">
+  <div style="width: fit-content">
     <v-avatar
       :style="balanceAvatar(index)"
       v-for="(member, index) in maxMemberCount"

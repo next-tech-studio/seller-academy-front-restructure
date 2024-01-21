@@ -79,10 +79,24 @@ const goToPanel = () => {
   navigateTo(
     localePath({
       path: "/blog/panel/listings/posts",
-    }),{external:true}
+    }),
+    { external: true }
+  );
+};
+const goToDashboard = () => {
+  navigateTo(
+    localePath({
+      path: "/dashboard/user-account",
+    }),
+    { external: true }
   );
 };
 const items = [
+  {
+    title: "user_dashboard",
+    icon: "custom:dashboard",
+    action: goToDashboard,
+  },
   {
     title: "admin_panel",
     icon: "custom:userSolid",

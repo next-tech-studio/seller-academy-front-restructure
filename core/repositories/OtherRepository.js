@@ -2,6 +2,15 @@ import userDashboard from "~/mappers/models/dto/userDashboard";
 import uploader from "~/mappers/models/schema/uploader";
 import panelTable from "~/mappers/models/schema/panelTable";
 export default (request) => ({
+  homepage() {
+    return request({
+      name: "homepage",
+      method: "get",
+      path: "/homepage",
+      loading: true,
+      alert: false,
+    });
+  },
   search(payload) {
     return request({
       name: "search",

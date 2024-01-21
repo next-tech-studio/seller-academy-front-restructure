@@ -46,7 +46,7 @@
           ></v-progress-linear>
         </div>
         <div v-if="item?.passedPercentage == 100">
-          <div class="d-flex">
+          <div class="d-flex align-center">
             <v-icon
               icon="custom:circleCheckSolid"
               color="icon-hint-success"

@@ -339,6 +339,7 @@ const props = defineProps({
     default: [
       { title: "پنهان کردن", value: "hidden" },
       { title: "حذف کردن", value: "deleted" },
+      { title: "بازگردانی", value: "draft" },
     ],
   },
   hideGroupActions: {

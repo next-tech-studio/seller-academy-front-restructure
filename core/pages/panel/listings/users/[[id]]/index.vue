@@ -85,8 +85,11 @@
           </div>
         </template>
         <template #roles="{ item }">
-          <div style="direction: ltr" class="text-end">
-            {{ item.item?.roles?.displayName }}
+          <div>
+            <v-chip v-if="item.item?.roles" style="direction: ltr" class="text-end" color="secondary-base">
+            {{ item.item?.roles?.name  }}
+          </v-chip>
+          <div v-else>-</div>
           </div>
         </template>
         <template #status="{ item }">
