@@ -14,7 +14,7 @@
         <div class="align-self-end d-none d-lg-block">
           <v-img
             width="300px"
-            :src="getPublicImage('/images/roomlist_header.png', 'forum')"
+            src="/images/roomlist_header.png"
           ></v-img>
         </div>
       </v-container>

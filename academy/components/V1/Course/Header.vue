@@ -54,7 +54,7 @@
       :gradient="`to ${
         lgAndUp ? 'right' : 'top'
       }, rgba(35, 41, 51, 0), rgba(35, 41, 51, 1)`"
-      :src="getPublicImage('/images/digikala_banner.png', 'academy')"
+      src="/images/digikala_banner.png"
       style="flex: 0 0 auto; position: absolute; left: 0"
       :style="lgAndUp ? 'top: 0' : 'bottom: 0'"
       :class="{ 'w-100': mdAndUp && !lgAndUp }"

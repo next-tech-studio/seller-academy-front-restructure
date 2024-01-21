@@ -7,7 +7,7 @@
       size="83"
     ></v-icon>
     <v-img
-      :src="getPublicImage('/images/academy_header.jpg', 'academy')"
+      src="/images/academy_header.jpg"
       gradient="180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.8) 100%"
       cover
       max-height="398px"

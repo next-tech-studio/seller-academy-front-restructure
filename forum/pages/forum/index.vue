@@ -2,7 +2,7 @@
   <div class="bg-background-dark">
     <v-img
       class="d-none d-lg-block"
-      :src="getPublicImage('/images/community_header.webp', 'forum')"
+      src="/images/community_header.webp"
     ></v-img>
     <v-container class="d-lg-none">
       <div class="d-flex justify-space-between align-center">
@@ -190,13 +190,13 @@ const sendFeedBack = (e) => {
     });
 };
 
-const getQuestionData = async (currentPage) => {
+const getQuestionData = (currentPage) => {
   if (currentPage) {
     page = currentPage;
     questions.splice(0, questions.length);
   }
   // Object.assign(filter, e);
-  await $repos.community
+  $repos.community
     .questionsData({
       page,
       sort: filterStore?.filter.sort,
@@ -256,7 +256,7 @@ const toRoomList = () => {
 };
 
 Promise.all([
-  useAsyncData(async () => await getQuestionData()),
+  // useAsyncData(() => getQuestionData()),
   useAsyncData(async () => {
     await $repos.community.questionsCommon().then((res) => {
       Object.assign(suggestedChatRooms, res.suggestedChatRooms);
@@ -267,6 +267,9 @@ Promise.all([
     });
   }),
 ]);
+
+onMounted(() => getQuestionData()),
+
 useHead(
   useHeadTags({
     title: t("forum"),

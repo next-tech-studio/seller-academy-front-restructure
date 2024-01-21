@@ -1,5 +1,5 @@
 <template>
-  <v-card :image="getPublicImage('/images/bubble.webp', 'forum')">
+  <v-card image="/images/bubble.webp">
     <v-card-text
       class="d-flex align-center justify-md-space-between px-4 py-lg-4 py-4"
       :class="{'flex-column': !horizontal}"
