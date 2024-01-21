@@ -51,8 +51,8 @@
         <v-slide-group class="d-md-none d-block">
           <v-slide-group-item
             v-for="attachment in item?.attachments"
-            :key="attachment?.id"
-            :value="attachment?.id"
+            :key="attachment.id"
+            :value="attachment.id"
           >
             <v-card
               color="grey-lighten-1"
@@ -65,8 +65,8 @@
                 cover
                 aspect-ratio="1.2"
                 class="rounded-md"
-                :alt="item?.slug"
-                :src="attachment?.previewImageUrl"
+                :alt="item.slug"
+                :src="attachment.previewImageUrl"
               ></v-img>
             </v-card>
           </v-slide-group-item>
@@ -80,7 +80,7 @@
         <v-row class="d-none d-md-flex">
           <v-col
             v-for="attachment in item?.attachments"
-            :key="attachment?.id"
+            :key="attachment.id"
             class="py-2"
             cols="12"
             md="4"
@@ -89,8 +89,8 @@
               aspect-ratio="1.2"
               cover
               class="rounded-md w-100"
-              :alt="item?.slug"
-              :src="attachment?.previewImageUrl"
+              :alt="item.slug"
+              :src="attachment.previewImageUrl"
               height="230"
             ></v-img>
           </v-col>
