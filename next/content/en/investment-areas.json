@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "title": "Ecommerce",
+            "icon": "custom:ecommerce"
+        },
+        {
+            "title": "Smart Logistic",
+            "icon": "custom:smartLogistic"
+        },
+        {
+            "title": "Fintech",
+            "icon": "custom:fintech"
+        },
+        {
+            "title": "Smart Industry",
+            "icon": "custom:smartIndustry"
+        },
+        {
+            "title": "Automation",
+            "icon": "custom:automation"
+        },
+        {
+            "title": "Health Tech",
+            "icon": "custom:healthTech"
+        }
+    ]
+}

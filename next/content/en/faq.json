@@ -1,0 +1,44 @@
+{
+    "faq": [
+        {
+            "question": "How can I secure investment from Diginext?",
+            "answer": "To apply for investment, you must submit a comprehensive pitch deck, including a business plan, in PDF format to a.chitsaz@diginext.ir."
+        },
+        {
+            "question": "Is the investment provided only in cash?",
+            "answer": "No. In addition to cash investments, Diginext also offers Smart Money investments, which provide startups with access to resources from within the Digikala group to facilitate rapid scaling."
+        },
+        {
+            "question": "At what stages does Diginext invest in startups?",
+            "answer": "Diginext provides cash investments to startups at the Seed-Stage and Early-Stage."
+        },
+        {
+            "question": "Besides financial investments, do you offer any other value to startups?",
+            "answer": "Diginext assists businesses in their growth by leveraging its network of investors, strategic partners, mentors, and by providing guidance and training in Iran's domestic and international markets."
+        },
+        {
+            "question": "Is it necessary to have a registered company to submit a funding proposal?",
+            "answer": "You do not need to have a registered company to submit your proposal, but company registration will be required in the final stages of investment negotiations."
+        },
+        {
+            "question": "What types of courses are offered at Diginext Academy?",
+            "answer": "Diginext Academy offers courses in various fields, including software development, product design, business development, digital marketing, machine learning, and advanced technologies, as well as soft skills needed in today’s job market."
+        },
+        {
+            "question": "Will participants receive certificates at the end of the courses?",
+            "answer": "Yes, at the end of each course, participants will receive certificates of course completion in English, issued by Diginext. It should be noted that these certificates are not affiliated with any specific organization or agency."
+        },
+        {
+            "question": "Is there an opportunity for troubleshooting during the course?",
+            "answer": "During the course, participants will have access to group messaging platforms where they can engage in discussions, network, and seek assistance from other participants and course instructors."
+        },
+        {
+            "question": "Is there an opportunity for internships at DigiNext after completing a course?",
+            "answer": "Participants in Diginext Academy courses will be given priority consideration for internships, job opportunities at Diginext, and other organizations."
+        },
+        {
+            "question": "Are there specific prerequisites for enrolling in Diginext Academy courses?",
+            "answer": "Enrollment requirements for each course are detailed on the respective course pages. You can register for courses after reviewing the specific prerequisites."
+        }
+      ]
+}

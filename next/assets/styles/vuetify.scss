@@ -1,0 +1,121 @@
+@forward 'vuetify/settings' with (
+    $grid-breakpoints: (
+        'xs': 0,
+        'sm': 576px,
+        'md': 768px,
+        'lg': 992px,
+        'xl': 1200px,
+        'xxl': 1400px
+    ),
+    $container-max-widths: (
+        'xs': none,
+        'sm': 540px,
+        'md': 720px,
+        'lg': 960px,
+        'xl': 1140px,
+        'xxl': 1320px
+    ),
+    $grid-gutters: (
+        'xs': 0px,
+        'sm': 16px,
+        'md': 24px,
+        'lg': 24px,
+        'xl': 24px,
+        'xxl': 24px
+    ),
+    $body-font-family: var(--font-family),
+    /*default browser font-size = 16px -> 10/16 = 62.5   1rem=62.5%*/
+    $typography: (
+        'h1': (
+          'letter-spacing': normal,
+          'line-height': 4.3125rem !important, //69px
+          'size': 2.0625rem, //33px
+          'weight': 500 !important,
+        ),
+        'h2': (
+          'letter-spacing': normal,
+          'line-height': 3.4375rem !important, //55px
+          'size': 1.625rem, //26px
+          'weight': 500 !important,
+        ),
+        'h3': (
+          'letter-spacing': normal,
+          'line-height': 2.75rem !important, //44px
+          'size': 1.3125rem, //21px
+          'weight': 500 !important,
+        ),
+        'h4': (
+          'letter-spacing': normal,
+          'line-height': 2.5rem !important, //19px
+          'size': 1.1875rem, //40px
+          'weight': 600 !important,
+        ),
+        'h5': (
+          'letter-spacing': normal,
+          'line-height': 2.125rem !important, //34px
+          'size': 1rem, //16px
+          'weight': 600 !important,
+        ),
+        'h6': (
+          'letter-spacing': normal,
+        ),
+        'subtitle-1': (
+          'letter-spacing': normal,
+          'line-height': 2rem !important, //32px
+          'size': 0.9375rem, //15px
+          'weight': 400 !important,
+        ),
+        'subtitle-2': (
+          'letter-spacing': normal,
+          'line-height': 2rem !important, //32px
+          'size': 0.9375rem, //15px
+          'weight': 600 !important,
+        ),
+        'body-1': (
+          'letter-spacing': normal,
+          'line-height': 1.875rem !important, //30px
+          'size': 0.875rem, //14px
+          'weight': 400 !important,
+        ),
+        'body-2': (
+          'letter-spacing': normal,
+          'line-height': 1.625rem !important, //26px
+          'size': 0.75rem, //12px
+          'weight': 400 !important,
+        ),
+        'button': (
+          'letter-spacing': normal,
+          'line-height': 1.875rem !important, //30px
+          'size': 0.875rem, //14px
+          'weight': 600 !important,
+        ),
+        'caption': (
+          'letter-spacing': normal,
+          'line-height': 1.5rem !important, //24px
+          'size': 0.6875rem, //11px,
+        ),
+        'overline': (
+          'letter-spacing': normal
+        )
+    ),
+    $button-disabled-overlay: 0,
+    $card-elevation: 0,
+    $rounded: (
+        'md': 8px,
+        'lg': 16px,
+        '2lg': 24px
+    ),
+    $text-field-border-radius: 8px,
+    $button-border-radius: 16px,
+    $select-content-elevation: 0,
+    $select-content-border-radius: 16px,
+    $border-radius-root: 8px,
+    $button-font-weight: 400,
+    $list-indent-size:8px,
+    $list-item-prepend-size:32px,
+    $states: (
+      // 'hover': 0,
+      'focus':0
+    ),
+    $combobox-content-elevation:0 !important
+);

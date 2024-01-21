@@ -1,0 +1,23 @@
+
+//TODO: this file can't be merged correctly to vutify styles, so that we don't have text-h4C as a class
+@use "vuetify/lib/styles/tools/_functions.sass" as *;
+@use "sass:map";
+@import "vuetify/lib/styles/settings/_variables.scss";
+$custom-typography: () !default;
+$custom-typography: map-deep-merge(
+  (
+    "h4C": (
+      "size": 6rem,
+      "weight": 300,
+      "line-height": 6rem,
+      "letter-spacing": -0.015625em,
+      "font-family": $heading-font-family,
+      "text-transform": uppercase,
+    ),
+  ),
+  $custom-typography
+);
+
+@each $type, $values in $custom-typography {
+  $typography: map-deep-merge($typography, (#{$type}: map-values($values)));
+}
