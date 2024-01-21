@@ -7,16 +7,16 @@
       <course-landing-our-courses :categories="data.categories"></course-landing-our-courses>
     </v-container>
     <v-container class="py-lg-10 py-2">
-      <v-img src="/images/landing_courses.png" />
+      <v-img :src="getPublicImage('/images/landing_courses.png', 'academy')" />
     </v-container>
     <v-container class="py-lg-10 py-2">
       <v-img
-        src="/images/landing_pros.png"
+        :src="getPublicImage('/images/landing_pros.png', 'academy')"
       ></v-img>
     </v-container>
     <v-img
       class="py-lg-10 py-2"
-      src="/images/landing_statistics.png"
+      :src="getPublicImage('/images/landing_statistics.png', 'academy')"
     ></v-img>
     <v-container>
       <course-landing-testimonial :items="data.comments"></course-landing-testimonial>
@@ -24,7 +24,7 @@
     <v-img
       class="pt-10"
       cover
-      src="/images/landing_features.png"
+      :src="getPublicImage('/images/landing_features.png', 'academy')"
     ></v-img>
   </div>
   <div v-else>
@@ -60,9 +60,9 @@
       ></course-landing-our-courses>
       <KeepAlive>
         <course-landing-testimonial
-        class="py-12"
-        :items="data.comments"
-      ></course-landing-testimonial>
+          class="py-12"
+          :items="data.comments"
+        ></course-landing-testimonial>
       </KeepAlive>
     </v-container>
   </div>

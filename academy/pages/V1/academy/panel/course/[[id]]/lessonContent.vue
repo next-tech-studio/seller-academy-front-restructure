@@ -180,9 +180,9 @@ let onDeleteComponent = (index) => {
 };
 let contentBasedOptions = computed(() => {
   if (lesson.value.dominantType == "text")
-    return ["img", "html", "reference", "audio", "divider"];
+    return ["img", "html", "reference", "divider"];
   else {
-    return ["img", "html", "reference", "audio", "exam", "vid", "divider"];
+    return ["img", "html", "reference", "exam", "vid", "divider"];
   }
 });
 const openSelectedContentSection = (type) => {

@@ -13,6 +13,7 @@
           v-model="trueAnswers"
           @start:quiz="startQuiz"
           @previous="onNavigate('previous')"
+          @to:item="toItem"
         ></app-content>
       </template>
 
@@ -185,6 +186,9 @@ const onNavigate = (dir) => {
     })
   );
 };
+const toItem = (e) => {
+  navigateTo(localePath({path: `/article/${e.slug}`}), {external: true})
+}
 </script>
 
 <style scoped>

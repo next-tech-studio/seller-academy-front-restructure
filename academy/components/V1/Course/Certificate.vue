@@ -15,7 +15,7 @@
     <v-card-text>
       <v-img
         width="275"
-        src="/images/certificate.png"
+        :src="getPublicImage('/images/certificate.png', 'academy')"
       ></v-img>
     </v-card-text>
   </v-card>

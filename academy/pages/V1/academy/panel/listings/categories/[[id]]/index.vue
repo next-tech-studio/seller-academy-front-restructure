@@ -54,6 +54,9 @@
             >
           </div>
         </template>
+        <template #slug="{ item }">
+          <span>{{ $t(item.item.article.slug) }}</span>
+        </template>
       </app-listing>
     </v-container>
   </NuxtLayout>

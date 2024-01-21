@@ -66,6 +66,8 @@
             :placeholder="$t('option_title')"
             persistent-placeholder
             persistent-hint
+            :append-inner-icon="index > 1 ? 'custom:trash' : ''"
+            @click:appendInner="removeFrom(academyStore.content.supportItems, index)"
           ></v-text-field>
           <v-btn
             variant="text"
@@ -110,6 +112,8 @@
               :placeholder="$t('goal_title')"
               persistent-placeholder
               persistent-hint
+              :append-inner-icon="index > 0 ? 'custom:trash' : ''"
+            @click:appendInner="removeFrom(academyStore.content.learningPoints, index)"
             ></v-text-field>
             <v-textarea
               base-color="n300"
@@ -159,6 +163,9 @@ onMounted(() => {
   Object.assign(academyStore.content, primaryValues);
 });
 const { content } = storeToRefs(academyStore);
+const removeFrom = (items, index) => {
+  items.splice(index, 1)
+}
 watch(
   content,
   (newDraft) => {

@@ -260,7 +260,7 @@ const sharedStore = useSharedPanelStore();
 import { storeToRefs } from "pinia";
 const route = useRoute();
 let form = ref(null);
-const UPLOAD_COURSE_PATH = "/main/file/upload";
+const UPLOAD_COURSE_PATH = "/panel/articles/inline_media";
 let primaryValues = {
   title: "",
   summary: "",

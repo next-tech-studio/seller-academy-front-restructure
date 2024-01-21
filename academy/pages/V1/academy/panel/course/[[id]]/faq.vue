@@ -83,7 +83,7 @@
               persistent-hint
               flat
               no-resize
-              v-model="academyStore.content.faq.content.faq[index].description"
+              v-model="academyStore.content.faq.content.faq[index].answers"
             ></v-textarea>
           </div>
           <v-btn
