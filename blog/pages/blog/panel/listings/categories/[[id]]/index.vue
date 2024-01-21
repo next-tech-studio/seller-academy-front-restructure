@@ -73,6 +73,7 @@ const sharedStore = useSharedPanelStore();
 import { useFilterStore } from "@core/stores/filter";
 let filterStore = useFilterStore();
 const localePath = useLocalePath();
+const { t } = useI18n();
 let page = ref(1);
 let filters;
 let categoryList = ref(null);

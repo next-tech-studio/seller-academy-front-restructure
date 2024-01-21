@@ -3,7 +3,7 @@
     <v-col cols="6" md="3" v-for="(item, index) in items" :key="item.title">
       <v-card>
         <v-img
-          :src="`/featuredArticles/${index+1}.jpg`"
+          :src="getPublicImage(`/featuredArticles/${index+1}.jpg`, 'blog')"
           aspect-ratio="2"
           cover
           class="bg-grey-lighten-2"

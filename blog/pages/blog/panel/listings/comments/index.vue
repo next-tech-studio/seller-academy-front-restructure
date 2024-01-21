@@ -79,7 +79,7 @@
         </template>
         <template #operation="{ item }">
           <div class="d-flex flex-column">
-            <div>
+            <div class="d-flex">
               <v-btn
                 v-for="(action, index) in operations"
                 :key="index"
