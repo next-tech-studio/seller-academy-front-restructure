@@ -46,11 +46,11 @@
         class="article-card"
         :class="mdAndUp ? 'w-75 rounded-lg mx-auto' : 'w-100 rounded-lg'"
       >
-        <content
+        <post-content
           :is-preview="preview"
           @reactto:article="reactArticle"
           :item="item"
-        ></content>
+        ></post-content>
       </v-card>
     </article>
     <v-row tag="section" v-if="!preview">
