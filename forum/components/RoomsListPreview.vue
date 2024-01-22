@@ -1,10 +1,14 @@
 <template>
   <v-navigation-drawer
     absolute
-    style="top: 0; right: 0; left: 0; bottom: 0; transform:translateX(0%)"
+    style="top: 0; right: 0; left: 0; bottom: 0;"
     class="h-100"
+    elevation="0"
     :width="smAndDown ? '100%' : 264"
+    :rail-width="smAndDown ? '100%' : 264"
     :model-value="modelValue"
+    :rail="rail"
+    :scrim="false"
     :class="{'bg-background-dark': smAndDown}"
   >
     <v-list :max-width="smAndDown ? '100%' : 300" class="pt-4 px-4" color="secondary">
@@ -72,12 +76,16 @@ import { useDisplay } from 'vuetify';
 
 const emit = defineEmits(["submit", "update:modelValue"]);
 const {smAndDown} = useDisplay()
-defineProps({
+const props = defineProps({
   items: Array,
   modelValue: Boolean,
+  rail: Boolean,
   active: {
     type: Boolean,
     default: true,
   },
 });
+// watch(props.modelValue, (newValue) => {
+//   drawer.value = !newValue
+// }, {deep: true})
 </script>

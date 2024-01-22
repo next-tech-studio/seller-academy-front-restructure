@@ -11,12 +11,10 @@
         :class="!authStore.user.loggedIn ? 'blur' : ''"
       >
         <v-container class="h-100 pb-0" :class="{ 'pa-0': smAndDown }">
-          <v-card
-            class="rounded-md h-100 rounded-b-0 pt-16 pr-lg-64"
-            id="parent"
-          >
+          <v-card class="rounded-md h-100 rounded-b-0 pt-16" id="parent">
             <rooms-list-preview
               v-model="showRoomsList"
+              :rail="rail"
               :title="
                 authStore.user.loggedIn && authUser?.user?.seller
                   ? `${$t('your_rooms')} (${userChatRoomsCount})`
@@ -49,6 +47,7 @@
                 </template>
               </room-preview>
               <Chat
+                :style="!smAndDown ? 'width: calc(100% - 264px); position: absolute; left: 0;' : ''"
                 @react="react"
                 @send="send($event)"
                 @remove="remove($event)"
@@ -70,7 +69,8 @@ import { useDisplay } from "vuetify";
 const { $repos } = useNuxtApp();
 const { smAndDown, lgAndUp } = useDisplay();
 const common = ref({});
-const showRoomsList = ref(false);
+const showRoomsList = ref(true);
+const rail = ref(false);
 let chat = ref([]);
 let members = reactive([]);
 let sidebar = ref([]);
@@ -188,7 +188,10 @@ function getChatData($state) {
       } else {
         $state.complete();
       }
-      showRoomsList.value = false;
+      if (smAndDown.value) {
+        rail.value = true;
+        showRoomsList.value = false;
+      }
     });
 }
 const addMember = (e) => {
@@ -268,6 +271,7 @@ const toRooms = (item) => {
 };
 
 const back = () => {
+  rail.value = !rail.value;
   showRoomsList.value = !showRoomsList.value;
 };
 
