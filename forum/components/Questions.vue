@@ -27,7 +27,7 @@
         </v-card-actions>
       </div>
     </v-card>
-    <v-card color="background-dark">
+    <v-card color="background-dark" v-if="items.length">
       <div v-for="(item, index) in items" :key="item.slug">
         <question
           @reaction="onReaction($event, item.slug, index)"

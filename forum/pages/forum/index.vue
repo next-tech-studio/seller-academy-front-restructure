@@ -190,13 +190,13 @@ const sendFeedBack = (e) => {
     });
 };
 
-const getQuestionData = (currentPage) => {
+const getQuestionData = async (currentPage) => {
   if (currentPage) {
     page = currentPage;
     questions.splice(0, questions.length);
   }
   // Object.assign(filter, e);
-  $repos.community
+  await $repos.community
     .questionsData({
       page,
       sort: filterStore?.filter.sort,
@@ -256,7 +256,7 @@ const toRoomList = () => {
 };
 
 Promise.all([
-  // useAsyncData(() => getQuestionData()),
+  useAsyncData(async () => await getQuestionData()),
   useAsyncData(async () => {
     await $repos.community.questionsCommon().then((res) => {
       Object.assign(suggestedChatRooms, res.suggestedChatRooms);
@@ -267,8 +267,6 @@ Promise.all([
     });
   }),
 ]);
-
-onMounted(() => getQuestionData()),
 
 useHead(
   useHeadTags({
