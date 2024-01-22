@@ -33,7 +33,6 @@ export default (request) => ({
     });
   },
   updateForm(payload) {
-    console.log('paylooaaaaddddddddd',payload)
     return request(
       {
         name: "updateForm",
@@ -42,7 +41,7 @@ export default (request) => ({
         loading: true,
         alert: false,
       },
-      payload.body
+      payload
     );
   },
   //panel
