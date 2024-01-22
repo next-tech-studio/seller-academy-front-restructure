@@ -187,7 +187,7 @@ const onNavigate = (dir) => {
   );
 };
 const toItem = (e) => {
-  navigateTo(localePath({path: `/article/${e.slug}`}), {external: true})
+  navigateTo(localePath({path: `/article/${e.slug}`}))
 }
 </script>
 

@@ -161,7 +161,6 @@ export const useAcademyStore = defineStore("academy", {
         return "text-icon-hint-caution";
     },
     publishCourse() {
-      console.log("djdjdjdjdjdjdjdj");
       let localePath = useLocalePath();
       let payload = { body: { ids: [this.postRouteId], status: "published" } };
       this.$repos.academyPanel.updateCourseStatus(payload).then((res) => {
@@ -261,7 +260,7 @@ export const useAcademyStore = defineStore("academy", {
           } else if (back) {
             callBackFunction(false, res.id);
           } else if (preview) {
-            navigateTo(
+            localePath(
               localePath({
                 name: "academy-courses-slug",
                 params: { slug: res.id },
@@ -269,8 +268,7 @@ export const useAcademyStore = defineStore("academy", {
                   preview: true,
                 },
                 // path: `/academy/courses/${this.content.slug}`,
-              }),
-              { external: true }
+              })
             );
           } else if (!this.postRouteId) {
             navigateTo(
@@ -293,9 +291,8 @@ export const useAcademyStore = defineStore("academy", {
             query: {
               preview: true,
             },
-            // path: `/academy/courses/${this.content.slug}`,
-          }),
-          { external: true }
+            // path: `/academy/courses/${this.postRouteId}?preview=true`,
+          })
         );
       } else if (publish) {
         this.publishCourse();

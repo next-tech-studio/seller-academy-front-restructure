@@ -262,8 +262,7 @@ export const usePanelStore = defineStore("panel", {
             navigateTo(
               localePath({
                 path: `/article/preview/${res.id}`,
-              }),
-              { external: true }
+              })
             );
           } else if (!this.postRouteId) {
             navigateTo(
@@ -284,8 +283,7 @@ export const usePanelStore = defineStore("panel", {
         navigateTo(
           localePath({
             path: `/article/preview/${this.postRouteId}`,
-          }),
-          { external: true }
+          })
         );
       } else if (publish) {
         this.publishArticle();

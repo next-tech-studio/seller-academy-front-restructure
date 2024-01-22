@@ -71,8 +71,7 @@ const toItem = (e) => {
         roomId: e.id,
         category: e?.category?.slug
       }
-    }),
-    { external: true }
+    })
   );
 };
 </script>

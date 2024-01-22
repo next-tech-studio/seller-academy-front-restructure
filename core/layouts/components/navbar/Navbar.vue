@@ -142,8 +142,7 @@ const toItem = (e)=>{
   navigateTo(
     localePath({
       path: `/article/${e?.slug}`,
-    }),
-    { external: true }
+    })
   );
 }
 </script>
