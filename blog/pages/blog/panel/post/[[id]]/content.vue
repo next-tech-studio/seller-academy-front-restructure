@@ -328,10 +328,10 @@ watch(
   },
   { deep: true }
 );
-definePageMeta({
-  middleware: ["auth"],
-  layout: false,
-});
+// definePageMeta({
+//   middleware: ["auth"],
+//   layout: 'sidebar',
+// });
 
 const isDraggable = (context) => {
   const { index, futureIndex } = context;

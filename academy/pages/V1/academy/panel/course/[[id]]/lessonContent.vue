@@ -335,10 +335,10 @@ watch(
   },
   { deep: true }
 );
-definePageMeta({
-  middleware: ["auth"],
-  layout: false,
-});
+// definePageMeta({
+//   middleware: ["auth"],
+//   layout: false,
+// });
 onMounted(() => {
   academyStore.postRouteId = route.params.id;
   academyStore.getChaptersList(route.query.chapterIndex, route.query.lessonIndex);

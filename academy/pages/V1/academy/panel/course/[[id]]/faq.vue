@@ -128,10 +128,10 @@ const remove = (index)=>{
 
   academyStore.content.faq.content.faq.splice(index,1)
 }
-definePageMeta({
-  middleware: ["auth"],
-  layout: false,
-});
+// definePageMeta({
+//   middleware: ["auth"],
+//   layout: false,
+// });
 </script>
 <style lang="scss">
 #level-selection {

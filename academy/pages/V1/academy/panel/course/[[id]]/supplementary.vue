@@ -173,8 +173,8 @@ watch(
   },
   { deep: true }
 );
-definePageMeta({
-  middleware: ["auth"],
-  layout: false,
-});
+// definePageMeta({
+//   middleware: ["auth"],
+//   layout: false,
+// });
 </script>

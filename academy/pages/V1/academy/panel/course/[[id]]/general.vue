@@ -252,10 +252,10 @@ watch(
   },
   { deep: true }
 );
-definePageMeta({
-  middleware: ["auth"],
-  layout: false,
-});
+// definePageMeta({
+//   middleware: ["auth"],
+//   layout: false,
+// });
 </script>
 <style lang="scss">
 #level-selection {

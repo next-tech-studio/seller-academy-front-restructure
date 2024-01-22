@@ -325,10 +325,10 @@ onMounted(() => {
     getRoomInfo();
   }
 });
-definePageMeta({
-  middleware: ["auth"],
-  layout: false,
-});
+// definePageMeta({
+//   middleware: ["auth"],
+//   layout: false,
+// });
 </script>
 <style lang="scss">
 .chosen-member {
