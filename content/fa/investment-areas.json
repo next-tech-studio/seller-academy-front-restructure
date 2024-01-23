@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "title": "تجارت الکترونیک",
+            "icon": "custom:ecommerce"
+        },
+        {
+            "title": "لجستیک هوشمند",
+            "icon": "custom:smartLogistic"
+        },
+        {
+            "title": "فین‌تک",
+            "icon": "custom:fintech"
+        },
+        {
+            "title": "صنعت هوشمند",
+            "icon": "custom:smartIndustry"
+        },
+        {
+            "title": "اتوماسیون",
+            "icon": "custom:automation"
+        },
+        {
+            "title": "فناوری سلامت",
+            "icon": "custom:healthTech"
+        }
+    ]
+}

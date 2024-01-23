@@ -1,14 +1,11 @@
 import vuetify from "vite-plugin-vuetify";
 import { createResolver } from "@nuxt/kit";
-
 const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
-  extends: ["../"],
   alias: {
     "@core": resolve("./"),
   },
-  modulesDir: ["../node-modules"],
   app: {
     pageTransition: { name: "page" },
     layoutTransition: { name: "page" },
@@ -35,9 +32,7 @@ export default defineNuxtConfig({
       },
     },
     resolve: {
-      dedupe: [
-        'vue'
-      ]
+      dedupe: ["vue"],
     },
     // build: {
     //   rollupOptions: {
@@ -73,6 +68,11 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@pinia-plugin-persistedstate/nuxt",
   ],
+  // content: {
+  //   api: {
+  //     baseURL: '/next/content'
+  //   }
+  // },
   pinia: {
     autoImports: ["defineStore"],
   },
@@ -89,7 +89,7 @@ export default defineNuxtConfig({
         name: "English",
         dir: "ltr",
         file: "en.js",
-      }
+      },
     ],
     defaultLocale: "fa",
     lazy: true,
@@ -111,7 +111,7 @@ export default defineNuxtConfig({
       baseURL: "/blog",
       domain: process.env.DOMAIN,
       gtagId: "G-RTFPWZH8RV",
-      needAuth: process.env.NEED_AUTH
+      needAuth: process.env.NEED_AUTH,
     },
   },
   // schemaOrg: {
