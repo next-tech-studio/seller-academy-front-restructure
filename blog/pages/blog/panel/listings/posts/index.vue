@@ -112,7 +112,7 @@ const init = () => {
     {
       title: "انتشار",
       value: "published",
-      function: coursesList.value.changeItemStatus,
+      function: postList.value.changeItemStatus,
     },
   ]);
   filters = ref([
