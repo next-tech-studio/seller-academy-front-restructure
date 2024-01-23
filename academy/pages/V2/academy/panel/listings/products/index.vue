@@ -243,12 +243,12 @@ const onSearch = useDebounceFn(
   }
 );
 const changeItemStatus = (e) => {
-  let payload = { body: { status: e.action, ids: e.id } };
-  $repos.academyPanel
-    .updateCourseStatus(payload)
+  let data = { body: { status: e.action, ids: e.id } };
+  $repos.academyProductPanel
+    .updateCourseStatus(data)
     .then(
-      async () =>
-        await sharedStore.getListingItems(
+      () =>
+        sharedStore.getListingItems(
           "getCoursesData",
           payload.value,
           "academyProductPanel"
