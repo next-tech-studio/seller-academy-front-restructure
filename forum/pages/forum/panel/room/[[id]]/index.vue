@@ -255,8 +255,8 @@ const addMember = (item, index) => {
   chosenIndex.value[item.id] = true;
 };
 let privacyStatus = [
-  { id: 0, title: t("private") },
-  { id: 1, title: t("public") },
+  { id: 1, title: t("private") },
+  { id: 0, title: t("public") },
 ];
 const getRoomCommon = () => {
   $repos.communityPanel.roomCommon(route.params.id).then((res) => {

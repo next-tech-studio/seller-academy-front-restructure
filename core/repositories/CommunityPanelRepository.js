@@ -1,7 +1,6 @@
 import panelTable from "~/mappers/models/schema/panelTable";
 import panelRoom from "~/mappers/models/schema/panelRoom";
 
-
 export default (request) => ({
   questionsList(payload) {
     return request({
@@ -110,7 +109,7 @@ export default (request) => ({
       path: `/panel/chat/show/${payload}`,
       loading: true,
       alert: false,
-      model: { name: panelRoom, dataPath:'data'},
+      model: { name: panelRoom, dataPath: "data" },
     });
   },
   updateRoomStatus(payload) {
@@ -126,12 +125,35 @@ export default (request) => ({
     );
   },
   saveRoom(payload) {
-    console.log('44444',payload)
     return request(
       {
         name: "saveRoom",
         method: "put",
         path: `/panel/chat/rooms/editor-data`,
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  },
+  chatRoomsList(payload) {
+    return request(
+      {
+        name: "chatRoomsList",
+        method: "get",
+        path: `/panel/chat/rooms/data`,
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  },
+  chatRoomsCommon(payload) {
+    return request(
+      {
+        name: "chatRoomsCommon",
+        method: "get",
+        path: `/panel/chat/rooms/common`,
         loading: true,
         alert: false,
       },
