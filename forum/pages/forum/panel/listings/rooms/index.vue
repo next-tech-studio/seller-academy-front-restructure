@@ -137,16 +137,9 @@ let payload = computed(() => {
   };
 });
 const edit = () => {
-  console.log(
-    "edit",
-    `blog-panel-${type.value == "podcast" ? "podcast" : "post"}-id-draft`,
-    sharedStore.currentItem.id
-  );
   navigateTo(
     localePath({
-      name: `blog-panel-${
-        type.value == "podcast" ? "podcast" : "post"
-      }-id-draft`,
+      name: `forum-panel-room-id`,
       params: { id: sharedStore.currentItem.id },
     })
   );
