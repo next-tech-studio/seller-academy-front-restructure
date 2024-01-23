@@ -14,11 +14,11 @@
         @update:searchModel="onSearch"
         edit-address="blog-panel-post-id-draft"
         view-address="/article/"
-        default-status="draft"
+        default-status="inactive"
         @update:itemStatus="
           sharedStore.changeItemStatus(
             $event,
-            'updateArticleStatus',
+            'updateRoomStatus',
             'chatRoomsList',
             payload,
             'communityPanel'
@@ -40,6 +40,7 @@
           )
         "
         @edit="edit"
+        :group-actions="groupActions"
         :table-actions="operations"
         @navigate:toItem="goToItem"
       >
@@ -73,6 +74,10 @@ const sharedStore = useSharedPanelStore();
 let filterStore = useFilterStore();
 const { t } = useI18n();
 let operations;
+let groupActions = ref([
+  { title: "فعال کردن", value: "active" },
+  { title: "غیر‌فعال کردن", value: "inactive" },
+]);
 const roomsList = ref(null);
 let search = ref("");
 let filters = ref([]);
@@ -106,13 +111,8 @@ const init = () => {
       function: roomsList.value.edit,
     },
     {
-      title: "حذف کردن",
-      value: "deleted",
-      function: roomsList.value.changeItemStatus,
-    },
-    {
-      title: "پنهان کردن",
-      value: "hidden",
+      title: "غیرفعال کردن",
+      value: "active",
       function: roomsList.value.changeItemStatus,
     },
   ]);
@@ -129,16 +129,11 @@ const init = () => {
 let payload = computed(() => {
   return {
     page: page.value,
-    authorId: filterStore.filter?.authors?.id || "",
-    authorType: filterStore.filter?.authors?.type || "",
-    categorySlug: filterStore.filter?.categories || "",
+    categorySlug: filterStore.filter?.categorySlug || "",
     status: filterStore.filter?.status || "",
     search: search.value,
     sortKey: sharedStore.sortBy[0]?.key || "",
     sortOrder: sharedStore.sortBy[0]?.order || "",
-    publicationDateMax: filterStore.filter?.publicationDateMax || "",
-    publicationDateMin: filterStore.filter?.publicationDateMin || "",
-    type: type.value,
   };
 });
 const edit = () => {

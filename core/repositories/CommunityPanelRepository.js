@@ -137,15 +137,17 @@ export default (request) => ({
     );
   },
   chatRoomsList(payload) {
+    console.log('payload',payload)
     return request(
       {
         name: "chatRoomsList",
         method: "get",
+      query: `?categorySlug=${payload?.categorySlug}&&search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}&page=${payload?.page}`,
         path: `/panel/chat/rooms/data`,
         loading: true,
         alert: false,
       },
-      payload.body
+      payload
     );
   },
   chatRoomsCommon(payload) {
@@ -160,4 +162,16 @@ export default (request) => ({
       payload.body
     );
   },
+  updateRoomStatus(payload){
+    return request(
+      {
+        name: "updateRoomStatus",
+        method: "put",
+        path: `/panel/chat/set_status`,
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  }
 });

@@ -733,5 +733,7 @@ export default {
   public: "عمومی",
   this_room_does_not_have_any_members:'این اتاق در حال حاضر هیچ عضوی ندارد!',
   create_chatroom:'ایجاد اتاق',
-  members_count:'تعداد اعضا'
+  members_count:'تعداد اعضا',
+  categorySlug:'دسته‌بندی',
+  inactive:'غیرفعال'
 };
