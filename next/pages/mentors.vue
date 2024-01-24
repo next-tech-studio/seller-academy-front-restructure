@@ -21,7 +21,10 @@
     />
   </v-container>
 
-  <app-dialog-response v-bind="requestStatus" @update:show="requestStatus.show = false" />
+  <app-dialog-response
+    v-bind="requestStatus"
+    @update:show="requestStatus.show = false"
+  />
 </template>
 
 <script setup>
@@ -36,10 +39,31 @@ const currentMentor = ref(null);
 const requestStatus = ref({});
 const auth = useAuthStore();
 useAsyncData(() => {
-  $repos.main.mentorsCategory().then((res) => {
+  $repos.main.mentors().then((res) => {
     requestFormStore.form.first_name = auth.user.firstName;
     requestFormStore.form.last_name = auth.user.lastName;
-    categories.value = res.data;
+    // categories.value = res.data;
+
+    categories.value = res.data.reduce((accumulator, currentValue) => {
+      const categoryId = currentValue.category.id;
+      if (!accumulator[categoryId]) {
+        accumulator[categoryId] = {
+          category: currentValue.category,
+          mentors: []
+        };
+      }
+      accumulator[categoryId].mentors.push(currentValue);
+      return accumulator;
+    }, {});
+
+    categories.value['0'] = {
+      category: {
+        id: 0,
+        title: 'همه'
+      },
+      mentors: res.data
+    }
+
     if (auth.afterLogin) requestForm.value.openDialog();
   });
 });
@@ -70,7 +94,6 @@ const send = () => {
     });
 };
 const onMentorshipClick = (e) => {
-  console.log("sjbdjksadjakbdakjdbkjasbjkas", e);
   currentMentor.value = e;
   requestFormStore.form.category = e.category;
   requestFormStore.form.mentor_id = e;
