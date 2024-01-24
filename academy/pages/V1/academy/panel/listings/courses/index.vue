@@ -48,21 +48,21 @@
             <v-icon
               icon="custom:dot"
               size="12"
-              :class="sharedStore.statusColor(item.item.status)"
+              :class="sharedStore.statusColor(item?.item?.status)"
               class="me-2"
             />
             <span
               class="text-body-2"
-              :class="sharedStore.statusColor(item.item.status)"
-              >{{ $t(item.item.status) }}</span
+              :class="sharedStore.statusColor(item?.item?.status)"
+              >{{ $t(item?.item?.status) }}</span
             >
           </div>
         </template>
         <template #instructor="{ item }">
-          <div>{{ item.item.instructor.displayName }}</div>
+          <div>{{ item?.item?.instructor?.displayName }}</div>
         </template>
         <template #category="{ item }">
-          <div>{{ item.item.category.title }}</div>
+          <div>{{ item?.item?.category?.title }}</div>
         </template>
         <template #rate="{ item }">
           <div class="d-flex">
@@ -71,15 +71,15 @@
               color="text-hint-caution"
               class="me-3"
             ></v-icon>
-            <div v-if="item.item.rate != null">
-              {{ item.item.rate }}
+            <div v-if="item?.item?.rate != null">
+              {{ item?.item?.rate }}
             </div>
             <div v-else>0</div>
           </div>
         </template>
         <template #publicationDate="{ item }">
           <div style="direction: ltr" class="text-end">
-            {{ item.item.publicationDate }}
+            {{ item?.item?.publicationDate }}
           </div>
         </template>
       </app-listing>
