@@ -69,16 +69,30 @@ export default (request) => ({
       alert: false,
     });
   },
+  updateUser(payload) {
+    console.log("payloaddddd", payload);
+    return request(
+      {
+        name: "createUser",
+        method: "put",
+        path: `/panel/users/${payload.id}/edit`,
+        loading: true,
+        alert: false,
+      },
+      payload
+    );
+  },
   createUser(payload) {
+    console.log("payloaddddd", payload);
     return request(
       {
         name: "createUser",
         method: "post",
-        path: "/panel/users/create",
+        path: `/panel/users/create`,
         loading: true,
         alert: false,
       },
-      payload.body
+      payload
     );
   },
   updateUserStatus(payload) {
@@ -94,15 +108,12 @@ export default (request) => ({
     );
   },
   generatePassword() {
-    return request(
-      {
-        name: "createUser",
-        method: "post",
-        path: "/panel/users/generatePassword",
-        loading: true,
-        alert: false,
-      },
-    );
+    return request({
+      name: "createUser",
+      method: "post",
+      path: "/panel/users/generatePassword",
+      loading: true,
+      alert: false,
+    });
   },
-
 });

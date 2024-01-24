@@ -25,8 +25,8 @@
                 class="bg-text-secondary d-flex flex-column rounded-md"
               >
                 <v-card-text class="pa-3 d-flex flex-column">
-                  <v-btn disabled block variant="flat" class="mb-6">
-                    <span class="text-text-secondary">{{
+                  <v-btn disabled block variant="flat" class="mb-6 text-truncate">
+                    <span class="text-text-secondary text-truncate">{{
                       headline.title
                     }}</span>
                   </v-btn>
