@@ -33,7 +33,11 @@
         height="41"
       >
         <div class="mx-1 text-icon-high-emphasis text-button">
-          <v-avatar start size="30" :image="auth.user?.avatarUrl"></v-avatar>
+          <v-avatar
+            start
+            size="30"
+            :image="auth.user?.avatarUrl.url || auth.user?.avatarUrl"
+          ></v-avatar>
           <span class="mr-2"
             >{{ `${$t("hello")} ${auth.user.firstName}` }}!</span
           >

@@ -37,6 +37,8 @@
 </template>
 <script setup>
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useAuthStore } from "@core/stores/auth";
+const auth = useAuthStore();
 const sharedStore = useSharedPanelStore();
 let userInfo = ref({});
 const { $repos } = useNuxtApp();
@@ -49,6 +51,7 @@ const menu = ref([
 const getUserInfo = () => {
   $repos.other.userInfo().then((res) => {
     Object.assign(userInfo.value, res);
+    auth.user = { ...res.personalInfo, loggedIn: true };
   });
 };
 const editGeneralInformation = () => {

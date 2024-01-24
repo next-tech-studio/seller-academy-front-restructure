@@ -111,29 +111,3 @@ definePageMeta({
 }
 </style>
 
-<!-- <template>
-  <div class="bg-n100">
-    <v-container>
-      <div class="d-flex">
-        <v-window v-model="tabs" class="w-75">
-          <v-window-item value="user_account">
-            <dashboard-user-account></dashboard-user-account>
-          </v-window-item>
-        </v-window>
-        <v-card class="w-25"> jsjsjsj </v-card>
-      </div>
-    </v-container>
-  </div>
-</template>
-<script setup>
-let userInfo = ref({});
-const getUserInfo = () => {
-  $repos.other.userInfo().then((res) => {
-    Object.assign(userInfo, res);
-  });
-};
-
-onMounted(() => {
-  getUserInfo();
-});
-</script> -->
