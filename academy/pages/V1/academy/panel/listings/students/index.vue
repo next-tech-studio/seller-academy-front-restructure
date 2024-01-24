@@ -10,24 +10,11 @@
         listing-title="students"
         :show-dialog="false"
         :add-new-item="false"
-        dialog-start-button-title="add_new_skill"
-        :dialog-title="sharedStore.edit?'edit_skill':'add_new_skill'"
         v-model:page="payload.page"
         v-model:searchModel="payload.search"
         @update:searchModel="onSearch"
-        @show:dialog="openDialog"
-        dialog-subtitle="add_new_skill_description"
-        @update:itemStatus="
-          store.changeItemStatus(
-            $event,
-            'updateSkillStatus',
-            'skillsList',
-            payload,
-            'academyPanel'
-          )
-        "
         @update:page="
-          store.getListingItems('categoryList', payload, headers.value)
+          store.getListingItems('studentsList', payload.value, 'academyPanel')
         "
         default-status="active"
         :table-actions="operations"
@@ -77,10 +64,10 @@
 </template>
 
 <script setup>
-import { useAcademyStore } from "@core/stores/academy";
-import {useSharedPanelStore} from "@core/stores/sharedPanel";
-const sharedStore = useSharedPanelStore();
-let store = useAcademyStore();
+// import { useAcademyStore } from "@core/stores/academy";
+import { useSharedPanelStore } from "@core/stores/sharedPanel";
+// const sharedStore = useSharedPanelStore();
+let store = useSharedPanelStore();
 const localePath = useLocalePath();
 const { t } = useI18n();
 let page = ref(1);
@@ -142,8 +129,8 @@ let payload = computed(() => {
   return {
     page: page.value,
     search: search.value,
-    sortKey: sharedStore.sortBy[0]?.key || "",
-    sortOrder: sharedStore.sortBy[0]?.order || "",
+    sortKey: store.sortBy[0]?.key || "",
+    sortOrder: store.sortBy[0]?.order || "",
   };
 });
 const { $repos } = useNuxtApp();
@@ -171,11 +158,7 @@ const openDialog = () => {
 };
 const onSearch = useDebounceFn(
   async () =>
-    await store.getListingItems(
-      "studentsList",
-      payload.value,
-      "academyPanel"
-    ),
+    await store.getListingItems("studentsList", payload.value, "academyPanel"),
   1000,
   {
     maxWait: 5000,
@@ -183,7 +166,11 @@ const onSearch = useDebounceFn(
 );
 const init = () => {
   operations = ref([
-    { title: "ویرایش", value: "certificate", function: studentsList.value.edit }
+    {
+      title: "ویرایش",
+      value: "certificate",
+      function: studentsList.value.edit,
+    },
   ]);
 };
 const submitItem = () => {
@@ -238,11 +225,7 @@ const submitItem = () => {
 onMounted(() => {
   init();
   store.getListingCommon("studentsListCommon", "academyPanel");
-  store.getListingItems(
-    "studentsList",
-    payload.value,
-    "academyPanel"
-  );
+  store.getListingItems("studentsList", payload.value, "academyPanel");
 });
 definePageMeta({
   middleware: ["auth"],
@@ -250,8 +233,8 @@ definePageMeta({
 });
 
 const certificates = () => {
-  navigateTo(localePath({name: 'academy-panel-listings-certificates'}))
-}
+  navigateTo(localePath({ name: "academy-panel-listings-certificates" }));
+};
 </script>
 
 <style></style>

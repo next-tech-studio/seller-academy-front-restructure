@@ -246,6 +246,7 @@ export default (request) => ({
       alert: false,
       query: `?search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}`,
       page: payload.page,
+      model: { name: panelTable, collection: true, pagination: true },
     });
   },
   studentsListCommon() {

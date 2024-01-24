@@ -272,9 +272,9 @@
       <template v-slot:bottom> </template>
     </v-data-table>
     <v-pagination
-      v-if="items.last_page > 1"
+      v-if="items?.pagination?.lastPage > 1"
       v-model="pageNumber"
-      :length="items.last_page"
+      :length="items?.pagination?.lastPage"
       class="mt-4 align-center"
       density="compact"
       border

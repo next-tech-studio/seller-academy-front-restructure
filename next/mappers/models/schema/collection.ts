@@ -9,12 +9,17 @@ const collection: Mapping = {
       return mapperCollection(value, mapping);
     },
   },
-  meta: {
-    newName: "pagination",
-    processValue: (value) => {
-      return mapper(value, pagination);
+  pagination: {
+    setValue: (value) => {
+      return !value.meta ? mapper(value, pagination) : mapper(value.meta, pagination);
     },
   },
+  // meta: {
+  //   newName: "pagination",
+  //   processValue: (value) => {
+  //     return mapper(value, pagination);
+  //   },
+  // }
 };
 console.log('ccolleccttiion',collection)
 export default collection;
