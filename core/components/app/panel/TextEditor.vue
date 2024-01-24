@@ -52,6 +52,10 @@ import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import CharacterCount from "@tiptap/extension-character-count";
 import Link from "@tiptap/extension-link";
+import Table from "@tiptap/extension-table";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import TableRow from "@tiptap/extension-table-row";
 let emit = defineEmits(["update:modelValue"]);
 let props = defineProps({
   modelValue: {
@@ -76,6 +80,12 @@ const editor = useEditor({
     Link.configure({
       openOnClick: false,
     }),
+    Table.configure({
+      resizable: true,
+    }),
+    TableRow,
+    TableHeader,
+    TableCell,
   ],
   onUpdate: () => {
     emit("update:modelValue", { model: editor.value.getHTML() });
@@ -105,6 +115,15 @@ let textActions = [
   },
   { slug: "orderedList", icon: "custom:orderedList", active: "orderedList" },
   { slug: "bulletList", icon: "custom:unorderedList", active: "bulletList" },
+  { slug: "insertTable", icon: "custom:unorderedList", active: "insertTable" },
+  { slug: "addColumnAfter", icon: "custom:unorderedList", active: "addColumnAfter" },
+  { slug: "deleteColumn", icon: "custom:unorderedList", active: "deleteColumn" },
+  { slug: "addRowAfter", icon: "custom:unorderedList", active: "addRowAfter" },
+  { slug: "deleteRow", icon: "custom:unorderedList", active: "deleteRow" },
+  { slug: "mergeCells", icon: "custom:unorderedList", active: "mergeCells" },
+  { slug: "splitCell", icon: "custom:unorderedList", active: "splitCell" },
+
+
 ];
 let headings = [
   {
@@ -149,19 +168,14 @@ let headings = [
   },
 ];
 
-// watch(
-//   props.modelValue,
-//   (newModelValue, oldModelValue) => {
-//     if (editor.value.getHTML() === oldModelValue) return;
-//     editor.commands.setContent(props.modelValue, false);
-//     if (!props.modelValue.html) onHeadingClick(0);
-//   },
-//   { deep: true }
-// );
-watch([headingsModel, props.modelValue.model], ([newheading,newModelValue]) => {
-  if (newheading != false) onHeadingClick(newheading?.level);
-  else onHeadingClick(0);
-},{deep:true});
+watch(
+  [headingsModel, props.modelValue.model],
+  ([newheading, newModelValue]) => {
+    if (newheading != false) onHeadingClick(newheading?.level);
+    else onHeadingClick(0);
+  },
+  { deep: true }
+);
 
 let onActionClick = (slug, option = null) => {
   {
@@ -183,6 +197,13 @@ let onActionClick = (slug, option = null) => {
         vm.unsetAllMarks().run();
       },
       code: () => vm.toggleCodeBlock().run(),
+      insertTable:()=>vm.insertTable().run(),
+      addColumnAfter:()=>vm.insertTable().run(),
+      deleteColumn:()=>vm.insertTable().run(),
+      addRowAfter:()=>vm.insertTable().run(),
+      deleteRow:()=>vm.insertTable().run(),
+      mergeCells:()=>vm.insertTable().run(),
+      splitCell:()=>vm.insertTable().run(),
     };
 
     actionTriggers[slug]();
