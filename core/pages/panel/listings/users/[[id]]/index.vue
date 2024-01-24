@@ -299,16 +299,16 @@ const submitItem = () => {
     let itemIndex = sharedStore.listItems.data.findIndex(
       (item) => item.id === sharedStore.currentItem.id
     );
-    payload = { body: { ...body, id: sharedStore.currentItem.id } };
+    payload = { ...body, id: sharedStore.currentItem.id };
     $repos.sharedPanel.updateUser(payload).then((res) => {
       Object.assign(sharedStore.listItems.data[itemIndex], res);
       sharedStore.edit = false;
       sharedStore.closeDialog();
     });
   } else {
-    payload = { body: { ...body, id: 0 } };
+    payload = { ...body, id: 0 };
     $repos.sharedPanel
-      .updateUser(payload)
+      .createUser(payload)
       .then((res) => {
         Object.assign(sharedStore.listItems.data, [
           ...sharedStore.listItems.data,
