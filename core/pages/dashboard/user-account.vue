@@ -51,7 +51,7 @@ const menu = ref([
 const getUserInfo = () => {
   $repos.other.userInfo().then((res) => {
     Object.assign(userInfo.value, res);
-    auth.user = { ...res.personalInfo, loggedIn: true };
+    Object.assign(auth.user, {...auth.user, ...res.personalInfo});
   });
 };
 const editGeneralInformation = () => {

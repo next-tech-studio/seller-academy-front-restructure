@@ -6,7 +6,7 @@
         <v-img :src="information?.avatarUrl?.url" />
       </v-avatar>
       <div class="text-text-heading text-body-1 font-weight-bold">
-        {{ information?.displayName }}
+        {{ information?.name }}
       </div>
     </div>
     <v-btn color="text-primary" class="px-0 d-flex justify-end" variant="text" @click="openDialog">
