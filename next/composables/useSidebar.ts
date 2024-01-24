@@ -115,7 +115,7 @@ export const useSidebar = (user = { roles: [] }) => {
       },
       children: [
         {
-          title: "add_new_course",
+          title: "offline_course",
           roles: ["siteAdmin", "seller"],
           get show() {
             // return checkUserRoles(this.roles);
@@ -124,7 +124,90 @@ export const useSidebar = (user = { roles: [] }) => {
           // to: localePath({ path: "academy/panel/course/id/general" }),
           children: [
             {
-              title: "product",
+              title: "add_new_course",
+              roles: ["siteAdmin", "seller"],
+              get show() {
+                // return checkUserRoles(this.roles);
+                return true;
+              },
+              to: localePath({ path: "/academy/panel/course/general" }),
+            },
+            {
+              title: "courses",
+              roles: ["siteAdmin", "seller"],
+              get show() {
+                // return checkUserRoles(this.roles);
+                return true;
+              },
+              to: localePath({ path: "/academy/panel/listings/courses" }),
+            },
+            {
+              title: "course_instructors",
+              roles: ["siteAdmin", "seller"],
+              get show() {
+                // return checkUserRoles(this.roles);
+                return true;
+              },
+              to: localePath({ path: "/academy/panel/listings/instructors" }),
+            },
+            {
+              title: "categories",
+              roles: ["siteAdmin", "seller"],
+              get show() {
+                // return checkUserRoles(this.roles);
+                return true;
+              },
+              to: localePath({ path: "/academy/panel/listings/categories" }),
+            },
+            {
+              title: "students",
+              roles: ["siteAdmin", "seller"],
+              get show() {
+                // return checkUserRoles(this.roles);
+                return true;
+              },
+              to: localePath({ path: "/academy/panel/listings/students" }),
+            },
+            {
+              title: "certificates",
+              roles: ["siteAdmin", "seller"],
+              get show() {
+                // return checkUserRoles(this.roles);
+                return true;
+              },
+              to: localePath({ path: "/academy/panel/listings/certificates" }),
+            },
+            {
+              title: "comments",
+              roles: ["siteAdmin", "seller"],
+              get show() {
+                // return checkUserRoles(this.roles);
+                return true;
+              },
+              to: localePath({ path: "/academy/panel/listings/comments" }),
+            },
+            {
+              title: "skills",
+              roles: ["siteAdmin", "seller"],
+              get show() {
+                // return checkUserRoles(this.roles);
+                return true;
+              },
+              to: localePath({ path: "/academy/panel/listings/skills" }),
+            },
+          ],
+        },
+        {
+          title: "online_course",
+          roles: ["siteAdmin", "seller"],
+          get show() {
+            // return checkUserRoles(this.roles);
+            return true;
+          },
+          // to: localePath({ path: "academy/panel/course/id/general" }),
+          children: [
+            {
+              title: "add_new_course",
               roles: ["siteAdmin", "seller"],
               get show() {
                 // return checkUserRoles(this.roles);
@@ -133,88 +216,117 @@ export const useSidebar = (user = { roles: [] }) => {
               to: localePath({ path: "/academy/panel/product/general" }),
             },
             {
-              title: "course",
+              title: "products",
               roles: ["siteAdmin", "seller"],
               get show() {
                 // return checkUserRoles(this.roles);
                 return true;
               },
-              to: localePath({ path: "/academy/panel/course/general" }),
+              to: localePath({ path: "/academy/panel/listings/products" }),
             },
           ],
         },
-        {
-          title: "courses",
-          roles: ["siteAdmin", "seller"],
-          get show() {
-            // return checkUserRoles(this.roles);
-            return true;
-          },
-          to: localePath({ path: "/academy/panel/listings/courses" }),
-        },
-        {
-          title: "products",
-          roles: ["siteAdmin", "seller"],
-          get show() {
-            // return checkUserRoles(this.roles);
-            return true;
-          },
-          to: localePath({ path: "/academy/panel/listings/products" }),
-        },
-        {
-          title: "course_instructors",
-          roles: ["siteAdmin", "seller"],
-          get show() {
-            // return checkUserRoles(this.roles);
-            return true;
-          },
-          to: localePath({ path: "/academy/panel/listings/instructors" }),
-        },
-        {
-          title: "categories",
-          roles: ["siteAdmin", "seller"],
-          get show() {
-            // return checkUserRoles(this.roles);
-            return true;
-          },
-          to: localePath({ path: "/academy/panel/listings/categories" }),
-        },
-        {
-          title: "students",
-          roles: ["siteAdmin", "seller"],
-          get show() {
-            // return checkUserRoles(this.roles);
-            return true;
-          },
-          to: localePath({ path: "/academy/panel/listings/students" }),
-        },
-        {
-          title: "certificates",
-          roles: ["siteAdmin", "seller"],
-          get show() {
-            // return checkUserRoles(this.roles);
-            return true;
-          },
-          to: localePath({ path: "/academy/panel/listings/certificates" }),
-        },
-        {
-          title: "comments",
-          roles: ["siteAdmin", "seller"],
-          get show() {
-            // return checkUserRoles(this.roles);
-            return true;
-          },
-          to: localePath({ path: "/academy/panel/listings/comments" }),
-        },
-        {
-          title: "skills",
-          roles: ["siteAdmin", "seller"],
-          get show() {
-            // return checkUserRoles(this.roles);
-            return true;
-          },
-          to: localePath({ path: "/academy/panel/listings/skills" }),
-        },
+        // {
+        //   title: "add_new_course",
+        //   roles: ["siteAdmin", "seller"],
+        //   get show() {
+        //     // return checkUserRoles(this.roles);
+        //     return true;
+        //   },
+        //   // to: localePath({ path: "academy/panel/course/id/general" }),
+        //   children: [
+        //     {
+        //       title: "product",
+        //       roles: ["siteAdmin", "seller"],
+        //       get show() {
+        //         // return checkUserRoles(this.roles);
+        //         return true;
+        //       },
+        //       to: localePath({ path: "/academy/panel/product/general" }),
+        //     },
+        //     {
+        //       title: "course",
+        //       roles: ["siteAdmin", "seller"],
+        //       get show() {
+        //         // return checkUserRoles(this.roles);
+        //         return true;
+        //       },
+        //       to: localePath({ path: "/academy/panel/course/general" }),
+        //     },
+        //   ],
+        // },
+        // {
+        //   title: "courses",
+        //   roles: ["siteAdmin", "seller"],
+        //   get show() {
+        //     // return checkUserRoles(this.roles);
+        //     return true;
+        //   },
+        //   to: localePath({ path: "/academy/panel/listings/courses" }),
+        // },
+        // {
+        //   title: "products",
+        //   roles: ["siteAdmin", "seller"],
+        //   get show() {
+        //     // return checkUserRoles(this.roles);
+        //     return true;
+        //   },
+        //   to: localePath({ path: "/academy/panel/listings/products" }),
+        // },
+        // {
+        //   title: "course_instructors",
+        //   roles: ["siteAdmin", "seller"],
+        //   get show() {
+        //     // return checkUserRoles(this.roles);
+        //     return true;
+        //   },
+        //   to: localePath({ path: "/academy/panel/listings/instructors" }),
+        // },
+        // {
+        //   title: "categories",
+        //   roles: ["siteAdmin", "seller"],
+        //   get show() {
+        //     // return checkUserRoles(this.roles);
+        //     return true;
+        //   },
+        //   to: localePath({ path: "/academy/panel/listings/categories" }),
+        // },
+        // {
+        //   title: "students",
+        //   roles: ["siteAdmin", "seller"],
+        //   get show() {
+        //     // return checkUserRoles(this.roles);
+        //     return true;
+        //   },
+        //   to: localePath({ path: "/academy/panel/listings/students" }),
+        // },
+        // {
+        //   title: "certificates",
+        //   roles: ["siteAdmin", "seller"],
+        //   get show() {
+        //     // return checkUserRoles(this.roles);
+        //     return true;
+        //   },
+        //   to: localePath({ path: "/academy/panel/listings/certificates" }),
+        // },
+        // {
+        //   title: "comments",
+        //   roles: ["siteAdmin", "seller"],
+        //   get show() {
+        //     // return checkUserRoles(this.roles);
+        //     return true;
+        //   },
+        //   to: localePath({ path: "/academy/panel/listings/comments" }),
+        // },
+        // {
+        //   title: "skills",
+        //   roles: ["siteAdmin", "seller"],
+        //   get show() {
+        //     // return checkUserRoles(this.roles);
+        //     return true;
+        //   },
+        //   to: localePath({ path: "/academy/panel/listings/skills" }),
+        // },
       ],
     },
     {
