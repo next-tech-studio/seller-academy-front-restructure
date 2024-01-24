@@ -33,7 +33,11 @@
         height="41"
       >
         <div class="mx-1 text-icon-high-emphasis text-button">
-          <v-avatar start size="30" :image="auth.user?.avatarUrl"></v-avatar>
+          <v-avatar
+            start
+            size="30"
+            :image="auth.user?.avatarUrl.url || auth.user?.avatarUrl"
+          ></v-avatar>
           <span class="mr-2"
             >{{ `${$t("hello")} ${auth.user.firstName}` }}!</span
           >
@@ -79,10 +83,24 @@ const goToPanel = () => {
   navigateTo(
     localePath({
       path: "/blog/panel/listings/posts",
-    }),{external:true}
+    }),
+    { external: true }
+  );
+};
+const goToDashboard = () => {
+  navigateTo(
+    localePath({
+      path: "/dashboard/user-account",
+    }),
+    { external: true }
   );
 };
 const items = [
+  {
+    title: "user_dashboard",
+    icon: "custom:dashboard",
+    action: goToDashboard,
+  },
   {
     title: "admin_panel",
     icon: "custom:userSolid",

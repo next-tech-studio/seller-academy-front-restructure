@@ -5,7 +5,7 @@
       elevation="0"
       order="1"
       absolute
-      style="top: 0; border-bottom: 1px solid rgba(var(--v-theme-n200));width:calc(100% - 264px)"
+      style="top: 0; border-bottom: 1px solid rgba(var(--v-theme-n200))"
 
       class="px-4"
     >

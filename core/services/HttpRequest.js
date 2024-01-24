@@ -1,11 +1,13 @@
 import FileDownload from "js-file-download";
 import { useToastStore } from "~/stores/toast";
+import { useAuthStore } from "~/stores/auth";
 
 class HttpRequest {
   constructor(app) {
     this.me = app._route.query.me || 1;
     this.notifier = app.$notifier;
     this.toast = useToastStore();
+    this.headers = { Authorization: useAuthStore().user.token };
   }
 
   post(url, payload = {}, alert = false) {
@@ -15,6 +17,7 @@ class HttpRequest {
           method: "POST",
           body: payload,
           credentials: "include",
+          headers: this.headers
         })
           .then((resp) => {
             resolve(resp);
@@ -35,6 +38,7 @@ class HttpRequest {
           method: "PUT",
           body: payload,
           credentials: "include",
+          headers: this.headers
         })
           .then((resp) => {
             resolve(resp);
@@ -55,6 +59,7 @@ class HttpRequest {
           method: "DELETE",
           body: payload,
           credentials: "include",
+          headers: this.headers
         })
           .then((resp) => {
             resolve(resp);
@@ -71,7 +76,7 @@ class HttpRequest {
   get(url, alert = false) {
     try {
       return new Promise((resolve, reject) => {
-        $fetch(url, { credentials: "include" })
+        $fetch(url, { credentials: "include", headers: this.headers })
           .then((resp) => {
             resolve(resp);
           })
@@ -88,6 +93,7 @@ class HttpRequest {
       return new Promise((resolve, reject) => {
         $fetch(url, {
           responseType: "blob",
+          headers: this.headers
         })
           .then((resp) => {
             FileDownload(resp.data, "file." + type);

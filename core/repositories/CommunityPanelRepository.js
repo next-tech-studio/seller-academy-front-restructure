@@ -1,4 +1,5 @@
 import panelTable from "~/mappers/models/schema/panelTable";
+import panelRoom from "~/mappers/models/schema/panelRoom";
 
 export default (request) => ({
   questionsList(payload) {
@@ -108,6 +109,7 @@ export default (request) => ({
       path: `/panel/chat/show/${payload}`,
       loading: true,
       alert: false,
+      model: { name: panelRoom, dataPath: "data" },
     });
   },
   updateRoomStatus(payload) {
@@ -134,4 +136,42 @@ export default (request) => ({
       payload.body
     );
   },
+  chatRoomsList(payload) {
+    console.log('payload',payload)
+    return request(
+      {
+        name: "chatRoomsList",
+        method: "get",
+      query: `?categorySlug=${payload?.categorySlug}&&search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}&page=${payload?.page}`,
+        path: `/panel/chat/rooms/data`,
+        loading: true,
+        alert: false,
+      },
+      payload
+    );
+  },
+  chatRoomsCommon(payload) {
+    return request(
+      {
+        name: "chatRoomsCommon",
+        method: "get",
+        path: `/panel/chat/rooms/common`,
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  },
+  updateRoomStatus(payload){
+    return request(
+      {
+        name: "updateRoomStatus",
+        method: "put",
+        path: `/panel/chat/set_status`,
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  }
 });

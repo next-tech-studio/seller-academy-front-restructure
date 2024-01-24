@@ -150,8 +150,8 @@ onMounted(() => {
 const type = computed(() =>
   route.name.includes("podcast") ? "podcast" : "article"
 );
-definePageMeta({
-  middleware: ["auth"],
-  layout: false,
-});
+// definePageMeta({
+//   middleware: ["auth"],
+//   layout: 'sidebar',
+// });
 </script>

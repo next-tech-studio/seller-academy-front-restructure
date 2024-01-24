@@ -10,9 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "^3.9.1",
-    "vue": "^3.4.10",
-    "vue-router": "^4.2.5",
     "@fortawesome/fontawesome-free": "^5.0.13",
     "@nuxtjs/i18n": "8.0.0-beta.12",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
@@ -37,21 +34,24 @@
     "js-file-download": "^0.4.12",
     "laravel-echo": "^1.15.1",
     "moment-jalaali": "^0.9.6",
+    "nuxt": "^3.9.1",
     "nuxt-schema-org": "^2.1.2",
     "pinia": "^2.0.36",
     "pusher-js": "^8.0.2",
     "sass": "^1.63.3",
     "v3-infinite-loading": "^1.2.2",
     "vite-plugin-vuetify": "^1.0.2",
+    "vue": "^3.4.10",
+    "vue-router": "^4.2.5",
     "vuedraggable": "^4.1.0",
     "vuetify": "^3.4.3"
   },
   "dependencies": {
-    "@nuxt/content": "^2.9.0",
+    "@nuxt/content": "^2.11.0",
     "jalali-moment": "^3.3.11",
     "vue3-persian-datetime-picker": "^1.2.2"
   },
   "overrides": {
-      "vue": "latest"
+    "vue": "latest"
   }
 }

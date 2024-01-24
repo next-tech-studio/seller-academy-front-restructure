@@ -1,16 +1,17 @@
 //@ts-ignore
-import { Mapping, $moment } from "~/mappers";
+import { Mapping, $moment, mapperCollection } from "~/mappers";
+import user from "./user";
 const panelTable: Mapping = {
   question: {
     processValue: (value) => {
       return value.title;
     },
   },
-  slug: {
-    setValue: (object) => object.article?.slug
-  },
-  address:{
-    setValue: (object) => object.article?.slug
+  // slug: {
+  //   setValue: (object) => object.article?.slug,
+  // },
+  address: {
+    setValue: (object) => object.article?.slug,
   },
 
   publicationDate: {
@@ -22,7 +23,7 @@ const panelTable: Mapping = {
       process.client ? $moment(value).format("jYYYY/jMM/jDD - HH:mm") : "",
   },
   createdAt: {
-    newName: 'creationDate',
+    newName: "creationDate",
     processValue: (value) =>
       process.client ? $moment(value).format("jYYYY/jMM/jDD - HH:mm") : "",
   },
@@ -35,10 +36,23 @@ const panelTable: Mapping = {
       return { url: value };
     },
   },
+  avatarUrl: {
+    processValue: (value) => {
+      return { url: value };
+    },
+  },
+  bannerUrl: {
+    processValue: (value) => {
+      return { url: value };
+    },
+  },
   cover_url: {
     processValue: (value) => {
       return { url: value };
     },
+  },
+  members: {
+    processValue: (value) => mapperCollection(value, user),
   },
 };
 

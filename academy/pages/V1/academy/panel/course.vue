@@ -1,13 +1,13 @@
 <template>
-    <NuxtLayout name="sidebar">
+    <!-- <NuxtLayout name="sidebar"> -->
       <NuxtPage />
-    </NuxtLayout>
+    <!-- </NuxtLayout> -->
   </template>
   
   <script setup>
   definePageMeta({
     middleware: ["auth"],
-    layout: false,
+    layout: 'sidebar',
   });
   </script>
   

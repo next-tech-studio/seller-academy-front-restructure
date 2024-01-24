@@ -33,7 +33,6 @@ export default (request) => ({
     });
   },
   updateForm(payload) {
-    console.log('paylooaaaaddddddddd',payload)
     return request(
       {
         name: "updateForm",
@@ -42,7 +41,7 @@ export default (request) => ({
         loading: true,
         alert: false,
       },
-      payload.body
+      payload
     );
   },
   //panel
@@ -70,12 +69,12 @@ export default (request) => ({
       alert: false,
     });
   },
-  createUser(payload) {
+  updateUser(payload) {
     return request(
       {
         name: "createUser",
-        method: "post",
-        path: "/panel/users/create",
+        method: "put",
+        path: "/panel/user/edit-data",
         loading: true,
         alert: false,
       },
@@ -95,15 +94,12 @@ export default (request) => ({
     );
   },
   generatePassword() {
-    return request(
-      {
-        name: "createUser",
-        method: "post",
-        path: "/panel/users/generatePassword",
-        loading: true,
-        alert: false,
-      },
-    );
+    return request({
+      name: "createUser",
+      method: "post",
+      path: "/panel/users/generatePassword",
+      loading: true,
+      alert: false,
+    });
   },
-
 });

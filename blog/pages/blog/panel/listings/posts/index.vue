@@ -26,18 +26,10 @@
         "
         :show-dialog="false"
         @update:page="
-          sharedStore.getListingItems(
-            'articleListData',
-            payload,
-            'panel'
-          )
+          sharedStore.getListingItems('articleListData', payload, 'panel')
         "
         @filter="
-          sharedStore.getListingItems(
-            'articleListData',
-            payload,
-            'panel'
-          )
+          sharedStore.getListingItems('articleListData', payload, 'panel')
         "
         @edit="edit"
         :table-actions="operations"
@@ -101,7 +93,12 @@ const type = computed(() =>
 const localePath = useLocalePath();
 const init = () => {
   operations = ref([
-    { title: "ویرایش", value: "edit",hasDialog:true, function: postList.value.edit },
+    {
+      title: "ویرایش",
+      value: "edit",
+      hasDialog: true,
+      function: postList.value.edit,
+    },
     {
       title: "حذف کردن",
       value: "deleted",
@@ -110,6 +107,11 @@ const init = () => {
     {
       title: "پنهان کردن",
       value: "hidden",
+      function: postList.value.changeItemStatus,
+    },
+    {
+      title: "انتشار",
+      value: "published",
       function: postList.value.changeItemStatus,
     },
   ]);
@@ -206,13 +208,18 @@ const goToItem = () => {
     );
   }
 };
-const onSearch = useDebounceFn(async () => await sharedStore.getListingItems(
-    "articleListData",
-    payload.value,
-    "panel"
-  ), 1000, {
-  maxWait: 5000,
-});
+const onSearch = useDebounceFn(
+  async () =>
+    await sharedStore.getListingItems(
+      "articleListData",
+      payload.value,
+      "panel"
+    ),
+  1000,
+  {
+    maxWait: 5000,
+  }
+);
 // const changeItemStatus = (e) => {
 //   let payload = { body: { status: e.action, ids: e.id }, type: type.value };
 //   $repos.panel.updateArticleStatus(payload).then(() => getItems());
@@ -228,11 +235,7 @@ onMounted(async () => {
     payload.value
   );
   init();
-  await sharedStore.getListingItems(
-    "articleListData",
-    payload.value,
-    "panel"
-  );
+  await sharedStore.getListingItems("articleListData", payload.value, "panel");
 });
 definePageMeta({
   middleware: ["auth"],

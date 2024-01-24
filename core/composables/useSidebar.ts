@@ -1,21 +1,15 @@
-export const useSidebar = (user = {roles:[]}) => {
+import { useAuthStore } from "~/stores/auth";
+const auth = useAuthStore();
+export const useSidebar = (user = { roles: [] }) => {
   const { t } = useI18n();
   const localePath = useLocalePath();
 
-  const checkUserRoles = (roles: String[]) => {
-    // return true
-
-    return roles.find((el) => {
-      return user?.roles?.includes(el);
-    });
-  };
   return ref([
     {
       title: t("dashboard"),
       icon: "custom:dashboard",
       roles: ["siteAdmin", "seller"],
       get show() {
-        // return checkUserRoles(this.roles);
         return true;
       },
       to: localePath({ path: "/panel" }),
@@ -25,8 +19,7 @@ export const useSidebar = (user = {roles:[]}) => {
       icon: "custom:blog",
       roles: ["siteAdmin", "seller"],
       get show() {
-        // return checkUserRoles(this.roles);
-        return true;
+        return auth.hasPermission(["blogs"]);
       },
       to: localePath({ path: "/blog/panel/blog" }),
       children: [
@@ -111,8 +104,7 @@ export const useSidebar = (user = {roles:[]}) => {
       icon: "custom:monitor",
       roles: ["siteAdmin", "seller"],
       get show() {
-        // return checkUserRoles(this.roles);
-        return true;
+        return auth.hasPermission(["academy"]);
       },
       children: [
         {
@@ -165,7 +157,7 @@ export const useSidebar = (user = {roles:[]}) => {
           roles: ["siteAdmin", "seller"],
           get show() {
             // return checkUserRoles(this.roles);
-            return true
+            return true;
           },
           to: localePath({ path: "/academy/panel/listings/certificates" }),
         },
@@ -194,9 +186,27 @@ export const useSidebar = (user = {roles:[]}) => {
       icon: "custom:chat",
       roles: ["siteAdmin", "seller"],
       get show() {
-        return checkUserRoles(this.roles);
+        return auth.hasPermission(["community"]);
       },
       children: [
+        {
+          title: t("create_chatroom"),
+          roles: ["siteAdmin", "seller"],
+          get show() {
+            // return checkUserRoles(this.roles);
+            return true;
+          },
+          to: localePath({ path: "/forum/panel/room" }),
+        },
+        {
+          title: t("rooms"),
+          roles: ["siteAdmin", "seller"],
+          get show() {
+            // return checkUserRoles(this.roles);
+            return true;
+          },
+          to: localePath({ path: "/forum/panel/listings/rooms" }),
+        },
         {
           title: t("questions"),
           roles: ["siteAdmin", "seller"],
@@ -232,8 +242,7 @@ export const useSidebar = (user = {roles:[]}) => {
       icon: "custom:userSolid",
       roles: ["siteAdmin", "seller"],
       get show() {
-        // return checkUserRoles(this.roles);
-        return true;
+        return auth.hasPermission(["users"]);
       },
       to: localePath({ path: "/panel/listings/users" }),
     },

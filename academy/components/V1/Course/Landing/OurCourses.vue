@@ -129,6 +129,9 @@ let filters = computed(() => {
 const courses = computed(() => {
   return !props.hideFilter ? store.filter.courses : props.items;
 });
+const toCourse = (item) => {
+  navigateTo(localePath(item.url))
+}
 // onUpdated(() => {
 //   store.buttonDefault = props.categories[0].slug;
 // });

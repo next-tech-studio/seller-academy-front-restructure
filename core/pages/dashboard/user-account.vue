@@ -1,5 +1,5 @@
 <template>
-  <v-card :title="$t('user_account')">
+  <v-card :title="$t('user_account')" class="px-6 py-4">
     <dashboard-menu
       v-model="tabs"
       :menu="menu"
@@ -37,6 +37,8 @@
 </template>
 <script setup>
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useAuthStore } from "@core/stores/auth";
+const auth = useAuthStore();
 const sharedStore = useSharedPanelStore();
 let userInfo = ref({});
 const { $repos } = useNuxtApp();
@@ -49,6 +51,7 @@ const menu = ref([
 const getUserInfo = () => {
   $repos.other.userInfo().then((res) => {
     Object.assign(userInfo.value, res);
+    Object.assign(auth.user, {...auth.user, ...res.personalInfo});
   });
 };
 const editGeneralInformation = () => {

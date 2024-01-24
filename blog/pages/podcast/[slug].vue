@@ -15,13 +15,13 @@
               :audio-poster="itemContent.cover"
             />
           </v-card-text>
-          <content
+          <post-content
             @reactto:article="reactPost(item)"
             @bookmark:article="bookmarkPost(item)"
             :item="item"
             :show-banner-url="false"
             inline-bookmark
-          ></content>
+          ></post-content>
         </v-card>
       </v-col>
       <v-col cols="12" md="4" tag="section">

@@ -60,9 +60,9 @@
       ></course-landing-our-courses>
       <KeepAlive>
         <course-landing-testimonial
-        class="py-12"
-        :items="data.comments"
-      ></course-landing-testimonial>
+          class="py-12"
+          :items="data.comments"
+        ></course-landing-testimonial>
       </KeepAlive>
     </v-container>
   </div>

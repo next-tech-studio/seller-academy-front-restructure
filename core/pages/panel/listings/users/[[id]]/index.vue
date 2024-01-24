@@ -12,7 +12,7 @@
         :show-dialog="true"
         :add-new-item="true"
         dialog-start-button-title="add_new_user"
-        :dialog-title="sharedStore.edit?'edit_user':'add_new_user'"
+        :dialog-title="sharedStore.edit ? 'edit_user' : 'add_new_user'"
         v-model:page="payload.page"
         v-model:searchModel="payload.search"
         @update:searchModel="onSearch"
@@ -29,11 +29,7 @@
           )
         "
         @update:page="
-          sharedStore.getListingItems(
-            'usersList',
-            payload,
-            'sharedPanel'
-          )
+          sharedStore.getListingItems('usersList', payload, 'sharedPanel')
         "
         default-status="active"
         :table-actions="operations"
@@ -52,11 +48,7 @@
         "
         @navigate:toItem="goToItem"
         @filter="
-          sharedStore.getListingItems(
-            'usersList',
-            payload,
-            'sharedPanel'
-          )
+          sharedStore.getListingItems('usersList', payload, 'sharedPanel')
         "
       >
         <template #displayName="{ item }">
@@ -85,8 +77,16 @@
           </div>
         </template>
         <template #roles="{ item }">
-          <div style="direction: ltr" class="text-end">
-            {{ item.item?.roles?.displayName }}
+          <div>
+            <v-chip
+              v-if="item.item?.roles"
+              style="direction: ltr"
+              class="text-end"
+              color="secondary-base"
+            >
+              {{ item.item?.roles?.name }}
+            </v-chip>
+            <div v-else>-</div>
           </div>
         </template>
         <template #status="{ item }">
@@ -114,6 +114,7 @@ import { useSharedPanelStore } from "@core/stores/sharedPanel";
 import { useFilterStore } from "@core/stores/filter";
 const sharedStore = useSharedPanelStore();
 const filterStore = useFilterStore();
+
 const { t } = useI18n();
 const UPLOAD_AVATAR_PATH = "/panel/forms/upload_cover";
 let page = ref(1);
@@ -163,22 +164,10 @@ let payload = computed(() => {
 });
 const { $repos } = useNuxtApp();
 let dataForm = ref([
-// {
-//     type: "uploader",
-//     name: "image",
-//     show:true,
-//     uploadPath: UPLOAD_AVATAR_PATH,
-//     modelValue: ref([]),
-//     size: 1,
-//     multiple: false,
-//     maxImage: 1,
-//     hasStartButton: true,
-//     validations: [{ title: "required" }],
-//   },
   {
     type: "text-field",
     name: "firstName",
-    show:true,
+    show: true,
     modelValue: ref(""),
     validations: "required",
     label: "first_name",
@@ -188,7 +177,7 @@ let dataForm = ref([
   {
     type: "text-field",
     name: "lastName",
-    show:true,
+    show: true,
     modelValue: ref(""),
     validations: "required",
     label: "last_name",
@@ -198,7 +187,7 @@ let dataForm = ref([
   {
     type: "text-field",
     name: "email",
-    show:true,
+    show: true,
     modelValue: ref(""),
     size: 6,
     validations: "required|email",
@@ -208,10 +197,10 @@ let dataForm = ref([
   {
     type: "text-field",
     name: "phoneNumber",
-    show:true,
+    show: true,
     modelValue: ref(""),
     size: 6,
-    validations: [],
+    validations: "",
     label: "phone_number",
     hint: false,
   },
@@ -227,22 +216,11 @@ let dataForm = ref([
     hint: false,
   },
 
-  // {
-  //   type: "button",
-  //   name: "generatePassword",
-  //   variant: "flat",
-  //   icon: "custom:key",
-  //   buttonSize: "x-small",
-  //   color: "button-primary",
-  //   function: sharedStore.generatePassword,
-  //   size: 1,
-  //   hint: false,
-  // },
   {
     type: "select",
     modelValue: ref(""),
     selectValue: "id",
-    show:true,
+    show: true,
     selectTitle: "name",
     name: "roles",
     items: computed(() => sharedStore.listInfo?.roles),
@@ -250,6 +228,14 @@ let dataForm = ref([
     label: "role",
     size: 6,
     hint: false,
+  },
+  {
+    type: "text-area",
+    name: "description",
+    modelValue: ref(""),
+    size: 12,
+    validations: "",
+    label: "description",
   },
 ]);
 const openDialog = () => {
@@ -271,7 +257,12 @@ const onSearch = useDebounceFn(
 );
 const init = () => {
   operations = ref([
-    { title: "ویرایش",hasDialog:true, value: "edit", function: userList.value.edit },
+    {
+      title: "ویرایش",
+      hasDialog: true,
+      value: "edit",
+      function: userList.value.edit,
+    },
     {
       title: "حذف کردن",
       value: "deleted",
@@ -296,51 +287,28 @@ const init = () => {
 
 const submitItem = () => {
   let payload;
-  let firstName = sharedStore.editForm.find(
-    (item) => item.name === "firstName"
-  );
-  let lastName = sharedStore.editForm.find((item) => item.name === "lastName");
-  let email = sharedStore.editForm.find((item) => item.name === "email");
-  let phoneNumber = sharedStore.editForm.find(
-    (item) => item.name === "phoneNumber"
-  );
-  let password = sharedStore.editForm.find((item) => item.name === "password");
-  let roles = sharedStore.editForm.find((item) => item.name === "roles");
-  // let avatarUrl = sharedStore.editForm.find((item) => item.name === "image");
+  let body = {};
+  sharedStore.editForm.forEach((field) => {
+    body[field.name] = sharedStore.editForm.find(
+      (item) => item.name === field.name
+    )?.modelValue;
+  });
+  if (body.avatarUrl) body.avatarUrl = body.avatarUrl.url;
 
   if (sharedStore.edit) {
     let itemIndex = sharedStore.listItems.data.findIndex(
       (item) => item.id === sharedStore.currentItem.id
     );
-    payload = {
-      body: {
-        firstName: firstName.modelValue,
-        lastName: lastName.modelValue,
-        email: email.modelValue,
-        phoneNumber: phoneNumber.modelValue,
-        password: password.modelValue,
-        role: roles.modelValue,
-      },
-    };
+    payload = { body: { ...body, id: sharedStore.currentItem.id } };
     $repos.sharedPanel.updateUser(payload).then((res) => {
       Object.assign(sharedStore.listItems.data[itemIndex], res);
       sharedStore.edit = false;
       sharedStore.closeDialog();
     });
   } else {
-    payload = {
-      body: {
-        firstName: firstName.modelValue,
-        lastName: lastName.modelValue,
-        email: email.modelValue,
-        phoneNumber: phoneNumber.modelValue,
-        password: password.modelValue,
-        role: roles.modelValue,
-        // avatarUrl:avatarUrl.modelValue.url
-      },
-    };
+    payload = { body: { ...body, id: 0 } };
     $repos.sharedPanel
-      .createUser(payload)
+      .updateUser(payload)
       .then((res) => {
         Object.assign(sharedStore.listItems.data, [
           ...sharedStore.listItems.data,
@@ -356,11 +324,7 @@ const submitItem = () => {
 onMounted(async () => {
   await sharedStore.getListingCommon("usersListCommon", "sharedPanel");
   init();
-  await sharedStore.getListingItems(
-    "usersList",
-    payload.value,
-    "sharedPanel"
-  );
+  await sharedStore.getListingItems("usersList", payload.value, "sharedPanel");
 });
 definePageMeta({
   middleware: ["auth"],

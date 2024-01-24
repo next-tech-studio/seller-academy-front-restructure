@@ -20,9 +20,9 @@ const user: Mapping = {
   lastName: {},
   avatarUrl: { defaultValue: "/images/user.jpeg" },
   secondaryText: {},
-  roles: {
-    setValue: (object) => ["seller"],
-  },
+  // roles: {
+  //   setValue: (object) => ["seller"],
+  // },
 };
 
 export default user;

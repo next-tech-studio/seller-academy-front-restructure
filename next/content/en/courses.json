@@ -1,0 +1,126 @@
+{
+    "data": [
+        {
+          "title": "string",
+          "description": "برای یک مهندس نرم‌افزار شدن، به مهارت‌هایی نظیر آشنایی با زیرساخت‌های نرم‌افزار، اصول برنامه‌نویسی، حل مسئله و کار با پایگاه داده و... نیاز است. هدف اصلی در این بوت‌کمپ، کسب این مهارت‌ها با شبیه‌سازی محیط کار در قالب انجام پروژه‌های فردی و گروهی‌است. در نهایت، به شما کمک می‌کنیم مهارت‌های خود را به گونه‌ای ارائه دهید که بتوانید برای سازمان‌ها و کارفرمایان ارزش خلق کنید.",
+          "instructor": [
+            {
+              "type": "alias",
+              "id": 0,
+              "avatarUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+              "displayName": "string",
+              "description": "برای یک مهندس نرم‌افزار شدن، به مهارت‌هایی نظیر آشنایی با زیرساخت‌های نرم‌افزار، اصول برنامه‌نویسی، حل مسئله و کار با پایگاه داده و... نیاز است. هدف اصلی در این بوت‌کمپ، کسب این مهارت‌ها با شبیه‌سازی محیط کار در قالب انجام پروژه‌های فردی و گروهی‌است. در نهایت، به شما کمک می‌کنیم مهارت‌های خود را به گونه‌ای ارائه دهید که بتوانید برای سازمان‌ها و کارفرمایان ارزش خلق کنید.",
+              "courses": [
+                {
+                  "id": 0,
+                  "title": "string",
+                  "createCourse": "string",
+                  "commentsCount": "string",
+                  "level": "string",
+                  "certificateEnabled": true,
+                  "thumbnail_url": "string",
+                  "instructor": [
+                    {
+                      "displayName": "string",
+                      "type": "alias",
+                      "id": 0,
+                      "avatarUrl": "string"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "alias",
+              "id": 0,
+              "avatarUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+              "displayName": "string",
+              "description": "برای یک مهندس نرم‌افزار شدن، به مهارت‌هایی نظیر آشنایی با زیرساخت‌های نرم‌افزار، اصول برنامه‌نویسی، حل مسئله و کار با پایگاه داده و... نیاز است. هدف اصلی در این بوت‌کمپ، کسب این مهارت‌ها با شبیه‌سازی محیط کار در قالب انجام پروژه‌های فردی و گروهی‌است. در نهایت، به شما کمک می‌کنیم مهارت‌های خود را به گونه‌ای ارائه دهید که بتوانید برای سازمان‌ها و کارفرمایان ارزش خلق کنید.",
+              "courses": [
+                {
+                  "id": 0,
+                  "title": "string",
+                  "createCourse": "string",
+                  "commentsCount": "string",
+                  "level": "string",
+                  "certificateEnabled": true,
+                  "thumbnail_url": "string",
+                  "instructor": [
+                    {
+                      "displayName": "string",
+                      "type": "alias",
+                      "id": 0,
+                      "avatarUrl": "string"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "bannerUrl": "https://images.unsplash.com/photo-1574090361748-627226b75476?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80",
+          "bannerUrlMobile": "string",
+          "currentUserBookmarked": true,
+          "currentUserEnrolled": true,
+          "participantsCount": 0,
+          "category": [
+            {
+              "slug": "string",
+              "title": "string",
+              "desctiption": "string",
+              "skils": [
+                "string"
+              ]
+            }
+          ],
+          "totalDurationMinutes": 0,
+          "videosCount": 0,
+          "quizesCount": 0,
+          "languages": [
+            "string"
+          ],
+          "ratingsCount": "string",
+          "averageRating": 0,
+          "level": "beginner",
+          "learningPoint": [
+            {
+              "type": "string",
+              "content": {}
+            }
+          ],
+          "certificateEnabled": true,
+          "instructoSupport": true,
+          "moneyReturnGuarantee": true,
+          "chapters": [
+            {
+              "title": "string",
+              "totalVideoDuration": 0,
+              "totalMinutesToRead": 0,
+              "description": "string",
+              "totalDuration": 0,
+              "quezesCount": 0
+            }
+          ],
+          "certificate": [
+            {
+              "description": "string"
+            }
+          ],
+          "comments": [
+            {
+              "userName": "string",
+              "text": "string",
+              "date": "string",
+              "avatarUrl": "string",
+              "id": 0
+            }
+          ],
+          "FAQ": [
+            {
+              "id": 0,
+              "answer": "string",
+              "question": "string"
+            }
+          ]
+        }
+      ]
+}

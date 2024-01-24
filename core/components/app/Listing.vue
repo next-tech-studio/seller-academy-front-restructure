@@ -218,7 +218,8 @@
               >
                 <v-icon
                   v-if="setOperationIcon(action.value, item)"
-                  :icon="setOperationIcon(action.value, item)"
+                  :color="setOperationIcon(action.value, item)?.color"
+                  :icon="setOperationIcon(action.value, item)?.icon"
                   size="22"
                 ></v-icon>
                 {{ action.text }}
@@ -339,6 +340,7 @@ const props = defineProps({
     default: [
       { title: "پنهان کردن", value: "hidden" },
       { title: "حذف کردن", value: "deleted" },
+      { title: "بازگردانی", value: "draft" },
     ],
   },
   hideGroupActions: {
@@ -454,28 +456,38 @@ let sortedByIconType = (columnKey) => {
 };
 
 const setOperationIcon = (action, item) => {
-  if (action == "edit") return "custom:pencil";
+  if (action == "edit")
+    return { icon: "custom:pencil", color: "text-high-emphasis" };
   else if (action == "deleted" && item.status != "deleted")
-    return "custom:trash";
+    return { icon: "custom:trash", color: "text-high-emphasis" };
   else if (action == "deleted" && item.status == "deleted")
-    return "custom:redo";
-  else if (action == "hidden" && item.status != "hidden") return "custom:eye";
+    return { icon: "custom:redo", color: "text-high-emphasis" };
+  else if (action == "hidden" && item.status != "hidden")
+    return { icon: "custom:eye", color: "text-high-emphasis" };
   else if (action == "hidden" && item.status == "hidden")
-    return "custom:closedEye";
+    return { icon: "custom:closedEye", color: "text-high-emphasis" };
   else if (action == "published" && item.status != "published")
-    return "custom:publish";
-  else if (action == "certificate") return "custom:certificate";
-  else if (action == "download") return "custom:download";
-  else if (action == "answer") return "custom:reply";
-  else if (action == "profile") return "custom:userEdit";
+    return { icon: "custom:publish", color: "text-high-emphasis" };
+  else if (action == "certificate")
+    return { icon: "custom:certificate", color: "text-high-emphasis" };
+  else if (action == "download")
+    return { icon: "custom:download", color: "text-high-emphasis" };
+  else if (action == "answer")
+    return { icon: "custom:reply", color: "text-high-emphasis" };
+  else if (action == "profile")
+    return { icon: "custom:userEdit", color: "text-high-emphasis" };
   else if (action == "published" && item.status == "published")
-    return "custom:notPublished";
+    return { icon: "custom:notPublished", color: "text-high-emphasis" };
   else if (action == "active" && item.status == "deactive")
-    return "custom:profileDelete";
-  else if (action == "active" && item.status == "active")
-    return "custom:profileTick";
-  else if (action == "detail") return "custom:infoCircleOutlined";
-  else if (action == "approved") return "custom:circleCheckSolid";
+    return { icon: "custom:power", color: "text-hint-success" };
+    else if (action == "active" && item.status == "inactive")
+    return { icon: "custom:power", color: "text-hint-success" };
+  else if (action == "active" && item.status == "active") {
+    return { icon: "custom:power", color: "text-primary" };
+  } else if (action == "detail")
+    return { icon: "custom:infoCircleOutlined", color: "text-high-emphasis" };
+  else if (action == "approved")
+    return { icon: "custom:circleCheckSolid", color: "text-high-emphasis" };
 };
 </script>
 
@@ -518,7 +530,7 @@ const setOperationIcon = (action, item) => {
 }
 
 #search .v-input__control {
-    width: 320px;
-    height: 48px;
-  }
+  width: 320px;
+  height: 48px;
+}
 </style>

@@ -327,10 +327,10 @@ watch(
   },
   { deep: true }
 );
-definePageMeta({
-  middleware: ["auth"],
-  layout: false,
-});
+// definePageMeta({
+//   middleware: ["auth"],
+//   layout: 'sidebar',
+// });
 const openChannelDialog = (index) => {
   currentChannel.value = index;
   dialog.value = true;

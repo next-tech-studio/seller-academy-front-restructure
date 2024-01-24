@@ -1,0 +1,59 @@
+// MEDIA QUERY MANAGER
+/*
+xs     < 0-576px
+sm     576px >< 768px
+md     768px >< 992px
+lg     992 >< 1200
+xl     1200 >< 1400
+xxl    > 1400px
+
+$breakpoints argument choices:
+- xs
+- sm
+- md
+- lg
+- xl
+- xxl
+
+1em = 16px
+
+avoid conflict: order of writing media queries > large to small > if conflict exists : latest applies
+
+ORDER: Base + typography > general layout + grid > page layout > components
+*/
+
+@mixin respond($breakpoints) {
+  @if $breakpoints == xs {
+    @media only screen and (max-width: 35.9375em) { @content };    // < 0-576px
+  }
+  @if $breakpoints == sm {
+    @media only screen and (max-width: 47.9375em) { @content };     // 576px >< 768px
+  }
+  @if $breakpoints == md {
+    @media only screen and (max-width: 61.9375em) { @content };     // 768px >< 992px
+  }
+  @if $breakpoints == lg {
+    @media only screen and (max-width: 74.9375em) { @content };     // 992 >< 1200
+  }
+  @if $breakpoints == xl {
+    @media only screen and (max-width: 87.4375em) { @content };    // 1200 >< 1400
+  }
+  @if $breakpoints == xxl {
+    @media only screen and (min-width: 87.5em) { @content };    // > 1400px
+  }
+}
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

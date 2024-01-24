@@ -70,8 +70,7 @@ const changeStep = (next, id) => {
       localePath({
         name: props.store.steps[props.type][props.store.step].to,
         params: { id: id },
-      }),
-      { external: true }
+      })
     );
   }
 };

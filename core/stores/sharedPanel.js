@@ -143,6 +143,7 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
       this.additionalOperation = false;
     },
     statusColor(status) {
+      console.log("status", status == "inactive");
       if (status == "active") return "text-icon-hint-success";
       else if (status == "hidden") return "text-icon-high-emphasis";
       else if (status == "deleted") return "text-icon-hint-error";
@@ -150,6 +151,7 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
       else if (status == "draft") return "text-icon-low-emphasis";
       else if (status == "published") return "text-icon-hint-success";
       else if (status == "approved") return "text-icon-hint-success";
+      else if (status == "inactive") return "text-text-primaryr";
       else if (status == "waiting_for_approval")
         return "text-icon-hint-caution";
     },

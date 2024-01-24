@@ -99,6 +99,7 @@ import arrowDown from "../../components/icons/arrowDown.vue";
 import phone from "../../components/icons/phone.vue";
 import telegram from "../../components/icons/telegram.vue";
 import instagram from "../../components/icons/instagram.vue";
+import power from "../../components/icons/power.vue";
 
 const aliases: any = {
   search,
@@ -200,6 +201,7 @@ const aliases: any = {
   phone,
   telegram,
   instagram,
+  power,
 };
 
 const custom: IconSet = {

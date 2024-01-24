@@ -13,6 +13,7 @@
           v-model="trueAnswers"
           @start:quiz="startQuiz"
           @previous="onNavigate('previous')"
+          @to:item="toItem"
         ></app-content>
       </template>
 
@@ -104,7 +105,7 @@ definePageMeta({
 });
 let emit = defineEmits(["update:sidebar"]);
 const { $repos } = useNuxtApp();
-const lesson = reactive({});
+const lesson = ref({});
 const route = useRoute();
 const trueAnswers = reactive([]);
 const localePath = useLocalePath();
@@ -116,8 +117,8 @@ useAsyncData(() => {
       slug: route.params.lessonSlug,
     })
     .then((res) => {
-      Object.assign(lesson, { ...res });
-      let references = lesson.content.filter(
+      Object.assign(lesson.value, { ...res });
+      let references = lesson.value.content.filter(
         (item) => item.type == "reference"
       );
       if (references) {
@@ -129,25 +130,27 @@ useAsyncData(() => {
           });
         }
       }
-      emit("update:sidebar", lesson);
+      emit("update:sidebar", lesson.value);
     });
 });
 
 watch(
-  lesson,
-  () => {
-    if (lesson?.content?.length) {
-      lesson.content.forEach((item, index) => {
+  lesson.value,
+  (newValue) => {
+    let content
+    if (lesson.value?.content?.length) {
+      lesson.value.content.forEach((item, index) => {
         if (item.type == "exam") {
-          lesson.content[index] = {
-            ...item,
-            content: {
-              ...item.content,
-              currentUserStatus: lesson.currentUserStatus,
-              userQuizStatus: lesson.userQuizStatus,
-              score: lesson.score,
-            },
+          content = {
+            ...item.content,
+            currentUserStatus: newValue.currentUserStatus,
+            userQuizStatus: newValue.userQuizStatus,
+            score: newValue.score,
           };
+          Object.assign(lesson.value.content[index], {
+            ...item,
+          });
+          Object.assign(lesson.value.content[index].content, {...content})
         }
       });
     }
@@ -155,21 +158,21 @@ watch(
   { immediate: true }
 );
 const startQuiz = () => {
-  lesson.userQuizStatus = "started";
+  lesson.value.userQuizStatus = "started";
   // lesson.content[0].content.userQuizStatus = "started";
 };
 const setAnswer = () => {
   $repos.academy
     .participateInQuiz({
-      quizId: lesson.id,
+      quizId: lesson.value.id,
       body: {
         trueAnswers,
         version: 0,
       },
     })
     .then((res) => {
-      lesson.content[0].content.userQuizStatus = res.status;
-      lesson.content[0].content.score = res.score;
+      lesson.value.content[0].content.userQuizStatus = res.status;
+      lesson.value.content[0].content.score = res.score;
       if (res.status == "fail") props.item.examAllowed = false;
     });
 };
@@ -184,6 +187,9 @@ const onNavigate = (dir) => {
       },
     })
   );
+};
+const toItem = (e) => {
+  navigateTo(localePath({ path: `/article/${e.slug}` }));
 };
 </script>
 

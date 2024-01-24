@@ -29,6 +29,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
       HttpRequestInstance[api.method](api.path, payload, alert)
         .then((resp) => {
+          console.log('data', resp.data)
+
           // APIHandlerInstance.performCommits(store.state, store.commit, commits, resp)
           let data;
           if (model) {
@@ -43,7 +45,8 @@ export default defineNuxtPlugin((nuxtApp) => {
                 );
               }
             } else {
-              data = mapper(resp, model.name, model.raw);
+              if(model.dataPath) data = mapper(resp[model.dataPath], model.name, model.raw);
+              else data = mapper(resp, model.name, model.raw);
             }
           } else {
             data = resp;
