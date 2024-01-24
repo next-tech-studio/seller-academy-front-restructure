@@ -294,34 +294,12 @@ const submitItem = () => {
     )?.modelValue;
   });
   if (body.avatarUrl) body.avatarUrl = body.avatarUrl.url;
-  // let payload;
-  // let firstName = sharedStore.editForm.find(
-  //   (item) => item.name === "firstName"
-  // );
-  // let lastName = sharedStore.editForm.find((item) => item.name === "lastName");
-  // let email = sharedStore.editForm.find((item) => item.name === "email");
-  // let phoneNumber = sharedStore.editForm.find(
-  //   (item) => item.name === "phoneNumber"
-  // );
-  // let password = sharedStore.editForm.find((item) => item.name === "password");
-  // let roles = sharedStore.editForm.find((item) => item.name === "roles");
-  // let avatarUrl = sharedStore.editForm.find((item) => item.name === "image");
 
   if (sharedStore.edit) {
     let itemIndex = sharedStore.listItems.data.findIndex(
       (item) => item.id === sharedStore.currentItem.id
     );
     payload = { body: { ...body, id: sharedStore.currentItem.id } };
-    // payload = {
-    //   body: {
-    //     firstName: firstName.modelValue,
-    //     lastName: lastName.modelValue,
-    //     email: email.modelValue,
-    //     phoneNumber: phoneNumber.modelValue,
-    //     password: password.modelValue,
-    //     role: roles.modelValue,
-    //   },
-    // };
     $repos.sharedPanel.updateUser(payload).then((res) => {
       Object.assign(sharedStore.listItems.data[itemIndex], res);
       sharedStore.edit = false;
@@ -329,18 +307,6 @@ const submitItem = () => {
     });
   } else {
     payload = { body: { ...body, id: 0 } };
-
-    // payload = {
-    //   body: {
-    //     firstName: firstName.modelValue,
-    //     lastName: lastName.modelValue,
-    //     email: email.modelValue,
-    //     phoneNumber: phoneNumber.modelValue,
-    //     password: password.modelValue,
-    //     role: roles.modelValue,
-    //     // avatarUrl:avatarUrl.modelValue.url
-    //   },
-    // };
     $repos.sharedPanel
       .updateUser(payload)
       .then((res) => {
