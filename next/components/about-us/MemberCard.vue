@@ -8,10 +8,11 @@
   >
     <div class="bg-primary-base pt-lg-4" :style="`height: ${lgAndUp ? 206 : 155}px; position:relative`">
       <v-img
-        class="rounded-lg"
+        class=""
         width="100%"
         style="position: absolute; bottom: 0;"
         :src="item.avatar || item.avatarUrl"
+        contain
       />
     </div>
     <v-card-text>

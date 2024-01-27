@@ -235,6 +235,7 @@ export default (request) => ({
       alert: false,
       query: `?search=${payload.search}`,
       page: payload.page,
+      model: { name: panelTable, collection: true, pagination: true },
     });
   },
   studentsListCommon() {

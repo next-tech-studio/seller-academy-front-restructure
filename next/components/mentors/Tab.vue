@@ -7,17 +7,17 @@
     class="mb-6"
   >
     <v-tab
-      v-for="category in categories"
-      :key="category.slug"
-      :value="category.slug"
-      >{{ category.title }}</v-tab
+      v-for="(category, propertyName) in categories"
+      :key="propertyName"
+      :value="propertyName"
+      >{{ category.category.title }}</v-tab
     >
   </v-tabs>
   <v-window v-model="currentCategory">
     <v-window-item
       v-for="category in categories"
-      :key="category.slug"
-      :value="category.slug"
+      :key="category"
+      :value="category"
     >
       <v-container fluid>
         <v-row>
@@ -87,6 +87,6 @@ const props = defineProps({
 });
 const currentCategory = ref("");
 onUpdated(() => {
-  if (!currentCategory.value) currentCategory.value = props?.categories[0].slug;
+  if (!currentCategory.value) currentCategory.value = Object.keys(props?.categories)[0];
 });
 </script>

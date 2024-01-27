@@ -24,7 +24,7 @@
           density="compact"
           variant="solo-filled"
           dir="ltr"
-          :label="$t('username')"
+          :label="$t('mobile')"
           type="email"
           persistent-placeholder
           class="outside-label"

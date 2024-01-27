@@ -8,7 +8,7 @@
     <v-card>
       <v-card-text v-if="!smAndDown" class="text-center py-0">
         <v-avatar rounded="0" size="fit-content">
-          <v-img width="94" height="48" src="/images/logo/1.svg"></v-img>
+          <v-img width="94" height="48" src="/images/logo/logo.png"></v-img>
         </v-avatar>
       </v-card-text>
       <v-card-title class="desktop-h3 text-text-heading mt-6 mb-12 text-center">

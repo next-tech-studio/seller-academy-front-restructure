@@ -16,7 +16,6 @@ export const useNavItems = () => {
       children: ["blog", "video", "article", "podcast"],
     },
     { title: "requested_forms", to: "/forms",  children: ["forms"], },
-    { title: "divider", divider: true },
     {
       title: "be_seller_in_digikala",
       to: "/",

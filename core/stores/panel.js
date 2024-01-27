@@ -247,8 +247,13 @@ export const usePanelStore = defineStore("panel", {
             tags: this.draftContent.tags,
             slug: this.draftContent.slug,
             information: this.draftContent.information,
-            publicationDate:
-              date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
+            //   publicationDate:
+            //     date.getFullYear() +
+            //     "-" +
+            //     (date.getMonth() + 1) +
+            //     "-" +
+            //     date.getDate(),
+            // },
           },
         };
         this.$repos.panel.saveDraft(finalContent).then((res) => {

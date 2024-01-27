@@ -70,15 +70,29 @@ export default (request) => ({
     });
   },
   updateUser(payload) {
+    console.log("payloaddddd", payload);
     return request(
       {
         name: "createUser",
         method: "put",
-        path: "/panel/user/edit-data",
+        path: `/panel/users/${payload.id}/edit`,
         loading: true,
         alert: false,
       },
-      payload.body
+      payload
+    );
+  },
+  createUser(payload) {
+    console.log("payloaddddd", payload);
+    return request(
+      {
+        name: "createUser",
+        method: "post",
+        path: `/panel/users/create`,
+        loading: true,
+        alert: false,
+      },
+      payload
     );
   },
   updateUserStatus(payload) {

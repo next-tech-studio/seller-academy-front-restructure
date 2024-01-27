@@ -14,18 +14,38 @@
           fontSize: '20px !important',
         }"
       ></app-category>
-      <v-btn
-        v-for="({ slug, option, active, icon }, index) in textActions"
-        :key="index"
-        icon
-        flat
-        size="x-small"
-        class="mx-2"
-        :class="{ active: editor.isActive(active) }"
-        @click="onActionClick(slug, option)"
-      >
-        <v-icon :icon="icon" size="18"></v-icon>
-      </v-btn>
+      <div v-for="(item, index) in textActions" :key="index">
+        <v-btn
+          v-if="item.type == 'btn'"
+          icon
+          flat
+          size="x-small"
+          class="mx-2"
+          :class="{ active: editor.isActive(item.active) }"
+          @click="onActionClick(item.slug, item.option)"
+        >
+          <v-icon :icon="item.icon" size="18"></v-icon>
+        </v-btn>
+        <v-menu :location="location" v-if="item.type == 'list'">
+          <template v-slot:activator="{ props }">
+            <v-btn color="light" icon flat dark v-bind="props" size="small">
+              <v-icon :icon="item.icon" :size="25"></v-icon>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in item.items"
+              :key="index"
+              @click="onActionClick(item.slug, item.option)"
+            >
+              <v-list-item-title class="text-caption">{{
+                item.title
+              }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
 
       <div>
         <v-btn
@@ -52,6 +72,11 @@ import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import CharacterCount from "@tiptap/extension-character-count";
 import Link from "@tiptap/extension-link";
+import Table from "@tiptap/extension-table";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import TableRow from "@tiptap/extension-table-row";
+const { t } = useI18n();
 let emit = defineEmits(["update:modelValue"]);
 let props = defineProps({
   modelValue: {
@@ -72,10 +97,17 @@ const editor = useEditor({
     }),
     TextAlign.configure({
       types: ["heading", "paragraph"],
+      alignments: ["left", "center", "right"],
     }),
     Link.configure({
       openOnClick: false,
     }),
+    Table.configure({
+      resizable: true,
+    }),
+    TableRow,
+    TableHeader,
+    TableCell,
   ],
   onUpdate: () => {
     emit("update:modelValue", { model: editor.value.getHTML() });
@@ -83,28 +115,96 @@ const editor = useEditor({
 });
 let headingsModel = ref({});
 let textActions = [
-  { slug: "bold", icon: "custom:bold", active: "bold" },
-  { slug: "italic", icon: "custom:italic", active: "italic" },
+  { slug: "bold", icon: "custom:bold", active: "bold", type: "btn" },
+  { slug: "italic", icon: "custom:italic", active: "italic", type: "btn" },
   {
     slug: "align",
     option: "left",
     icon: "custom:alignLeft",
     active: { textAlign: "left" },
+    type: "btn",
   },
   {
     slug: "align",
     option: "justify",
     icon: "custom:justifyCenter",
     active: { textAlign: "justify" },
+    type: "btn",
+  },
+  {
+    slug: "align",
+    option: "center",
+    icon: "custom:justifyCenter",
+    active: { textAlign: "center" },
+    type: "btn",
   },
   {
     slug: "align",
     option: "right",
     icon: "custom:alignRight",
     active: { textAlign: "right" },
+    type: "btn",
   },
-  { slug: "orderedList", icon: "custom:orderedList", active: "orderedList" },
-  { slug: "bulletList", icon: "custom:unorderedList", active: "bulletList" },
+  {
+    slug: "orderedList",
+    icon: "custom:orderedList",
+    active: "orderedList",
+    type: "btn",
+  },
+  {
+    slug: "bulletList",
+    icon: "custom:unorderedList",
+    active: "bulletList",
+    type: "btn",
+  },
+  {
+    icon: "custom:table",
+    type: "list",
+    items: [
+      {
+        slug: "insertTable",
+        icon: "custom:unorderedList",
+        active: "insertTable",
+        title: t("insert_table"),
+      },
+      {
+        slug: "addColumnAfter",
+        icon: "custom:unorderedList",
+        active: "addColumnAfter",
+        title: t("add_column_after"),
+      },
+      {
+        slug: "deleteColumn",
+        icon: "custom:unorderedList",
+        active: "deleteColumn",
+        title: t("delete_column"),
+      },
+      {
+        slug: "addRowAfter",
+        icon: "custom:unorderedList",
+        active: "addRowAfter",
+        title: t("add_row_after"),
+      },
+      {
+        slug: "deleteRow",
+        icon: "custom:unorderedList",
+        active: "deleteRow",
+        title: t("delete_row"),
+      },
+      {
+        slug: "mergeCells",
+        icon: "custom:unorderedList",
+        active: "mergeCells",
+        title: t("merge_cells"),
+      },
+      {
+        slug: "splitCell",
+        icon: "custom:unorderedList",
+        active: "splitCell",
+        title: t("split_cell"),
+      },
+    ],
+  },
 ];
 let headings = [
   {
@@ -149,19 +249,14 @@ let headings = [
   },
 ];
 
-// watch(
-//   props.modelValue,
-//   (newModelValue, oldModelValue) => {
-//     if (editor.value.getHTML() === oldModelValue) return;
-//     editor.commands.setContent(props.modelValue, false);
-//     if (!props.modelValue.html) onHeadingClick(0);
-//   },
-//   { deep: true }
-// );
-watch([headingsModel, props.modelValue.model], ([newheading,newModelValue]) => {
-  if (newheading != false) onHeadingClick(newheading?.level);
-  else onHeadingClick(0);
-},{deep:true});
+watch(
+  [headingsModel, props.modelValue.model],
+  ([newheading, newModelValue]) => {
+    if (newheading != false) onHeadingClick(newheading?.level);
+    else onHeadingClick(0);
+  },
+  { deep: true }
+);
 
 let onActionClick = (slug, option = null) => {
   {
@@ -183,6 +278,13 @@ let onActionClick = (slug, option = null) => {
         vm.unsetAllMarks().run();
       },
       code: () => vm.toggleCodeBlock().run(),
+      insertTable: () => vm.insertTable().run(),
+      addColumnAfter: () => vm.addColumnAfter().run(),
+      deleteColumn: () => vm.deleteColumn().run(),
+      addRowAfter: () => vm.addRowAfter().run(),
+      deleteRow: () => vm.deleteRow().run(),
+      mergeCells: () => vm.mergeCells().run(),
+      splitCell: () => vm.splitCell().run(),
     };
 
     actionTriggers[slug]();
@@ -216,7 +318,7 @@ let setLink = () => {
 </script>
 <style lang="scss">
 #text-editor {
-  div:nth-child(2) {
+  div:nth-child(3) {
     height: 100%;
     div {
       height: 100%;
@@ -224,6 +326,16 @@ let setLink = () => {
   }
   :focus-visible {
     outline: none !important;
+  }
+  table,
+  th,
+  td,
+  tr {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  table {
+    min-width: 600px !important;
   }
 }
 .ProseMirror {
@@ -237,5 +349,9 @@ let setLink = () => {
   :focus-visible {
     outline: none !important;
   }
+}
+.tableWrapper {
+  display: flex;
+  justify-content: center;
 }
 </style>
