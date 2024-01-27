@@ -29,7 +29,7 @@
             <div class="text-body-1 text-text-light my-2">
               {{ $t("for_more_info_about_your_intended_group") }}
             </div>
-            <v-btn class="text-button" color="primary-base">
+            <v-btn class="text-button" size="large" color="primary-base">
               {{ $t("request_more_info") }}
             </v-btn>
           </div>
@@ -38,15 +38,25 @@
           <v-card rounded="lg" height="459">
             <v-card-text>
               <div class="text-center">
-                <v-avatar tile size="85">
+                <div class="d-flex justify-center">
+
                   <v-img
-                    src="/images/logo/1.svg"
-                    max-height="31.26px"
-                    max-width="55.36"
-                    contain
+                    src="/images/logo/logo.png"
+                    max-height="100"
+                    max-width="200"
+                    cover
                     alt="logo"
                   />
-                </v-avatar>
+                </div>
+                <!-- <v-avatar tile size="85">
+                  <v-img
+                    src="/images/logo/logo.png"
+                    max-height="31.26px"
+                    max-width="55.36"
+                    cover
+                    alt="logo"
+                  />
+                </v-avatar> -->
                 <h4 class="text-h4 text-text-heading mb-6">
                   {{ $t("your_average_income") }}
                 </h4>
@@ -72,7 +82,7 @@
                   $t("average_income")
                 }}</span>
                 <span class="text-text-heading text-body-1 font-weight-bold">{{
-                  currentValue?.averageIncome || '-'
+                  currentValue?.averageIncome || "-"
                 }}</span>
               </div>
               <div class="d-flex justify-space-between mb-4">
@@ -86,7 +96,7 @@
               </div>
               <div class="d-flex justify-space-between mb-4">
                 <span class="text-text-low-emphasis text-body-1">{{
-                  $t("shiiping_fee_margin")
+                  $t("shipping_fee_margin")
                 }}</span>
                 <span class="text-text-heading text-body-1 font-weight-bold">
                   {{ currentValue?.commission_min }} تا
@@ -109,17 +119,17 @@ const props = defineProps({
 let current = ref(1);
 
 onMounted(() => {
-  console.log('-==-=-=-==-=-=-=', current.value, props.items);
-})
+  console.log("-==-=-=-==-=-=-=", current.value, props.items);
+});
 
 let currentValue = computed(() => {
-  if (typeof current.value == 'number') {
-    console.log('number');
-    return props.items[0]
+  if (typeof current.value == "number") {
+    console.log("number");
+    return props.items[0];
   } else {
-    return current.value
+    return current.value;
   }
-})
+});
 </script>
 
 <style lang="scss">

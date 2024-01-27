@@ -18,15 +18,22 @@
       <v-container class="d-flex align-center" v-if="!lgAndUp">
         <v-spacer></v-spacer>
         <a href="/blog">
-          <v-avatar tile size="85">
+          <v-img
+            src="/images/logo/logo.png"
+            height="55"
+            width="120"
+            cover
+            alt="logo"
+          />
+          <!-- <v-avatar tile size="85">
             <v-img
-              src="/images/logo/1.svg"
+              src="/images/logo/logo.png"
               max-height="31.26px"
               max-width="55.36"
               contain
               alt="logo"
             />
-          </v-avatar>
+          </v-avatar> -->
         </a>
         <v-spacer></v-spacer>
       </v-container>
@@ -36,15 +43,16 @@
         class="d-flex align-center"
       >
         <a href="/blog">
-          <v-avatar tile size="86.51">
-            <v-img
-              src="/images/logo/1.svg"
-              max-height="31.26px"
-              max-width="86.51"
-              contain
-              alt="logo"
-            />
-          </v-avatar>
+          <v-img
+            src="/images/logo/logo.png"
+            height="65"
+            width="140"
+            cover
+            alt="logo"
+          />
+          <!-- <v-avatar size="200">
+
+          </v-avatar> -->
         </a>
         <!-- TODO: change navbar condition -->
         <template v-for="(item, index) in items" :key="item.title">
@@ -75,6 +83,14 @@
         <v-spacer></v-spacer>
         <search @choose:article="toItem($event)" v-if="showNavberItems" />
         <v-divider vertical class="my-6 mx-4"></v-divider>
+        <v-btn
+          prepend-icon="custom:plus"
+          color="secondary-base"
+          class="text-button"
+          @click="goToPageBuilder"
+        >
+          {{ $t("add_new_post") }}
+        </v-btn>
         <auth-handler />
       </v-container>
     </v-app-bar>
@@ -125,7 +141,7 @@ const { lgAndUp } = useDisplay();
 const drawer = ref();
 const route = useRoute();
 const openSearch = ref(false);
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 const props = defineProps({
   showNavberItems: {
     default: true,
@@ -138,13 +154,20 @@ const isActive = (item) => {
   });
   return !!found;
 };
-const toItem = (e)=>{
+const goToPageBuilder = (item) => {
+  navigateTo(
+    localePath({
+      name: `blog-panel-post-id-draft`,
+    })
+  );
+};
+const toItem = (e) => {
   navigateTo(
     localePath({
       path: `/article/${e?.slug}`,
     })
   );
-}
+};
 </script>
 
 <style lang="scss">
