@@ -299,7 +299,7 @@ const submitItem = () => {
     let itemIndex = sharedStore.listItems.data.findIndex(
       (item) => item.id === sharedStore.currentItem.id
     );
-    payload = { ...body, id: sharedStore.currentItem.idtext };
+    payload = { ...body, id: sharedStore.currentItem.id};
     $repos.sharedPanel.updateUser(payload).then((res) => {
       Object.assign(sharedStore.listItems.data[itemIndex], res);
       sharedStore.edit = false;
