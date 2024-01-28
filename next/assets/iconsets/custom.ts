@@ -123,6 +123,9 @@ import people from "../../components/icons/people.vue";
 import infoCircleOutlined from "../../components/icons/infoCircleOutlined.vue";
 import radioTrue from "../../components/icons/radioTrue.vue";
 import radioFalse from "../../components/icons/radioFalse.vue";
+import article from "../../components/icons/article.vue";
+import audio from "../../components/icons/audio.vue";
+import location from "../../components/icons/location.vue"
 
 const aliases: any = {
   search,
@@ -248,6 +251,9 @@ const aliases: any = {
   infoCircleOutlined,
   radioTrue,
   radioFalse,
+  article,
+  audio,
+  location
 };
 
 const custom: IconSet = {

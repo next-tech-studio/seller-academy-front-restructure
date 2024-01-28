@@ -4,7 +4,7 @@ import roles from "../schema/roles";
 
 const editorCommon: Mapping = {
     author: {
-        processValue: (value) => mapper(value,{}, roles)
+        processValue: (value) => mapper(value, roles)
     },
 };
 

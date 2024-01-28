@@ -1,0 +1,25 @@
+{
+    "data": [
+        {
+            "title": "پل نوآوری مشهد",
+            "image": "/images/innovation-bridge/universities/mashhad.png",
+            "date": "۲۴ بهمن ۱۴۰۳",
+            "location": "دانشگاه فردوسی",
+            "slug": "پل-نوآوری-مشهد"
+          },
+          {
+            "title": "پل نوآوری زاهدان",
+            "image": "/images/innovation-bridge/universities/zahedan.png",
+            "date": "۲۴ بهمن ۱۴۰۳",
+            "location": "دانشگاه زاهدان",
+            "slug": "پل-نوآوری-زاهدان"
+          },
+          {
+            "title": "پل نوآوری تربیت مدرس",
+            "image": "/images/innovation-bridge/universities/modares.jpg",
+            "date": "۲۴ بهمن ۱۴۰۳",
+            "location": "دانشگاه تربیت مدرس",
+            "slug": "پل-نوآوری-تربیت-مدرس"
+          }
+    ]
+}

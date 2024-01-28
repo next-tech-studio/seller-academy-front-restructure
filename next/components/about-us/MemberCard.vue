@@ -55,6 +55,8 @@
           </v-btn>
         </div>
       </slot>
+
+      <slot name="bottom"></slot>
     </v-card-text>
   </v-card>
 </template>
