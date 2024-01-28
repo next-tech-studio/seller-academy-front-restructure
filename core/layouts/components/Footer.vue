@@ -8,9 +8,9 @@
           class="d-flex flex-column w-100 justify-space-between mb-11 mb-md-8"
         >
           <v-img
-            src="/images/logo/2.svg"
-            max-height="56"
-            max-width="154"
+            src="/images/logo/logo.png"
+            max-height="112"
+            max-width="308"
             contain
             class="mb-4 mb-md-6"
             alt="logo"
@@ -36,7 +36,8 @@
         <v-col
           cols="6"
           md="3"
-          v-for="item in footerLinks"
+          v-for="(item, index) in footerLinks"
+          :key="index"
           class="d-flex flex-column mb-8 pb-7 mb-md-10"
           tag="nav"
         >
@@ -56,12 +57,12 @@
             variant="text"
             class="align-self-start px-0 text-body-1 animated"
           >
-              {{ $t(link.title) }}
+            {{ $t(link.title) }}
           </v-btn>
         </v-col>
         <v-col class="d-md-none mb-8 pb-7 d-flex justify-space-between">
-            <p class="text-h5">{{ $t("be_with_us") }}</p>
-            <div>
+          <p class="text-h5">{{ $t("be_with_us") }}</p>
+          <div>
             <v-btn
               color="text-icon-light"
               class="ml-4 d-md-none"

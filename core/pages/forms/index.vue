@@ -45,7 +45,7 @@ const getAllForms = async () => {
     });
 };
 useAsyncData(async () => await getAllForms());
-onMounted(()=>{
-  
-})
+// onMounted(()=>{
+//   getAllForms()
+// })
 </script>

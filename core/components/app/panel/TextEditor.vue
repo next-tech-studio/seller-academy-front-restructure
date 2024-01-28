@@ -28,18 +28,20 @@
         </v-btn>
         <v-menu :location="location" v-if="item.type == 'list'">
           <template v-slot:activator="{ props }">
-            <v-btn
-              color="primary"
-              :icon="item.icon"
-              dark
-              v-bind="props"
-              size="small"
-            />
+            <v-btn color="light" icon flat dark v-bind="props" size="small">
+              <v-icon :icon="item.icon" :size="25"></v-icon>
+            </v-btn>
           </template>
 
           <v-list>
-            <v-list-item v-for="(item, index) in item.items" :key="index"  @click="onActionClick(item.slug, item.option)">
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item
+              v-for="(item, index) in item.items"
+              :key="index"
+              @click="onActionClick(item.slug, item.option)"
+            >
+              <v-list-item-title class="text-caption">{{
+                item.title
+              }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -95,6 +97,7 @@ const editor = useEditor({
     }),
     TextAlign.configure({
       types: ["heading", "paragraph"],
+      alignments: ["left", "center", "right"],
     }),
     Link.configure({
       openOnClick: false,
@@ -130,6 +133,13 @@ let textActions = [
   },
   {
     slug: "align",
+    option: "center",
+    icon: "custom:justifyCenter",
+    active: { textAlign: "center" },
+    type: "btn",
+  },
+  {
+    slug: "align",
     option: "right",
     icon: "custom:alignRight",
     active: { textAlign: "right" },
@@ -148,7 +158,7 @@ let textActions = [
     type: "btn",
   },
   {
-    icon: "custom:unorderedList",
+    icon: "custom:table",
     type: "list",
     items: [
       {
@@ -308,7 +318,7 @@ let setLink = () => {
 </script>
 <style lang="scss">
 #text-editor {
-  div:nth-child(2) {
+  div:nth-child(3) {
     height: 100%;
     div {
       height: 100%;
@@ -324,6 +334,9 @@ let setLink = () => {
     border: 1px solid black;
     border-collapse: collapse;
   }
+  table {
+    min-width: 600px !important;
+  }
 }
 .ProseMirror {
   overflow: scroll;
@@ -336,5 +349,9 @@ let setLink = () => {
   :focus-visible {
     outline: none !important;
   }
+}
+.tableWrapper {
+  display: flex;
+  justify-content: center;
 }
 </style>
