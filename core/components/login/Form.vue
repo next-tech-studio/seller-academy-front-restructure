@@ -6,10 +6,12 @@
     v-model="validForm"
   >
     <v-card>
-      <v-card-text v-if="!smAndDown" class="text-center py-0">
-        <v-avatar rounded="0" size="fit-content">
-          <v-img width="94" height="48" src="/images/logo/logo.png"></v-img>
-        </v-avatar>
+      <v-card-text v-if="!smAndDown" class="text-center py-0 d-flex align-center justify-center">
+        <div class="d-flex justify-center align-center">
+          <v-img width="350" height="70" src="/images/logo/logo.png"></v-img>
+        </div>
+
+        <v-avatar rounded="0" size="fit-content"> </v-avatar>
       </v-card-text>
       <v-card-title class="desktop-h3 text-text-heading mt-6 mb-12 text-center">
         {{ $t(title) }}
@@ -253,6 +255,6 @@ const submit = async (step) => {
 };
 
 const updateOTP = async (item) => {
-  validForm.value = item.length == 6
+  validForm.value = item.length == 6;
 };
 </script>

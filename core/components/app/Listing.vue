@@ -213,7 +213,7 @@
                 flat
                 @click="action.function(item, action)"
                 v-bind="action.props"
-                class="me-2 px-2"
+                class="me-2 px-2 position-relative"
                 rounded
               >
                 <v-icon
@@ -222,7 +222,9 @@
                   :icon="setOperationIcon(action.value, item)?.icon"
                   size="22"
                 ></v-icon>
-                {{ action.text }}
+                <v-tooltip activator="parent" location="bottom">
+                  {{ $t(action.title) }}</v-tooltip
+                >
               </v-btn>
               <v-select
                 v-if="action.type == 'select'"
@@ -480,7 +482,7 @@ const setOperationIcon = (action, item) => {
     return { icon: "custom:notPublished", color: "text-high-emphasis" };
   else if (action == "active" && item.status == "deactive")
     return { icon: "custom:power", color: "text-hint-success" };
-    else if (action == "active" && item.status == "inactive")
+  else if (action == "active" && item.status == "inactive")
     return { icon: "custom:power", color: "text-hint-success" };
   else if (action == "active" && item.status == "active") {
     return { icon: "custom:power", color: "text-primary" };
