@@ -4,7 +4,6 @@ import { mapper } from "~/mappers";
 import collection from "~/mappers/models/schema/collection";
 import noPaginationCollection from "~/mappers/models/schema/noPaginationCollection";
 export const useRealtime = (channel, event, model) => {
-    console.log('bye bye',channel,event);
     const status = ref('Connecting...');
     const stream = ref([]);
     let response = ref()

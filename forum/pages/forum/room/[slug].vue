@@ -29,7 +29,6 @@
               <room-preview
                 v-model="common"
                 @update:roomDesc="editDescription"
-                @chatMembers="chatMembers"
                 @update:members="addMember"
                 :users="users"
                 @search:users="onSearch"
@@ -47,7 +46,11 @@
                 </template>
               </room-preview>
               <Chat
-                :style="!smAndDown ? 'width: calc(100% - 264px); position: absolute; left: 0;' : ''"
+                :style="
+                  !smAndDown
+                    ? 'width: calc(100% - 264px); position: absolute; left: 0;'
+                    : ''
+                "
                 @react="react"
                 @send="send($event)"
                 @remove="remove($event)"
@@ -211,7 +214,7 @@ const remove = (e) => {
   });
 };
 const chatMembers = ($state) => {
-  console.log($state);
+  console.log('heeellooo', $state);
   if (loadFirstPage.value) {
     members_page = 1;
     members.splice(0, members.length);
@@ -228,7 +231,7 @@ const chatMembers = ($state) => {
         Object.assign(members, [...members, ...res.data]);
         members_total_pages = res.total;
         members_page++;
-        $state.loaded();
+        console.log("page", members_page);
         loadFirstPage.value = false;
       } else {
         $state.complete();
@@ -276,7 +279,7 @@ const back = () => {
 };
 
 const react = (e) => {
-  const index = chat.findIndex((x) => x.id == e.id);
+  const index = chat.value.findIndex((x) => x.id == e.id);
   let reaction =
     chat.value[index].reactions.currentUserReaction != e.value
       ? e.value
