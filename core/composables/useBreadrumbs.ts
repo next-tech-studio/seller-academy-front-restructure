@@ -4,12 +4,12 @@ export const useBreadrumbs = (item = {}) => {
 
   const article = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
     {
-      title: t("articles"),
+      title: "articles",
       disabled: false,
       to: localePath({ name: "article-archive" }),
     },
@@ -25,12 +25,12 @@ export const useBreadrumbs = (item = {}) => {
 
   const articles = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
     {
-      title: t("articles"),
+      title: "articles",
       disabled: true,
       to: localePath({ name: "article" }),
     },
@@ -38,7 +38,7 @@ export const useBreadrumbs = (item = {}) => {
 
   const articleCategory = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
@@ -50,7 +50,7 @@ export const useBreadrumbs = (item = {}) => {
   ];
   const articleTag = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
@@ -62,12 +62,12 @@ export const useBreadrumbs = (item = {}) => {
   ];
   const articlesArchive = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
     {
-      title: t("articles"),
+      title: "articles",
       disabled: true,
       to: localePath({ name: "article-archive" }),
     },
@@ -75,12 +75,12 @@ export const useBreadrumbs = (item = {}) => {
 
   const video = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
     {
-      title: t("videos"),
+      title: "videos",
       disabled: false,
       to: localePath({ name: "video" }),
     },
@@ -93,12 +93,12 @@ export const useBreadrumbs = (item = {}) => {
 
   const videos = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
     {
-      title: t("videos"),
+      title: "videos",
       disabled: true,
       to: localePath({ name: "video" }),
     },
@@ -106,12 +106,12 @@ export const useBreadrumbs = (item = {}) => {
 
   const videosArchive = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
     {
-      title: t("videos"),
+      title: "videos",
       disabled: true,
       to: localePath({ name: "video-archive" }),
     },
@@ -119,12 +119,12 @@ export const useBreadrumbs = (item = {}) => {
 
   const podcast = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
     {
-      title: t("podcasts"),
+      title: "podcasts",
       disabled: false,
       to: localePath({ name: "podcast-archive" }),
     },
@@ -140,12 +140,12 @@ export const useBreadrumbs = (item = {}) => {
 
   const podcastArchive = () => [
     {
-      title: t("blog"),
+      title: "blog",
       disabled: false,
       to: localePath({ name: "blog" }),
     },
     {
-      title: t("podcasts"),
+      title: "podcasts",
       disabled: true,
       to: localePath({ name: "podcast-archive" }),
     },
@@ -153,7 +153,7 @@ export const useBreadrumbs = (item = {}) => {
 
   const forum = () => [
     {
-      title: t("forum"),
+      title: "forum",
       disabled: false,
       to: localePath({ name: "forum" }),
     },
@@ -174,7 +174,7 @@ export const useBreadrumbs = (item = {}) => {
 
   const academyCategory = () => [
     {
-      title: t("academy"),
+      title: "academy",
       disabled: false,
       to: localePath({ name: "academy" }),
     },
@@ -186,7 +186,7 @@ export const useBreadrumbs = (item = {}) => {
   ];
   const requestedForms = () => [
     {
-      title: t("requested_forms"),
+      title: "requested_forms",
       disabled: true,
       to: localePath({ name: "forms" }),
     },
