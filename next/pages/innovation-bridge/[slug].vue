@@ -154,16 +154,16 @@
 
 <script setup>
 let innovationBridge = ref([]);
-const current = ref();
+const current = ref({});
 const route = useRoute();
 useAsyncData(async () => {
   innovationBridge.value = await queryContent(
     `/fa/innovation-bridge`
   ).findOne();
 
-  current.value = innovationBridge.value.data.find(
+  Object.assign(current.value, innovationBridge.value.data.find(
     (x) => x.slug == route.params.slug
-  );
+  ));
 });
 </script>
 
