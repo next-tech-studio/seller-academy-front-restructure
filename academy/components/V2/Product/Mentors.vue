@@ -1,6 +1,13 @@
 <template>
   <v-row v-if="items.length">
-    <v-col v-if="title" cols="6" lg="3" xxl="2" class="pa-2 text-h3 text-text-heading">{{ title }}</v-col>
+    <v-col
+      v-if="title"
+      cols="12"
+      lg="3"
+      xxl="2"
+      class="pa-2 text-h3 text-text-heading"
+      >{{ title }}</v-col
+    >
     <v-col
       v-for="(item, index) in items"
       :key="index"
@@ -9,7 +16,11 @@
       xxl="2"
       class="pa-2"
     >
-      <about-us-member-card :item="item" />
+      <about-us-member-card :item="item">
+        <template #bottom>
+          <slot name="bottom" :item="item"></slot>
+        </template>
+      </about-us-member-card>
     </v-col>
   </v-row>
 </template>

@@ -4,7 +4,7 @@
         <v-icon :color="color" size="x-small" icon="custom:chevronLeftLight"></v-icon>
     </template>
     <template #title="{ item }">
-        <div style="z-index: 10" v-text="item.title" class="text-caption text-md-body-2 text-truncate" :class="`text-${color}`"></div>
+        <div style="z-index: 10" v-text="$t(item.title)" class="text-caption text-md-body-2 text-truncate" :class="`text-${color}`"></div>
     </template>
 </v-breadcrumbs>
 </template>
