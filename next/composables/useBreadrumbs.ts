@@ -203,6 +203,22 @@ export const useBreadrumbs = (item = {}) => {
     },
   ];
 
+  const innovationBridge = () => [
+    {
+      title: t("innovation_bridge"),
+      disabled: false,
+      to: localePath({ name: "innovation-bridge" }),
+    },
+    {
+      title: item?.title,
+      disabled: true,
+      to: localePath({
+        name: "innovation-bridge-slug",
+        params: { slug: item.slug },
+      }),
+    },
+  ];
+
   return {
     article,
     articles,
@@ -217,5 +233,6 @@ export const useBreadrumbs = (item = {}) => {
     academyProduct,
     podcast,
     podcastArchive,
+    innovationBridge
   };
 };

@@ -1,7 +1,7 @@
 <template>
   <!-- HEADER -->
   <div
-    id="course-header"
+    id="innovation-bridge-header"
     class="bg-n800 rounded-b-lg"
     :style="`height: ${
       lgAndUp ? '520px' : mdAndUp ? '800px' : '563px'
@@ -97,7 +97,7 @@
       <v-col
         cols="12"
         md="4"
-        v-for="(university, index) in universities"
+        v-for="(university, index) in universities.data"
         :key="index"
       >
         <v-card :height="smAndDown ? 219 : 287">
@@ -113,7 +113,7 @@
                 <div class="text-text-light text-h4">
                   {{ university.title }}
                 </div>
-                <v-btn size="x-small" icon="custom:chevronLeft"></v-btn>
+                <v-btn :to="localePath({ name: 'innovation-bridge-slug', params: { slug: university.slug } })" size="x-small" icon="custom:chevronLeft"></v-btn>
               </div>
               <div class="d-flex align-center">
                 <div class="text-text-light">
@@ -148,6 +148,7 @@
 <script setup>
 import { useDisplay } from "vuetify";
 const { lgAndUp, mdAndUp, smAndDown } = useDisplay();
+const universities = ref([])
 const topics = [
   {
     title: "زنجیره ارزش تجارت الکترونیک",
@@ -174,30 +175,38 @@ const topics = [
     image: "",
   },
 ];
-const universities = [
-  {
-    title: "پل نوآوری مشهد",
-    image: "/images/innovation-bridge/universities/mashhad.png",
-    date: "۲۴ بهمن ۱۴۰۳",
-    location: "دانشگاه فردوسی",
-  },
-  {
-    title: "پل نوآوری زاهدان",
-    image: "/images/innovation-bridge/universities/zahedan.png",
-    date: "۲۴ بهمن ۱۴۰۳",
-    location: "دانشگاه زاهدان",
-  },
-  {
-    title: "پل نوآوری تربیت مدرس",
-    image: "/images/innovation-bridge/universities/modares.jpg",
-    date: "۲۴ بهمن ۱۴۰۳",
-    location: "دانشگاه تربیت مدرس",
-  },
-];
+// const universities = [
+//   {
+//     title: "پل نوآوری مشهد",
+//     image: "/images/innovation-bridge/universities/mashhad.png",
+//     date: "۲۴ بهمن ۱۴۰۳",
+//     location: "دانشگاه فردوسی",
+//     slug: "پل-نوآوری-مشهد"
+//   },
+//   {
+//     title: "پل نوآوری زاهدان",
+//     image: "/images/innovation-bridge/universities/zahedan.png",
+//     date: "۲۴ بهمن ۱۴۰۳",
+//     location: "دانشگاه زاهدان",
+//     slug: "پل-نوآوری-زاهدان"
+//   },
+//   {
+//     title: "پل نوآوری تربیت مدرس",
+//     image: "/images/innovation-bridge/universities/modares.jpg",
+//     date: "۲۴ بهمن ۱۴۰۳",
+//     location: "دانشگاه تربیت مدرس",
+//     slug: "پل-نوآوری-تربیت-مدرس"
+//   },
+// ];
+useAsyncData(async () => {
+    universities.value = await queryContent(
+      `/fa/innovation-bridge`
+    ).findOne()
+})
 </script>
 
 <style>
-#course-header .v-img__img {
+#innovation-bridge-header .v-img__img {
   position: relative;
 }
 </style>
