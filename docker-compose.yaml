@@ -32,16 +32,16 @@ services:
             context: .
             args:
                 <<: *buildargs
-        container_name: refactored-seller-core-ui-core
+        container_name: refactored-diginext-core-ui
         restart: unless-stopped
     
 
 
     nginx:
         image: nginx:latest
-        container_name: refactored-seller-academy-ui-rproxy
+        container_name: refactored-diginext-ui-rproxy
         ports:
-            - 3450:80
+            - 3244:80
         restart: unless-stopped
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf:ro
