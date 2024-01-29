@@ -6,7 +6,6 @@
       order="1"
       absolute
       style="top: 0; border-bottom: 1px solid rgba(var(--v-theme-n200))"
-
       class="px-4"
     >
       <v-btn
@@ -34,6 +33,11 @@
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-card
+      :style="
+        !smAndDown
+          ? 'width: calc(100% - 264px); position: absolute; left: 0;'
+          : ''
+      "
       rounded="0"
       class="preview d-flex flex-column pr-lg-64"
       v-if="showPreview"

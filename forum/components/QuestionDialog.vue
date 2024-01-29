@@ -28,7 +28,8 @@
             variant="solo-filled"
             :rules="$rules({ questionBody: 'required' }, questionContent.text)"
             persistent-placeholder
-            hide-details=""
+            hide-details
+            :placeholder="$t('your_question')"
             v-model="questionContent.text"
             no-resize
             required
@@ -44,13 +45,14 @@
           <v-select
             :placeholder="$t('choose_category')"
             density="compact"
+            persistent-placeholder
             class="my-4"
             base-color="n300"
             persistent-hint
+            v-model="questionContent.categorySlug"
             :rules="
               $rules({ category: 'required' }, questionContent.categorySlug)
             "
-            v-model="questionContent.categorySlug"
             :hint="$t('choose_category_hint')"
             :items="categories"
             item-value="slug"
@@ -165,7 +167,7 @@ const validate = async () => {
 const emptyDialog = () => {
   Object.assign(questionContent.value, {
     text: "",
-    categorySlug: "",
+    categorySlug: null,
     acceptedRules: false,
     attachments: [],
   });
@@ -186,7 +188,7 @@ const submit = async () => {
     emit("submit", questionContent.value);
     Object.assign(questionContent.value, {
       text: "",
-      categorySlug: "",
+      categorySlug: null,
       acceptedRules: false,
       attachments: [],
     });
