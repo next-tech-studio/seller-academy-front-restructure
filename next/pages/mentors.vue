@@ -44,17 +44,19 @@ useAsyncData(() => {
     requestFormStore.form.last_name = auth.user.lastName;
     // categories.value = res.data;
 
-    categories.value = res.data.reduce((accumulator, currentValue) => {
-      const categoryId = currentValue.category.id;
+    const data = res.data.reduce((accumulator, currentValue) => {
+      const categoryId = currentValue?.category.id;
       if (!accumulator[categoryId]) {
         accumulator[categoryId] = {
-          category: currentValue.category,
+          category: currentValue?.category,
           mentors: []
         };
       }
       accumulator[categoryId].mentors.push(currentValue);
       return accumulator;
     }, {});
+
+    Object.assign(categories.value, data)
 
     categories.value['0'] = {
       category: {
