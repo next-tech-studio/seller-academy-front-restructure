@@ -129,6 +129,7 @@ const closeDialog = () => {
       params: { slug: route.params.slug },
     })
   );
+  sharedStore.closeDialog()
 };
 const save = (e) => {
   let body = {};
@@ -143,13 +144,21 @@ const save = (e) => {
     )?.modelValue;
   });
 
-  $repos.main.message({
-    body: {
-      ...body,
-      message: `Inoovation Bridge Event`,
-      type: "innovation_bridge",
-    },
-  });
+  $repos.main
+    .message({
+      body: {
+        ...body,
+        message: `Inoovation Bridge Event`,
+        type: "innovation_bridge",
+      },
+    })
+    .then(() => {
+      sharedStore.sendingRequest = false;
+      closeDialog()
+    })
+    .catch(() => {
+      sharedStore.sendingRequest = true;
+    });
 };
 onMounted(() => openDialog());
 </script>
