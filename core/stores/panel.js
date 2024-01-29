@@ -269,6 +269,8 @@ export const usePanelStore = defineStore("panel", {
                 path: `/article/preview/${res.id}`,
               })
             );
+          } else if (publish) {
+            this.publishArticle();
           } else if (!this.postRouteId) {
             navigateTo(
               localePath({
