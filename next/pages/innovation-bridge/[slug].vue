@@ -4,7 +4,7 @@
     <v-container fluid class="pa-0">
       <v-banner
         border="none"
-        lines="one"
+        lines="two"
         class="bg-transparent py-4"
         density="compact"
       >
@@ -24,13 +24,18 @@
           </div>
         </template>
         <v-spacer></v-spacer>
-        <app-share-in :hide-title="false" />
+        <app-share-in v-if="!smAndDown" :hide-title="false" />
         <template v-slot:actions>
           <v-btn
             class="text-button text-primary-base px-10 bg-background-light mb-4"
             variant="outlined"
             size="x-large"
-            @click="openDialog(true)"
+            :to="
+              localePath({
+                name: 'innovation-bridge-slug-register',
+                params: { slug: route.params.slug },
+              })
+            "
             rounded="lg"
           >
             {{ $t("sign_up") }}
@@ -95,6 +100,12 @@
                   color="primary-base"
                   class="mt-4"
                   size="large"
+                  :to="
+                    localePath({
+                      name: 'innovation-bridge-slug-register',
+                      params: { slug: route.params.slug },
+                    })
+                  "
                 >
                   {{ $t("sign_up") }}
                   <v-icon icon="custom:chevronLeft" end></v-icon>
@@ -137,22 +148,25 @@
       :items="current?.speakers"
       class="mb-4"
     >
-    <template #bottom="{item}">
-       <div>
-        <v-divider color="n400" class="my-1"></v-divider>
-        <div class="text-text-low-emphasis text-caption">
-            {{ $t('presentation_topic') }}
-        </div>
-        <div class="text-text-heading text-body-2 font-weight-bold">
+      <template #bottom="{ item }">
+        <div>
+          <v-divider color="n400" class="my-1"></v-divider>
+          <div class="text-text-low-emphasis text-caption">
+            {{ $t("presentation_topic") }}
+          </div>
+          <div class="text-text-heading text-body-2 font-weight-bold">
             {{ item.presentationTopic }}
+          </div>
         </div>
-       </div>
-    </template>
+      </template>
     </product-mentors>
+    <NuxtPage />
   </v-container>
 </template>
 
 <script setup>
+import { useDisplay } from "vuetify";
+const { smAndDown } = useDisplay();
 let innovationBridge = ref([]);
 const current = ref({});
 const route = useRoute();
@@ -161,9 +175,10 @@ useAsyncData(async () => {
     `/fa/innovation-bridge`
   ).findOne();
 
-  Object.assign(current.value, innovationBridge.value.data.find(
-    (x) => x.slug == route.params.slug
-  ));
+  Object.assign(
+    current.value,
+    innovationBridge.value.data.find((x) => x.slug == route.params.slug)
+  );
 });
 </script>
 

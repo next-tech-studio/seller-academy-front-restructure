@@ -320,7 +320,7 @@ let max = computed({
     }
   },
 });
-let emit = defineEmits(["update:dialog", "update:fields", "show:dialog"]);
+let emit = defineEmits(["update:dialog", "update:fields", "show:dialog", "close:dialog"]);
 let submit = async () => {
   const { valid } = await form.value.validate();
   console.log("yeyeyyyeuuue", valid);
@@ -338,6 +338,7 @@ const showFormItem = (item) => {
 };
 const close = () => {
   props.store.closeDialog();
+  emit('close:dialog')
 };
 // defineExpose({ close });
 </script>
