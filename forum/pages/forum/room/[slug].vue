@@ -229,7 +229,8 @@ const chatMembers = ($state) => {
     .then((res) => {
       if (res.data.length) {
         Object.assign(members, [...members, ...res.data]);
-        members_total_pages = res.total;
+        members_total_pages = res.last_page;
+        if(members_page == members_total_pages) $state.complete();
         members_page++;
         console.log("page", members_page);
         loadFirstPage.value = false;
