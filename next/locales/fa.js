@@ -701,6 +701,9 @@ export default {
   rate_with_vote: "امتیاز دوره با",
   headings: "سرفصل‌ها",
   vote: "رای",
+  university: "دانشگاه",
+  grade: "مقطع تحصیلی",
+  major: "رشته تحصیلی",
   academy: {
     product: {
       bootcamp: "بوت‌کمپ",
