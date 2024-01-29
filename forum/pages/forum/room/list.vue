@@ -78,7 +78,7 @@
           $t("no_result_found")
         }}</span>
       </v-row>
-      <v-row justify="center" v-if="rooms.length != 0">
+      <v-row justify="center" v-if="rooms.length != 0 && !lastPage">
         <v-btn
           @click="getRooms(false)"
           flat
@@ -104,6 +104,7 @@ let rooms = ref([]);
 let search = ref("");
 const categories = ref([]);
 const topRooms = reactive([]);
+let lastPage = ref(false)
 const getRooms =  (resetPage = false) => {
   if (resetPage) page = 1;
   let payload = {
@@ -115,6 +116,7 @@ const getRooms =  (resetPage = false) => {
     if (resetPage) {
       rooms.value.splice(0, rooms.value.length);
       Object.assign(rooms.value, res.data);
+      lastPage.value = res.last_page === res.current_page ? true : false;
     } else Object.assign(rooms.value, [...rooms.value, ...res.data]);
     if (res.pagination.total != page) page++;
   });

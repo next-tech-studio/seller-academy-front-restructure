@@ -14,6 +14,7 @@
     <app-infinite-loading
       @infinite="infinite"
       :items="items"
+      :offset="35"
       target=".bottom-results"
       :top="false"
       id="height"

@@ -2,7 +2,6 @@
   <div class="bg-background-dark">
     <v-container class="py-6">
       <v-row>
-        
         <v-col cols="12" md="9">
           <question
             @reaction="sendFeedBackQuestion($event)"
@@ -92,6 +91,13 @@
             </div>
           </v-card>
           <more-info-card
+            v-if="!auth.user.loggedIn"
+            @change:state="toLogin"
+            url="login"
+            :class="{ 'sticky rounded-t-md rounded-b-0': !mdAndUp }"
+          />
+          <more-info-card
+            v-if="auth.user.loggedIn"
             :horizontal="mdAndUp"
             @change:state="questionDialog = true"
             submit-text="submit_question"
@@ -133,7 +139,7 @@
             <v-card-title class="text-body-1 font-weight-bold">
               {{ $t("relevant_questions") }}
             </v-card-title>
-            <v-list lines="one">
+            <v-list lines="one" v-if="isClient">
               <v-list-item
                 class="py-0"
                 density="compact"
@@ -175,6 +181,7 @@ const auth = useAuthStore();
 const { $repos } = useNuxtApp();
 const route = useRoute();
 const answerForm = ref(null);
+const { isClient } = useSsrCorrection();
 let filterToggle = ref("recent");
 let filters = [
   { title: "newest", value: "recent" },

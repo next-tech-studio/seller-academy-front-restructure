@@ -72,7 +72,7 @@
           </div>
         </v-col>
         <v-col cols="12" lg="9" class="pt-0">
-          <div class="d-lg-flex d-none justify-space-between align-center mb-4">
+          <div class="d-lg-flex d-none justify-space-between align-center my-1">
             <span class="text-body-1 font-weight-bold align-center">{{
               $t("suggested_rooms")
             }}</span>
