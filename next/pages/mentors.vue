@@ -16,6 +16,7 @@
   <v-container fluid class="mb-16 py-0" id="mentors">
     <mentors-tab
       :categories="categories"
+      v-model="currentCategory"
       @click:mentorship="onMentorshipClick"
       @click:info="onInfoClick"
     />
@@ -33,9 +34,10 @@ import { useAuthStore } from "@core/stores/auth";
 import { useDisplay } from "vuetify";
 const requestFormStore = useRequestFormStore();
 const { $repos } = useNuxtApp();
-const categories = ref([]);
+const categories = ref({});
 const requestForm = ref(null);
 const currentMentor = ref(null);
+const currentCategory = ref(0);
 const requestStatus = ref({});
 const auth = useAuthStore();
 useAsyncData(() => {
@@ -44,17 +46,19 @@ useAsyncData(() => {
     requestFormStore.form.last_name = auth.user.lastName;
     // categories.value = res.data;
 
-    categories.value = res.data.reduce((accumulator, currentValue) => {
-      const categoryId = currentValue.category.id;
+    let data = res.data.reduce((accumulator, currentValue) => {
+      const categoryId = currentValue?.category.id;
       if (!accumulator[categoryId]) {
         accumulator[categoryId] = {
-          category: currentValue.category,
+          category: currentValue?.category,
           mentors: []
         };
       }
       accumulator[categoryId].mentors.push(currentValue);
       return accumulator;
     }, {});
+    console.log(data);
+    Object.assign(categories.value, data)
 
     categories.value['0'] = {
       category: {

@@ -84,6 +84,7 @@
         <search @choose:article="toItem($event)" v-if="showNavberItems" />
         <v-divider vertical class="my-6 mx-4"></v-divider>
         <v-btn
+          v-if="auth.user.loggedIn"
           prepend-icon="custom:plus"
           color="secondary-base"
           class="text-button"
@@ -135,6 +136,8 @@
 import { useDisplay } from "vuetify";
 import AuthHandler from "./components/AuthHandler.vue";
 import Search from "./components/Search.vue";
+import { useAuthStore } from "@core/stores/auth";
+const auth = useAuthStore();
 
 const items = useNavItems();
 const { lgAndUp } = useDisplay();

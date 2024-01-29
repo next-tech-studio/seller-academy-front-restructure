@@ -1,6 +1,6 @@
 <template>
   <v-tabs
-    v-model="currentCategory"
+    v-model="mutedCurrentCategory"
     slider-color="primary-base"
     color="primary-base"
     align-tabs="center"
@@ -10,19 +10,19 @@
       v-for="(category, propertyName) in categories"
       :key="propertyName"
       :value="propertyName"
-      >{{ category.category.title }}</v-tab
+      >{{ category?.category?.title }}</v-tab
     >
   </v-tabs>
-  <v-window v-model="currentCategory">
+  <v-window v-model="mutedCurrentCategory">
     <v-window-item
-      v-for="category in categories"
-      :key="category"
-      :value="category"
+      v-for="(category, propertyName) in categories"
+      :key="propertyName"
+      :value="propertyName"
     >
       <v-container fluid>
         <v-row>
           <v-col
-            v-for="(mentor, i) in category.mentors"
+            v-for="(mentor, i) in category?.mentors"
             :key="i"
             cols="6"
             lg="2"
@@ -82,11 +82,21 @@
 </template>
 
 <script setup>
+const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   categories: Array,
+  modelValue: String
 });
-const currentCategory = ref("");
-onUpdated(() => {
-  if (!currentCategory.value) currentCategory.value = Object.keys(props?.categories)[0];
-});
+const mutedCurrentCategory = computed({
+  get() {
+    return props.modelValue
+  },
+  set(value) {
+    emit('update:modelValue', value)
+  }
+})
+// let currentCategory = ref("");
+// onMounted(() => {
+//   if (!currentCategory.value) currentCategory.value = Object.keys(props?.categories)[0];
+// });
 </script>
