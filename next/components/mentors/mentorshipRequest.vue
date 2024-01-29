@@ -20,7 +20,7 @@
 
         <template v-slot:actions>
           <v-btn
-            class="text-button text-primary-base px-10 bg-background-light"
+            class="text-button text-primary-base px-md-10 px-2 bg-background-light"
             variant="outlined"
             size="x-large"
             @click="openDialog(true)"

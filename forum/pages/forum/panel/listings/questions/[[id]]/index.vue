@@ -29,7 +29,6 @@
         :filters="filters"
         @show:dialog="openDialog"
         slug-generator-title="qText"
-        view-address="/article/category/"
         @update:itemStatus="
           sharedStore.changeItemStatus(
             $event,
@@ -63,6 +62,7 @@
           )
         "
         @navigate:toItem="goToItem"
+        view-address="/article/category/"
         @filter="
           sharedStore.getListingItems(
             'questionsList',
@@ -72,7 +72,7 @@
         "
       >
         <template #qText="{ item }">
-          <div class="d-flex cursor-pointer">
+          <div class="d-flex cursor-pointer" @click="goToItem(item.item)">
             <div class="d-flex align-center" style="width: 200px; flex: 0 1 0%">
               <v-checkbox-btn
                 true-icon="custom:squareCheck"
@@ -405,17 +405,6 @@ const submitItem = () => {
   });
   if (body.attachments)
     body.attachments = body.attachments.map((item) => item.id);
-
-  // let payload;
-  // let qText = sharedStore.editForm.find((item) => item.name === "QText");
-  // let aText = sharedStore.editForm.find((item) => item.name === "aText");
-  // let questionSlug = sharedStore.editForm.find((item) => item.name === "slug");
-  // let attachments = sharedStore.editForm.find(
-  //   (item) => item.name === "attachments"
-  // );
-  // let cateogoryId = sharedStore.editForm.find(
-  //   (item) => item.name === "category"
-  // );
   payload = {
     body: { ...body, id: sharedStore.currentItem.id },
   };
@@ -450,15 +439,18 @@ const submitItem = () => {
     });
   }
 };
-const goToItem = () => {
-  navigateTo(
-    localePath({
-      path: "/forum/panel/listings/answers",
-    }),
-    {
-      external: true,
-    }
-  );
+const goToItem = (item) => {
+  console.log("eurwopeiruwioeruoweirhji", item);
+  if (item.status == "published") {
+    navigateTo(
+      localePath({
+        path: `/forum/question/${item.slug}`,
+      }),
+      {
+        external: true,
+      }
+    );
+  }
 };
 const goToAnswers = (item) => {
   navigateTo(

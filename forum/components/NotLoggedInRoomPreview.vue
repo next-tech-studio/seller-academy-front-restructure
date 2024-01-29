@@ -1,5 +1,11 @@
 <template>
-  <v-dialog scrim="bg-red" v-model="noSellerDialog" width="406px" id="no-seller-dialog" persistent>
+  <v-dialog
+    scrim="bg-red"
+    v-model="noSellerDialog"
+    width="406px"
+    id="no-seller-dialog"
+    persistent
+  >
     <v-card class="pa-4">
       <v-card-text class="d-flex justify-space-between align-center px-0 pt-0">
         <app-profile-list-item
@@ -21,6 +27,9 @@
             <div></div>
           </template>
         </app-profile-list-item>
+        <v-btn icon flat class="d-flex justify-end" @click="goBack">
+          <v-icon icon="custom:arrowLeft" />
+        </v-btn>
       </v-card-text>
       <v-img
         height="182px"
@@ -41,19 +50,36 @@
         رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
         پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
       </p>
-      <v-divider thickness="2"/>
+      <v-divider thickness="2" />
       <div class="d-flex my-4">
         <v-icon icon="custom:info" color="text-secondary" class="me-2" />
         <span class="text-caption">{{ $t("see_room_seller") }}</span>
       </div>
-      <v-btn block flat color="button-primary" @click="$emit('continue')" class="text-button">{{ $t("seller_login_signup") }}</v-btn>
+      <v-btn
+        block
+        flat
+        color="button-primary"
+        @click="$emit('continue')"
+        class="text-button"
+        >{{ $t("seller_login_signup") }}</v-btn
+      >
     </v-card>
   </v-dialog>
 </template>
 <script setup>
+const router = useRouter();
+const goBack = () => {
+  router.back();
+};
 let noSellerDialog = ref(true);
-let emit = defineEmits(['continue'])
+let emit = defineEmits(["continue"]);
 let props = defineProps({
   modelValue: Object,
 });
 </script>
+
+<style scoped>
+.v-btn:hover :deep(.v-btn__overlay) {
+  opacity: 0 !important;
+}
+</style>
