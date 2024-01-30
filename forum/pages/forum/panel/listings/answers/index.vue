@@ -278,11 +278,6 @@ const init = () => {
       api: "",
     },
     {
-      title: "حذف کردن",
-      value: "deleted",
-      function: answersList.value.changeItemStatus,
-    },
-    {
       title: "پنهان کردن",
       value: "hidden",
       function: answersList.value.changeItemStatus,

@@ -206,6 +206,13 @@ const searchQuestionData = async (payload) => {
     Object.assign(similarQuestions.value, res);
   });
 };
+const toLogin = () => {
+  navigateTo(
+    localePath({
+      name: "login",
+    })
+  );
+};
 const onSearch = useDebounceFn(async (e) => await searchQuestionData(e), 500, {
   maxWait: 5000,
 });

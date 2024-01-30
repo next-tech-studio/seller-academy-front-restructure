@@ -33,6 +33,7 @@
         <app-feedback
           v-if="!allInBottom"
           class="px-0 d-none d-md-flex"
+          :disabled="!auth.user.loggedIn"
           :item="item"
           @react="react($event)"
         />
@@ -73,6 +74,7 @@
         </v-slide-group>
         <app-feedback
           v-if="!allInBottom"
+          :disabled="!auth.user.loggedIn"
           class="px-0 d-flex d-md-none"
           :item="item"
           @react="react($event)"
@@ -112,11 +114,12 @@
             <div
               class="d-flex flex-md-row flex-column align-md-center align-start justify-start justify-md-end px-1"
               :class="{ 'divided-footer': divededFooter }"
-              >
+            >
               <div v-if="allInBottom" class="w-100 order-last">
                 <app-feedback
                   :item="item"
-                  :class="{'me-3': !allInBottom}"
+                  :disabled="!auth.user.loggedIn"
+                  :class="{ 'me-3': !allInBottom }"
                   @react="react($event)"
                 />
               </div>
@@ -167,8 +170,10 @@
 
 <script setup>
 import { useDisplay } from "vuetify";
+import { useAuthStore } from "@core/stores/auth";
 const { smAndDown } = useDisplay();
 const emit = defineEmits(["reaction"]);
+const auth = useAuthStore();
 const props = defineProps({
   item: Object,
   allInBottom: {
@@ -186,7 +191,7 @@ const props = defineProps({
   divededFooter: {
     default: true,
     type: Boolean,
-  }
+  },
 });
 
 const react = (reactionType) => {
