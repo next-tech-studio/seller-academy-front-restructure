@@ -4,7 +4,7 @@
       <not-logged-in-room-preview
         v-model="common"
         @continue="goTosellerPanel"
-        v-if="!authStore.user.loggedIn"
+        v-if="!authStore.user.loggedIn || isAMemberOfRoom"
       ></not-logged-in-room-preview>
       <div
         class="bg-background-dark h-100"
@@ -83,6 +83,7 @@ let total_pages = reactive();
 let members_page = reactive(1);
 let dialog = ref(false);
 let loadFirstPage = ref(false);
+let isAMemberOfRoom = ref(false);
 let members_total_pages = reactive();
 const route = useRoute();
 const authStore = useAuthStore();
@@ -185,6 +186,7 @@ function getChatData($state) {
       console.log(res);
       if (res.data.length) {
         Object.assign(chat.value, [...res.data.reverse(), ...chat.value]);
+        isAMemberOfRoom.value = res.loginUserAllowToChat;
         total_pages = res.total;
         page++;
         $state.loaded();
@@ -214,7 +216,7 @@ const remove = (e) => {
   });
 };
 const chatMembers = ($state) => {
-  console.log('heeellooo', $state);
+  console.log("heeellooo", $state);
   if (loadFirstPage.value) {
     members_page = 1;
     members.splice(0, members.length);
@@ -230,7 +232,7 @@ const chatMembers = ($state) => {
       if (res.data.length) {
         Object.assign(members, [...members, ...res.data]);
         members_total_pages = res.last_page;
-        if(members_page == members_total_pages) $state.complete();
+        if (members_page == members_total_pages) $state.complete();
         members_page++;
         console.log("page", members_page);
         loadFirstPage.value = false;
