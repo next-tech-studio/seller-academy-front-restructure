@@ -327,7 +327,6 @@ export default {
   title: "عنوان",
   add_picture: "افزودن تصویر",
   delete_picture: "حذف تصویر",
-  add_from_gallery: "افزودن از گالری از گالری",
   add_video: "افزودن ویدئو",
   add_video_from_gallery: "افزودن ویدئو از گالری",
   add_audio: "افزودن فایل صوتی",
@@ -762,5 +761,7 @@ export default {
   selling_roadmap_in_digikala: "مسیر فروشندگی در دیجی‌کالا",
   selling_roadmap_in_digikala_subtitle:
     "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است،",
-    success_stories:'داستان‌های موفقیت'
+    success_stories:'داستان‌های موفقیت',
+    become_a_member:'عضو گروه شوید',
+    you_have_to_become_a_member:'جهت مشاهده‌ی تالار باید عضوی از آن باشید.'
 };
