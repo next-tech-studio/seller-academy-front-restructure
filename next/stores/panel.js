@@ -230,7 +230,7 @@ export const usePanelStore = defineStore("panel", {
           };
           sectionsArray.value.push(contentObject);
         });
-        finalContent = {
+        (finalContent = {
           type: this.type(),
           body: {
             id: this.postRouteId || 0,
@@ -254,32 +254,34 @@ export const usePanelStore = defineStore("panel", {
             // "-" +
             // date.getDate(),
           },
-          },
-        this.$repos.panel.saveDraft(finalContent).then((res) => {
-          console.log("save draft", res);
-          this.postSavedState = true;
-          if (next) {
-            callBackFunction(true, res.id);
-          } else if (back) {
-            callBackFunction(false, res.id);
-          } else if (preview) {
-            navigateTo(
-              localePath({
-                path: `/article/preview/${res.id}`,
-              }),
-              { external: true }
-            );
-          } else if (!this.postRouteId) {
-            navigateTo(
-              localePath({
-                path: `/blog/panel/${
-                  this.type() == "podcast" ? "podcast" : "post"
-                }/${res.id}/${currentState}`,
-              }),
-              { external: true }
-            );
-          }
-        });
+        }),
+          this.$repos.panel.saveDraft(finalContent).then((res) => {
+            console.log("save draft", res);
+            this.postSavedState = true;
+            if (next) {
+              callBackFunction(true, res.id);
+            } else if (back) {
+              callBackFunction(false, res.id);
+            } else if (preview) {
+              navigateTo(
+                localePath({
+                  path: `/article/preview/${res.id}`,
+                }),
+                { external: true }
+              );
+            } else if (publish) {
+              this.publishArticle();
+            } else if (!this.postRouteId) {
+              navigateTo(
+                localePath({
+                  path: `/blog/panel/${
+                    this.type() == "podcast" ? "podcast" : "post"
+                  }/${res.id}/${currentState}`,
+                }),
+                { external: true }
+              );
+            }
+          });
       } else if (next) {
         callBackFunction(true, this.postRouteId);
       } else if (back) {

@@ -63,7 +63,7 @@
               v-if="
                 !authStore.user.loggedIn && authUser?.user?.roles[0] != 'seller'
               "
-              :title="`${$t('most_visited_rooms')} (${userChatRoomsCount})`"
+              :title="`${$t('most_visited_rooms')}`"
               :items="rooms"
               subtitle-key="subtitle"
               @to:item="toRoom"

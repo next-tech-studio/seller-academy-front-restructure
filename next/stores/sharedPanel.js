@@ -191,40 +191,45 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
     initForm(dataForm) {
       console.log("edit current item", this.currentItem);
       dataForm.forEach((element) => {
-        element.modelValue =
-          typeof element.modelValue == "string"
-            ? ""
-            : Array.isArray(element.modelValue)
-            ? []
-            : {};
-      });
-      if (this.edit == true || this.additionalOperation == true) {
-      // for (let field in this.currentItem) {
-      //   let findedField = dataForm.find((item) => {
-      //     return item.name === field;
-      //   });
-      //   if (findedField) {
-      //     findedField.modelValue = this.currentItem[field];
-      //   }
-      // }
-
-      const handler = new APIHandler();
-      dataForm.forEach((field) => {
-        if (field.dataPath) {
-          const current = handler.getDeepData(this.currentItem, field.dataPath);
-          if (current && current[field.name])
-            field.modelValue = current[field.name];
-          else if (typeof field.modelValue == "string") field.modelValue = "";
-          else if (Array.isArray(field.modelValue)) field.modelValue = [];
-          else field.modelValue = {};
-        } else {
-          if (this.currentItem[field.name])
-            field.modelValue = this.currentItem[field.name];
-          else if (typeof field.modelValue == "string") field.modelValue = "";
-          else if (Array.isArray(field.modelValue)) field.modelValue = [];
-          else field.modelValue = {};
+        if (!element.default) {
+          element.modelValue =
+            typeof element.modelValue == "string"
+              ? ""
+              : Array.isArray(element.modelValue)
+              ? []
+              : {};
         }
       });
+      if (this.edit == true || this.additionalOperation == true) {
+        // for (let field in this.currentItem) {
+        //   let findedField = dataForm.find((item) => {
+        //     return item.name === field;
+        //   });
+        //   if (findedField) {
+        //     findedField.modelValue = this.currentItem[field];
+        //   }
+        // }
+
+        const handler = new APIHandler();
+        dataForm.forEach((field) => {
+          if (field.dataPath) {
+            const current = handler.getDeepData(
+              this.currentItem,
+              field.dataPath
+            );
+            if (current && current[field.name])
+              field.modelValue = current[field.name];
+            else if (typeof field.modelValue == "string") field.modelValue = "";
+            else if (Array.isArray(field.modelValue)) field.modelValue = [];
+            else field.modelValue = {};
+          } else {
+            if (this.currentItem[field.name])
+              field.modelValue = this.currentItem[field.name];
+            else if (typeof field.modelValue == "string") field.modelValue = "";
+            else if (Array.isArray(field.modelValue)) field.modelValue = [];
+            else field.modelValue = {};
+          }
+        });
       }
       this.editForm.push(...dataForm);
     },

@@ -25,7 +25,6 @@
           variant="solo-filled"
           dir="ltr"
           :label="$t('mobile')"
-          type="email"
           persistent-placeholder
           class="outside-label"
         ></v-text-field>
