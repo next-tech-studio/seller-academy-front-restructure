@@ -14,7 +14,7 @@ ARG APP_NAME
 ARG PUBLIC_SITE_URL
 ARG SELLER_PANEL_LOGIN_URL
 
-COPY ./core /app/core
+COPY ./next /app/next
 
 ARG MODULE
 
