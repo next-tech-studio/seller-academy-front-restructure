@@ -217,13 +217,11 @@ const infoDialog = ref(false);
 const openDialog = (empty = false) => {
   if (auth.user.loggedIn) {
     if (empty) {
-      console.log("empty");
       requestFormStore.form.mentorId = null;
       requestFormStore.form.category = null;
     } else {
       requestFormStore.form.category = props.currentMentor?.category;
       requestFormStore.form.mentorId = props.currentMentor;
-      console.log("!empty", props.currentMentor, requestFormStore);
     }
     dialog.value = true;
     closeInfoDialog();

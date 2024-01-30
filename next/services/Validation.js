@@ -1,10 +1,11 @@
 class Validation {
   constructor(app) {
+    const $t = app.$i18n.t;
     this.rules = {
       required: (v, attribute = "") => {
         const result =
           !!v ||
-          app.$i18n.t("پر کردن این فیلد اجباری است.", {
+          $t("پر کردن این فیلد اجباری است.", {
             attribute,
           });
         this.setMessage(result, attribute);
@@ -12,31 +13,31 @@ class Validation {
       },
       digits: (v, attribute = "", digits) =>
         v.length == digits ||
-        app.$i18n.t("validation.digits", {
+        $t("validation.digits", {
           attribute,
           digits,
         }),
       checked: (v, attribute = "", digits) =>
         v == true ||
-        app.$i18n.t("validation.checked", {
+        $t("validation.checked", {
           attribute,
         }),
       // digits_between: (v, min, max) =>
       //   (v.length >= min && v.length <= max) ||
-      //   app.$i18n.t("validation.digits_between"),
+      //   $t("validation.digits_between"),
       digits_between: (v, attribute = "", min, max) =>
         (v.length >= min && v.length <= max) ||
-        app.$i18n.t("validation.digits_between", { max }),
+        $t("validation.digits_between", { max }),
       image_count_constraint: (v, attribute, count = 3) =>
         v.length > count ||
-        app.$i18n.t("validation.image_count", {
+        $t("validation.image_count", {
           attribute,
           digits,
         }),
       persian: (v, attribute = "") => {
         const result =
           /^[\u0600-\u06FF\s]+$/.test(v) ||
-          app.$i18n.t("validation.persian", {
+          $t("validation.persian", {
             attribute,
           });
         this.setMessage(result);
@@ -45,7 +46,7 @@ class Validation {
       english: (v, attribute = "") => {
         const result =
           /^[A-Za-z0-9]*$/.test(v) ||
-          app.$i18n.t("validation.english", {
+          $t("validation.english", {
             attribute,
           });
         this.setMessage(result);
@@ -54,9 +55,14 @@ class Validation {
       email: (v, attribute = "") => {
         const result =
           /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          app.$i18n.t("validation.email", {
-            attribute,
-          });
+          "یک ایمیل معتبر وارد نمایید.";
+        this.setMessage(result, attribute);
+        return result;
+      },
+      mobile: (v, attribute = "") => {
+        const result =
+          /^09\d{9}$/.test(v) ||
+          "یک شماره موبایل معتبر وارد نمایید.";
         this.setMessage(result, attribute);
         return result;
       },

@@ -33,38 +33,42 @@ let dataForm = ref([
   {
     type: "text-field",
     name: "firstName",
-    modelValue: ref(""),
+    modelValue: auth.user.firstName,
     validations: "required",
     label: "first_name",
     size: 6,
     hint: true,
+    default: true
   },
   {
     type: "text-field",
     name: "lastName",
-    modelValue: ref(""),
+    modelValue: auth.user.lastName,
     validations: "required",
     label: "last_name",
     size: 6,
     hint: true,
+    default: true
   },
   {
     type: "text-field",
     name: "email",
-    modelValue: ref(""),
+    modelValue: auth.user.email,
     validations: "required|email",
     label: "email",
     size: 6,
     hint: true,
+    default: true
   },
   {
     type: "text-field",
     name: "mobile",
-    modelValue: ref(""),
-    validations: "required",
+    modelValue: auth.user.mobile,
+    validations: "required|mobile",
     label: "mobile",
     size: 6,
     hint: true,
+    default: true
   },
   {
     type: "text-field",

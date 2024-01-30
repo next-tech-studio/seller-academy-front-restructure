@@ -74,7 +74,7 @@
       </v-col>
       <v-col cols="12" md="6">
         <v-row>
-          <v-col cols="6" md="4" v-for="n in 10" :key="n">
+          <v-col cols="6" md="4" v-for="n in 9" :key="n">
             <v-card variant="outlined" class="text-center" color="n200">
               <v-card-text>
                 <v-avatar
@@ -92,7 +92,7 @@
 
   <!-- PREVIOUS INNOVATION BRIDGE -->
   <v-container fluid class="pb-md-16 mb-md-4 pb-8 mb-2">
-    <div class="text-h4 mb-6 text-center">پل‌های نوآوری برگزار شده</div>
+    <div class="text-h4 mb-6 text-center">پل‌های نوآوری پیش رو</div>
     <v-row>
       <v-col
         cols="12"
@@ -152,52 +152,30 @@ const universities = ref([])
 const topics = [
   {
     title: "زنجیره ارزش تجارت الکترونیک",
-    image: "",
+    image: "/images/innovation-bridge/topics/Icon-03.png",
   },
   {
     title: "رباتیک",
-    image: "",
+    image: "/images/innovation-bridge/topics/Icon-05.png",
   },
   {
     title: "لجستیک",
-    image: "",
+    image: "/images/innovation-bridge/topics/Icon-06.png",
   },
   {
     title: "پردازش ابری",
-    image: "",
+    image: "/images/innovation-bridge/topics/Icon-01.png",
   },
   {
     title: "هوش مصنوعی",
-    image: "",
+    image: "/images/innovation-bridge/topics/Icon-02.png",
   },
   {
     title: "بلاکچین",
-    image: "",
+    image: "/images/innovation-bridge/topics/Icon-04.png",
   },
 ];
-// const universities = [
-//   {
-//     title: "پل نوآوری مشهد",
-//     image: "/images/innovation-bridge/universities/mashhad.png",
-//     date: "۲۴ بهمن ۱۴۰۳",
-//     location: "دانشگاه فردوسی",
-//     slug: "پل-نوآوری-مشهد"
-//   },
-//   {
-//     title: "پل نوآوری زاهدان",
-//     image: "/images/innovation-bridge/universities/zahedan.png",
-//     date: "۲۴ بهمن ۱۴۰۳",
-//     location: "دانشگاه زاهدان",
-//     slug: "پل-نوآوری-زاهدان"
-//   },
-//   {
-//     title: "پل نوآوری تربیت مدرس",
-//     image: "/images/innovation-bridge/universities/modares.jpg",
-//     date: "۲۴ بهمن ۱۴۰۳",
-//     location: "دانشگاه تربیت مدرس",
-//     slug: "پل-نوآوری-تربیت-مدرس"
-//   },
-// ];
+
 useAsyncData(async () => {
     universities.value = await queryContent(
       `/fa/innovation-bridge`
