@@ -315,7 +315,7 @@ const saveRoom = () => {
   };
   $repos.communityPanel.saveRoom(payload).then((res) => {
     if (!edit.value)
-      navigateTo(localePath({ path: `/forum/panel/room/${res.id}` }));
+      navigateTo(localePath({ path: `/forum/panel/room/${res.data.id}` }));
   });
 };
 onMounted(() => {
