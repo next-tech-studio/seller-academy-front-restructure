@@ -39,6 +39,7 @@
                 :item="item"
                 context="description"
                 @submit="$emit('submit')"
+                @open="open"
               />
             </v-col>
           </v-row>
@@ -56,7 +57,13 @@
 </template>
 
 <script setup>
+import { useSharedPanelStore } from "@core/stores/sharedPanel";
+const sharedStore = useSharedPanelStore();
 const props = defineProps({
   item: Object,
 });
+
+const open = () => {
+  sharedStore.currentContext = "description"
+}
 </script>

@@ -3,6 +3,7 @@
     <v-btn @click="openDialog">{{ $t("participate_in_the_course") }}</v-btn>
   </slot>
   <app-dialog-form
+    v-if="sharedStore.currentContext == context"
     :store="sharedStore"
     button-title=""
     subtitle=""
@@ -45,6 +46,7 @@ import { useSharedPanelStore } from "@core/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 const props = defineProps({
   item: Object,
+  context: String,
 });
 let dataForm = ref([
   {

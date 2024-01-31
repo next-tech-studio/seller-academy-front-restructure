@@ -27,7 +27,12 @@
         </div>
         <div class="d-flex align-center">
           <app-share-in class="text-caption me-6" :hide-title="false" />
-          <registration :item="item" @submit="$emit('submit')" context="enroll" />
+          <registration
+            :item="item"
+            context="enroll"
+            @submit="$emit('submit')"
+            @open="open"
+          />
         </div>
       </div>
     </v-container>
@@ -35,10 +40,15 @@
 </template>
 
 <script setup>
+import { useSharedPanelStore } from "@core/stores/sharedPanel";
+const sharedStore = useSharedPanelStore();
 const props = defineProps({
   item: {
     type: Object,
     default: () => {},
   },
 });
+const open = () => {
+  sharedStore.currentContext = "description"
+}
 </script>

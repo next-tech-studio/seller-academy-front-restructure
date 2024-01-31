@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="store.dialog"
+    v-model="sharedStore.dialog"
     id="dialog-form"
     persistent
     :width="mdAndUp ? '640' : '100%'"
@@ -277,6 +277,7 @@
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
 let sharedStore = useSharedPanelStore();
 let form = ref(null);
+let dialog = ref(false);
 import { useDisplay } from "vuetify";
 const { mdAndUp } = useDisplay();
 let { $rules } = useNuxtApp();
@@ -338,6 +339,8 @@ const showFormItem = (item) => {
 };
 const close = () => {
   props.store.closeDialog();
+  // dialog.value = false
+  // props.store.editForm = ref([])
   emit('close:dialog')
 };
 // defineExpose({ close });
@@ -350,3 +353,11 @@ const close = () => {
   }
 }
 </style>
+<!-- closeDialog() {
+  this.sendingRequest = false;
+  this.dialog = false;
+  this.editForm = ref([]);
+  this.commentRejectForm = ref([]);
+  this.edit = false;
+  this.reject = false;
+}, -->

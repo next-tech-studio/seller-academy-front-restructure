@@ -98,6 +98,7 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
     pagination: ref({}),
     listingDialog: ref(false),
     dialog: ref(false),
+    currentContext: ref(''),
     edit: ref(false),
     currentItem: ref({}),
     reject: ref(false),

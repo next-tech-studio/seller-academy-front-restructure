@@ -3,6 +3,7 @@
     <v-btn @click="openDialog">{{ $t("participate_in_the_course") }}</v-btn>
   </slot>
   <app-dialog-form
+    v-if="sharedStore.currentContext == context"
     :store="sharedStore"
     button-title=""
     subtitle=""
@@ -55,6 +56,7 @@ const sharedStore = useSharedPanelStore();
 const UPLOAD_PATH = "/panel/articles/inline_media";
 const props = defineProps({
   item: Object,
+  context: String
 });
 let dataForm = ref([
   {
