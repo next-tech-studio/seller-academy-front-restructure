@@ -345,7 +345,7 @@ export const useAcademyStore = defineStore("academy", {
         if (res.supportItems?.length < 1) {
           for (let i = 0; i < 2; i++) this.content.supportItems.push("");
         }
-        if (!res.faq.hasOwnProperty("type")) {
+        if (!res.faq?.hasOwnProperty("type")) {
           for (let i = 0; i < 1; i++) {
             Object.assign(this.content.faq, {
               type: "faq",

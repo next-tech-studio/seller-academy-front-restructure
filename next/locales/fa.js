@@ -493,7 +493,6 @@ export default {
   title: "عنوان",
   add_picture: "افزودن تصویر",
   delete_picture: "حذف تصویر",
-  add_from_gallery: "افزودن از گالری",
   change_picture: "تغییر تصویر",
   copy: "کپی کردن",
   remove_msg: "حذف پیام",

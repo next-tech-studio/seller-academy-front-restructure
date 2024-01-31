@@ -53,7 +53,7 @@
       <v-divider thickness="2" />
       <div class="d-flex my-4">
         <v-icon icon="custom:info" color="text-secondary" class="me-2" />
-        <span class="text-caption">{{ $t("see_room_seller") }}</span>
+        <span class="text-caption">{{ $t(infoText) }}</span>
       </div>
       <v-btn
         block
@@ -61,7 +61,7 @@
         color="button-primary"
         @click="$emit('continue')"
         class="text-button"
-        >{{ $t("seller_login_signup") }}</v-btn
+        >{{ $t(btnTitle) }}</v-btn
       >
     </v-card>
   </v-dialog>
@@ -75,6 +75,8 @@ let noSellerDialog = ref(true);
 let emit = defineEmits(["continue"]);
 let props = defineProps({
   modelValue: Object,
+  btnTitle: { type: String, default: "seller_login_signup" },
+  infoText: { type: String, default: "see_room_seller" },
 });
 </script>
 

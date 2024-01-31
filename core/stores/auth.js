@@ -64,7 +64,7 @@ export const useAuthStore = defineStore("auth", {
   getters: {
     hasPermission: (state) => (permission) =>
       permission.some((p) =>
-        state.user?.roles?.permission.map((x) => x.key).includes(p)
+        state.user?.roles?.permission?.map((x) => x.key).includes(p)
       ),
   },
   actions: {
