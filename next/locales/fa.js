@@ -866,6 +866,9 @@ export default {
   offline_course: "دوره‌ آفلاین",
   online_course: "دوره‌ آنلاین/حضوری",
   registrants: "ثبت‌نام کنندگان",
+  register: "ثبت‌نام",
+  'pre-register': "پیش‌ثبت‌نام",
+  full: "تکمیل ظرفیت",
   registrationType: {
     done: "خاتمه یافته",
     full: "تکمیل ظرفیت",

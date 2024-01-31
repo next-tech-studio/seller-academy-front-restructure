@@ -1,8 +1,8 @@
 <template>
-  <product-enroll :item="item" />
+  <product-enroll :item="item" @submit="register" />
   <v-container fluid>
     <product-holding class="my-12" :item="item" />
-    <product-description :item="item" />
+    <product-description :item="item" @submit="register" />
     <div class="my-16">
       <product-mentors
         v-if="item?.teachers"
@@ -52,17 +52,16 @@
         </v-col>
       </v-row>
     </div>
-
-    <registration-dialog :item="item" />
-    <pre-registration-dialog :item="item" />
   </v-container>
 </template>
 
 <script setup>
+import { useSharedPanelStore } from "@core/stores/sharedPanel";
+const sharedStore = useSharedPanelStore();
 const { $repos } = useNuxtApp();
 const route = useRoute();
 const item = reactive({});
-
+const { $repo } = useNuxtApp()
 useAsyncData(async () => {
   await $repos.academyProduct
     .getProduct({
@@ -70,4 +69,23 @@ useAsyncData(async () => {
     })
     .then((res) => Object.assign(item, res.data));
 });
-</script>
+
+const register = () => {
+  if (item.registrationType == 'register') {
+    console.log('register');
+  } else if (item.registrationType == 'pre-register') {
+    console.log('pre-register');
+    let body = {};
+    sharedStore.editForm.forEach((field) => {
+      body[field.name] = sharedStore.editForm.find(
+        (item) => item.name === field.name
+      )?.modelValue;
+    });
+    $repos.academyProduct.preRegister({
+      slug: route.params.slug,
+      body
+    })
+  }
+}
+</script>￼
+

@@ -27,10 +27,7 @@
         </div>
         <div class="d-flex align-center">
           <app-share-in class="text-caption me-6" :hide-title="false" />
-          <v-btn height="48" class="text-primary-base text-button" flat>
-            {{ $t("participate_in_the_course") }}
-            <v-icon end icon="custom:chevronLeft"></v-icon>
-          </v-btn>
+          <registration :item="item" @submit="$emit('submit')" context="enroll" />
         </div>
       </div>
     </v-container>
