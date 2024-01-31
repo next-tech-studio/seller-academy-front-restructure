@@ -149,7 +149,7 @@ let dataForm = ref([
   },
   {
     type: "uploader",
-    name: "resume",
+    name: "quiz",
     uploadPath: UPLOAD_PATH,
     modelValue: ref({}),
     size: 10,

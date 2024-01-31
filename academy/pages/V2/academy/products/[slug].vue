@@ -61,7 +61,7 @@ const sharedStore = useSharedPanelStore();
 const { $repos } = useNuxtApp();
 const route = useRoute();
 const item = reactive({});
-const { $repo } = useNuxtApp()
+const { $repo } = useNuxtApp();
 useAsyncData(async () => {
   await $repos.academyProduct
     .getProduct({
@@ -71,21 +71,33 @@ useAsyncData(async () => {
 });
 
 const register = () => {
-  if (item.registrationType == 'register') {
-    console.log('register');
-  } else if (item.registrationType == 'pre-register') {
-    console.log('pre-register');
+  if (item.registrationType == "register") {
+    console.log("register");
+  } else if (item.registrationType == "pre-register") {
+    console.log("pre-register");
     let body = {};
     sharedStore.editForm.forEach((field) => {
       body[field.name] = sharedStore.editForm.find(
         (item) => item.name === field.name
       )?.modelValue;
     });
-    $repos.academyProduct.preRegister({
-      slug: route.params.slug,
-      body
-    })
-  }
-}
-</script>￼
 
+    if (body.quiz) body.quiz = body.quiz.url;
+    if (body.resume) body.resume = body.resume.url;
+    $repos.academyProduct
+      .preRegister({
+        slug: route.params.slug,
+        body,
+      })
+      .then(() => {
+        sharedStore.sendingRequest = false;
+        sharedStore.closeDialog();
+      })
+      .catch(() => {
+        sharedStore.sendingRequest = true;
+        sharedStore.closeDialog();
+      });
+  }
+};
+</script>
+￼
