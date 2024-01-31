@@ -1,10 +1,12 @@
 <template>
   <div class="d-flex align-center" id="editor-uploader">
+    {{ uploadedFiles }}
     <div
       :style="{ width: `${areaSize.width}`, height: `${areaSize.height}` }"
       :class="description ? 'mb-8' : ''"
       class="position-relative"
     >
+    {{ showImage }}
       <div v-if="showImage">
         <slot
           name="outlineEdit"
@@ -42,7 +44,7 @@
             cover
             width="100%"
             :height="blogContent ? '80%' : '100%'"
-            :src="uploadedFiles?.url"
+            :src="uploadedFiles?.url || uploadedFiles"
           >
             <div class="d-flex justify-end ma-4">
               <v-btn

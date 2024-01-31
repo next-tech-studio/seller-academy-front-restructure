@@ -441,7 +441,7 @@ const submitItem = () => {
 };
 const goToItem = (item) => {
   console.log("eurwopeiruwioeruoweirhji", item);
-  if (item.status == "published") {
+  if (item.status == "approved") {
     navigateTo(
       localePath({
         path: `/forum/question/${item.slug}`,

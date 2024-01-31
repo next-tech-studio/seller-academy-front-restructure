@@ -424,7 +424,7 @@ export default {
   comments: "بازخورد‌ها",
   withReplies: "پاسخ داده شده",
   rejected: "رد شده",
-  approved: "منتشر شده",
+  approved: "تایید شده",
   waitingForApproval: "در انتظار تایید",
   videos_count: "تعداد ویدیوها",
   videos: "ویدیوها",
