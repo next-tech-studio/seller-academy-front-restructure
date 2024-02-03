@@ -147,6 +147,7 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
       let payload = {
         body: { status: e.action || e, ids: e.id, progress: e.action },
         type: listingPayload?.type || "",
+        slug: listingPayload.slug
       };
       this.$repos[repo][api](payload).then(() => {
         return this.getListingItems(listingApi, listingPayload, repo);

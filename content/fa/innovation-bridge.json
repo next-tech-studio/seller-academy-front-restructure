@@ -8,6 +8,7 @@
         "location": "دانشگاه فردوسی",
         "slug": "پل-نوآوری-مشهد",
         "information": "در این رویداد سه ساعته، مدیران دیجی کالا به بیان مسائل و چالش های فعلی صنعت تجارت الکترونیک می پردازند. این رویداد برای علاقه مندان حوزه کارآفرینی فرصتی ایجاد می کند تا با نیازهای صنعت آشنا شده و به دنبال ارائه راه حلی فناور محور در راستای رفع این چالش ها برآیند. در ادامه، طرح های ارائه شده توسط شرکت کنندگان مورد ارزیابی تیم دیجی نکست قرار می گیرد و در صورت تأیید اولیه، جلسات منتورشیپ برگزار شده و فرصت حضور در کمپ استارتاپی دیجی نکست را پیدا می کنید.",
+        "disable_navigation": false,
         "holdingDate": "سه‌شنبه مورخ ۳۰ بهمن ۱۴۰۲ از ساعت ۰۸:۰۰ الی ۱۴:۰۰",
         "price": "رایگان و برای عموم آزاد",
         "eventType": "حضوری",
@@ -24,7 +25,7 @@
         ],
         "speakers": [
           {
-            "avatar": "",
+            "avatar": "/images/innovation-bridge/speakers/mehran mohamdi.png",
             "firstName": "مهران ",
             "lastName": "محمدی",
             "jobTitle": "مدیر کل تجربه مشتری و تجربه فروشنده دیجی کالا",
@@ -33,16 +34,16 @@
             "presentationTopic": ""
           },
           {
-            "avatar": "",
+            "avatar": "/images/innovation-bridge/speakers/alireza khaleghi.png",
             "firstName": "علیرضا",
-            "lastName": "خالقی سنقر",
+            "lastName": "خالقی",
             "jobTitle": "سرپرست ارشد واحد تکنولوژی و نوآوری دیجی‌نکست",
             "linkedin": "",
             "email": "",
             "presentationTopic": ""
           },
           {
-            "avatar": "",
+            "avatar": "/images/innovation-bridge/speakers/ehsan taher.png",
             "firstName": "احسان ",
             "lastName": "طاهر",
             "jobTitle": "Data Scientist Tech Lead",
@@ -51,7 +52,7 @@
             "presentationTopic": ""
           },
           {
-            "avatar": "",
+            "avatar": "/images/innovation-bridge/speakers/armin farhang.png",
             "firstName": "آرمین",
             "lastName": "مهر فرهنگ",
             "jobTitle": "Partnership and M&A Lead",
@@ -60,8 +61,8 @@
             "presentationTopic": ""
           },
           {
-            "avatar": "",
-            "firstName": "محمد صادف",
+            "avatar": "/images/innovation-bridge/speakers/sadegh.png",
+            "firstName": "محمد صادق",
             "lastName": "شفیعی",
             "jobTitle": "مدیر ارشد پورتفولیو و سرمایه گذاری دیجی‌نکست",
             "linkedin": "",
@@ -74,19 +75,21 @@
         "title": "پل نوآوری زاهدان",
         "event_title": "اولین رویداد پل نوآوری دیجی نکست در زاهدان با حضور مدیران گروه دیجی کالا",
         "image": "/images/innovation-bridge/universities/zahedan.png",
-        "date": "۲۴ بهمن ۱۴۰۳",
+        "date": "به زودی",
         "location": "دانشگاه زاهدان",
         "slug": "پل-نوآوری-زاهدان",
-        "information": ""
+        "information": "",
+        "disable_navigation": true
       },
       {
         "title": "پل نوآوری تربیت مدرس",
         "event_title": "اولین رویداد پل نوآوری دیجی نکست در مشهد با حضور مدیران گروه دیجی کالا",
         "image": "/images/innovation-bridge/universities/modares.jpg",
-        "date": "۲۴ بهمن ۱۴۰۳",
+        "date": "به زودی",
         "location": "دانشگاه تربیت مدرس",
         "slug": "پل-نوآوری-تربیت-مدرس",
-        "information": ""
+        "information": "",
+        "disable_navigation": true
       }
   ]
 }

@@ -14,14 +14,12 @@
         v-model:searchModel="payload.search"
         @update:searchModel="onSearch"
         @update:page="
-          store.getListingItems('studentsList', payload.value, 'academyPanel')
+          store.getListingItems('studentsList', payload, 'academyPanel')
         "
         default-status="active"
         :table-actions="operations"
-        @update:items="submitItem"
         @init:form="store.initForm(dataForm)"
         @edit="certificates"
-        @navigate:toItem="goToItem"
       >
         <template #displayName="{ item }">
           <div class="d-flex cursor-pointer">
@@ -173,55 +171,6 @@ const init = () => {
     },
   ]);
 };
-const submitItem = () => {
-  let payload;
-  let formTitle = store.editForm.find((item) => item.name === "title");
-  let formDescription = store.editForm.find(
-    (item) => item.name === "description"
-  );
-  if (store.edit) {
-    let itemIndex = store.listItems.data.findIndex(
-      (item) => item.id === store.currentItem.id
-    );
-    payload = {
-      body: {
-        id: store.currentItem.id,
-        title: formTitle.modelValue,
-        description: formDescription.modelValue,
-        status: store.currentItem.status,
-      },
-    };
-    $repos.academyPanel.updateSkill(payload).then((res) => {
-      Object.assign(store.listItems.data[itemIndex], res);
-      store.edit = false;
-      store.closeDialog();
-    });
-  } else {
-    payload = {
-      body: {
-        title: formTitle.modelValue,
-        description: formDescription.modelValue,
-      },
-    };
-    $repos.academyPanel.updateSkill(payload).then((res) => {
-      Object.assign(store.listItems.data, [
-        ...store.listItems.data,
-        { ...res },
-      ]);
-      store.closeDialog();
-    });
-  }
-};
-// const goToItem = () => {
-//   navigateTo(
-//     localePath({
-//       path: "/article/category/" + `${store.currentItem.slug}`,
-//     }),
-//     {
-//       external: true,
-//     }
-//   );
-// };
 onMounted(() => {
   init();
   store.getListingCommon("studentsListCommon", "academyPanel");
