@@ -8,7 +8,12 @@
   >
     <v-card-text class="pa-0">
       <v-row>
-        <v-col cols="12" lg="6" md="12" @click="$emit('to:more', mutedItems[current])">
+        <v-col
+          cols="12"
+          lg="6"
+          md="12"
+          @click="$emit('to:more', mutedItems[current])"
+        >
           <div class="d-flex justify-space-between">
             <div
               class="text-text-high-emphasis"
@@ -28,7 +33,13 @@
               {{ $moment(mutedItems[current]?.publicationDate).fromNow() }}
             </client-only>
             <span class="dot mx-2"></span>
-            نوشته {{ mutedItems[current]?.author?.displayName }}
+            نوشته
+            {{
+              mutedItems[current]?.author?.displayName ||
+              mutedItems[current]?.author?.first_name +
+                " " +
+                mutedItems[current]?.author?.last_name
+            }}
           </div>
           <div
             class="text-body-1 text-text-low-emphasis truncate-4 pt-2 d-none d-md-flex"
@@ -134,14 +145,14 @@ let animation = computed(() => {
 });
 
 const mutedItems = computed(() => {
-  let result = []
-  if (props.items?.constructor === Array) { 
-    return props.items
+  let result = [];
+  if (props.items?.constructor === Array) {
+    return props.items;
   } else {
-    result.push(props.items)
-    return result
+    result.push(props.items);
+    return result;
   }
-})
+});
 </script>
 
 <style lang="scss">
