@@ -122,7 +122,7 @@ export default defineNuxtConfig({
       docker: process.env.DOCKER,
       baseURL: "/blog",
       domain: process.env.DOMAIN,
-      gtagId: "G-RTFPWZH8RV",
+      gtagId: process.env.GTAGID,
     },
   },
   schemaOrg: {

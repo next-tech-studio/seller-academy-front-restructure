@@ -1,6 +1,9 @@
 <template>
-  <v-btn @click="openDialog">REGISTRATION DIALOG</v-btn>
+  <slot name="activator" :open="openDialog">
+    <v-btn @click="openDialog">{{ $t("participate_in_the_course") }}</v-btn>
+  </slot>
   <app-dialog-form
+    v-if="sharedStore.currentContext == context"
     :store="sharedStore"
     button-title=""
     subtitle=""
@@ -8,7 +11,7 @@
     title="registrationType.register"
     ref="dialogForm"
     :add-new-item="false"
-    @update:fields="editGeneralInformation"
+    @update:fields="$emit('submit')"
   >
     <template #formActions>
       <slot name="formActions"></slot>
@@ -17,7 +20,10 @@
       <v-row class="py-4">
         <v-col v-for="(installment, i) in installments" :key="i" cols="4">
           <v-card :color="i == 0 ? 'primary-base' : ''">
-            <v-card-text class="text-caption" :class="{'text-text-light': i == 0}">
+            <v-card-text
+              class="text-caption"
+              :class="{ 'text-text-light': i == 0 }"
+            >
               <div class="font-weight-bold">
                 {{ installment.percent }}
               </div>
@@ -40,6 +46,7 @@ import { useSharedPanelStore } from "@core/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 const props = defineProps({
   item: Object,
+  context: String,
 });
 let dataForm = ref([
   {
@@ -132,7 +139,8 @@ const installments = ref([
     price: "۱.۲۵۰.۰۰۰ تومان",
   },
 ]);
-const openDialog = () => {
+const openDialog = (context) => {
+  console.log("context", context);
   sharedStore.dialog = true;
   sharedStore.currentItem = props.item;
   sharedStore.edit = true;

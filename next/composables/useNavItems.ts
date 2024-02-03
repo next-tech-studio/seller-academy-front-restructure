@@ -6,7 +6,7 @@ export const useNavItems = () => {
       children: ["home"],
     },
     {
-      title: "startups",
+      title: "portfolio",
       to: "/portfo",
       children: ["portfo"],
     },
@@ -15,11 +15,11 @@ export const useNavItems = () => {
       to: "/mentors",
       children: ["mentors"],
     },
-    {
-      title: "courses",
-      to: "/academy/courses",
-      children: ["academy"],
-    },
+    // {
+    //   title: "courses",
+    //   to: "/academy/courses",
+    //   children: ["academy"],
+    // },
     // {
     //   title: "research_and_development",
     //   to: "/tech-studio",

@@ -67,7 +67,11 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/content",
     "@pinia-plugin-persistedstate/nuxt",
+    // "nuxt-gtag",
   ],
+  // gtag: {
+  //   id: 'G-T58G88TMTD'
+  // },
   // content: {
   //   api: {
   //     baseURL: '/next/content'
@@ -110,7 +114,7 @@ export default defineNuxtConfig({
       docker: process.env.DOCKER,
       baseURL: "/blog",
       domain: process.env.DOMAIN,
-      gtagId: "G-RTFPWZH8RV",
+      gtagId: process.env.GTAGID,
       needAuth: process.env.NEED_AUTH,
     },
   },

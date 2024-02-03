@@ -45,7 +45,7 @@
     </template>
     <v-list elevation="0" :border="true" density="compact" class="py-0">
       <v-list-item v-for="(item, i) in items" :key="i" @click="item.action">
-        <div class="d-flex align-center">
+        <div class="d-flex align-center" v-if="item.show">
           <v-icon
             size="small"
             class="ml-3"
@@ -86,11 +86,13 @@ const items = [
     title: "admin_panel",
     icon: "custom:userSolid",
     action: goToPanel,
+    show: auth.hasPermission(["blogs", "community", "academy"]),
   },
   {
     title: "logout",
     icon: "custom:logout",
     action: logout,
+    show: true
   },
 ];
 

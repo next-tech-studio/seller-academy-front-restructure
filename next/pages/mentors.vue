@@ -3,7 +3,9 @@
     <mentors-mentorship-request
       ref="requestForm"
       :item="requestFormStore.form"
-      :categories="categories"
+      :categories="Object.values(categories).map(x => {
+        return {...x.category, mentors: x.mentors}
+      })"
       :current-mentor="currentMentor"
       @upload="upload"
       @send="send"
@@ -57,9 +59,8 @@ useAsyncData(() => {
       accumulator[categoryId].mentors.push(currentValue);
       return accumulator;
     }, {});
-    console.log(data);
     Object.assign(categories.value, data)
-
+    
     categories.value['0'] = {
       category: {
         id: 0,
@@ -67,7 +68,7 @@ useAsyncData(() => {
       },
       mentors: res.data
     }
-
+    
     if (auth.afterLogin) requestForm.value.openDialog();
   });
 });

@@ -62,6 +62,32 @@
             </v-btn>
           </div>
         </div>
+        <div v-else-if="!hasStartButton && !(max - (Object.keys(uploadedFiles).length || uploadedFiles?.length))">
+          <v-btn
+              class="mx-1 pa-0 border-dashed border-sm d-flex align-center justify-center"
+              flat
+              @click="handleFileImport(true, index - 1)"
+              color="text-low-emphasis"
+              :rounded="roundImages ? 'md' : 'pill'"
+              :loading="loading[index - 1]"
+              :size="`${size}px`"
+              variant="outlined"
+            >
+              <div class="d-flex flex-column justify-center align-center">
+                <v-icon
+                  color="icon-high-emphasis"
+                  icon="custom:uploadFile"
+                  class="mb-1"
+                  :size="`${size / 2.5}px`"
+                />
+                <span
+                  class="text-text-high-emphasis"
+                  :style="{ fontSize: `${size / 4}px` }"
+                  >{{ $t("upload") }}</span
+                >
+              </div>
+            </v-btn>
+        </div>
       </slot>
     </div>
     <input

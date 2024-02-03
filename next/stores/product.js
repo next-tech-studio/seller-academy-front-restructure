@@ -101,6 +101,8 @@ export const useProductStore = defineStore("product", {
     ],
     platforms: ref([]),
     paymentTypes: ref([]),
+    registrationType: ref([]),
+    registerRequirements: ref([]),
     //
     selectedTableItems: ref([]),
     commentRejectForm: ref({}),
@@ -137,6 +139,8 @@ export const useProductStore = defineStore("product", {
         Object.assign(this.levels, res?.data?.level);
         Object.assign(this.platforms, res?.data?.platform);
         Object.assign(this.paymentTypes, res?.data?.paymentType);
+        Object.assign(this.registrationType, res?.data?.registrationType);
+        Object.assign(this.registerRequirements, res?.data?.registerRequirements);
       });
     },
     addNewSupportItem() {
@@ -324,6 +328,8 @@ export const useProductStore = defineStore("product", {
             supportItems: this.content.supportItems,
             headings: this.content.headings,
             features: this.content.features,
+            registerRequirements: this.content.registerRequirements,
+            registrationType: this.content.registrationType,
           },
         };
         this.$repos.academyProductPanel.createCourse(finalContent).then((res) => {

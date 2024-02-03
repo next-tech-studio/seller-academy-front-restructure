@@ -139,9 +139,9 @@ export default (request) => ({
         method: "post",
         path: `/product/${payload.slug}/pre_register`,
         loading: true,
-        alert: false,
+        alert: true,
       },
-      payload
+      payload.body
     );
   },
   checkout(payload) {
