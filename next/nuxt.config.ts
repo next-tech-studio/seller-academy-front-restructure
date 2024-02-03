@@ -67,7 +67,11 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/content",
     "@pinia-plugin-persistedstate/nuxt",
+    "nuxt-gtag",
   ],
+  gtag: {
+    id: 'G-T58G88TMTD'
+  },
   // content: {
   //   api: {
   //     baseURL: '/next/content'
