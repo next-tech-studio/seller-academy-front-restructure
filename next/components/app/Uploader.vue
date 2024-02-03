@@ -62,7 +62,7 @@
             </v-btn>
           </div>
         </div>
-        <div v-else-if="!hasStartButton">
+        <div v-else-if="!hasStartButton && !(max - (Object.keys(uploadedFiles).length || uploadedFiles?.length))">
           <v-btn
               class="mx-1 pa-0 border-dashed border-sm d-flex align-center justify-center"
               flat

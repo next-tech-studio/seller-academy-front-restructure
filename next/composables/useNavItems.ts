@@ -6,7 +6,7 @@ export const useNavItems = () => {
       children: ["home"],
     },
     {
-      title: "startups",
+      title: "portfolio",
       to: "/portfo",
       children: ["portfo"],
     },

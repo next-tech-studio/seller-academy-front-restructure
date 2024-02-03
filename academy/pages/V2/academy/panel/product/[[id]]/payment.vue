@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid  class="px-0 py-8" id="event-location">
+  <v-container fluid class="px-0 py-8" id="event-location">
     <app-stepper v-slot="scope" :store="sharedStore" type="product">
       <div class="d-flex align-center">
         <v-btn
@@ -53,7 +53,14 @@
           :text="$t('editor.publish')"
           color="button-secondary"
           @click="
-            productStore.saveDraft('payment', false, scope.next, false, false, true)
+            productStore.saveDraft(
+              'payment',
+              false,
+              scope.next,
+              false,
+              false,
+              true
+            )
           "
         ></v-btn>
       </div>
@@ -96,15 +103,74 @@
             <template v-slot:append-inner>
               <v-icon icon="custom:caretDownSolid" size="12" />
             </template>
-            <template v-slot:item="{props,item }">
+            <template v-slot:item="{ props, item }">
               <v-list-item v-bind="props" subtitle="">
                 {{ $t(item.title) }}
               </v-list-item>
             </template>
-            <template v-slot:selection="{item }">
-                {{  $t(item.title)}}
+            <template v-slot:selection="{ item }">
+              {{ $t(item.title) }}
             </template>
           </v-select>
+        </div>
+      </section>
+      <section class="bg-background-light rounded-lg pa-6" style="width: 49%">
+        <div class="mb-8">
+          <p class="text-h3">{{ $t("registration_type") }}</p>
+          <v-select
+            v-model="productStore.content.registrationType"
+            :items="productStore.registrationType"
+            flat
+            base-color="n400"
+            density="compact"
+            item-value="value"
+            item-title="title"
+            variant="outlined"
+            menu-icon=""
+            :placeholder="$t('choose_payment_type')"
+          >
+            <template v-slot:append-inner>
+              <v-icon icon="custom:caretDownSolid" size="12" />
+            </template>
+            <template v-slot:item="{ props, item }">
+              <v-list-item v-bind="props" title="">
+                {{ $t(item.title) }}
+              </v-list-item>
+            </template>
+            <template v-slot:selection="{ item }">
+              {{ $t(item.title) }}
+            </template>
+          </v-select>
+        </div>
+        <div class="mb-8">
+          <p class="text-h3">{{ $t("register_requirements") }}</p>
+          <div
+            v-for="(item, index) in productStore.registerRequirements"
+            :key="item.value"
+          >
+            <v-checkbox
+              v-model="productStore.content.registerRequirements"
+              :label="item.title"
+              :value="item"
+              true-icon="custom:squareCheck"
+              false-icon="custom:square"
+              hide-details
+            ></v-checkbox>
+            <!-- <v-radio-group v-model="productStore.content.registerRequirements[index].type" inline>
+              <v-radio
+                label="text"
+                value="text"
+                false-icon="custom:circle"
+                true-icon="custom:circleThick"
+              ></v-radio>
+              <v-radio
+                label="file"
+                value="file"
+                false-icon="custom:circle"
+                true-icon="custom:circleThick"
+              ></v-radio>
+            </v-radio-group> -->
+          </div>
         </div>
       </section>
     </v-form>
@@ -129,7 +195,7 @@ let primaryValues = {
   bannerUrl: ref([]),
 };
 onMounted(() => {
-productStore.getCourseCreationCommon();
+  productStore.getCourseCreationCommon();
   productStore.postRouteId = route.params.id;
   sharedStore.setStep(5);
   if (route.params.id) productStore.getDraftInfo();

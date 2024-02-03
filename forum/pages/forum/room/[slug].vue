@@ -3,12 +3,26 @@
     <NuxtLayout name="no-footer">
       <not-logged-in-room-preview
         v-model="common"
+        :btn-title="
+          !isAMemberOfRoom
+            ? 'become_a_member'
+            : !authStore.user.loggedIn
+            ? 'seller_login_signup'
+            : ''
+        "
+        :info-text="
+          !isAMemberOfRoom
+            ? 'you_have_to_become_a_member'
+            : !authStore.user.loggedIn
+            ? 'see_room_seller'
+            : ''
+        "
         @continue="goTosellerPanel"
-        v-if="!authStore.user.loggedIn || isAMemberOfRoom"
+        v-if="!authStore.user.loggedIn || !isAMemberOfRoom"
       ></not-logged-in-room-preview>
       <div
         class="bg-background-dark h-100"
-        :class="!authStore.user.loggedIn ? 'blur' : ''"
+        :class="!authStore.user.loggedIn || !isAMemberOfRoom ? 'blur' : ''"
       >
         <v-container class="h-100 pb-0" :class="{ 'pa-0': smAndDown }">
           <v-card class="rounded-md h-100 rounded-b-0 pt-16" id="parent">
@@ -83,7 +97,7 @@ let total_pages = reactive();
 let members_page = reactive(1);
 let dialog = ref(false);
 let loadFirstPage = ref(false);
-let isAMemberOfRoom = ref(false);
+let isAMemberOfRoom = ref(true);
 let members_total_pages = reactive();
 const route = useRoute();
 const authStore = useAuthStore();
@@ -176,28 +190,32 @@ const getChatCommon = () => {
 };
 
 function getChatData($state) {
-  $repos.community
-    .chatData({
-      categorySlug: route.query.category,
-      chatSlug: route.params.slug,
-      page,
-    })
-    .then((res) => {
-      console.log(res);
-      if (res.data.length) {
-        Object.assign(chat.value, [...res.data.reverse(), ...chat.value]);
-        isAMemberOfRoom.value = res.loginUserAllowToChat;
-        total_pages = res.total;
-        page++;
-        $state.loaded();
-      } else {
-        $state.complete();
-      }
-      if (smAndDown.value) {
-        rail.value = true;
-        showRoomsList.value = false;
-      }
-    });
+  if (authStore.user.loggedIn) {
+    $repos.community
+      .chatData({
+        categorySlug: route.query.category,
+        chatSlug: route.params.slug,
+        page,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.length) {
+          Object.assign(chat.value, [...res.data.reverse(), ...chat.value]);
+          isAMemberOfRoom.value = res.loginUserAllowToChat;
+          total_pages = res.total;
+          page++;
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+        if (smAndDown.value) {
+          rail.value = true;
+          showRoomsList.value = false;
+        }
+      });
+  }else{
+    //fake chat
+  }
 }
 const addMember = (e) => {
   let payload = { body: { memberId: e.id }, chatSlug: route.params.slug };

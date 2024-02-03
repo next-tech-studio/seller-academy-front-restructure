@@ -1,6 +1,9 @@
 <template>
-  <v-btn @click="openDialog">PRE REGISTRATION DIALOG</v-btn>
+  <slot name="activator" :open="openDialog">
+    <v-btn @click="openDialog">{{ $t("participate_in_the_course") }}</v-btn>
+  </slot>
   <app-dialog-form
+    v-if="sharedStore.currentContext == context"
     :store="sharedStore"
     button-title=""
     subtitle=""
@@ -8,7 +11,7 @@
     :title="$t('pre_registration') + ' ' + item.title"
     ref="dialogForm"
     :add-new-item="false"
-    @update:fields="editGeneralInformation"
+    @update:fields="$emit('submit')"
   >
     <template #formActions>
       <slot name="formActions"></slot>
@@ -30,10 +33,19 @@
     </template>
     <template #downloadQuiz>
       <div class="d-flex justify-space-between align-center">
-        <div class="text-body-2 font-weight-bold">{{ $t('pre_registration_quiz') }}</div>
-        <v-btn class="text-body-2 font-weight-bold px-0 animated" variant="text" color="primary-base">{{ $t('download_quiz') }}</v-btn>
+        <div class="text-body-2 font-weight-bold">
+          {{ $t("pre_registration_quiz") }}
+        </div>
+        <v-btn
+          class="text-body-2 font-weight-bold px-0 animated"
+          variant="text"
+          color="primary-base"
+          >{{ $t("download_quiz") }}</v-btn
+        >
       </div>
-      <div class="text-text-high-emphasis text-body-2 py-4">{{ $t('pre_registration_quiz_description') }}</div>
+      <div class="text-text-high-emphasis text-body-2 py-4">
+        {{ $t("pre_registration_quiz_description") }}
+      </div>
     </template>
   </app-dialog-form>
 </template>
@@ -41,8 +53,10 @@
 <script setup>
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
+const UPLOAD_PATH = "/panel/articles/inline_media";
 const props = defineProps({
   item: Object,
+  context: String
 });
 let dataForm = ref([
   {
@@ -106,12 +120,11 @@ let dataForm = ref([
   {
     type: "uploader",
     name: "resume",
-    // uploadPath: UPLOAD_FORM_PATH,
+    uploadPath: UPLOAD_PATH,
     modelValue: ref({}),
     size: 1,
     multiple: false,
     maxImage: 1,
-    hasStartButton: true,
     validations: "required",
     hasStartButton: false,
     roundImages: "md",
@@ -136,8 +149,8 @@ let dataForm = ref([
   },
   {
     type: "uploader",
-    name: "resume",
-    // uploadPath: UPLOAD_FORM_PATH,
+    name: "quiz",
+    uploadPath: UPLOAD_PATH,
     modelValue: ref({}),
     size: 10,
     multiple: false,
@@ -185,7 +198,8 @@ const installments = ref([
     price: "۱.۲۵۰.۰۰۰ تومان",
   },
 ]);
-const openDialog = () => {
+const openDialog = (context) => {
+  console.log("context", context);
   sharedStore.dialog = true;
   sharedStore.currentItem = props.item;
   sharedStore.edit = true;

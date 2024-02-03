@@ -153,6 +153,7 @@ export const useUploader = (uploaderArguments: upArguments) => {
             ...res.data
           );
         } else if (!uploaderArguments.multiple) {
+          console.log
           Object.assign(uploaderArguments.uploadedFiles, ...res.data);
           uploaderArguments.emit(
             "update:modelValue",

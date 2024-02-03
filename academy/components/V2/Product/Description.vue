@@ -21,7 +21,7 @@
                 ></v-icon>
               </div>
               <div class="text-subtitle font-weight-bold text-text-heading">
-                {{ $t(item?.paymentType || '') }}
+                {{ $t(item?.paymentType || "") }}
               </div>
             </v-col>
             <v-col cols="12" md="12">
@@ -33,15 +33,14 @@
               </div>
             </v-col>
             <v-col cols="12" md="12">
-              <v-btn
+              <registration
                 color="secondary-base"
-                height="48"
                 class="text-text-light text-button"
-                flat
-              >
-                {{ $t("participate_in_the_course") }}
-                <v-icon end icon="custom:chevronLeft"></v-icon>
-              </v-btn>
+                :item="item"
+                context="description"
+                @submit="$emit('submit')"
+                @open="open"
+              />
             </v-col>
           </v-row>
         </v-card-text>
@@ -58,7 +57,13 @@
 </template>
 
 <script setup>
+import { useSharedPanelStore } from "@core/stores/sharedPanel";
+const sharedStore = useSharedPanelStore();
 const props = defineProps({
   item: Object,
 });
+
+const open = () => {
+  sharedStore.currentContext = "description"
+}
 </script>

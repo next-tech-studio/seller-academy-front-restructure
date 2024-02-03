@@ -31,6 +31,11 @@
         </div>
       </v-btn>
       <v-spacer></v-spacer>
+      <v-btn
+        density="compact"
+        icon="custom:arrowLeft"
+        @click="goBack"
+      />
     </v-app-bar>
     <v-card
       :style="
@@ -50,7 +55,10 @@
         height="35%"
       >
         <div class="d-flex flex-column h-100">
-          <v-card-text class="d-flex justify-end mb-auto flex-grow-1">
+          <v-card-text
+            class="d-flex justify-end mb-auto flex-grow-1"
+            v-if="authStore.hasPermission(['community'])"
+          >
             <cover-uploader
               :upload-path="UPLOAD_COVER_PATH"
               v-model="uploaderModel"
@@ -59,17 +67,17 @@
               @click="showPreview = !showPreview"
               flat
               class="ms-3"
-              icon="custom:x"
+              icon="custom:arrowLeft"
               size="36"
             ></v-btn>
           </v-card-text>
-          <v-card-text class="flex-grow-0">
+          <v-card-text class="flex-grow-0 h-100 d-flex flex-wrap">
             <app-profile-list-item
               :item="item"
               :avatar="item.avatarUrl"
               :hover="false"
               avatar-size="64"
-              class="px-0"
+              class="px-0 w-100"
             >
               <template #title>
                 <span class="text-h5 text-text-light">{{ item.name }}</span>
@@ -89,6 +97,7 @@
                 size="small"
                 flat
                 variant="text"
+                v-if="authStore.hasPermission(['community'])"
                 class="text-text-light"
                 @click="openDialog('edit')"
               >
@@ -98,7 +107,7 @@
                 }}</span>
               </v-btn>
             </div>
-            <div class="text-text-light text-body-2">
+            <div class="text-text-light text-body-2 align-self-end">
               {{
                 item.description ||
                 "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان."
@@ -116,6 +125,7 @@
           <v-btn
             variant="text"
             color="button-secondary"
+            v-if="authStore.hasPermission(['community'])"
             @click="openDialog('add_member')"
           >
             <v-icon class="ml-2" icon="custom:plus"></v-icon>
@@ -141,7 +151,7 @@
                 color="icon-high-emphasis"
                 flat
                 size="small"
-                icon="custom:x"
+                icon="custom:arrowLeft"
                 @click="closeDialog"
               ></v-btn>
             </div>
@@ -173,6 +183,11 @@ const props = defineProps({
   modelValue: Object,
   users: Array,
 });
+
+const router = useRouter();
+const goBack = () => {
+  router.back();
+};
 
 let UPLOAD_COVER_PATH;
 const emit = defineEmits(["update:modelValue", "update:members"]);
