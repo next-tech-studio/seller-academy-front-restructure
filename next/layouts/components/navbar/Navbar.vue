@@ -70,10 +70,10 @@
         </template>
         <v-spacer></v-spacer>
         <div class="d-flex align-center">
-          <app-share-in :color="color.text" />
-          <div class="mx-4">
+          <app-share-in class="mx-4" :color="color.text" />
+          <!-- <div class="mx-4">
             <lang-switcher />
-          </div>
+          </div> -->
           <auth-handler v-if="needAuth" />
         </div>
       </v-container>
