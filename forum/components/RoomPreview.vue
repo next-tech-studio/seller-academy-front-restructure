@@ -31,6 +31,11 @@
         </div>
       </v-btn>
       <v-spacer></v-spacer>
+      <v-btn
+        density="compact"
+        icon="custom:arrowLeft"
+        @click="goBack"
+      />
     </v-app-bar>
     <v-card
       :style="
@@ -62,7 +67,7 @@
               @click="showPreview = !showPreview"
               flat
               class="ms-3"
-              icon="custom:x"
+              icon="custom:arrowLeft"
               size="36"
             ></v-btn>
           </v-card-text>
@@ -146,7 +151,7 @@
                 color="icon-high-emphasis"
                 flat
                 size="small"
-                icon="custom:x"
+                icon="custom:arrowLeft"
                 @click="closeDialog"
               ></v-btn>
             </div>
@@ -178,6 +183,11 @@ const props = defineProps({
   modelValue: Object,
   users: Array,
 });
+
+const router = useRouter();
+const goBack = () => {
+  router.back();
+};
 
 let UPLOAD_COVER_PATH;
 const emit = defineEmits(["update:modelValue", "update:members"]);
