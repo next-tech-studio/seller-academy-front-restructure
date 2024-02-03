@@ -1,12 +1,10 @@
 <template>
   <div class="d-flex align-center" id="editor-uploader">
-    {{ uploadedFiles }}
     <div
       :style="{ width: `${areaSize.width}`, height: `${areaSize.height}` }"
       :class="description ? 'mb-8' : ''"
       class="position-relative"
     >
-    {{ showImage }}
       <div v-if="showImage">
         <slot
           name="outlineEdit"

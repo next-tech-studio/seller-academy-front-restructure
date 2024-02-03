@@ -20,14 +20,14 @@
         <v-text-field
           v-if="fields.includes('email')"
           v-model="item.emailOrPhoneNumber"
-          :rules="$rules({ email: 'required' }, item.emailOrPhoneNumber)"
+          :rules="$rules({ phoneNumber: 'required|mobile' }, item.emailOrPhoneNumber)"
           flat
           base-color="n300"
           density="compact"
           variant="solo-filled"
           dir="ltr"
-          :label="$t('enter_your_email')"
-          type="email"
+          :label="$t('enter_your_phone')"
+          type="number"
           persistent-placeholder
           class="outside-label"
         ></v-text-field>

@@ -157,6 +157,7 @@ export default {
   add_course_key_fetures: "افزودن ویژگی کلیدی",
   enroll_course: "ثبت‌نام کلاس‌های آموزشی",
   enter_your_email: "با ایمیل وارد شوید.",
+  enter_your_phone:'با شماره موبایل وارد شوید',
   faq: "پرسش‌های متداول",
   first_name: "نام",
   footer_description:
@@ -606,7 +607,6 @@ export default {
     unauthorized: "دسترسی غیر‌مجاز",
     required: "پر کردن این فیلد اجباری است.",
     email: "یک ایمیل معتبر وارد نمایید",
-    digits_between: "حداکثر {max} کاراکتر می‌تواند باشد",
   },
   questions: "پرسش‌ها",
   edit_form: "ویرایش فرم",

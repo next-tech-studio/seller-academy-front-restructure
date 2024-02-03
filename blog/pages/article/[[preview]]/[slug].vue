@@ -108,7 +108,7 @@ const type = computed(() =>
   route.name.includes("podcast") ? "podcast" : "article"
 );
 
-useAsyncData(async () => {
+useAsyncData(async() => {
   if (!preview) {
     await $repos.blog.article
       .show({
