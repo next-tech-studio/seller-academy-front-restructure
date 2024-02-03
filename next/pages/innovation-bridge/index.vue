@@ -113,7 +113,7 @@
                 <div class="text-text-light text-h4">
                   {{ university.title }}
                 </div>
-                <v-btn :to="localePath({ name: 'innovation-bridge-slug', params: { slug: university.slug } })" size="x-small" icon="custom:chevronLeft"></v-btn>
+                <v-btn v-if="!university.disable_navigation" :to="localePath({ name: 'innovation-bridge-slug', params: { slug: university.slug } })" size="x-small" icon="custom:chevronLeft"></v-btn>
               </div>
               <div class="d-flex align-center">
                 <div class="text-text-light">
