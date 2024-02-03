@@ -3,13 +3,14 @@
     <h1 style="display: none">بلاگ سلر آکادمی</h1>
     <content-slider :items="blog.featuredArticles" @to:more="toItem($event)" />
     <featured-content
+      v-if="blog?.quickActionBanners?.length"
       :class="isClient ? 'd-flex' : 'd-none'"
       :items="blog.quickActionBanners"
       class="mt-md-10 mt-1"
     ></featured-content>
   </v-container>
 
-  <v-container class="mt-6 py-2">
+  <v-container class="mt-6 py-2" v-if="blog?.recentPodcasts?.length">
     <client-only>
       <content-slide-group
         :title="$t('latest_podcasts')"
@@ -49,6 +50,7 @@
       @load:more="toMore"
       @filter="getHomeData($event)"
       see-more-title="see_more_articles"
+      :show-see-more="!lastPage"
     />
   </v-container>
 </template>
@@ -59,10 +61,9 @@ const store = useFilterStore();
 let blog = reactive([]);
 const { isClient } = useSsrCorrection();
 const { $repos } = useNuxtApp();
-
 const localePath = useLocalePath();
-
 const { t } = useI18n();
+let lastPage = ref(false);
 let filters = computed(() => {
   return [{ type: "button", items: blog.categories }];
 });
@@ -86,12 +87,14 @@ const toMore = () => {
 };
 
 const getHomeCommon = async () => {
-  await $repos.blog.homeCommon({
-    type: 'article'
-  }).then((res) => {
-    Object.assign(blog, res);
-    store.buttonDefault = blog.categories[0].slug;
-  });
+  await $repos.blog
+    .homeCommon({
+      type: "article",
+    })
+    .then((res) => {
+      Object.assign(blog, res);
+      store.buttonDefault = blog.categories[0].slug;
+    });
 };
 
 const getHomeData = async () => {
@@ -100,11 +103,11 @@ const getHomeData = async () => {
       sort: "recent",
       category: store.buttonDefault,
       tag: "",
-      type: 'article'
+      type: "article",
     })
     .then((res) => {
       Object.assign(blog, res);
-      console.log("data", blog);
+      lastPage.value = res.last_page === res.current_page ? true : false;
     });
 };
 Promise.all([
