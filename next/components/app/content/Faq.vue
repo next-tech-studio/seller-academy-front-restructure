@@ -42,7 +42,6 @@
                 v-if="iconPostion === 'end'"
                 class="text-text-low-emphasis px-2 text-body-1 font-weight-bold"
                 :class="density == 'compact' ? '' : 'py-4'"
-                style="white-space: nowrap"
                 >{{ item.question }}</span
               >
             </slot>
