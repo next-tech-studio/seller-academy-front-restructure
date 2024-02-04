@@ -44,19 +44,21 @@
       </v-btn>
     </template>
     <v-list elevation="0" :border="true" density="compact" class="py-0">
-      <v-list-item v-for="(item, i) in items" :key="i" @click="item.action">
-        <div class="d-flex align-center" v-if="item.show">
-          <v-icon
-            size="small"
-            class="ml-3"
-            :icon="item.icon"
-            color="icon-low-emphasis"
-          ></v-icon>
-          <v-list-item-title class="text-high-emphasis">{{
-            $t(item.title)
-          }}</v-list-item-title>
-        </div>
-      </v-list-item>
+      <template  v-for="(item, i) in items" :key="i">
+        <v-list-item @click="item.action" v-if="item.show">
+          <div class="d-flex align-center">
+            <v-icon
+              size="small"
+              class="ml-3"
+              :icon="item.icon"
+              color="icon-low-emphasis"
+            ></v-icon>
+            <v-list-item-title class="text-high-emphasis">{{
+              $t(item.title)
+            }}</v-list-item-title>
+          </div>
+        </v-list-item>
+      </template>
     </v-list>
   </v-menu>
 </template>

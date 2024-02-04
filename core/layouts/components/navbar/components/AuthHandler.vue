@@ -102,7 +102,7 @@ const items = [
     title: "user_dashboard",
     icon: "custom:dashboard",
     action: goToDashboard,
-    show: auth.hasPermission(["blogs", "community", "academy"]),
+    show: !auth.loggedIn,
   },
   {
     title: "admin_panel",

@@ -297,7 +297,7 @@ export default (request) => ({
       alert: false,
     }, payload.type);
   },
-  productUsers(payload){
+  registersList(payload){
     return request({
       name: "productUsers",
       method: "get",
@@ -306,4 +306,13 @@ export default (request) => ({
       alert: false,
     });
   },
+  updateRegisterStatus(payload) {
+    return request({
+      name: "updateRegisterStatus",
+      method: "put",
+      path: `/panel/product/users/${payload.slug}/set-status`,
+      loading: true,
+      alert: false,
+    }, payload.body)
+  }
 });

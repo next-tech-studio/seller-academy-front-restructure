@@ -30,6 +30,11 @@ const props = defineProps({
 });
 const units = [
   {
+    heading: "پورتفو و سرمایه‌گذاری",
+    title: "units.portfolio.title",
+    description: "units.portfolio.description",
+  },
+  {
     heading: "تکنولوژی و نوآوری",
     title: "units.r_and_d.title",
     description: "units.r_and_d.description",
@@ -38,11 +43,6 @@ const units = [
     heading: "توسعه استعداد",
     title: "units.talent.title",
     description: "units.talent.description",
-  },
-  {
-    heading: "پورتفو و سرمایه‌گذاری",
-    title: "units.portfolio.title",
-    description: "units.portfolio.description",
   },
   {
     heading: "مالی",

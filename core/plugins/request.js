@@ -2,6 +2,7 @@ import APIHandler from "~/services/APIHandler";
 import HttpRequest from "~/services/HttpRequest";
 import createRepository from "~/repositories/Repository";
 import { mapper } from "~/mappers";
+import { useGlobalStore } from "~/core/stores/global";
 import collection from "~/mappers/models/schema/collection";
 import noPaginationCollection from "~/mappers/models/schema/noPaginationCollection";
 
@@ -21,16 +22,17 @@ export default defineNuxtPlugin((nuxtApp) => {
   }) {
     const APIHandlerInstance = new APIHandler();
     const HttpRequestInstance = new HttpRequest(nuxtApp);
-
+    let pendingRequest = false;
     const api = APIHandlerInstance.getApi(method, path, params, query, page);
     return new Promise((resolve, reject) => {
       if (loading) {
-        // bus.emit('setLoading', true)
+        useGlobalStore().pendingRequest = true;
+        console.log("737373737373737", useGlobalStore().pendingRequest);
       }
       HttpRequestInstance[api.method](api.path, payload, alert)
         .then((resp) => {
-          console.log('data', resp.data)
-
+          useGlobalStore().pendingRequest = false
+          console.log("fasdfasdfafasfd", useGlobalStore().pendingRequest);
           // APIHandlerInstance.performCommits(store.state, store.commit, commits, resp)
           let data;
           if (model) {
@@ -45,7 +47,8 @@ export default defineNuxtPlugin((nuxtApp) => {
                 );
               }
             } else {
-              if(model.dataPath) data = mapper(resp[model.dataPath], model.name, model.raw);
+              if (model.dataPath)
+                data = mapper(resp[model.dataPath], model.name, model.raw);
               else data = mapper(resp, model.name, model.raw);
             }
           } else {

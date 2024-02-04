@@ -1,7 +1,6 @@
 <template>
   <v-dialog v-model="approvalDialog" width="401px" class="pa-4">
     <v-card class="pa-1">
-
         <div class="text-center">
           <v-icon
             size="48"

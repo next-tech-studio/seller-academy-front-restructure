@@ -122,9 +122,12 @@
         <tr>
           <template v-for="column in columns" :key="column.key">
             <td class="border-b text-text-low-emphasis text-body-1">
-              <span v-if="!column.sortable && !column.selectAll">{{
-                column?.title
-              }}</span>
+              <span
+                style="white-space: nowrap"
+                v-if="!column.sortable && !column.selectAll"
+              >
+                {{ column?.title }}
+              </span>
               <v-checkbox-btn
                 v-if="column.selectAll && selectable"
                 true-icon="custom:squareCheck"
@@ -401,7 +404,7 @@ let itemsPerPage = 10;
 let GroupMenu = ref(false);
 const changeItemStatus = (items, action, single = true) => {
   let ids;
-  console.log(items.status, action.value);
+  console.log(items, action.value);
   if (single) {
     ids = [items.id];
     if (items.status != action.value)
@@ -518,7 +521,7 @@ const setOperationIcon = (action, item) => {
 }
 
 #search .v-input__control {
-    width: 320px;
-    height: 48px;
-  }
+  width: 320px;
+  height: 48px;
+}
 </style>

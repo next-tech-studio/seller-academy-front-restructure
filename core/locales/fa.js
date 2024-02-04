@@ -343,6 +343,7 @@ export default {
   user_type: "نوع کاربر",
   course_name: "نام دوره",
   final_score: "امتیاز پایانی",
+  please_be_patient_your_video_is_processing:'ویدیوی شما در حال پردازش است، لطفا شکیبا باشید!',
   panel: {
     active: "فعال({count})",
     hidden: "پنهان شده({count})",
@@ -726,7 +727,7 @@ export default {
   room_avatar: "آواتار اتاق",
   room_banner: "بنر اتاق",
   choose_room_members: "انتخاب اعضای اتاق",
-  user_dashboard: "پنل کاربری",
+  user_dashboard: "ناحیه کاربری",
   is_private: "وضعیت دسترسی اتاق",
   private: "خصوصی",
   public: "عمومی",
