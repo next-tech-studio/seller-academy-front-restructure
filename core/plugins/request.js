@@ -22,7 +22,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   }) {
     const APIHandlerInstance = new APIHandler();
     const HttpRequestInstance = new HttpRequest(nuxtApp);
-    let pendingRequest = false;
     const api = APIHandlerInstance.getApi(method, path, params, query, page);
     return new Promise((resolve, reject) => {
       if (loading) {
@@ -31,7 +30,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
       HttpRequestInstance[api.method](api.path, payload, alert)
         .then((resp) => {
-          useGlobalStore().pendingRequest = false
+          // useGlobalStore().pendingRequest = false
           console.log("fasdfasdfafasfd", useGlobalStore().pendingRequest);
           // APIHandlerInstance.performCommits(store.state, store.commit, commits, resp)
           let data;
@@ -61,6 +60,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         })
         .finally(() => {
           if (loading) {
+            useGlobalStore().pendingRequest = false
             // bus.emit('setLoading', false)
           }
         });
