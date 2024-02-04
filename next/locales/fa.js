@@ -867,9 +867,12 @@ export default {
   registrants: "ثبت‌نام کنندگان",
   register: "ثبت‌نام",
   registers: "ثبت‌نامی‌ها",
+  see: "مشاهده",
+  resume: "رزومه",
   'pre-register': "پیش‌ثبت‌نام",
   full: "تکمیل ظرفیت",
-  portfolio: "پورتفولیو",
+  written: "نوشته",
+  portfolio: "پورتفولیو و سرمایه‌گذاری",
   registrationType: {
     done: "خاتمه یافته",
     full: "تکمیل ظرفیت",

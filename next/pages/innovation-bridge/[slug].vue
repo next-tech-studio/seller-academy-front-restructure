@@ -1,52 +1,54 @@
 <template>
   <!-- REGSTER -->
-  <div class="bg-icon-hint-caution">
+  <div class="bg-icon-hint-caution" :style="sticky">
     <v-container fluid class="pa-0">
-      <v-banner
-        border="none"
-        lines="two"
-        class="bg-transparent py-4"
-        density="compact"
-      >
-        <template v-slot:text>
-          <div>
-            <div class="text-text-light text-h3">
-              {{ current?.title }}
+      <div>
+        <v-banner
+          border="none"
+          lines="one"
+          class="bg-transparent py-4"
+          density="compact"
+        >
+          <template v-slot:text>
+            <div>
+              <div class="text-text-light text-h3">
+                {{ current?.title }}
+              </div>
+              <div class="text-text-light text-caption ms-n4">
+                <app-breadcrumbs
+                  color="text-light"
+                  page="innovationBridge"
+                  :data="current"
+                  class="py-0"
+                />
+              </div>
             </div>
-            <div class="text-text-light text-caption ms-n4">
-              <app-breadcrumbs
-                color="text-light"
-                page="innovationBridge"
-                :data="current"
-                class="py-0"
-              />
-            </div>
-          </div>
-        </template>
-        <v-spacer></v-spacer>
-        <app-share-in v-if="!smAndDown" :hide-title="false" />
-        <template v-slot:actions>
-          <v-btn
-            class="text-button text-primary-base px-10 bg-background-light mb-4"
-            variant="outlined"
-            size="x-large"
-            :to="
-              localePath({
-                name: 'innovation-bridge-slug-register',
-                params: { slug: route.params.slug },
-              })
-            "
-            rounded="lg"
-          >
-            {{ $t("sign_up") }}
-            <v-icon class="ms-2" icon="custom:chevronLeft"></v-icon>
-          </v-btn>
-        </template>
-      </v-banner>
+          </template>
+          <v-spacer></v-spacer>
+          <app-share-in v-if="!smAndDown" :hide-title="false" />
+          <template v-slot:actions>
+            <v-btn
+              class="text-button text-primary-base px-10 bg-background-light mb-4"
+              variant="outlined"
+              size="x-large"
+              :to="
+                localePath({
+                  name: 'innovation-bridge-slug-register',
+                  params: { slug: route.params.slug },
+                })
+              "
+              rounded="lg"
+            >
+              {{ $t("sign_up") }}
+              <v-icon class="ms-2" icon="custom:chevronLeft"></v-icon>
+            </v-btn>
+          </template>
+        </v-banner>
+      </div>
     </v-container>
   </div>
   <!-- HOLDING DETAIL -->
-  <v-container fluid class="py-md-16 my-md-4 py-8 my-2">
+  <v-container fluid class="py-md-16 my-md-16 py-8 my-2">
     <div class="text-md-h3 text-h5 text-text-heading text-center mb-6">
       {{ current?.event_title }}
     </div>
@@ -59,39 +61,47 @@
           <v-col cols="12" md="4">
             <v-card class="cardColor rounded-lg">
               <v-card-text>
-                <div class="text-primary-base text-caption">
+                <div class="text-primary-base text-body-1 font-weight-bold">
                   {{ $t("holding_date") }}
                 </div>
-                <div class="text-text-heading font-weight-bold mt-2">
+                <div class="text-text-heading font-weight-bold mt-1">
                   {{ current?.holdingDate }}
                 </div>
-                <div class="text-primary-base text-caption mt-4">
+                <div
+                  class="text-primary-base text-body-1 font-weight-bold mt-4"
+                >
                   {{ $t("price") }}
                 </div>
-                <div class="text-text-heading font-weight-bold mt-2">
+                <div class="text-text-heading font-weight-bold mt-1">
                   {{ current?.price }}
                 </div>
-                <div class="text-primary-base text-caption mt-4">
+                <div
+                  class="text-primary-base text-body-1 font-weight-bold mt-4"
+                >
                   {{ $t("event_type") }}
                 </div>
-                <div class="text-text-heading font-weight-bold mt-2">
+                <div class="text-text-heading font-weight-bold mt-1">
                   {{ current?.eventType }}
                 </div>
-                <div class="text-primary-base text-caption mt-4">
+                <div
+                  class="text-primary-base text-body-1 font-weight-bold mt-4"
+                >
                   {{ $t("eventPlace") }}
                 </div>
                 <div class="d-flex justify-space-between">
-                  <div class="text-text-heading font-weight-bold mt-2">
+                  <div class="text-text-heading font-weight-bold mt-1">
                     {{ current?.eventPlace }}
                   </div>
                   <v-btn color="primary-base" variant="text"
                     >مشاهده روی نقشه</v-btn
                   >
                 </div>
-                <div class="text-primary-base text-caption mt-4">
+                <div
+                  class="text-primary-base text-body-1 font-weight-bold mt-4"
+                >
                   {{ $t("event_audiences") }}
                 </div>
-                <div class="text-text-heading font-weight-bold mt-2">
+                <div class="text-text-heading font-weight-bold mt-1">
                   {{ current?.eventAudiences }}
                 </div>
                 <v-btn
@@ -120,7 +130,7 @@
   <!-- HOLDING DETAIL -->
   <v-container fluid class="pt-0">
     <v-card>
-      <v-card-text>
+      <v-card-text class="px-0">
         <div class="text-h3 text-text-heading">
           {{ $t("event_information") }}
         </div>
@@ -141,7 +151,7 @@
     </v-card>
   </v-container>
   <!-- SPEAKERS -->
-  <v-container fluid>
+  <v-container fluid class="mt-md-16 mt-0">
     <product-mentors
       v-if="current?.speakers"
       :title="$t('event_speakers')"
@@ -179,6 +189,15 @@ useAsyncData(async () => {
     current.value,
     innovationBridge.value.data.find((x) => x.slug == route.params.slug)
   );
+});
+
+const sticky = ref({
+  backgroundColor: "#c0c0c0",
+  position: "fixed",
+  top: 0,
+  width: "100%",
+  zIndex: 100,
+  marginTop: "64px",
 });
 </script>
 

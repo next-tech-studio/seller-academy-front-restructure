@@ -2,15 +2,15 @@
   <our-team-header class="mb-16" :item="manager" />
   <our-team-heads :items="heads" />
   <our-team-departments class="mt-16" :items="members" />
-  <v-container fluid>
+  <v-container class="mb-lg-16 mb-8" fluid>
+    <our-team-culture />
+  </v-container>
+  <v-container fluid class="mb-lg-16 mb-8">
     <our-team-cooperation-request
       :item="requestFormStore.form"
       @upload="upload($event)"
       @send="send"
     />
-  </v-container>
-  <v-container class="mb-lg-16 mb-8" fluid>
-    <our-team-culture />
   </v-container>
 </template>
 
