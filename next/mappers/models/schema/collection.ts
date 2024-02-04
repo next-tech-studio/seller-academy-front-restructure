@@ -11,7 +11,9 @@ const collection: Mapping = {
   },
   pagination: {
     setValue: (value) => {
-      return !value.meta ? mapper(value, pagination) : mapper(value.meta, pagination);
+      console.log('value', value);
+      
+      return !value.meta ? mapper(value, pagination, false) : mapper(value.meta, pagination, false);
     },
   },
   // meta: {

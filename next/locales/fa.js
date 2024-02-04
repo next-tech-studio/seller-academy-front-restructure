@@ -872,6 +872,8 @@ export default {
   'pre-register': "پیش‌ثبت‌نام",
   full: "تکمیل ظرفیت",
   written: "نوشته",
+  reject: "رد شده",
+  waiting_payment: "در انتظار پرداخت",
   portfolio: "پورتفولیو و سرمایه‌گذاری",
   registrationType: {
     done: "خاتمه یافته",
