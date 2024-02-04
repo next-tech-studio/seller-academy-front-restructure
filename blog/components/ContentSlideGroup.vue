@@ -53,6 +53,9 @@ const props = defineProps({
 <style lang="scss">
 #content-slide-group {
     .v-slide-group {
+        &__content {
+            flex: 0 1 auto !important;
+        }
         position: relative;
         overflow: visible !important;
     }
