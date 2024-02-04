@@ -1,5 +1,13 @@
 <template>
-  <div>
+  <div class="position-relative">
+    <v-progress-circular
+      indeterminate
+      color="primary-base"
+      :size="50"
+      class="loading-position"
+      v-if="store.pendingRequest"
+    ></v-progress-circular>
+
     <v-card
       v-if="!uploaded"
       class="dashed-border d-flex align-center justify-center"
@@ -8,9 +16,24 @@
     >
     </v-card>
     <v-card v-else rounded="lg" :height="height">
-      <v-img v-if="type == 'image'" :src="modelValue.url"></v-img>
+      <v-img
+        v-if="type == 'image' && !store.pendingRequest"
+        :src="modelValue.url"
+      ></v-img>
+      <v-btn
+        icon="custom:simplePlay"
+        color="light"
+        class="loading-position bg-text-low-emphasis"
+        flat
+        @click="videoHasNotUploadedYet"
+        v-if="!/https/.test(modelValue.url)"
+      />
       <app-video-player
-        v-if="type == 'video'"
+        v-if="
+          type == 'video' &&
+          !store.pendingRequest &&
+          /https/.test(modelValue.url)
+        "
         :video-src="modelValue.url"
         :video-poster="modelValue.cover"
         :options="['volume', 'cog', 'forward', 'fullScreen']"
@@ -18,12 +41,19 @@
       >
       </app-video-player>
       <app-audio-player
-        v-if="type == 'audio'"
+        v-if="
+          type == 'audio' &&
+          !store.pendingRequest &&
+          /https/.test(modelValue.url)
+        "
         :audio-src="modelValue.url"
         :audio-poster="modelValue.cover"
       />
     </v-card>
-    <div :class="{ uploaded: uploaded, actions: true }">
+    <div
+      :class="{ uploaded: uploaded, actions: true }"
+      class="d-flex justify-end"
+    >
       <v-file-input
         v-model="fileValue"
         ref="file"
@@ -34,7 +64,7 @@
         ref="cover"
         class="d-none"
       ></v-file-input>
-      <v-btn
+      <!-- <v-btn
         v-if="uploaded"
         flat
         color="primary-base"
@@ -43,8 +73,13 @@
       >
         <v-icon icon="custom:uploadPicture" class="me-2"></v-icon>
         {{ $t("add_cover") }}
-      </v-btn>
-      <div>
+      </v-btn> -->
+      <div
+        v-if="
+          !store.pendingRequest &&
+          (/https/.test(modelValue.url) || !modelValue.url)
+        "
+      >
         <v-btn flat color="primary-base" class="me-4" @click="file.click()">
           <v-icon icon="custom:video" class="me-2"></v-icon>
           {{ $t(`add_${type}`) }}
@@ -55,9 +90,13 @@
       </div>
     </div>
   </div>
+  <app-rejection-approval v-model="dialog" approval-or-rejection-message = "please_be_patient_your_video_is_processing"></app-rejection-approval>
 </template>
 
 <script setup>
+import { useGlobalStore } from "~/core/stores/global";
+const store = useGlobalStore();
+let dialog = ref(false);
 let emit = defineEmits(["update:modelValue"]);
 const { $repos } = useNuxtApp();
 const props = defineProps({
@@ -81,6 +120,9 @@ let coverValue = computed({
   },
 });
 
+const videoHasNotUploadedYet = () => {
+  dialog.value = true;
+};
 let fileValue = computed({
   get() {
     return props.modelValue.file;
@@ -99,7 +141,7 @@ let uploaded = computed(
 let height = computed(() =>
   uploaded.value && props.type != "video"
     ? 461
-    : uploaded.value && props.type == "video"
+    : uploaded.value && props.type == "video " && /https/.test(modelValue.url)
     ? "100%"
     : 239
 );
@@ -130,6 +172,13 @@ const createPreview = async (file, type) => {
 <style lang="scss" scoped>
 .dashed-border {
   border: 1px dashed rgba(var(--v-theme-n200)) !important;
+}
+.loading-position {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 100000;
+  transform: translateY(-50%);
 }
 
 .actions {

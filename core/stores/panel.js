@@ -247,17 +247,9 @@ export const usePanelStore = defineStore("panel", {
             tags: this.draftContent.tags,
             slug: this.draftContent.slug,
             information: this.draftContent.information,
-            //   publicationDate:
-            //     date.getFullYear() +
-            //     "-" +
-            //     (date.getMonth() + 1) +
-            //     "-" +
-            //     date.getDate(),
-            // },
           },
         };
         this.$repos.panel.saveDraft(finalContent).then((res) => {
-          console.log("save draft", res);
           this.postSavedState = true;
           if (next) {
             callBackFunction(true, res.id);
