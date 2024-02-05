@@ -137,12 +137,12 @@ export default (request) => ({
     );
   },
   chatRoomsList(payload) {
-    console.log('payload',payload)
+    console.log("payload", payload);
     return request(
       {
         name: "chatRoomsList",
         method: "get",
-      query: `?categorySlug=${payload?.categorySlug}&&search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}&page=${payload?.page}`,
+        query: `?categorySlug=${payload?.categorySlug}&search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}&page=${payload?.page}`,
         path: `/panel/chat/rooms/data`,
         loading: true,
         alert: false,
@@ -162,7 +162,7 @@ export default (request) => ({
       payload.body
     );
   },
-  updateRoomStatus(payload){
+  updateRoomStatus(payload) {
     return request(
       {
         name: "updateRoomStatus",
@@ -173,5 +173,52 @@ export default (request) => ({
       },
       payload.body
     );
-  }
+  },
+  //categories
+  categoriesList(payload) {
+    return request({
+      name: "categoriesList",
+      method: "get",
+      path: `/panel/category/list`,
+      query: `?type=${payload.type}&search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}&page=${payload?.page}&status=${payload.status}`,
+      loading: true,
+      alert: false,
+    });
+  },
+  categoriesListCommon(payload) {
+    return request({
+      name: "categoriesListCommon",
+      method: "get",
+      path: `/panel/category/common-data`,
+      query: `?type=${payload.type}`,
+      loading: true,
+      alert: false,
+    });
+  },
+  updateCategory(payload) {
+    return request(
+      {
+        name: "updateCategories",
+        method: "put",
+        path: `/panel/category/edit-data`,
+        query: `?type=${payload.type}`,
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  },
+  updateCategoryStatus(payload) {
+    return request(
+      {
+        name: "updateRoomStatus",
+        method: "put",
+        path: `/panel/chat/set_status`,
+        query: `?type=${payload.type}`,
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  },
 });

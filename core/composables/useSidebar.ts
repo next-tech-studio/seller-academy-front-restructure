@@ -196,7 +196,7 @@ export const useSidebar = (user = { roles: [] }) => {
             // return checkUserRoles(this.roles);
             return true;
           },
-          to: localePath({ path: "/forum/panel/room" }),
+          to: localePath({ path: "/forum/panel/room/create" }),
         },
         {
           title: t("rooms"),
@@ -205,7 +205,7 @@ export const useSidebar = (user = { roles: [] }) => {
             // return checkUserRoles(this.roles);
             return true;
           },
-          to: localePath({ path: "/forum/panel/listings/rooms" }),
+          to: localePath({ path: "/forum/panel/room/listings/rooms" }),
         },
         {
           title: t("questions"),
@@ -214,7 +214,7 @@ export const useSidebar = (user = { roles: [] }) => {
             // return checkUserRoles(this.roles);
             return true;
           },
-          to: localePath({ path: "/forum/panel/listings/questions" }),
+          to: localePath({ path: "/forum/panel/qa/listings/questions" }),
         },
         {
           title: t("answers"),
@@ -223,7 +223,7 @@ export const useSidebar = (user = { roles: [] }) => {
             // return checkUserRoles(this.roles);
             return true;
           },
-          to: localePath({ path: `/forum/panel/listings/answers` }),
+          to: localePath({ path: `/forum/panel/qa/listings/answers` }),
         },
       ],
     },
@@ -245,6 +245,35 @@ export const useSidebar = (user = { roles: [] }) => {
         return auth.hasPermission(["users"]);
       },
       to: localePath({ path: "/panel/listings/users" }),
+    },
+    {
+      title: t("faqs"),
+      icon: "custom:userSolid",
+      roles: ["siteAdmin", "seller"],
+      get show() {
+        return true;
+      },
+      to: localePath({ path: "/panel/listings/users" }),
+      children: [
+        {
+          title: t("categories"),
+          roles: ["siteAdmin", "seller"],
+          get show() {
+            // return checkUserRoles(this.roles);
+            return true;
+          },
+          to: localePath({ path: "/panel/faq/listings/categories" }),
+        },
+        {
+          title: t("list"),
+          roles: ["siteAdmin", "seller"],
+          get show() {
+            // return checkUserRoles(this.roles);
+            return true;
+          },
+          to: localePath({ path: "/panel/faq/listings/faqs" }),
+        },
+      ],
     },
   ]);
 };
