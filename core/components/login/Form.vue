@@ -1,12 +1,16 @@
 <template>
   <v-form
+  id="auth-form"
     ref="authForm"
     :class="smAndDown ? 'w-75' : 'w-50'"
     @submit.prevent="submit"
     v-model="validForm"
   >
     <v-card>
-      <v-card-text v-if="!smAndDown" class="text-center py-0 d-flex align-center justify-center">
+      <v-card-text
+        v-if="!smAndDown"
+        class="text-center py-0 d-flex align-center justify-center"
+      >
         <div class="d-flex justify-center align-center">
           <v-img width="350" height="70" src="/images/logo/logo.png"></v-img>
         </div>
@@ -20,7 +24,9 @@
         <v-text-field
           v-if="fields.includes('email')"
           v-model="item.emailOrPhoneNumber"
-          :rules="$rules({ phoneNumber: 'required|mobile' }, item.emailOrPhoneNumber)"
+          :rules="
+            $rules({ phoneNumber: 'required|mobile' }, item.emailOrPhoneNumber)
+          "
           flat
           base-color="n300"
           density="compact"
@@ -258,3 +264,20 @@ const updateOTP = async (item) => {
   validForm.value = item.length == 6;
 };
 </script>
+
+<style >
+#auth-form{
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+}
+
+</style>

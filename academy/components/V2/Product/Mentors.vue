@@ -16,7 +16,7 @@
       xxl="2"
       class="pa-2"
     >
-      <about-us-member-card :item="item">
+      <about-us-member-card :item="item" hide-email>
         <template #bottom>
           <slot name="bottom" :item="item"></slot>
         </template>

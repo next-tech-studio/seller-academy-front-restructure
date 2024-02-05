@@ -50,7 +50,6 @@ export default (request) => ({
     );
   },
   forms(payload) {
-    console.log("euueueueueyyyrh");
     return request({
       name: "forms",
       method: "get",

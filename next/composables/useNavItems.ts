@@ -1,10 +1,10 @@
 export const useNavItems = () => {
   return ref([
-    {
-      title: "home",
-      to: "/",
-      children: ["home"],
-    },
+    // {
+    //   title: "home",
+    //   to: "/",
+    //   children: ["home"],
+    // },
     {
       title: "portfolio",
       to: "/portfo",

@@ -157,7 +157,7 @@ export default {
   add_course_key_fetures: "افزودن ویژگی کلیدی",
   enroll_course: "ثبت‌نام کلاس‌های آموزشی",
   enter_your_email: "با ایمیل وارد شوید.",
-  enter_your_phone:'با شماره موبایل وارد شوید',
+  enter_your_phone: "با شماره موبایل وارد شوید",
   faq: "پرسش‌های متداول",
   first_name: "نام",
   footer_description:
@@ -343,6 +343,11 @@ export default {
   user_type: "نوع کاربر",
   course_name: "نام دوره",
   final_score: "امتیاز پایانی",
+  please_be_patient_your_video_is_processing_please_submit_the_content:
+    " ویدیوی شما در حال پردازش است، لطفا شکیبا باشید! برای ادامه‌ی پردازش دکمه‌ی ذخیره‌ی تغییرات را بزنید.",
+  please_be_patient_your_video_is_processing:
+    "ویدیوی شما در حال پردازش است، لطفا شکیبا باشید!",
+    related_questions_count:"سوالات مرتبط",
   panel: {
     active: "فعال({count})",
     hidden: "پنهان شده({count})",
@@ -726,7 +731,7 @@ export default {
   room_avatar: "آواتار اتاق",
   room_banner: "بنر اتاق",
   choose_room_members: "انتخاب اعضای اتاق",
-  user_dashboard: "پنل کاربری",
+  user_dashboard: "ناحیه کاربری",
   is_private: "وضعیت دسترسی اتاق",
   private: "خصوصی",
   public: "عمومی",
@@ -761,7 +766,10 @@ export default {
   selling_roadmap_in_digikala: "مسیر فروشندگی در دیجی‌کالا",
   selling_roadmap_in_digikala_subtitle:
     "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است،",
-    success_stories:'داستان‌های موفقیت',
-    become_a_member:'عضو گروه شوید',
-    you_have_to_become_a_member:'جهت مشاهده‌ی تالار باید عضوی از آن باشید.'
+  success_stories: "داستان‌های موفقیت",
+  become_a_member: "عضو گروه شوید",
+  you_have_to_become_a_member: "جهت مشاهده‌ی تالار باید عضوی از آن باشید.",
+  frequently_asked_questions:'پرسش‌های متداول',
+  is_this_faq_frequent_in_this_category:'آیا این پرسش متداول جزو پرتکرارترین پرسش‌های این دسته‌بندی است؟',
+  deactive:'غیرفعال'
 };

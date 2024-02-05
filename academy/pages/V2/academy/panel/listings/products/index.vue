@@ -36,7 +36,11 @@
         @edit="goToPageBuilder"
         :filters="filters"
         :table-actions="operations"
-        @download:excel="sharedStore.downloadExcel('downloadProcuts','academyProductPanel',{type:'xlsx'})"
+        @download:excel="
+          sharedStore.downloadExcel('downloadProcuts', 'academyProductPanel', {
+            type: 'xlsx',
+          })
+        "
         default-status="draft"
       >
         <template #status="{ item }">
@@ -77,14 +81,25 @@
           </div>
         </template>
         <template #startAt="{ item }">
-          <div style="direction: ltr" class="text-end">
+          <div style="direction: ltr; white-space: nowrap" class="text-end">
             {{ item.item.startAt }}
           </div>
         </template>
         <template #endAt="{ item }">
-          <div style="direction: ltr" class="text-end">
+          <div style="direction: ltr; white-space: nowrap" class="text-end">
             {{ item.item.endAt }}
           </div>
+        </template>
+        <template #registers="{ item }">
+          <v-btn
+            :to="{
+              name: 'academy-panel-listings-products-slug-registers',
+              params: { slug: item?.item?.slug },
+            }"
+            flat
+            color="primary-base"
+            >{{ $t("see") }}</v-btn
+          >
         </template>
       </app-listing>
     </v-container>
@@ -94,7 +109,7 @@
 <script setup>
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
 import { useLocaleStore } from "@core/stores/locale";
-const localeStore = useLocaleStore()
+const localeStore = useLocaleStore();
 const sharedStore = useSharedPanelStore();
 import { useFilterStore } from "@core/stores/filter";
 let filterStore = useFilterStore();
@@ -102,7 +117,10 @@ const localePath = useLocalePath();
 const { t } = useI18n();
 const { $repos } = useNuxtApp();
 const config = useRuntimeConfig();
-const downloadUrl = computed(() => config.public.apiBase+`/${localeStore.locale}/api/panel/product/export`);
+const downloadUrl = computed(
+  () =>
+    config.public.apiBase + `/${localeStore.locale}/api/panel/product/export`
+);
 let page = ref(1);
 let coursesList = ref(null);
 let search = ref("");
@@ -151,28 +169,25 @@ let headers = ref([
     sortable: false,
     size: "50px",
   },
-
   {
     key: "platform",
     title: t("platform"),
     sortable: false,
     size: "100px",
   },
-
   {
     key: "price",
     title: t("price"),
     sortable: false,
     size: "100px",
   },
-
   {
     key: "likesCount",
     title: t("likes_count"),
     sortable: false,
     size: "100px",
   },
-
+  { key: "registers", title: t("registers"), size: "50px" },
   { key: "operation", title: t("operation"), size: "50px" },
 ]);
 const init = () => {
@@ -180,7 +195,7 @@ const init = () => {
     {
       title: "edit",
       value: "edit",
-      hasDialog:true,
+      hasDialog: true,
       function: coursesList.value.edit,
     },
     {
@@ -246,13 +261,12 @@ const changeItemStatus = (e) => {
   let data = { body: { status: e.action, ids: e.id } };
   $repos.academyProductPanel
     .updateCourseStatus(data)
-    .then(
-      () =>
-        sharedStore.getListingItems(
-          "getCoursesData",
-          payload.value,
-          "academyProductPanel"
-        )
+    .then(() =>
+      sharedStore.getListingItems(
+        "getCoursesData",
+        payload.value,
+        "academyProductPanel"
+      )
     );
 };
 const goToItem = () => {
