@@ -152,9 +152,9 @@
   </v-container>
   <!-- SPEAKERS -->
   <v-container fluid class="mt-md-16 mt-0">
+    <div class="text-h3 text-text-heading mb-4">{{ $t('event_speakers') }}</div>
     <product-mentors
       v-if="current?.speakers"
-      :title="$t('event_speakers')"
       :items="current?.speakers"
       class="mb-4"
     >

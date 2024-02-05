@@ -85,9 +85,9 @@
       sticky
     >
       <v-card>
-        <v-list>
+        <v-list class="mt-10">
           <!-- <v-list-item class="d-flex justify-center" border="0">
-            <v-img width="100" src="/images/logo/3.svg" alt="logo" />
+            <auth-handler v-if="needAuth" />
           </v-list-item>
           <v-divider class="mt-2 mx-5"></v-divider> -->
           <v-list-item

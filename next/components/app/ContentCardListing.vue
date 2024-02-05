@@ -75,7 +75,6 @@ v-if="showFilter && !dropDownFilter"
               @click="$emit('to:item', post)"
               :content="post"
               aspect-ratio="1.64"
-              img-width="257"
               hide-footer
             />
           </slot>
