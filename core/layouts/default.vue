@@ -3,11 +3,13 @@
     <v-layout class="flex-column" dir="rtl" full-height>
       <Navbar />
       <v-main>
-            <!-- <div>
+        <!-- <div>
               <search v-if="!lgAndUp" />
             </div> -->
-            <VitePwaManifest />
-            <slot />
+        <VitePwaManifest />
+
+        <component v-if="store?.skeletonLoading && skeleton" :is="skeleton" />
+        <div v-show="!store?.skeletonLoading"><slot /></div>
         <!-- <v-row justify="end">
           <v-col cols="3">
               <video-player small video-src="/videos/video.mp4" video-poster="https://static.cdn.asset.aparat.com/avt/46845066-5693-b__6582.jpg">
@@ -26,19 +28,21 @@
 </template>
 
 <script setup>
+import { useGlobalStore } from "../stores/global";
 import { useDisplay } from "vuetify";
 import Navbar from "./components/navbar/Navbar.vue";
 import Footer from "./components/Footer.vue";
 import Search from "./components/navbar/components/Search.vue";
 
 const { lgAndUp } = useDisplay();
+const store = useGlobalStore();
+const skeleton = resolveComponent(store?.skeleton)
 const props = defineProps({
   hideFooter: {
     default: false,
     type: Boolean,
   },
 });
-
 const footer = ref(null);
 provide("footer", footer);
 </script>

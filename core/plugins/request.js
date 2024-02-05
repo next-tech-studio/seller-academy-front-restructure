@@ -26,12 +26,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     return new Promise((resolve, reject) => {
       if (loading) {
         useGlobalStore().pendingRequest = true;
-        console.log("737373737373737", useGlobalStore().pendingRequest);
       }
       HttpRequestInstance[api.method](api.path, payload, alert)
         .then((resp) => {
           // useGlobalStore().pendingRequest = false
-          console.log("fasdfasdfafasfd", useGlobalStore().pendingRequest);
           // APIHandlerInstance.performCommits(store.state, store.commit, commits, resp)
           let data;
           if (model) {
@@ -60,7 +58,9 @@ export default defineNuxtPlugin((nuxtApp) => {
         })
         .finally(() => {
           if (loading) {
-            useGlobalStore().pendingRequest = false
+            useGlobalStore().skeletonLoading = false;
+            useGlobalStore().skeleton = null;
+            useGlobalStore().pendingRequest = false;
             // bus.emit('setLoading', false)
           }
         });
