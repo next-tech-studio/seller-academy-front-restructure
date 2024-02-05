@@ -20,7 +20,7 @@
           variant="flat"
           block
           class="text-button"
-          @click="mutedDialog = !mutedDialog"
+          @click="close"
         >
           {{ $t("close") }}
         </v-btn>
@@ -35,11 +35,15 @@ let props = defineProps({
   dialog: { type: Boolean, default: false },
   approvalOrRejectionMessage: String,
 });
+const close = ()=>{
+  mutedDialog.value = false
+}
 let mutedDialog = computed({
   get() {
     return props.dialog;
   },
   set(value) {
+    console.log('lllllddddddddddd',value)
     emit("update:dialog", value);
   },
 });
