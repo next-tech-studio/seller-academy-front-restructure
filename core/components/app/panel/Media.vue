@@ -1,4 +1,6 @@
 <template>
+
+  
   <div class="position-relative">
     <v-progress-circular
       indeterminate
@@ -90,7 +92,7 @@
       </div>
     </div>
   </div>
-  <app-rejection-approval v-model="dialog" approval-or-rejection-message = "please_be_patient_your_video_is_processing"></app-rejection-approval>
+  <app-rejection-approval v-model:dialog="dialog" approval-or-rejection-message = "please_be_patient_your_video_is_processing_please_submit_the_content"></app-rejection-approval>
 </template>
 
 <script setup>
@@ -143,7 +145,7 @@ let height = computed(() =>
     ? 461
     : uploaded.value && props.type == "video " && /https/.test(modelValue.url)
     ? "100%"
-    : 239
+    : 500
 );
 
 const createPreview = async (file, type) => {
