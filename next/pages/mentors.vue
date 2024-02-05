@@ -49,7 +49,7 @@ useAsyncData(() => {
     // categories.value = res.data;
 
     let data = res.data.reduce((accumulator, currentValue) => {
-      const categoryId = currentValue?.category.id;
+      const categoryId = currentValue?.category?.id;
       if (!accumulator[categoryId]) {
         accumulator[categoryId] = {
           category: currentValue?.category,

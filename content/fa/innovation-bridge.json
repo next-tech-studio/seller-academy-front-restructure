@@ -3,7 +3,7 @@
       {
         "title": "پل نوآوری مشهد",
         "event_title": "اولین رویداد پل نوآوری دیجی نکست در مشهد با حضور مدیران گروه دیجی کالا",
-        "image": "/images/innovation-bridge/universities/mashhad.png",
+        "image": "/images/innovation-bridge/universities/mashhad.jpeg",
         "date": "۲۴ بهمن ۱۴۰۳",
         "location": "دانشگاه فردوسی",
         "slug": "پل-نوآوری-مشهد",
@@ -25,13 +25,22 @@
         ],
         "speakers": [
           {
+            "avatar": "/images/innovation-bridge/speakers/hamid mohammadi.png",
+            "firstName": "حمید",
+            "lastName": "محمدی",
+            "jobTitle": "هم بنیان‌گذار و رئیس هیئت مدیره  گروه تجارت دیجی‌کالا",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": "آینده تجارت الکترونیک"
+          },
+          {
             "avatar": "/images/innovation-bridge/speakers/mehran mohamdi.png",
             "firstName": "مهران ",
             "lastName": "محمدی",
             "jobTitle": "مدیر کل تجربه مشتری و تجربه فروشنده دیجی کالا",
             "linkedin": "",
             "email": "",
-            "presentationTopic": ""
+            "presentationTopic": "مشتری مداری"
           },
           {
             "avatar": "/images/innovation-bridge/speakers/alireza khaleghi.png",
@@ -49,7 +58,7 @@
             "jobTitle": "Data Scientist Tech Lead",
             "linkedin": "",
             "email": "",
-            "presentationTopic": ""
+            "presentationTopic": "هوش مصنوعی در تجارت الکترونیک"
           },
           {
             "avatar": "/images/innovation-bridge/speakers/armin farhang.png",
@@ -58,7 +67,7 @@
             "jobTitle": "Partnership and M&A Lead",
             "linkedin": "",
             "email": "",
-            "presentationTopic": ""
+            "presentationTopic": "فین‌تک برای مدیران آینده: نیازهای صنعت"
           },
           {
             "avatar": "/images/innovation-bridge/speakers/sadegh.png",
@@ -67,14 +76,14 @@
             "jobTitle": "مدیر ارشد پورتفولیو و سرمایه گذاری دیجی‌نکست",
             "linkedin": "",
             "email": "",
-            "presentationTopic": ""
+            "presentationTopic": "معرفی دیجی‌نکست"
           }
         ]
       },
       {
         "title": "پل نوآوری زاهدان",
         "event_title": "اولین رویداد پل نوآوری دیجی نکست در زاهدان با حضور مدیران گروه دیجی کالا",
-        "image": "/images/innovation-bridge/universities/zahedan.png",
+        "image": "/images/innovation-bridge/universities/zahedan.jpg",
         "date": "به زودی",
         "location": "دانشگاه زاهدان",
         "slug": "پل-نوآوری-زاهدان",

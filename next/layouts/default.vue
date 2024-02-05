@@ -1,8 +1,15 @@
 <template>
   <div>
     <v-layout class="flex-column" full-height>
-      <v-app-bar flat v-if="$route.path == '/'">
-        <v-img class="cursor-pointer" @click="toEvent" cover width="100%" src="/images/innovation-bridge/cta-banner.svg"></v-img>
+      <v-app-bar flat v-if="$route.path == '/'" :height="lgAndUp ? 70 : 40">
+        <v-img
+          class="cursor-pointer"
+          @click="toEvent"
+          cover
+          width="100%"
+          :height="lgAndUp ? 70 : 40"
+          src="/images/innovation-bridge/cta-banner.svg"
+        ></v-img>
       </v-app-bar>
       <Navbar />
       <v-main :dir="$i18n.locale == 'fa' ? 'rtl' : 'ltr'">
@@ -40,7 +47,7 @@ const { loading, overflow } = useLoading();
 const route = useRoute();
 let localeStore = useLocaleStore();
 const { lgAndUp } = useDisplay();
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 const footer = ref(null);
 provide("footer", footer);
 
@@ -52,11 +59,10 @@ const props = defineProps({
 });
 
 const toEvent = () => {
-  navigateTo(localePath({name: 'innovation-bridge'}))
-}
+  navigateTo(localePath({ name: "innovation-bridge" }));
+};
 
 watch(localeStore, async (newValue) => {
-
   localeStore.setLocale(localeStore.locale);
   await refreshNuxtData();
 });
