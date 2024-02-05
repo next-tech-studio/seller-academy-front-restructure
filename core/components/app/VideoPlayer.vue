@@ -20,7 +20,7 @@
   <v-card
     v-else
     flat
-    class="video-player"
+    class="video-player h-100"
     :class="
       !$vuetify.display.mdAndUp && isHeader
         ? ' rounded-t-0 rounded-b-lg'
@@ -28,7 +28,17 @@
     "
     dir="ltr"
   >
-    <video
+    <iframe
+      :src="videoSrc"
+      class="w-100"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen="true"
+      webkitallowfullscreen="true"
+      mozallowfullscreen="true"
+    ></iframe>
+
+    <!-- <video
       ref="video"
       :src="videoSrc"
       :poster="videoPoster"
@@ -104,7 +114,7 @@
           </v-btn>
         </div>
       </div>
-    </div>
+    </div> -->
     <slot />
   </v-card>
 </template>
@@ -196,7 +206,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .h_iframe-aparat_embed_frame {
   position: relative;
 }
@@ -216,13 +226,11 @@ export default {
   border: none;
 }
 </style>
-
-<style lang="scss" scoped>
+<style lang="scss">
 .video-player {
   position: relative;
   width: 100%;
-  height: 0;
-  padding-top: 56.25%;
+  height: 500px;
   display: flex;
   transition: all 0.2s;
 
