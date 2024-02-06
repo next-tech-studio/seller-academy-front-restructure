@@ -3,7 +3,7 @@
   <div class="bg-n100 pt-3">
     <v-container>
       <div class="pt-7 pb-10">
-        <faq-categories :items="items" />
+        <faq-categories :items="categories" />
       </div>
 
       <faq-result
@@ -25,6 +25,26 @@
 </template>
 
 <script setup>
+const { $repos } = useNuxtApp();
+let faqs = ref([]);
+let frequentFaq = ref([]);
+let categories = ref([]);
+const getFaqs = async () => {
+  await $repos.other.faqs(payload).then((res) => {
+    Object.assign(faqs.value, res.data);
+    Object.assign(frequentFaq.value, res.isFrequent);
+  });
+};
+const getCategories = async () => {
+  await $repos.other.faqsCommon().then((res) => {
+    Object.assign(categories.value, res.data);
+  });
+};
+
+Promise.all([
+  useAsyncData(async () => await getFaqs()),
+  useAsyncData(async () => await getCategories()),
+]);
 const items = [
   {
     title: "عمومی",

@@ -5,5 +5,5 @@ export default defineNuxtRouteMiddleware((to, from) => {
   let skeleton = '';
   if (route.name.indexOf("blog") !== -1) skeleton = "skeleton-blog";
   store.skeleton = skeleton;
-  store.skeletonLoading = true;
+  store.skeletonLoading = true && skeleton;
 });

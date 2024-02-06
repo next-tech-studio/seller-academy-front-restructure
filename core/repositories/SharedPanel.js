@@ -50,7 +50,7 @@ export default (request) => ({
       {
         name: "usersList",
         method: "get",
-        path: "/panel/users/data",
+        path: "/panel/user/list",
         query: `?search=${payload?.search}&role=${payload?.role}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}`,
         page: payload?.page,
         loading: true,
@@ -64,7 +64,7 @@ export default (request) => ({
     return request({
       name: "usersListCommon",
       method: "get",
-      path: "/panel/users/common",
+      path: "/panel/user/list/common",
       loading: true,
       alert: false,
     });
