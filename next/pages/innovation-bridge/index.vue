@@ -56,7 +56,7 @@
           در این رویدادها مورد بحث قرار گرفته اند می‌توان به موارد زیر اشاره
           کرد:
         </div>
-        <v-row class="mt-16">
+        <v-row class="mt-10">
           <v-col cols="6" v-for="(topic, index) in topics" :key="index">
             <div class="d-flex flex-md-row flex-column align-center">
               <v-avatar

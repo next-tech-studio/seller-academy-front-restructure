@@ -14,7 +14,7 @@
                 variant="outlined"
                 image="/images/mentors/pros/strong-connection.png"
               ></v-avatar>
-              <div class="font-weight-bold mt-4">ارتباط قوی</div>
+              <div class="font-weight-bold mt-4">ارتباطات قوی</div>
             </v-card-text>
           </v-card>
         </v-col>

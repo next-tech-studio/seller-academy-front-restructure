@@ -54,6 +54,8 @@
                 base-color="n400"
                 density="compact"
                 variant="solo-filled"
+                class="outside-label"
+                :label="$t('first_name')"
                 :placeholder="$t('first_name')"
               ></v-text-field>
             </v-col>
@@ -65,26 +67,34 @@
                 base-color="n400"
                 density="compact"
                 variant="solo-filled"
+                class="outside-label"
+                :label="$t('last_name')"
                 :placeholder="$t('last_name')"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6" class="pb-0 px-0 px-md-3">
               <v-text-field
                 v-model="item.email"
+                :rules="$rules({ email: 'required' }, item.email)"
                 flat
                 base-color="n400"
                 density="compact"
                 variant="solo-filled"
+                class="outside-label"
+                :label="$t('used_service_email')"
                 :placeholder="$t('used_service_email')"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6" class="pb-0 px-0 px-md-3">
               <v-text-field
                 v-model="item.subject"
+                :rules="$rules({ subject: 'required' }, item.subject)"
                 flat
                 base-color="n400"
                 density="compact"
                 variant="solo-filled"
+                class="outside-label"
+                :label="$t('subject')"
                 :placeholder="$t('subject')"
               ></v-text-field>
             </v-col>
@@ -100,13 +110,15 @@
                 variant="solo-filled"
                 menu-icon=""
                 append-inner-icon="custom:chevronDown"
+                class="outside-label"
+                :label="$t('activity_areas')"
                 :placeholder="$t('activity_areas')"
                 return-object
                 @update:modelValue="changeSubject"
               >
               </v-select>
             </v-col>
-            <v-col cols="12" md="6" class="pb-0 px-0 px-md-3">
+            <v-col cols="12" md="6" class="px-0 px-md-3">
               <v-select
                 v-model="item.mentorId"
                 :items="item?.category?.mentors"
@@ -118,15 +130,16 @@
                 density="compact"
                 variant="solo-filled"
                 menu-icon=""
+                class="outside-label"
+                :label="$t('mentor')"
                 append-inner-icon="custom:chevronDown"
                 :placeholder="$t('mentor')"
               >
               </v-select>
             </v-col>
-            <v-col cols="12" md="12" class="pb-0 px-0 px-md-3">
+            <v-col cols="12" md="12" class="px-0 px-md-3">
               <v-file-input
                 v-model="item.from"
-                :rules="$rules({ from: 'required' }, item.from)"
                 :label="$t('upload_resume_file')"
                 flat
                 base-color="n400"
@@ -151,6 +164,7 @@
                 class="outside-label"
                 persistent-placeholder
                 persistent-hint
+                :label="$t('more_explanation')"
                 :placeholder="$t('more_explanation')"
               >
               </v-textarea>
