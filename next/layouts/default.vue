@@ -1,13 +1,13 @@
 <template>
   <div>
     <v-layout class="flex-column" full-height>
-      <v-app-bar flat v-if="$route.path == '/'" :height="lgAndUp ? 70 : 40">
+      <v-app-bar flat v-if="$route.path == '/'" :height="lgAndUp ? 68 : 40">
         <v-img
           class="cursor-pointer"
           @click="toEvent"
           cover
           width="100%"
-          :height="lgAndUp ? 70 : 40"
+          :height="lgAndUp ? 68 : 40"
           src="/images/innovation-bridge/cta-banner.svg"
         ></v-img>
       </v-app-bar>
