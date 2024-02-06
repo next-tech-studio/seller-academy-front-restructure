@@ -49,11 +49,7 @@
             width="140"
             cover
             alt="logo"
-          />
-          <!-- <v-avatar size="200">
-
-          </v-avatar> -->
-        </a>
+        /></a>
         <!-- TODO: change navbar condition -->
         <template v-for="(item, index) in items" :key="item.title">
           <v-divider v-if="item.divider" vertical class="my-8"></v-divider>
@@ -106,10 +102,23 @@
     >
       <v-card>
         <v-list>
-          <v-list-item class="d-flex justify-center" border="0">
+          <!-- <v-list-item class="d-flex justify-center" border="0">
             <v-img width="100" src="/images/logo/3.svg" alt="logo" />
           </v-list-item>
-          <v-divider class="mt-2 mx-5"></v-divider>
+          <v-divider class="mt-2 mx-5"></v-divider> -->
+          <v-list-item v-if="auth.user.loggedIn" :to="localePath({name: 'dashboard-user-account'})">
+            <div class="mx-1 text-icon-high-emphasis text-button">
+              <v-avatar
+                start
+                size="30"
+                :image="auth.user?.avatarUrl"
+              ></v-avatar>
+              <span class="mr-2">{{
+                `${auth.user.firstName} ${auth.user.lastName}`
+              }}</span>
+            </div>
+          </v-list-item>
+          <v-divider v-if="auth.user.loggedIn"></v-divider>
           <v-list-item
             @click.stop="drawer = false"
             v-for="(item, index) in items"
@@ -128,6 +137,11 @@
           </v-list-item></v-list
         >
       </v-card>
+      <template v-slot:append>
+        <div class="pa-2">
+          <auth-handler mobile />
+        </div>
+      </template>
     </v-navigation-drawer>
   </div>
 </template>
