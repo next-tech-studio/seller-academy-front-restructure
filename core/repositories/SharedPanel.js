@@ -148,6 +148,7 @@ export default (request) => ({
         path: "/panel/faq/edit-data",
         loading: true,
         alert: false,
+        model: { name: panelTable},
       },
       payload.body
     );

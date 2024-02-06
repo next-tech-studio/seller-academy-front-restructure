@@ -213,7 +213,7 @@ export default (request) => ({
       {
         name: "updateRoomStatus",
         method: "put",
-        path: `/panel/chat/set_status`,
+        path: `/panel/category/set-status`,
         query: `?type=${payload.type}`,
         loading: true,
         alert: false,

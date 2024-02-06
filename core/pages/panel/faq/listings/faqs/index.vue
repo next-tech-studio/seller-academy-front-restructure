@@ -26,6 +26,7 @@
         v-model:page="payload.page"
         v-model:searchModel="payload.search"
         @update:searchModel="onSearch"
+        :group-actions="groupActions"
         :filters="filters"
         @show:dialog="openDialog"
         slug-generator-title="qText"
@@ -90,6 +91,20 @@
             <span class="text-body-1">{{ $t(item.item.status) }}</span>
           </div>
         </template>
+        <template #isFrequent="{ item, header }">
+          <div
+            class="text-truncate"
+            :style="`width: ${header.header.size} !important`"
+          >
+            <v-icon
+              icon="custom:star"
+              v-if="item.item.isFrequent"
+              color="icon-hint-caution"
+              size="24"
+              class="me-2"
+            />
+          </div>
+        </template>
         <template #creationDate="{ item, header }">
           <div
             style="direction: ltr"
@@ -147,6 +162,13 @@ let headers = ref([
     key: "category",
     align: "start",
     title: t("category"),
+    size: "50px",
+    sortable: false,
+  },
+  {
+    key: "isFrequent",
+    align: "start",
+    title: t("is_frequent"),
     size: "50px",
     sortable: false,
   },
@@ -230,14 +252,8 @@ const init = () => {
       repo: "sharedPanel",
     },
     {
-      title: "حذف کردن",
-      value: "deleted",
-      icon: "custom:replyTo",
-      function: faqList.value.changeItemStatus,
-    },
-    {
-      title: "پنهان کردن",
-      value: "hidden",
+      title: "غیرفعال کردن",
+      value: "active",
       function: faqList.value.changeItemStatus,
     },
   ]);
@@ -259,6 +275,11 @@ const init = () => {
     },
   ]);
 };
+const groupActions = [
+  { title: "فعال کردن", value: "active" },
+  { title: "غیرفعال کردن", value: "deactive" },
+];
+
 const submitItem = () => {
   let payload;
   let body = {};

@@ -771,5 +771,8 @@ export default {
   you_have_to_become_a_member: "جهت مشاهده‌ی تالار باید عضوی از آن باشید.",
   frequently_asked_questions:'پرسش‌های متداول',
   is_this_faq_frequent_in_this_category:'آیا این پرسش متداول جزو پرتکرارترین پرسش‌های این دسته‌بندی است؟',
-  deactive:'غیرفعال'
+  deactive:'غیرفعال',
+  faqs:"پرسش و پاسخ‌های متداول", 
+  list:"لیست",
+  is_frequent:'پرتکرار'
 };
