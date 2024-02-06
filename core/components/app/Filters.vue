@@ -151,7 +151,7 @@ const {$moment} = useNuxtApp()
 const emit = defineEmits(["filter"]);
 let selected = ref({});
 let now = new Date();
-let date = ref([$moment(now).format('YYYY-MM-DD')]);
+let date = ref( !process.server ? [$moment(now).format('YYYY-MM-DD')] : []);
 let filter = ref("");
 const props = defineProps({
   items: Array,
