@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="store.dialog"
+    v-model="sharedStore.dialog"
     id="dialog-form"
     persistent
     :width="mdAndUp ? '640' : '100%'"
@@ -44,12 +44,24 @@
               >
                 <div
                   v-if="item.type === 'label'"
-                  class="text-body-2 font-weight-bold mb-3"
+                  class="text-body-2 font-weight-bold d-flex"
+                  :class="{ ' justify-space-between w-100': item.spaceBetween }"
                 >
-                  <span class="text-text-low-emphasis me-1"
-                    >{{ $t(item.label) }}
-                  </span>
+                  <p
+                    class="me-1"
+                    :class="
+                      item?.color
+                        ? `text-${item?.color}`
+                        : 'text-text-low-emphasis '
+                    "
+                  >
+                    {{ $t(item.label) }}
+                  </p>
                   <span class="text-text-heding"> {{ item?.modelValue }}</span>
+                </div>
+                <div v-if="item.type === 'divider'" class="w-100 mb-4 mt-2">
+                  <v-divider></v-divider>
+                  <!-- <span class="text-text-heding"> {{ item?.modelValue }}</span> -->
                 </div>
                 <v-text-field
                   v-if="item.type === 'text-field'"
@@ -68,9 +80,10 @@
                   :type="item.textFieldType || 'text'"
                   density="compact"
                   :hint="item.hint"
-                  :hide-details="item.hint"
+                  :hide-details="!item.hint"
                   variant="solo-filled"
                   :label="$t(item.label)"
+                  :readonly="item.readonly"
                   persistent-placeholder
                   class="outside-label mb-4"
                   persistent-hint
@@ -100,18 +113,26 @@
                     base-color="n300"
                     density="compact"
                     :hint="item.hint"
-                    :hide-details="item.hint"
+                    :hide-details="!item.hint"
+                    :readonly="item.readonly"
                     variant="solo-filled"
                     :placeholder="$t(item.label)"
                     persistent-placeholder
                     persistent-hint
                   >
                     <template v-slot:append-inner>
-                      <v-icon
-                        icon="custom:caretDownSolid"
-                        size="12"
-                      /> </template
-                  ></v-select>
+                      <v-icon icon="custom:caretDownSolid" size="12" />
+                    </template>
+                    <template v-slot:selection="{ item }">
+                      {{ $t(item.title) }}
+                    </template>
+                    <template v-slot:item="{ props, item }">
+                      <v-list-item
+                        v-bind="props"
+                        :title="$t(item.title)"
+                      ></v-list-item>
+                    </template>
+                  </v-select>
                 </div>
                 <v-textarea
                   v-if="item.type === 'text-area'"
@@ -136,6 +157,7 @@
                   class="outside-label mb-4"
                   persistent-placeholder
                   persistent-hint
+                  :readonly="item.readonly"
                   :hide-details="!item.hint"
                 ></v-textarea>
                 <div
@@ -154,7 +176,7 @@
                     v-model="item.modelValue"
                     :multiple="item?.multiple"
                     v-model:max="max"
-                    :round-images="false"
+                    :round-images="item.roundImages || false"
                     :has-start-button="item.hasStartButton"
                     :size="40"
                     class="me-2"
@@ -199,6 +221,56 @@
                     popover="bottom-left"
                   ></date-picker>
                 </div>
+                <div
+                  v-if="item.type === 'radio'"
+                  :class="{
+                    'd-flex justify-space-between w-100': item.spaceBetween,
+                  }"
+                >
+                  <div>{{ $t(item.label) }}</div>
+                  <div>
+                    <v-spacer />
+                    <v-radio-group
+                      v-model="item.modelValue"
+                      :inline="item.inline"
+                    >
+                      <v-radio
+                        v-for="option in item.options"
+                        :key="option.key"
+                        :label="$t(option.label)"
+                        :value="option.key"
+                        class="ms-3"
+                        :color="
+                          item.modelValue == option.key ? 'primary-base' : ''
+                        "
+                        :class="{
+                          'bg-primary-lighten1 text-primary-base rounded-lg py-1 px-2':
+                            item.modelValue == option.key,
+                        }"
+                        false-icon="custom:radioFalse"
+                        true-icon="custom:radioTrue"
+                      >
+                      </v-radio>
+                    </v-radio-group>
+                  </div>
+                </div>
+                <div v-if="item.type === 'checkbox'">
+                  <div>
+                    <v-checkbox
+                      v-model="item.modelValue"
+                      :label="$t(item.label)"
+                      color="primary-base"
+                      false-icon="custom:square"
+                      true-icon="custom:squareCheck"
+                      :value="1"
+                      hide-details
+                    ></v-checkbox>
+                  </div>
+                </div>
+                <div v-if="item.type == 'slot'" class="w-100">
+                  <!-- <template v-slot:[item.name]="slotProps"></template> -->
+                  <slot :name="item.name"></slot>
+                </div>
               </v-col>
             </template>
           </v-row>
@@ -226,6 +298,7 @@
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
 let sharedStore = useSharedPanelStore();
 let form = ref(null);
+let dialog = ref(false);
 import { useDisplay } from "vuetify";
 const { mdAndUp } = useDisplay();
 let { $rules } = useNuxtApp();
@@ -252,12 +325,12 @@ let max = computed({
     );
     if (props.store.edit) {
       if (!uploader.multiple) {
-        console.log("mmaxx");
+        console.log("mmaxx", uploader.maxImage);
         if (Object.keys(uploader.modelValue).includes("url")) return 0;
         else return 1;
       }
     }
-    console.log("not edit", uploader);
+    console.log("not edit", uploader.maxImage, uploader.modelValue);
     return uploader.maxImage;
   },
   set(value) {
@@ -269,7 +342,12 @@ let max = computed({
     }
   },
 });
-let emit = defineEmits(["update:dialog", "update:fields", "show:dialog"]);
+let emit = defineEmits([
+  "update:dialog",
+  "update:fields",
+  "show:dialog",
+  "close:dialog",
+]);
 let submit = async () => {
   const { valid } = await form.value.validate();
   console.log("yeyeyyyeuuue", valid);
@@ -287,6 +365,9 @@ const showFormItem = (item) => {
 };
 const close = () => {
   props.store.closeDialog();
+  // dialog.value = false
+  // props.store.editForm = ref([])
+  emit("close:dialog");
 };
 // defineExpose({ close });
 </script>
@@ -298,3 +379,11 @@ const close = () => {
   }
 }
 </style>
+<!-- closeDialog() {
+  this.sendingRequest = false;
+  this.dialog = false;
+  this.editForm = ref([]);
+  this.commentRejectForm = ref([]);
+  this.edit = false;
+  this.reject = false;
+}, -->

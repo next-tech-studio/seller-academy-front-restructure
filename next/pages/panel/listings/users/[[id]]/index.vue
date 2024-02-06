@@ -433,7 +433,7 @@ const submitItem = () => {
     $repos.sharedPanel
       .createUser(payload)
       .then((res) => {
-        Object.assign(sharedStore.listItems.data[itemIndex], res);
+        Object.assign(sharedStore.listItems.data[itemIndex], res.data);
         sharedStore.edit = false;
         sharedStore.closeDialog();
       })

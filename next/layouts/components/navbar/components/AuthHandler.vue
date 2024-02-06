@@ -1,6 +1,6 @@
 <template>
   <v-btn
-    v-if="!auth.user.loggedIn"
+    v-if="!auth.user.loggedIn && !mobile"
     @click="toLogin"
     :color="color.bg"
     height="41"
@@ -13,8 +13,22 @@
         icon="custom:registration"
       /> -->
       <v-img width="24" src="/images/user-default.svg" class="me-1" />
-      <span class=" text-text-light">{{ $t("login") + " | " + $t("sign_up") }}</span>
+      <span class="text-text-light">{{
+        $t("login") + " | " + $t("sign_up")
+      }}</span>
     </div>
+  </v-btn>
+  <v-btn
+    v-else-if="mobile"
+    block
+    color="primary-base"
+    height="41"
+    variant="flat"
+    @click="!auth.user.loggedIn ? toLogin() : logout()"
+  >
+    {{
+      !auth.user.loggedIn ? $t("login") + " | " + $t("sign_up") : $t("logout")
+    }}
   </v-btn>
   <v-menu
     v-else
@@ -44,7 +58,7 @@
       </v-btn>
     </template>
     <v-list elevation="0" :border="true" density="compact" class="py-0">
-      <template  v-for="(item, i) in items" :key="i">
+      <template v-for="(item, i) in items" :key="i">
         <v-list-item @click="item.action" v-if="item.show">
           <div class="d-flex align-center">
             <v-icon
@@ -67,6 +81,12 @@
 import { useAuthStore } from "~/stores/auth";
 const auth = useAuthStore();
 const localePath = useLocalePath();
+const props = defineProps({
+  mobile: {
+    default: false,
+    type: Boolean,
+  },
+});
 const toLogin = () => {
   auth.setStep(1);
   navigateTo("/login");
@@ -94,7 +114,7 @@ const items = [
     title: "logout",
     icon: "custom:logout",
     action: logout,
-    show: true
+    show: true,
   },
 ];
 
@@ -102,9 +122,7 @@ const color = computed(() => {
   let isIndex = useRoute().name == "index";
   return {
     bg: isIndex ? "transparent" : "primary-base",
-    text: isIndex
-      ? "transparent"
-      : "rgba(var(--v-theme-text-light))",
+    text: isIndex ? "transparent" : "rgba(var(--v-theme-text-light))",
   };
 });
 </script>

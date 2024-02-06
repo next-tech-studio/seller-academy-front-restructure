@@ -83,7 +83,6 @@ export default (request) => ({
     );
   },
   createUser(payload) {
-    console.log("payloaddddd", payload);
     return request(
       {
         name: "createUser",
@@ -116,4 +115,54 @@ export default (request) => ({
       alert: false,
     });
   },
+  //faqs
+  faqsList(payload) {
+    return request(
+      {
+        name: "faqsList",
+        method: "get",
+        path: "/panel/faq/list",
+        query: `?search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}`,
+        page: payload?.page,
+        loading: true,
+        alert: false,
+        model: { name: panelTable, collection: true, pagination: true },
+      },
+      payload.body
+    );
+  },
+  faqsListCommon(payload) {
+    return request({
+      name: "faqsListCommon",
+      method: "get",
+      path: "/panel/faq/common",
+      loading: true,
+      alert: false,
+    });
+  },
+  updateFAQ(payload) {
+    return request(
+      {
+        name: "updateFAQ",
+        method: "put",
+        path: "/panel/faq/edit-data",
+        loading: true,
+        alert: false,
+        model: { name: panelTable},
+      },
+      payload.body
+    );
+  },
+  updateFAQStatus(payload){
+    return request(
+      {
+        name: "updateFAQ",
+        method: "put",
+        path: "/panel/faq/set_status",
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  }
 });

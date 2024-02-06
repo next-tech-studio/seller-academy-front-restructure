@@ -4,7 +4,7 @@ import user from "./user";
 const panelTable: Mapping = {
   question: {
     processValue: (value) => {
-      return value.title;
+      return value.title || value;
     },
   },
   // slug: {

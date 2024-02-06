@@ -1,5 +1,5 @@
 <template>
-  <div id="navbar">
+  <div id="navbar" @click="drawer = false">
     <v-app-bar flat style="z-index: 1000 !important" :class="color.bg">
       <template v-slot:prepend v-if="!lgAndUp">
         <v-btn
@@ -55,11 +55,7 @@
           >
             <v-btn
               :active="isActive(item)"
-              :color="
-                !isActive(item)
-                  ? color.text
-                  : color.activeText
-              "
+              :color="!isActive(item) ? color.text : color.activeText"
               text
               tag="nav"
               class="text-body-2 font-weight-bold"
@@ -79,17 +75,28 @@
       </v-container>
     </v-app-bar>
     <v-navigation-drawer
+      v-if="!lgAndUp"
       v-model="drawer"
       location="start"
-      v-if="!lgAndUp"
       sticky
+      temporary
+      dir="auto"
     >
       <v-card>
-        <v-list class="mt-10">
-          <!-- <v-list-item class="d-flex justify-center" border="0">
-            <auth-handler v-if="needAuth" />
+        <v-list height="100vh">
+          <v-list-item v-if="auth.user.loggedIn">
+            <div class="mx-1 text-icon-high-emphasis text-button">
+              <v-avatar
+                start
+                size="30"
+                :image="auth.user?.avatarUrl"
+              ></v-avatar>
+              <span class="mr-2"
+                >{{ `${auth.user.firstName} ${auth.user.lastName}` }}</span
+              >
+            </div>
           </v-list-item>
-          <v-divider class="mt-2 mx-5"></v-divider> -->
+          <v-divider v-if="auth.user.loggedIn"></v-divider>
           <v-list-item
             @click.stop="drawer = false"
             v-for="(item, index) in items"
@@ -108,12 +115,18 @@
           </v-list-item>
         </v-list>
       </v-card>
+      <template v-slot:append>
+        <div class="pa-2">
+          <auth-handler mobile />
+        </div>
+      </template>
     </v-navigation-drawer>
   </div>
 </template>
 
 <script setup>
 import { useDisplay } from "vuetify";
+import { useAuthStore } from "~/next/stores/auth";
 import AuthHandler from "./components/AuthHandler.vue";
 import LangSwitcher from "./components/LangSwitcher.vue";
 import Search from "./components/Search.vue";
@@ -124,6 +137,7 @@ const { lgAndUp, mdAndUp } = useDisplay();
 const drawer = ref(false);
 const route = useRoute();
 const openSearch = ref(false);
+const auth = useAuthStore();
 const props = defineProps({
   showNavberItems: {
     default: true,
@@ -148,7 +162,9 @@ const color = computed(() => {
     text: isIndex.value
       ? "rgba(var(--v-theme-text-light))"
       : "rgba(var(--v-theme-text-high-emphasis))",
-      activeText: isIndex.value ? 'rgba(var(--v-theme-text-light))' : 'rgba(var(--v-theme-primary-base))'
+    activeText: isIndex.value
+      ? "rgba(var(--v-theme-text-light))"
+      : "rgba(var(--v-theme-primary-base))",
   };
 });
 </script>
@@ -161,7 +177,7 @@ const color = computed(() => {
 
   .v-navigation-drawer {
     top: 0 !important;
-    z-index: 1008 !important;
+    z-index: 2008 !important;
     height: 100% !important;
   }
 

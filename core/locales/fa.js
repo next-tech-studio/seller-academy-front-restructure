@@ -347,6 +347,7 @@ export default {
     " ویدیوی شما در حال پردازش است، لطفا شکیبا باشید! برای ادامه‌ی پردازش دکمه‌ی ذخیره‌ی تغییرات را بزنید.",
   please_be_patient_your_video_is_processing:
     "ویدیوی شما در حال پردازش است، لطفا شکیبا باشید!",
+    related_questions_count:"سوالات مرتبط",
   panel: {
     active: "فعال({count})",
     hidden: "پنهان شده({count})",
@@ -768,4 +769,10 @@ export default {
   success_stories: "داستان‌های موفقیت",
   become_a_member: "عضو گروه شوید",
   you_have_to_become_a_member: "جهت مشاهده‌ی تالار باید عضوی از آن باشید.",
+  frequently_asked_questions:'پرسش‌های متداول',
+  is_this_faq_frequent_in_this_category:'آیا این پرسش متداول جزو پرتکرارترین پرسش‌های این دسته‌بندی است؟',
+  deactive:'غیرفعال',
+  faqs:"پرسش و پاسخ‌های متداول", 
+  list:"لیست",
+  is_frequent:'پرتکرار'
 };
