@@ -153,7 +153,7 @@ export default (request) => ({
         loading: true,
         alert: false,
       },
-      payload
+      payload.body
     );
   }
 });
