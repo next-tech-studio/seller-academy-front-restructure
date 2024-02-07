@@ -153,4 +153,24 @@ export default (request) => ({
       alert: false,
     });
   },
+  // faqs
+  faqs(payload) {
+    return request({
+      name: "faqs",
+      method: "get",
+      path: "/faq/list",
+      query: `?search=${payload?.search}`,
+      loading: true,
+      alert: false,
+    });
+  },
+  faqsCommon(){
+    return request({
+      name: "common",
+      method: "get",
+      path: "/faq/common",
+      loading: true,
+      alert: false,
+    });
+  }
 });
