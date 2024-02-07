@@ -1,6 +1,4 @@
 
-import type { VListItemSubtitle } from 'vuetify/lib/components/index.mjs';
-
 <template>
   <v-card class="py-10">
     <v-container>

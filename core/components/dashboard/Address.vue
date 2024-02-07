@@ -84,7 +84,6 @@
 <script setup>
 import { useSharedPanelStore } from "~/stores/sharedPanel";
 const store = useSharedPanelStore();
-const UPLOAD_FORM_PATH = "/panel/forms/upload_cover";
 const props = defineProps({
   information: Object,
 });

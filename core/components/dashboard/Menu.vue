@@ -5,7 +5,7 @@
       class="text-text-low-emphasis"
       @update:modelValue="$emit('update:modelValue', $event)"
       bg-color="background-light"
-      :selected-class="selectedClass"
+      
       center-active
       :grow="grow"
     >
@@ -14,6 +14,7 @@
         :value="item.value"
         :key="index"
         @click="$emit('change:route')"
+        :class="$router.currentRoute.value.fullPath.split('/').pop() == item.value? selectedClass : ''"
       >
         <span>
           {{ $t(item.title) }}
@@ -31,9 +32,13 @@ const props = defineProps({
     default: true,
     type: String,
   },
+  to: {
+    default: true,
+    type: String,
+  },
 });
 const emit = defineEmits(["update:modelValue"]);
-
+const localePath = useLocalePath();
 let tabs = computed({
   get() {
     return props.modelValue;
