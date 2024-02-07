@@ -10,7 +10,7 @@
       <v-btn
         :text="$t('activate_room')"
         color="button-secondary"
-        @click="publishRoom"
+        @click="publish = true"
       ></v-btn>
     </div>
     <v-form
@@ -134,7 +134,7 @@
           <v-select
             :label="$t('editor.category')"
             density="compact"
-            :rules="$rules({ title: 'required' }, room.category.id)"
+            :rules="$rules({ categoryId: 'required' }, room.categoryId)"
             base-color="n300"
             v-model="room.categoryId"
             hide-details=""
@@ -152,7 +152,7 @@
           <v-select
             :label="$t('is_private')"
             density="compact"
-            :rules="$rules({ title: 'required' }, room.isPrivate)"
+            :rules="$rules({ isPrivate: 'required' }, room.isPrivate)"
             base-color="n300"
             v-model="room.isPrivate"
             hide-details=""
@@ -236,6 +236,7 @@
 const route = useRoute();
 let search = ref([]);
 let edit = ref(false);
+let publish = ref(true);
 let form = ref(null);
 const UPLOAD_CHAT_PATH = "/community/chat/attachment";
 const localePath = useLocalePath();
@@ -293,15 +294,16 @@ const getRoomInfo = () => {
     Object.assign(room.value, res);
   });
 };
-const publishRoom = () => {
-  let payload = {
-    body: {
-      status: "active",
-      ids: [room.value.id],
-    },
-  };
-  $repos.communityPanel.updateRoomStatus(payload);
-};
+// const publishRoom = () => {
+//   saveRoom();
+//   let payload = {
+//     body: {
+//       status: "active",
+//       ids: [room.value.id],
+//     },
+//   };
+//   $repos.communityPanel.updateRoomStatus(payload);
+// };
 const saveRoom = () => {
   if (edit.value)
     newMembers.value.push(...room.value.members.map((member) => member.id));
@@ -310,12 +312,23 @@ const saveRoom = () => {
       ...room.value,
       avatarUrl: room.value.avatarUrl.url,
       bannerUrl: room.value.bannerUrl.url,
-      members: newMembers.value,
+      members: newMembers.value || [],
     },
   };
   $repos.communityPanel.saveRoom(payload).then((res) => {
     if (!edit.value)
-      navigateTo(localePath({ path: `/forum/panel/room/create/${res.data.id}` }));
+      navigateTo(
+        localePath({ path: `/forum/panel/room/create/${res}` })
+      );
+    if (publish.value) {
+      let payload = {
+        body: {
+          status: "active",
+          ids: [room.value.id],
+        },
+      };
+      $repos.communityPanel.updateRoomStatus(payload);
+    }
   });
 };
 onMounted(() => {

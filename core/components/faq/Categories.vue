@@ -11,7 +11,7 @@
               'w-100 d-flex justify-space-between align-center ms-2': !mdAndUp,
             }"
           >
-            <span>{{ item.title }} ({{ item.faq.length }} پرسش)</span>
+            <span>{{ item.title }} ({{ item?.faqCount }} پرسش)</span>
             <v-icon class="ms-2" size="small" icon="custom:arrowLeft"></v-icon>
           </div>
         </v-card-text>

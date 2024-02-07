@@ -8,8 +8,8 @@
             </div> -->
         <VitePwaManifest />
 
-        <component v-if="store?.skeletonLoading && skeleton" :is="skeleton" />
-        <div v-show="!store?.skeletonLoading"><slot /></div>
+        <component v-if="store.skeletonLoading && skeleton" :is="skeleton" />
+        <div v-show="!store.skeletonLoading"><slot /></div>
         <!-- <v-row justify="end">
           <v-col cols="3">
               <video-player small video-src="/videos/video.mp4" video-poster="https://static.cdn.asset.aparat.com/avt/46845066-5693-b__6582.jpg">

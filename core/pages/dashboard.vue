@@ -59,9 +59,9 @@
 </template>
 
 <script setup>
-let tabs = ref(null);
 import { useDisplay } from "vuetify";
-
+const route = useRoute();
+let tabs = ref(null)
 const { lgAndUp, mdAndUp } = useDisplay();
 const localePath = useLocalePath();
 const gradient = "0deg,rgba(0, 0, 0, 0.6) 0%,rgba(0, 0, 0, 0.6) 100%";
@@ -69,7 +69,6 @@ const menu = ref([
   { title: "user_account", value: "user-account" },
   { title: "rooms", value: "rooms" },
   { title: "courses", value: "courses" },
-  { title: "learning_paths", value: "learning-paths" },
   { title: "comments", value: "comments" },
   { title: "posts", value: "posts" },
   { title: "question_and_answer", value: "question-and-answer" },
@@ -79,6 +78,10 @@ const menu = ref([
 const navigateToTab = () => {
   navigateTo(localePath({ name: `dashboard-${tabs.value}` }));
 };
+onMounted(()=>{
+  tabs.value =route.fullPath.split('/').pop()
+  console.log('ieieieieieiieieieie',tabs.value)
+})
 definePageMeta({
   middleware: ["auth"],
   layout: false,

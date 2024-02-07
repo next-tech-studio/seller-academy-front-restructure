@@ -45,7 +45,7 @@ class Validation {
       email: (v, attribute = "") => {
         const result =
           /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          app.$i18n.t("validation.email", {
+          app.$i18n.t("یک ایمیل معتبر وارد نمایید", {
             attribute,
           });
         this.setMessage(result, attribute);

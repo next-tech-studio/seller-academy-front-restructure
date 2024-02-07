@@ -73,6 +73,17 @@ useAsyncData(async () => {
 const register = () => {
   if (item.registrationType == "register") {
     console.log("register");
+    $repos.academyProduct
+      .checkout({
+        slug: route.params.slug,
+        body: {
+          method: "online",
+          gateway: "digipay",
+        },
+      })
+      .then((res) => {
+        window.open(res.data.url, '_blank');
+      });
   } else if (item.registrationType == "pre-register") {
     console.log("pre-register");
     let body = {};

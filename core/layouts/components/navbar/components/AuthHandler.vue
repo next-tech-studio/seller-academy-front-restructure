@@ -1,6 +1,6 @@
 <template>
   <v-btn
-    v-if="!auth.user.loggedIn"
+    v-if="!auth.user.loggedIn && !mobile"
     variant="outlined"
     rounded
     @click="toLogin"
@@ -15,6 +15,18 @@
       />
       {{ $t("login") + " | " + $t("sign_up") }}
     </span>
+  </v-btn>
+  <v-btn
+    v-else-if="mobile"
+    block
+    color="primary-base"
+    height="41"
+    variant="flat"
+    @click="!auth.user.loggedIn ? toLogin() : logout()"
+  >
+    {{
+      !auth.user.loggedIn ? $t("login") + " | " + $t("sign_up") : $t("logout")
+    }}
   </v-btn>
   <v-menu
     v-else
@@ -73,6 +85,12 @@
 import { useAuthStore } from "~/stores/auth";
 const auth = useAuthStore();
 const localePath = useLocalePath();
+const props = defineProps({
+  mobile: {
+    default: false,
+    type: Boolean,
+  },
+});
 const toLogin = () => {
   auth.setStep(0);
   navigateTo("/login");
