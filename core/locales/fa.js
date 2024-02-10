@@ -774,5 +774,10 @@ export default {
   deactive:'غیرفعال',
   faqs:"پرسش و پاسخ‌های متداول", 
   list:"لیست",
-  is_frequent:'پرتکرار'
+  is_frequent:'پرتکرار',
+  job_title:'عنوان شغلی',
+  linkedin:'لینکدین',
+  mobile:'موبایل',
+  username:'نام کاربری'
+
 };
