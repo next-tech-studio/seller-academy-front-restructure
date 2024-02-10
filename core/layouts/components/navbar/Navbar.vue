@@ -51,31 +51,33 @@
             alt="logo"
         /></a>
         <!-- TODO: change navbar condition -->
-        <template v-for="(item, index) in items" :key="item.title">
-          <v-divider v-if="item.divider" vertical class="my-8"></v-divider>
-          <a
-            v-else
-            style="text-decoration: none"
-            class="text-body-2 font-weight-medium"
-            tag="div"
-            exact
-            :href="localePath(item.to)"
-          >
-            <v-btn
-              :active="isActive(item)"
-              :color="
-                !isActive(item)
-                  ? 'rgba(var(--v-theme-text-high-emphasis))'
-                  : 'rgba(var(--v-theme-text-hint-error))'
-              "
-              text
-              tag="nav"
-              class="text-body-2 font-weight-bold"
+        <div v-if="showNavberItems">
+          <template v-for="(item, index) in items" :key="item.title">
+            <v-divider v-if="item.divider" vertical class="my-8"></v-divider>
+            <a
+              v-else
+              style="text-decoration: none"
+              class="text-body-2 font-weight-medium"
+              tag="div"
+              exact
+              :href="localePath(item.to)"
             >
-              {{ $t(item.title) }}
-            </v-btn>
-          </a>
-        </template>
+              <v-btn
+                :active="isActive(item)"
+                :color="
+                  !isActive(item)
+                    ? 'rgba(var(--v-theme-text-high-emphasis))'
+                    : 'rgba(var(--v-theme-text-hint-error))'
+                "
+                text
+                tag="nav"
+                class="text-body-2 font-weight-bold"
+              >
+                {{ $t(item.title) }}
+              </v-btn>
+            </a>
+          </template>
+        </div>
         <v-spacer></v-spacer>
         <search @choose:article="toItem($event)" v-if="showNavberItems" />
         <v-divider vertical class="my-6 mx-4"></v-divider>
@@ -106,7 +108,10 @@
             <v-img width="100" src="/images/logo/3.svg" alt="logo" />
           </v-list-item>
           <v-divider class="mt-2 mx-5"></v-divider> -->
-          <v-list-item v-if="auth.user.loggedIn" :to="localePath({name: 'dashboard-user-account'})">
+          <v-list-item
+            v-if="auth.user.loggedIn"
+            :to="localePath({ name: 'dashboard-user-account' })"
+          >
             <div class="mx-1 text-icon-high-emphasis text-button">
               <v-avatar
                 start

@@ -247,18 +247,18 @@ const submitNewChapter = () => {
   );
   if (sharedStore.edit) {
     let itemIndex = academyStore.courseContent.chaptersList.findIndex(
-      (item) => item.id === academyStore.currentItem.id
+      (item) => item.id === sharedStore.currentItem.id
     );
     payload = {
       body: {
-        id: academyStore.currentItem.id,
+        id: sharedStore.currentItem.id,
         courseId: academyStore.postRouteId,
         title: formTitle.modelValue,
         description: formDescription.modelValue,
       },
     };
     $repos.academyPanel.createChapter(payload).then((res) => {
-      Object.assign(academyStore.courseContent.chaptersList[itemIndex], res);
+      Object.assign(academyStore.courseContent.chaptersList[itemIndex], res.data);
       sharedStore.edit = false;
       sharedStore.closeDialog();
     });
@@ -294,8 +294,8 @@ const deleteLesson = (item, lessonIndex, index) => {
   });
 };
 const editChapter = (item, index) => {
-  academyStore.edit = true;
-  Object.assign(academyStore.currentItem, {
+  sharedStore.edit = true;
+  Object.assign(sharedStore.currentItem, {
     id: item.id,
     title: item.title,
     description: item.description,
