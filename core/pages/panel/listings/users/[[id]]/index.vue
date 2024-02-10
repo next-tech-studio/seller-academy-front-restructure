@@ -195,7 +195,7 @@ let dataForm = ref([
     name: "avatarUrl",
     show: true,
     uploadPath: UPLOAD_AVATAR_PATH,
-    modelValue: ref([]),
+    modelValue: ref({}),
     size: 12,
     multiple: false,
     maxImage: 1,
