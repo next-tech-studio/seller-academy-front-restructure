@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="11">
         <v-skeleton-loader
-        width="20%"
+        width="50%"
           type="subtitle, heading"
         ></v-skeleton-loader>
       </v-col>
@@ -12,7 +12,7 @@
           type="button"
         ></v-skeleton-loader>
       </v-col>
-      <v-col cols="12" md="2" v-for="n in 12" :key="n" class="mb-9">
+      <v-col cols="6" md="2" v-for="n in 12" :key="n" class="mb-9">
         <v-skeleton-loader
           dir="ltr"
           type="card, heading"
