@@ -59,7 +59,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         .finally(() => {
           if (loading) {
             useGlobalStore().skeletonLoading = false;
-            useGlobalStore().skeleton = null;
+            useGlobalStore().skeleton = "";
             useGlobalStore().pendingRequest = false;
             // bus.emit('setLoading', false)
           }
