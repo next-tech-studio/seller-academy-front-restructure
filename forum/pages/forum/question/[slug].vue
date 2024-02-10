@@ -76,7 +76,7 @@
               }"
             >
               <question
-                @reaction="sendFeedBacAnswer($event, answer, index)"
+                @reaction="sendFeedBackAnswer($event, answer, index)"
                 :bold="false"
                 hide-avatar-gp
                 all-in-bottom
@@ -265,7 +265,7 @@ const sendFeedBackQuestion = (e) => {
     });
 };
 
-const sendFeedBacAnswer = (e, answer, index) => {
+const sendFeedBackAnswer = (e, answer, index) => {
   $repos.community
     .sendFeedbackAnswer({
       questionSlug: route.params.slug,

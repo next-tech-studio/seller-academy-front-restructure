@@ -86,12 +86,12 @@
 <script setup>
 import { useSharedPanelStore } from "~/stores/sharedPanel";
 const store = useSharedPanelStore();
-const UPLOAD_FORM_PATH = "/panel/forms/upload_cover";
+const UPLOAD_PATH = "/community/questions/attachment"
 let dataForm = ref([
   {
     type: "uploader",
     name: "avatarUrl",
-    uploadPath: UPLOAD_FORM_PATH,
+    uploadPath: UPLOAD_PATH,
     modelValue: ref({}),
     size: 1,
     sm:3,

@@ -2,15 +2,25 @@
   <NuxtLayout name="default">
     <div class="bg-n100">
       <v-container>
-        <dashboard-menu
-          class="mb-4"
-          v-model="tabs"
-          @change:route="navigateToTab"
-          :menu="menu"
-          selected-class="text-secondary-base"
-        ></dashboard-menu>
+        <div dir="ltr">
+
+        </div>
+        <client-only>
+          <dashboard-menu
+            class="mb-4"
+            v-model="tabs"
+            @change:route="navigateToTab"
+            :to="{ name: `dashboard-${tabs}` }"
+            :menu="menu"
+            selected-class='text-secondary-base'
+          ></dashboard-menu>
+        </client-only>
         <div class="d-flex">
-          <v-window v-model="tabs" class="rounded-lg me-4" :class="lgAndUp?'w-75':'w-100'">
+          <v-window
+            v-model="tabs"
+            class="rounded-lg me-4"
+            :class="lgAndUp ? 'w-75' : 'w-100'"
+          >
             <v-window-item :value="tabs">
               <NuxtPage />
             </v-window-item>
@@ -61,7 +71,7 @@
 <script setup>
 import { useDisplay } from "vuetify";
 const route = useRoute();
-let tabs = ref(null)
+let tabs = ref("posts");
 const { lgAndUp, mdAndUp } = useDisplay();
 const localePath = useLocalePath();
 const gradient = "0deg,rgba(0, 0, 0, 0.6) 0%,rgba(0, 0, 0, 0.6) 100%";
@@ -72,16 +82,16 @@ const menu = ref([
   { title: "comments", value: "comments" },
   { title: "posts", value: "posts" },
   { title: "question_and_answer", value: "question-and-answer" },
-  { title: "announcement", value: "announcement" },
+  // { title: "announcement", value: "announcement" },
 ]);
 
 const navigateToTab = () => {
   navigateTo(localePath({ name: `dashboard-${tabs.value}` }));
 };
-onMounted(()=>{
-  tabs.value =route.fullPath.split('/').pop()
-  console.log('ieieieieieiieieieie',tabs.value)
-})
+onMounted(() => {
+  tabs.value = route.fullPath.split("/").pop();
+  console.log('dslkjfjdslk',route.fullPath)
+});
 definePageMeta({
   middleware: ["auth"],
   layout: false,
@@ -113,4 +123,3 @@ definePageMeta({
   overflow: hidden;
 }
 </style>
-

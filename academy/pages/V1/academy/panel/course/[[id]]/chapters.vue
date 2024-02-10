@@ -167,9 +167,9 @@
         ref="chapterForm"
         icon="custom:plus"
         :add-new-item="true"
-        :store="academyStore"
+        :store="sharedStore"
         @update:fields="submitNewChapter"
-        @show:dialog="academyStore.initForm(dataForm)"
+        @show:dialog="sharedStore.initForm(dataForm)"
       >
       </app-dialog-form>
     </section>
@@ -177,7 +177,9 @@
 </template>
 <script setup>
 import { useAcademyStore } from "@core/stores/academy";
+import {useSharedPanelStore} from "@core/stores/sharedPanel"
 let academyStore = useAcademyStore();
+let sharedStore = useSharedPanelStore();
 const localePath = useLocalePath();
 const { $repos } = useNuxtApp();
 let chapterForm = ref(null);
@@ -239,11 +241,11 @@ let dataForm = ref([
 ]);
 const submitNewChapter = () => {
   let payload;
-  let formTitle = academyStore.editForm.find((item) => item.name === "title");
-  let formDescription = academyStore.editForm.find(
+  let formTitle = sharedStore.editForm.find((item) => item.name === "title");
+  let formDescription = sharedStore.editForm.find(
     (item) => item.name === "description"
   );
-  if (academyStore.edit) {
+  if (sharedStore.edit) {
     let itemIndex = academyStore.courseContent.chaptersList.findIndex(
       (item) => item.id === academyStore.currentItem.id
     );
@@ -257,8 +259,8 @@ const submitNewChapter = () => {
     };
     $repos.academyPanel.createChapter(payload).then((res) => {
       Object.assign(academyStore.courseContent.chaptersList[itemIndex], res);
-      academyStore.edit = false;
-      academyStore.closeDialog();
+      sharedStore.edit = false;
+      sharedStore.closeDialog();
     });
   } else {
     payload = {
@@ -271,7 +273,7 @@ const submitNewChapter = () => {
     };
     $repos.academyPanel.createChapter(payload).then(() => {
       academyStore.getChaptersList();
-      academyStore.closeDialog();
+      sharedStore.closeDialog();
     });
   }
 };
@@ -298,8 +300,8 @@ const editChapter = (item, index) => {
     title: item.title,
     description: item.description,
   });
-  academyStore.initForm(dataForm.value);
-  academyStore.dialog = true;
+  sharedStore.initForm(dataForm.value);
+  sharedStore.dialog = true;
 };
 const { courseContent } = storeToRefs(academyStore);
 watch(

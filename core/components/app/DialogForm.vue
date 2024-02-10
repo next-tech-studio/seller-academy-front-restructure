@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="sharedStore.dialog"
+    v-model="store.dialog"
     id="dialog-form"
     persistent
     :width="mdAndUp ? '640' : '100%'"
