@@ -24,13 +24,14 @@ export default defineNuxtPlugin((nuxtApp) => {
     const HttpRequestInstance = new HttpRequest(nuxtApp);
     const api = APIHandlerInstance.getApi(method, path, params, query, page);
     return new Promise((resolve, reject) => {
+      console.log("request", name);
       if (loading) {
         useGlobalStore().pendingRequest = true;
+        useGlobalStore().skeletonLoading = true;
+        useGlobalStore().activeRequests[name] = true;
       }
       HttpRequestInstance[api.method](api.path, payload, alert)
         .then((resp) => {
-          // useGlobalStore().pendingRequest = false
-          // APIHandlerInstance.performCommits(store.state, store.commit, commits, resp)
           let data;
           if (model) {
             if (model.collection) {
@@ -58,10 +59,12 @@ export default defineNuxtPlugin((nuxtApp) => {
         })
         .finally(() => {
           if (loading) {
-            useGlobalStore().skeletonLoading = false;
-            useGlobalStore().skeleton = null;
+            useGlobalStore().activeRequests[name] = false;
+            if (!useGlobalStore().activeRequestsExists) {
+              useGlobalStore().skeletonLoading = false;
+              useGlobalStore().skeleton = "";
+            }
             useGlobalStore().pendingRequest = false;
-            // bus.emit('setLoading', false)
           }
         });
     });

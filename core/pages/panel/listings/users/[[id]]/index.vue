@@ -86,7 +86,10 @@
           </div>
         </template>
         <template #type="{ item }">
-          <v-chip :color="sharedStore.statusColor(item.item.profile.type)" v-if="item.item.profile.type">
+          <v-chip
+            :color="sharedStore.statusColor(item.item.profile.type)"
+            v-if="item.item.profile.type"
+          >
             {{ $t(item?.item?.profile?.type) }}
           </v-chip>
         </template>
@@ -195,7 +198,7 @@ let dataForm = ref([
     name: "avatarUrl",
     show: true,
     uploadPath: UPLOAD_AVATAR_PATH,
-    modelValue: ref([]),
+    modelValue: ref({}),
     size: 12,
     multiple: false,
     maxImage: 1,
@@ -265,35 +268,7 @@ let dataForm = ref([
     modelValue: ref(""),
     size: 6,
     validations: "",
-    label: "jobTitle",
-    hint: true,
-    dataPath: "profile",
-  },
-  {
-    type: "select",
-    modelValue: ref(""),
-    selectValue: "id",
-    show: true,
-    selectTitle: "title",
-    name: "categoryId",
-    items: computed(() => sharedStore.listInfo?.categories),
-    validations: "",
-    label: "category",
-    size: 6,
-    hint: true,
-    dataPath: "profile",
-  },
-  {
-    type: "select",
-    modelValue: ref(""),
-    selectValue: "id",
-    show: true,
-    selectTitle: "title",
-    name: "team",
-    items: computed(() => sharedStore.listInfo?.teams),
-    validations: "",
-    label: "team",
-    size: 6,
+    label: "job_title",
     hint: true,
     dataPath: "profile",
   },
@@ -310,39 +285,15 @@ let dataForm = ref([
     dataPath: "profile",
   },
   {
-    type: "text-field",
-    name: "position",
-    show: true,
-    textFieldType: "position",
-    modelValue: ref(""),
-    size: 6,
-    validations: "",
-    label: "position",
-    hint: true,
-    dataPath: "profile",
-  },
-  {
-    type: "text-field",
-    name: "unit",
-    show: true,
-    textFieldType: "unit",
-    modelValue: ref(""),
-    size: 6,
-    validations: "",
-    label: "unit",
-    hint: true,
-    dataPath: "profile",
-  },
-  {
     type: "select",
     modelValue: ref(""),
     selectValue: "id",
     show: true,
-    selectTitle: "type",
+    selectTitle: "role",
     name: "type",
-    items: computed(() => sharedStore.listInfo?.types),
+    items: computed(() => sharedStore.listInfo?.roles),
     validations: "required",
-    label: "type",
+    label: "role",
     size: 6,
     hint: true,
     dataPath: "profile",
@@ -350,11 +301,11 @@ let dataForm = ref([
   {
     type: "text-field",
     name: "password",
-    show: true,
+    show: computed(() => (sharedStore.edit ? false : true)),
     textFieldType: "password",
     modelValue: ref(""),
     size: 12,
-    validations: computed(() => !sharedStore.edit ? "required" : ""),
+    validations: computed(() => (!sharedStore.edit ? "required" : "")),
     label: "password",
     hint: true,
   },
@@ -420,7 +371,7 @@ const submitItem = () => {
       (item) => item.name === field.name
     )?.modelValue;
 
-    if (field.name == 'avatarUrl') body[field.name] = body[field.name]?.url
+    if (field.name == "avatarUrl") body[field.name] = body[field.name]?.url;
   });
 
   if (sharedStore.edit) {
@@ -428,7 +379,9 @@ const submitItem = () => {
       (item) => item.id === sharedStore.currentItem.id
     );
     payload = {
-      body: { ...body, id: sharedStore.currentItem.id, profileId: sharedStore.currentItem.profile.id },
+      ...body,
+      id: sharedStore.currentItem.id,
+      profileId: sharedStore.currentItem.profile.id,
     };
     $repos.sharedPanel
       .createUser(payload)

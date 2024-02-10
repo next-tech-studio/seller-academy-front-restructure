@@ -86,8 +86,8 @@ export default (request) => ({
     return request(
       {
         name: "createUser",
-        method: "post",
-        path: `/panel/users/create`,
+        method: "put",
+        path: "/panel/user/editor-data",
         loading: true,
         alert: false,
       },
@@ -148,12 +148,12 @@ export default (request) => ({
         path: "/panel/faq/edit-data",
         loading: true,
         alert: false,
-        model: { name: panelTable},
+        model: { name: panelTable },
       },
       payload.body
     );
   },
-  updateFAQStatus(payload){
+  updateFAQStatus(payload) {
     return request(
       {
         name: "updateFAQ",
@@ -164,5 +164,5 @@ export default (request) => ({
       },
       payload.body
     );
-  }
+  },
 });
