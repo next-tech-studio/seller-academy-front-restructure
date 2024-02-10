@@ -8,9 +8,9 @@
           :class="color.bg"
         ></v-btn>
       </template>
-      <template v-slot:append v-if="!lgAndUp">
+      <!-- <template v-slot:append v-if="!lgAndUp">
         <lang-switcher />
-      </template>
+      </template> -->
       <v-container class="d-flex align-center" v-if="!lgAndUp">
         <a
           href="/"
