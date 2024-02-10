@@ -6,7 +6,7 @@
   >
     <!-- 1. Create the button that will be clicked to select a file -->
     <div class="d-flex h-100 align-center">
-
+      {{ uploadedFiles }}dfadf
       <slot name="activator">
         <v-btn
           v-bind="$attrs"
