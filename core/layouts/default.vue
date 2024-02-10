@@ -8,7 +8,9 @@
             </div> -->
         <VitePwaManifest />
 
-        <component v-if="store.skeletonLoading && skeleton" :is="skeleton" />
+        <client-only>
+          <component v-if="store.skeletonLoading && skeleton" :is="skeleton" />
+        </client-only>
         <div v-show="!store.skeletonLoading"><slot /></div>
         <!-- <v-row justify="end">
           <v-col cols="3">

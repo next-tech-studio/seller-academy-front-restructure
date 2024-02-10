@@ -9,6 +9,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   else if (route.name == "article-category-slug") skeleton = "skeleton-article-category-slug";
   else if (route.name == "article-tag-slug") skeleton = "skeleton-article-tag-slug";
   else if (route.name == "podcast-archive") skeleton = "skeleton-podcast-archive";
+  else if (route.name == "forum") skeleton = "skeleton-forum";
   if (skeleton && !process.server) {
     store.skeleton = skeleton;
     store.skeletonLoading = true && skeleton;
