@@ -6,7 +6,7 @@
         <v-banner
           border="none"
           lines="one"
-          class="bg-transparent py-4"
+          class="bg-transparent py-lg-4 py-1"
           density="compact"
         >
           <template v-slot:text>
@@ -28,7 +28,7 @@
           <app-share-in v-if="!smAndDown" :hide-title="false" />
           <template v-slot:actions>
             <v-btn
-              class="text-button text-primary-base px-10 bg-background-light mb-4"
+              class="text-button text-primary-base px-10 bg-background-light mb-lg-4 mb-3"
               variant="outlined"
               size="x-large"
               :to="
@@ -49,7 +49,7 @@
   </div>
   <!-- HOLDING DETAIL -->
   <v-container fluid class="py-md-16 my-md-16 py-8 my-2">
-    <div class="text-md-h3 text-h5 text-text-heading text-center mb-6">
+    <div class="text-md-h3 text-h5 text-text-heading text-center mb-lg-6 mb-3 mt-lg-0 mt-10">
       {{ current?.event_title }}
     </div>
     <v-card

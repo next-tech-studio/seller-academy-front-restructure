@@ -7,6 +7,9 @@ export default defineNuxtConfig({
     "@core": resolve("./"),
   },
   app: {
+    head: {
+      title: process.env.APP_NAME
+    },
     pageTransition: { name: "page" },
     layoutTransition: { name: "page" },
   },
