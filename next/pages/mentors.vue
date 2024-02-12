@@ -15,7 +15,7 @@
     <mentors-header />
   </v-container>
   <mentors-advantages class="my-10" />
-  <v-container fluid class="mb-16 py-0" id="mentors">
+  <v-container fluid class="mb-16 py-0 px-0" id="mentors">
     <mentors-tab
       :categories="categories"
       v-model="currentCategory"

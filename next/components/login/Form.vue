@@ -1,5 +1,6 @@
 <template>
   <v-form
+    id="auth-form"
     ref="authForm"
     :class="smAndDown ? 'w-75' : 'w-50'"
     @submit.prevent="submit"
@@ -18,7 +19,7 @@
         <v-text-field
           v-if="fields.includes('username')"
           v-model="item.username"
-          :rules="$rules({ username: 'required|english' }, item.username)"
+          :rules="$rules({ username: 'required|mobile' }, item.username)"
           flat
           base-color="n300"
           density="compact"
@@ -27,6 +28,7 @@
           :label="$t('mobile')"
           persistent-placeholder
           class="outside-label"
+          type="number"
         ></v-text-field>
         <v-text-field
           v-if="fields.includes('first_name')"
@@ -190,7 +192,12 @@
         </v-checkbox>
       </v-card-text>
       <v-card-actions class="px-0">
-        <v-btn v-if="backable" @click="$emit('back')" variant="outlined" color="primary-base">
+        <v-btn
+          v-if="backable"
+          @click="$emit('back')"
+          variant="outlined"
+          color="primary-base"
+        >
           <v-icon
             class="ml-4 text-button"
             size="small"
@@ -236,8 +243,8 @@ const props = defineProps({
   },
   backable: {
     type: Boolean,
-    default: true
-  }
+    default: true,
+  },
 });
 
 const passwordVisibility = ref({
@@ -259,3 +266,19 @@ const updateOTP = async (item) => {
   validForm.value = item.length == 6;
 };
 </script>
+
+<style lang="scss">
+#auth-form {
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+</style>
