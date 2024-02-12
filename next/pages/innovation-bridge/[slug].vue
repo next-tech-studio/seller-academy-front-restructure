@@ -49,7 +49,9 @@
   </div>
   <!-- HOLDING DETAIL -->
   <v-container fluid class="py-md-16 my-md-16 py-8 my-2">
-    <div class="text-md-h3 text-h5 text-text-heading text-center mb-lg-6 mb-3 mt-lg-0 mt-10">
+    <div
+      class="text-md-h3 text-h5 text-text-heading text-center mb-lg-6 mb-3 mt-lg-0 mt-10"
+    >
       {{ current?.event_title }}
     </div>
     <v-card
@@ -92,9 +94,14 @@
                   <div class="text-text-heading font-weight-bold mt-1">
                     {{ current?.eventPlace }}
                   </div>
-                  <v-btn color="primary-base" variant="text"
-                    >مشاهده روی نقشه</v-btn
+                  <v-btn
+                    color="primary-base"
+                    variant="text"
+                    href="https://maps.app.goo.gl/YeqbJYLqKS4bWH24A"
+                    target="_blank"
                   >
+                    مشاهده روی نقشه
+                  </v-btn>
                 </div>
                 <div
                   class="text-primary-base text-body-1 font-weight-bold mt-4"
@@ -152,7 +159,7 @@
   </v-container>
   <!-- SPEAKERS -->
   <v-container fluid class="mt-md-16 mt-0">
-    <div class="text-h3 text-text-heading mb-4">{{ $t('event_speakers') }}</div>
+    <div class="text-h3 text-text-heading mb-4">{{ $t("event_speakers") }}</div>
     <product-mentors
       v-if="current?.speakers"
       :items="current?.speakers"
