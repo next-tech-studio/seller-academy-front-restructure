@@ -13,15 +13,15 @@
           بود، همراه و پیگیر! به فروشندگانی که برنامه‌اى براى تبليغ برندشون
           دارند، پیشنهاد می‌کنم حتما تبلیغات دیجی‌کالا رو بررسی كنند.
         </div>
-        <div class="d-lg-block d-flex align-center order-lg-last">
-          <!-- <v-avatar class="my-6 me-6">
+        <div class="d-flex align-center order-lg-last mb-4">
+          <v-avatar class="my-6 me-6">
             <v-img
               cover
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaH95MYy4lQdqXKOR2FCcv2KIHRhz7rCj4N8VKm4zbQmfaOU7lU_m_ykDR6sWGMMEKof8&usqp=CAU"
+              src="/images/kasra-nikpoor.webp"
               alt="user"
             ></v-img>
-          </v-avatar> -->
-          <div class="mb-4">
+          </v-avatar>
+          <div>
             <div class="text-subtitle-1 text-text-heading font-weight-bold">
               کسری نیکپور، فروشنده برتر
             </div>
@@ -29,21 +29,20 @@
           </div>
         </div>
         <div
-            class="bg-background-dark rounded-lg pa-4 text-body-1 quote-background order-last"
-          >
-            دیجی‌کالا ۷ میلیون بازدید روزانه و ۳۰ میلیون کاربر فعال در ماه دارد.
-            دیجی کالا اد سرویس به پشتوانه‌ی تجربه‌ی ۱۵ ساله‌ دیجی‌کالا در تجارت
-            الکترونیک، درک و شناخت عمیقی از رفتار کاربران آنلاین هنگام خرید
-            دارد.
-          </div>
+          class="bg-background-dark rounded-lg pa-4 text-body-1 quote-background order-last"
+        >
+          دیجی‌کالا ۷ میلیون بازدید روزانه و ۳۰ میلیون کاربر فعال در ماه دارد.
+          دیجی کالا اد سرویس به پشتوانه‌ی تجربه‌ی ۱۵ ساله‌ دیجی‌کالا در تجارت
+          الکترونیک، درک و شناخت عمیقی از رفتار کاربران آنلاین هنگام خرید دارد.
+        </div>
       </v-col>
       <v-col cols="12" lg="6">
-        <v-img src="/images/kasra-nikpoor.jpeg" class="rounded-lg"></v-img>
-        <!-- <app-video-player
+        <!-- <v-img src="/images/kasra-nikpoor.webp" class="rounded-lg"></v-img> -->
+        <app-video-player
           video-poster="/images/home-header.png"
-          video-src="https://www.aparat.com/v/6GYax"
+          video-src="https://player.arvancloud.ir/index.html?config=https://next-test.arvanvod.ir/ZaMv0Glomq/51w0ZXnzBE/origin_config.json"
           small
-        /> -->
+        />
       </v-col>
     </v-row>
   </v-container>

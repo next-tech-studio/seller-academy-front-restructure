@@ -134,4 +134,70 @@ export default defineNuxtConfig({
       "composables/**",
     ],
   },
+  // pwa: {
+  //   manifest: {
+  //     name: "Seller Hub",
+  //     short_name: "Seller Hub",
+  //     start_url: "/",
+  //     lang: "fa-IR",
+  //     display: "standalone",
+  //     description: "Seller Hub, A Community For Digikala's Sellers",
+  //     theme_color: "#ffffff",
+  //     background_color: "#ffffff",
+  //     orientation: "any",
+  //     prefer_related_applications: true,
+  //     icons: [
+  //       {
+  //         src: "icons/android-chrome-192x192.png",
+  //         sizes: "192x192",
+  //         type: "image/png",
+  //       },
+  //       {
+  //         src: "icons/android-chrome-512x512.png",
+  //         sizes: "512x512",
+  //         type: "image/png",
+  //       },
+  //       {
+  //         src: "icons/android-chrome-512x512.png",
+  //         sizes: "512x512",
+  //         type: "image/png",
+  //         purpose: "any",
+  //       },
+  //       {
+  //         src: "icons/android-chrome-512x512.png",
+  //         sizes: "512x512",
+  //         type: "image/png",
+  //         purpose: "maskable",
+  //       },
+  //     ],
+  //   },
+  //   registerType: "autoUpdate",
+  //   workbox: {
+  //     // globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+  //     runtimeCaching: [
+  //       {
+  //         urlPattern: `${process.env.API_BASE_URL}/.*`,
+  //         handler: "NetworkFirst",
+  //         options: {
+  //           cacheName: "my-api-cache",
+  //           expiration: {
+  //             maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
+  //           },
+  //         },
+  //       },
+  //     ],
+  //   },
+  //   client: {
+  //     installPrompt: true,
+  //     // you don't need to include this: only for testing purposes
+  //     // if enabling periodic sync for update use 1 hour or so (periodicSyncForUpdates: 3600)
+  //     periodicSyncForUpdates: 20,
+  //   },
+  //   devOptions: {
+  //     enabled: true,
+  //     suppressWarnings: true,
+  //     navigateFallbackAllowlist: [/^\/$/],
+  //     type: "module",
+  //   },
+  // },
 });

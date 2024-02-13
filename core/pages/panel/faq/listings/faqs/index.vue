@@ -145,7 +145,7 @@ let headers = ref([
     size: "200px",
   },
   {
-    key: "answer",
+    key: "answers",
     align: "start",
     title: t("answer"),
     size: "120px",
@@ -202,7 +202,7 @@ let questionForm = ref([
   },
   {
     type: "text-area",
-    name: "answer",
+    name: "answers",
     modelValue: ref(""),
     validations: "required",
     label: "answer",
@@ -223,7 +223,7 @@ let questionForm = ref([
   {
     type: "checkbox",
     name: "isFrequent",
-    modelValue: ref(""),
+    modelValue: ref(false),
     label: "is_this_faq_frequent_in_this_category",
     size: 12,
     rows: 6,

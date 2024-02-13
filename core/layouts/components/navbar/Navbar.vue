@@ -19,7 +19,7 @@
         <v-spacer></v-spacer>
         <a href="/blog">
           <v-img
-            src="/images/logo/logo.png"
+            src="/images/logo/logo.svg"
             height="55"
             width="120"
             cover
@@ -44,7 +44,7 @@
       >
         <a href="/blog">
           <v-img
-            src="/images/logo/logo.png"
+            src="/images/logo/logo.svg"
             height="65"
             width="140"
             cover

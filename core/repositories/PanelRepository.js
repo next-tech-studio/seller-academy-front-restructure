@@ -217,7 +217,6 @@ export default (request) => ({
       {
         name: "commentText",
         method: "put",
-        query: `?type=${payload.type}`,
         path: `/panel/articles/comments/${payload.id}`,
         loading: true,
         alert: false,

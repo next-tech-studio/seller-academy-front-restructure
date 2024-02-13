@@ -182,23 +182,29 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
               this.currentItem,
               field.dataPath
             );
-            if (current && current[field.name])
+            console.log(current)
+            if (current && current[field.name]) {
               field.modelValue = current[field.name];
-            else if (typeof field.modelValue == "string") field.modelValue = "";
+              console.log(field.name,field.modelValue )
+            } else if (typeof field.modelValue == "string")
+              field.modelValue = "";
             else if (Array.isArray(field.modelValue)) field.modelValue = [];
+            else if (typeof field.modelValue == "boolean")
+              field.modelValue = false;
             else field.modelValue = {};
           } else {
             if (this.currentItem[field.name])
               field.modelValue = this.currentItem[field.name];
             else if (typeof field.modelValue == "string") field.modelValue = "";
             else if (Array.isArray(field.modelValue)) field.modelValue = [];
+            else if (typeof field.modelValue == "boolean")
+              field.modelValue = false;
             else field.modelValue = {};
           }
         });
       }
       this.editForm.push(...dataForm);
       // Object.assign( this.editForm,dataForm)
-      console.log(this.editForm, dataForm);
     },
     slugGenerator(str) {
       return str.replace(/\s+/g, "-");

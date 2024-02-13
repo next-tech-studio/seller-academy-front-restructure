@@ -139,7 +139,7 @@ let payload = computed(() => {
 const edit = () => {
   navigateTo(
     localePath({
-      name: `forum-panel-room-id`,
+      name: `forum-panel-room-create-id`,
       params: { id: sharedStore.currentItem.id },
     })
   );

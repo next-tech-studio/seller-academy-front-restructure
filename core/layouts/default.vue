@@ -23,7 +23,7 @@
           </v-col>
         </v-row> -->
       </v-main>
-      <Footer v-if="!hideFooter" ref="footer" />
+      <Footer ref="footer" />
       <app-toast></app-toast>
     </v-layout>
   </div>

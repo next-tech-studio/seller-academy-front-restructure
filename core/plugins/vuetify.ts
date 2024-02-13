@@ -2,7 +2,7 @@
 import {
     createVuetify, ThemeDefinition
 } from 'vuetify';
-import '@fortawesome/fontawesome-free/css/all.css'
+// import '@fortawesome/fontawesome-free/css/all.css'
 import "vuetify/styles";
 import FA from './../locales/fa'
 import { aliases, fa } from 'vuetify/iconsets/fa'
