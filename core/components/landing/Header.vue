@@ -6,7 +6,7 @@
           <v-card>
             <h1 class="text-h2 text-text-heading">{{ $t('landing_header_title') }}</h1>
             <div class="mb-2 text-h4 text-text-high-emphasis">{{ $t('landing_header_subtitle') }}</div>
-            <v-btn width="300" flat color="primary-base">{{ $t('landing_header_ca') }}</v-btn>
+            <v-btn block flat color="primary-base">{{ $t('landing_header_ca') }}</v-btn>
           </v-card>
         </v-col>
         <v-col cols="12" lg="4">
