@@ -19,6 +19,10 @@ const personalInfo: Mapping = {
   userDisplayName: {
     newName: "name",
   },
+  // birthday: {
+  //   processValue: (value) =>
+  //     process.client ? $moment(value).format("jYYYY/jMM/jDD") : "",
+  // },
   //   birthday: {
   //     processValue: (value) =>
   //       process.client ? $moment(value).format("jYYYY/jMM/jDD") : "",

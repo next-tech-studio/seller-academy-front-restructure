@@ -124,6 +124,7 @@ export default (request) => ({
     });
   },
   posts(payload) {
+    console.log('poossttss',payload)
     return request({
       name: "posts",
       method: "get",
@@ -159,7 +160,7 @@ export default (request) => ({
       name: "faqs",
       method: "get",
       path: "/faq/list",
-      query: `?search=${payload?.search}`,
+      query: `?search=${payload?.search}&categorySlug=${payload.category?.slug}`,
       loading: true,
       alert: false,
     });
