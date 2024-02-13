@@ -778,6 +778,7 @@ export default {
   job_title:'عنوان شغلی',
   linkedin:'لینکدین',
   mobile:'موبایل',
-  username:'نام کاربری'
+  username:'نام کاربری',
+  mobile_username:'موبایل(نام کاربری)'
 
 };

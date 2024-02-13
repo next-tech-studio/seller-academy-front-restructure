@@ -73,7 +73,7 @@ export default (request) => ({
     console.log("payloaddddd", payload);
     return request(
       {
-        name: "createUser",
+        name: "updateUser",
         method: "put",
         path: `/panel/users/${payload.id}/edit`,
         loading: true,
@@ -91,7 +91,7 @@ export default (request) => ({
         loading: true,
         alert: false,
       },
-      payload
+      payload.body
     );
   },
   updateUserStatus(payload) {

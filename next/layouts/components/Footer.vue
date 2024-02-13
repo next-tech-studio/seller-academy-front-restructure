@@ -89,7 +89,7 @@
           <v-img
             class="mx-auto mb-2"
             max-width="200"
-            src="/images/logo/logo.png"
+            src="/images/logo/logo.svg"
           />
           {{ $t("rights") }}
         </v-col>
