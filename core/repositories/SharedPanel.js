@@ -70,7 +70,6 @@ export default (request) => ({
     });
   },
   updateUser(payload) {
-    console.log("payloaddddd", payload);
     return request(
       {
         name: "updateUser",
@@ -83,6 +82,7 @@ export default (request) => ({
     );
   },
   createUser(payload) {
+    console.log('userPayload',payload)
     return request(
       {
         name: "createUser",

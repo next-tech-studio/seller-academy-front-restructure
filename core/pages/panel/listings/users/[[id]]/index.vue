@@ -160,13 +160,6 @@ let headers = ref([
     sortable: false,
   },
   {
-    value: "profile.type",
-    key: "type",
-    title: t("type"),
-    size: "75px",
-    sortable: false,
-  },
-  {
     value: "status",
     key: "status",
     title: t("status"),
@@ -261,6 +254,19 @@ let dataForm = ref([
   //   dataPath: "profile",
   // },
   {
+    type: "select",
+    modelValue: ref(""),
+    selectValue: "id",
+    show: true,
+    selectTitle: "name",
+    name: "role",
+    items: computed(() => sharedStore.listInfo?.roles),
+    validations: "required",
+    label: "role",
+    size: 6,
+    hint: true,
+  },
+  {
     type: "text-field",
     name: "jobTitle",
     show: true,
@@ -281,20 +287,6 @@ let dataForm = ref([
     size: 6,
     validations: "",
     label: "linkedin",
-    hint: true,
-    dataPath: "profile",
-  },
-  {
-    type: "select",
-    modelValue: ref(""),
-    selectValue: "id",
-    show: true,
-    selectTitle: "role",
-    name: "type",
-    items: computed(() => sharedStore.listInfo?.roles),
-    validations: "required",
-    label: "role",
-    size: 6,
     hint: true,
     dataPath: "profile",
   },
@@ -362,11 +354,14 @@ const submitItem = () => {
   let body = {};
 
   dataForm.value.forEach((field) => {
-    body[field.name] = sharedStore.editForm.find(
-      (item) => item.name === field.name
-    )?.modelValue;
+    if (field.show) {
+      body[field.name] = sharedStore.editForm.find(
+        (item) => item.name === field.name
+      )?.modelValue;
 
-    if (field.name == "avatarUrl") body[field.name] = body[field.name]?.url;
+      if (field.name == "avatarUrl")
+        body[field.name] = body[field.name]?.url || "";
+    }
   });
 
   if (sharedStore.edit) {
