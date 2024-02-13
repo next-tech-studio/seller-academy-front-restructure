@@ -28,12 +28,12 @@
               class="py-6 rounded-0 rounded-b-xl"
             >
               <v-img
-                :max-height="smAndDown ? 160 : 300"
+                :max-height="smAndDown ? 160 : 500"
                 src="/images/login.png"
                 class="align-self-stretch"
               ></v-img>
             </v-card>
-            <template v-if="!smAndDown">
+            <!-- <template v-if="!smAndDown">
               <div class="text-text-heading text-h3 mb-4 text-center">
                 عنوان توضیح
               </div>
@@ -41,7 +41,7 @@
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
                 استفاده از طراحان گرافیک است
               </div>
-            </template>
+            </template> -->
           </v-col>
         </v-row>
       </v-main>
