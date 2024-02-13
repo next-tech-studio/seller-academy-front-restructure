@@ -38,7 +38,7 @@
           </div>
       </v-col>
       <v-col cols="12" lg="6">
-        <v-img src="/images/kasra-nikpoor.jpeg" class="rounded-lg"></v-img>
+        <v-img src="/images/kasra-nikpoor.webp" class="rounded-lg"></v-img>
         <!-- <app-video-player
           video-poster="/images/home-header.png"
           video-src="https://www.aparat.com/v/6GYax"
