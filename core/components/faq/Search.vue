@@ -15,6 +15,7 @@
             color="n300"
             class="py-0 mt-4"
             variant="outlined"
+            v-model="mutedFaqs"
             bg-color="rgba(255, 255, 255, 0.1)"
             :label="$t('your_question')"
             type="email"
@@ -25,6 +26,7 @@
               <v-btn
                 style="border: 1px solid rgb(var(--v-theme-primary-base))"
                 flat
+                @click="$emit('update:modelValue', mutedFaqs)"
                 class="rounded-md text-button"
                 color="primary-base"
                 >{{ $t("search") }}</v-btn
@@ -34,8 +36,8 @@
         </v-col>
         <v-col cols="12" lg="3">
           <div class="d-flex justify-center align-center">
-          <v-img :max-width="lgAndUp ? 450 : 255" src="/images/faq.svg" />
-        </div>
+            <v-img :max-width="lgAndUp ? 450 : 255" src="/images/faq.svg" />
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -45,4 +47,16 @@
 <script setup>
 import { useDisplay } from "vuetify";
 const { lgAndUp } = useDisplay();
+const emit = defineEmits(["update:modelValue"]);
+const props = defineProps({
+  modelValue: "",
+});
+let mutedFaqs = computed({
+  get() {
+    props.modelValue;
+  },
+  set(value){
+    emit('update:modelValue', value)
+  }
+});
 </script>
