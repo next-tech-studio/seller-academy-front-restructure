@@ -41,7 +41,7 @@
                 <div class="d-flex justify-center">
 
                   <v-img
-                    src="/images/logo/logo.png"
+                    src="/images/logo/logo.svg"
                     max-height="100"
                     max-width="200"
                     cover

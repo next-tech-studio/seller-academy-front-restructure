@@ -8,7 +8,7 @@
           class="d-flex flex-column w-100 justify-space-between mb-11 mb-md-8"
         >
           <v-img
-            src="/images/logo/logo.png"
+            src="/images/logo/logo.svg"
             max-height="112"
             max-width="308"
             contain
