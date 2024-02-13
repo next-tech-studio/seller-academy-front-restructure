@@ -256,9 +256,9 @@ let dataForm = ref([
   {
     type: "select",
     modelValue: ref(""),
-    selectValue: "title",
+    selectValue: "id",
     show: true,
-    selectTitle: "title",
+    selectTitle: "name",
     name: "role",
     items: computed(() => sharedStore.listInfo?.roles),
     validations: "required",

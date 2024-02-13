@@ -1,6 +1,10 @@
 <template>
   <v-container fluid class="pa-8">
-    <app-stepper v-slot="scope" :store="academyStore" :type="academyStore.type()">
+    <app-stepper
+      v-slot="scope"
+      :store="academyStore"
+      :type="academyStore.type()"
+    >
       <div class="d-flex align-center">
         <v-btn
           icon="custom:eye"
@@ -141,7 +145,7 @@ const addNewQuestion = () => {
   contentModel.value[0].content.questions.push({
     title: "",
     choices: [],
-    id:contentModel.value[0].content.questions.length+1
+    id: contentModel.value[0].content.questions.length + 1,
   });
 };
 let singleContentType = computed(() => {
@@ -163,6 +167,11 @@ let pictureAlignment = [
   { icon: "custom:justifyCard", title: "وسط چین" },
   { icon: "custom:alignWhole", title: "تمام صفحه" },
 ];
+let videoUploaderProps = ref({
+  "area-size": { width: "100%", height: "327px" },
+  "upload-path": UPLOAD_ARTICLE_PATH,
+  "blog-content": true,
+});
 let uploaderProps = ref({
   "area-size": { width: "100%", height: "327px" },
   "upload-path": UPLOAD_ARTICLE_PATH,
@@ -251,8 +260,8 @@ const openSelectedContentSection = (type) => {
         type: "exam",
         component: Exam,
         content: {
-          questions: [{ title: "", choices: [], id: 1}],
-          description:''
+          questions: [{ title: "", choices: [], id: 1 }],
+          description: "",
         },
       });
       lesson.value.dominantType = "exam";
@@ -341,7 +350,10 @@ watch(
 // });
 onMounted(() => {
   academyStore.postRouteId = route.params.id;
-  academyStore.getChaptersList(route.query.chapterIndex, route.query.lessonIndex);
+  academyStore.getChaptersList(
+    route.query.chapterIndex,
+    route.query.lessonIndex
+  );
   academyStore.setStep(5);
 });
 </script>
