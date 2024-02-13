@@ -12,7 +12,7 @@
         class="text-center py-0 d-flex align-center justify-center"
       >
         <div class="d-flex justify-center align-center">
-          <v-img width="350" height="70" src="/images/logo/logo.png"></v-img>
+          <v-img width="350" height="70" src="/images/logo/logo.svg"></v-img>
         </div>
 
         <v-avatar rounded="0" size="fit-content"> </v-avatar>

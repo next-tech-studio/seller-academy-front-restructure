@@ -10,7 +10,7 @@
       <v-btn
         :text="$t('activate_room')"
         color="button-secondary"
-        @click="publish = true"
+        @click="saveRoom(true)"
       ></v-btn>
     </div>
     <v-form
@@ -236,7 +236,6 @@
 const route = useRoute();
 let search = ref([]);
 let edit = ref(false);
-let publish = ref(true);
 let form = ref(null);
 const UPLOAD_CHAT_PATH = "/community/chat/attachment";
 const localePath = useLocalePath();
@@ -304,7 +303,7 @@ const getRoomInfo = () => {
 //   };
 //   $repos.communityPanel.updateRoomStatus(payload);
 // };
-const saveRoom = () => {
+const saveRoom = (publish = false) => {
   if (edit.value)
     newMembers.value.push(...room.value.members.map((member) => member.id));
   let payload = {
@@ -320,7 +319,7 @@ const saveRoom = () => {
       navigateTo(
         localePath({ path: `/forum/panel/room/create/${res}` })
       );
-    if (publish.value) {
+    if (publish) {
       let payload = {
         body: {
           status: "active",
