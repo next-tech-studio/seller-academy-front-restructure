@@ -349,11 +349,6 @@ const init = () => {
   filters = ref([
     {
       type: "dropdown",
-      title: "type",
-      items: sharedStore.listInfo?.types,
-    },
-    {
-      type: "dropdown",
       title: "role",
       items: sharedStore.listInfo?.roles,
       key: "name",
@@ -423,8 +418,9 @@ onMounted(async () => {
   );
 });
 definePageMeta({
-  middleware: ["auth"],
+  middleware: ["auth", "roles"],
   layout: false,
+  permissions: ["blogs", "community", "academy", "users"],
 });
 </script>
 
