@@ -16,23 +16,26 @@
             md="6"
             sm="12"
             :order="mobile ? 1 : 2"
-            class="d-flex flex-column justify-md-center"
+            class="d-flex flex-column justify-md-center h-100"
             :class="{ 'bg-n100': !mobile }"
           >
-            <v-card
+          <v-img
+                src="/images/login.jpg"
+                cover
+              ></v-img>
+            <!-- <v-card
               :color="
                 mobile
                   ? 'rgba(var(--v-theme-background-success), 10%)'
                   : 'transparent'
               "
-              class="py-6 rounded-0 rounded-b-xl"
+              class="py-6 rounded-0 rounded-b-xl h-100"
             >
               <v-img
-                :max-height="smAndDown ? 160 : 500"
-                src="/images/login.png"
-                class="align-self-stretch"
+                src="/images/login.jpg"
+                cover
               ></v-img>
-            </v-card>
+            </v-card> -->
             <!-- <template v-if="!smAndDown">
               <div class="text-text-heading text-h3 mb-4 text-center">
                 عنوان توضیح
