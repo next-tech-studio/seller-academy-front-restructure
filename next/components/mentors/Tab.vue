@@ -19,7 +19,7 @@
       :key="propertyName"
       :value="propertyName"
     >
-      <v-container fluid>
+      <v-container fluid class="px-0">
         <v-row>
           <v-col
             v-for="(mentor, i) in category?.mentors"
@@ -33,7 +33,7 @@
               :item="mentor"
             >
               <template #footer>
-                <div class="d-flex justify-space-between">
+                <div class="d-flex justify-space-between align-center">
                   <div>
                     <v-btn
                       tag="a"
@@ -41,7 +41,7 @@
                       density="compact"
                       variant="flat"
                       icon
-                      class="me-4"
+                      class="me-lg-4 me-1"
                       :href="item?.linkedin"
                       target="_blank"
                     >

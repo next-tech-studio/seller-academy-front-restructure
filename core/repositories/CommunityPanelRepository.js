@@ -183,6 +183,7 @@ export default (request) => ({
       query: `?type=${payload.type}&search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}&page=${payload?.page}&status=${payload.status}`,
       loading: true,
       alert: false,
+      model: { name: panelTable, collection: true, pagination: true },
     });
   },
   categoriesListCommon(payload) {

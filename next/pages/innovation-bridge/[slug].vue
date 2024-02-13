@@ -6,7 +6,7 @@
         <v-banner
           border="none"
           lines="one"
-          class="bg-transparent py-4"
+          class="bg-transparent py-lg-4 py-1"
           density="compact"
         >
           <template v-slot:text>
@@ -28,7 +28,7 @@
           <app-share-in v-if="!smAndDown" :hide-title="false" />
           <template v-slot:actions>
             <v-btn
-              class="text-button text-primary-base px-10 bg-background-light mb-4"
+              class="text-button text-primary-base px-10 bg-background-light mb-lg-4 mb-3"
               variant="outlined"
               size="x-large"
               :to="
@@ -49,7 +49,9 @@
   </div>
   <!-- HOLDING DETAIL -->
   <v-container fluid class="py-md-16 my-md-16 py-8 my-2">
-    <div class="text-md-h3 text-h5 text-text-heading text-center mb-6">
+    <div
+      class="text-md-h3 text-h5 text-text-heading text-center mb-lg-6 mb-3 mt-lg-0 mt-10"
+    >
       {{ current?.event_title }}
     </div>
     <v-card
@@ -92,9 +94,14 @@
                   <div class="text-text-heading font-weight-bold mt-1">
                     {{ current?.eventPlace }}
                   </div>
-                  <v-btn color="primary-base" variant="text"
-                    >مشاهده روی نقشه</v-btn
+                  <v-btn
+                    color="primary-base"
+                    variant="text"
+                    href="https://maps.app.goo.gl/YeqbJYLqKS4bWH24A"
+                    target="_blank"
                   >
+                    مشاهده روی نقشه
+                  </v-btn>
                 </div>
                 <div
                   class="text-primary-base text-body-1 font-weight-bold mt-4"
@@ -152,7 +159,7 @@
   </v-container>
   <!-- SPEAKERS -->
   <v-container fluid class="mt-md-16 mt-0">
-    <div class="text-h3 text-text-heading mb-4">{{ $t('event_speakers') }}</div>
+    <div class="text-h3 text-text-heading mb-4">{{ $t("event_speakers") }}</div>
     <product-mentors
       v-if="current?.speakers"
       :items="current?.speakers"

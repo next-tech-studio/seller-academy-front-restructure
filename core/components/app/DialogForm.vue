@@ -208,7 +208,7 @@
                     type="text"
                     class="custom-input bg-n050 rounded px-4 py-2 w-100"
                     style="height: 46px"
-                    :value="item.modelValue"
+                    :value="$moment(item.modelValue).format('jYYYY/jMM/jDD')"
                   />
                   <date-picker
                     auto-submit
@@ -350,7 +350,6 @@ let emit = defineEmits([
 ]);
 let submit = async () => {
   const { valid } = await form.value.validate();
-  console.log("yeyeyyyeuuue", valid);
   if (valid) {
     emit("update:fields");
     sharedStore.sendingRequest = true;

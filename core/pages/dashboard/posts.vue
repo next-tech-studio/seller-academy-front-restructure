@@ -74,10 +74,8 @@ const menu = ref([
   { title: "my_posts", value: "myPosts" },
   { title: "bookmarked_posts", value: "Bookmarks" },
 ]);
-let payload = ref({
-  page: page.value,
-  search: search.value,
-  data: tabType.value,
+let payload = computed(() => {
+  return { page: page.value, search: search.value, data: tabType.value };
 });
 const getPosts = () => {
   $repos.other.posts(payload.value).then((res) => {
@@ -88,8 +86,8 @@ const getPosts = () => {
 watch(
   tabs,
   (newTab) => {
-    console.log(newTab);
     tabType.value = newTab == "myPosts" ? "my" : "bookmark";
+    console.log("tabs", newTab, tabType.value, payload.value);
     getPosts();
   },
   { deep: true }

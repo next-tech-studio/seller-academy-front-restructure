@@ -3,8 +3,7 @@
     <v-card-text class="pa-sm-auto" :class="parrentPadding">
       <div class="text-h2 text-text-heading mb-6" v-if="!hideTitle">
         {{ $t("faq") }}
-      </div>
-
+      </div> 
       <v-expansion-panels>
         <v-expansion-panel
           v-for="(item, index) in mutedContent"

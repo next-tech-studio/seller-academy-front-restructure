@@ -86,7 +86,10 @@
           </div>
         </template>
         <template #type="{ item }">
-          <v-chip :color="sharedStore.statusColor(item.item.profile.type)" v-if="item.item.profile.type">
+          <v-chip
+            :color="sharedStore.statusColor(item.item.profile.type)"
+            v-if="item.item.profile.type"
+          >
             {{ $t(item?.item?.profile?.type) }}
           </v-chip>
         </template>
@@ -298,11 +301,11 @@ let dataForm = ref([
   {
     type: "text-field",
     name: "password",
-    show: sharedStore.edit? false: true,
+    show: computed(() => (sharedStore.edit ? false : true)),
     textFieldType: "password",
     modelValue: ref(""),
     size: 12,
-    validations: computed(() => !sharedStore.edit ? "required" : ""),
+    validations: computed(() => (!sharedStore.edit ? "required" : "")),
     label: "password",
     hint: true,
   },
@@ -346,11 +349,6 @@ const init = () => {
   filters = ref([
     {
       type: "dropdown",
-      title: "type",
-      items: sharedStore.listInfo?.types,
-    },
-    {
-      type: "dropdown",
       title: "role",
       items: sharedStore.listInfo?.roles,
       key: "name",
@@ -368,7 +366,7 @@ const submitItem = () => {
       (item) => item.name === field.name
     )?.modelValue;
 
-    if (field.name == 'avatarUrl') body[field.name] = body[field.name]?.url
+    if (field.name == "avatarUrl") body[field.name] = body[field.name]?.url;
   });
 
   if (sharedStore.edit) {
@@ -376,7 +374,9 @@ const submitItem = () => {
       (item) => item.id === sharedStore.currentItem.id
     );
     payload = {
-      body: { ...body, id: sharedStore.currentItem.id, profileId: sharedStore.currentItem.profile.id },
+      ...body,
+      id: sharedStore.currentItem.id,
+      profileId: sharedStore.currentItem.profile.id,
     };
     $repos.sharedPanel
       .createUser(payload)
@@ -418,8 +418,9 @@ onMounted(async () => {
   );
 });
 definePageMeta({
-  middleware: ["auth"],
+  middleware: ["auth", "roles"],
   layout: false,
+  permissions: ["blogs", "community", "academy", "users"],
 });
 </script>
 

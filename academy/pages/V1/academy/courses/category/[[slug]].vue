@@ -63,15 +63,17 @@
         </v-col>
       </v-row>
     </v-container>
-    <div class="bg-primary-base mt-10">
+    <!-- <div class="bg-primary-base mt-10">
       <v-container>
         <landing-roadmaps :items="roadmaps"></landing-roadmaps>
       </v-container>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script setup>
+import { useDisplay } from "vuetify";
+const { lgAndUp } = useDisplay();
 const roadmaps = [
   {
     id: "6",
