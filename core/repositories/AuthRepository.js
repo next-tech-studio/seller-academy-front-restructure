@@ -8,7 +8,7 @@ export default (request) => ({
         method: "post",
         path: "/auth/exists",
         loading: true,
-        alert: false,
+        alert: true,
       },
       payload
     );
@@ -21,7 +21,7 @@ export default (request) => ({
         path: "/auth/login",
         loading: true,
         model: { name: user },
-        alert: false,
+        alert: true,
       },
       payload
     );

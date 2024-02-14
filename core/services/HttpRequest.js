@@ -21,7 +21,7 @@ class HttpRequest {
         })
           .then((resp) => {
             resolve(resp);
-            if(alert) this.toast.show({ text: resp.message }, "success");
+            if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
             this.toast.show({ text: err.response._data.message }, "error");
@@ -42,7 +42,7 @@ class HttpRequest {
         })
           .then((resp) => {
             resolve(resp);
-            if(alert) this.toast.show({ text: resp.message }, "success");
+            if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
             this.toast.show({ text: err.response._data.message }, "error");
@@ -63,7 +63,7 @@ class HttpRequest {
         })
           .then((resp) => {
             resolve(resp);
-            if(alert) this.toast.show({ text: resp.message }, "success");
+            if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
             this.toast.show({ text: err.response._data.message }, "error");
@@ -103,7 +103,7 @@ class HttpRequest {
                 color: "success",
               });
             resolve();
-            if(alert) this.toast.show({ text: resp.message }, "success");
+            if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
             if (!url.includes("checkLogin")) {
