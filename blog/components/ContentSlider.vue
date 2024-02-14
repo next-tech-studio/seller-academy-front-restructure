@@ -5,6 +5,7 @@
     tag="section"
     :style="animation"
     :ripple="false"
+    class="cursor-pointer"
   >
     <v-card-text class="pa-0">
       <v-row>
@@ -55,55 +56,57 @@
           >
         </v-col>
         <v-col cols="12" lg="6" md="12" class="my-md-auto my-1">
-          <v-carousel
-            class="rounded-lg"
-            :height="mdAndUp ? 370 : 199"
-            v-model="current"
-            :interval="10000"
-            cycle
-            v-bind="$attrs"
-          >
-            <template v-slot:prev="{ props }">
-              <v-btn
-                :height="mdAndUp ? 50 : 20.36"
-                class="text-white"
-                size="x-small"
-                style="
-                  background: rgba(var(--v-theme-background-scrim-dark), 30%);
-                  border-radius: 8px 0 0 8px;
-                  min-width: fit-content !important;
-                "
-                @click="props.onClick"
-              >
-                <v-icon>fas fa-chevron-right</v-icon>
-              </v-btn>
-            </template>
-            <template v-slot:next="{ props }">
-              <v-btn
-                :height="mdAndUp ? 50 : 20.36"
-                class="text-white"
-                size="x-small"
-                style="
-                  background: rgba(var(--v-theme-background-scrim-dark), 30%);
-                  border-radius: 0 8px 8px 0;
-                  min-width: fit-content !important;
-                "
-                @click="props.onClick"
-              >
-                <v-icon>fas fa-chevron-left</v-icon>
-              </v-btn>
-            </template>
-            <v-carousel-item
-              class="d-flex justify-center align-end rounded-lg"
-              v-for="(item, i) in mutedItems"
-              :key="i"
-              aspect-ratio="1.64"
-              cover
-              :src="item?.bannerUrl"
-              :alt="item?.slug"
+          <client-only>
+            <v-carousel
+              class="rounded-lg"
+              :height="mdAndUp ? 370 : 199"
+              v-model="current"
+              :interval="10000"
+              cycle
+              v-bind="$attrs"
             >
-            </v-carousel-item>
-          </v-carousel>
+              <template v-slot:prev="{ props }">
+                <v-btn
+                  :height="mdAndUp ? 50 : 20.36"
+                  class="text-white"
+                  size="x-small"
+                  style="
+                    background: rgba(var(--v-theme-background-scrim-dark), 30%);
+                    border-radius: 8px 0 0 8px;
+                    min-width: fit-content !important;
+                  "
+                  @click="props.onClick"
+                >
+                  <v-icon icon="custom:chevronRight"></v-icon>
+                </v-btn>
+              </template>
+              <template v-slot:next="{ props }">
+                <v-btn
+                  :height="mdAndUp ? 50 : 20.36"
+                  class="text-white"
+                  size="x-small"
+                  style="
+                    background: rgba(var(--v-theme-background-scrim-dark), 30%);
+                    border-radius: 0 8px 8px 0;
+                    min-width: fit-content !important;
+                  "
+                  @click="props.onClick"
+                >
+                  <v-icon icon="custom:chevronLeft"></v-icon>
+                </v-btn>
+              </template>
+              <v-carousel-item
+                class="d-flex justify-center align-end rounded-lg"
+                v-for="(item, i) in mutedItems"
+                :key="i"
+                aspect-ratio="1.64"
+                cover
+                :src="item?.bannerUrl"
+                :alt="item?.slug"
+              >
+              </v-carousel-item>
+            </v-carousel>
+          </client-only>
         </v-col>
       </v-row>
     </v-card-text>
