@@ -173,7 +173,7 @@ export default (request) => ({
         method: "put",
         path: "/panel/categories/set_status",
         loading: true,
-        alert: false,
+        alert: true,
       },
       payload.body
     );

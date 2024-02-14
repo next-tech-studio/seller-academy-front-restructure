@@ -24,7 +24,8 @@ class HttpRequest {
             if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
-            this.toast.show({ text: err.response._data.message }, "error");
+            console.log('err', err.response.status);
+            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
             reject(err);
           });
       });
@@ -45,7 +46,7 @@ class HttpRequest {
             if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
-            this.toast.show({ text: err.response._data.message }, "error");
+            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
             reject(err);
           });
       });
@@ -66,7 +67,7 @@ class HttpRequest {
             if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
-            this.toast.show({ text: err.response._data.message }, "error");
+            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
             reject(err);
           });
       });
@@ -81,7 +82,7 @@ class HttpRequest {
             resolve(resp);
           })
           .catch((err) => {
-            this.toast.show({ text: err.response._data.message }, "error");
+            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
             reject(err);
           });
       });
@@ -109,7 +110,7 @@ class HttpRequest {
             if (!url.includes("checkLogin")) {
               this.toast.show({ text: "validation.unauthorized" }, "error");
             }
-            this.toast.show({ text: err.response._data.message }, "error");
+            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
             reject(err);
           });
       });
