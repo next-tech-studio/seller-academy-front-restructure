@@ -124,6 +124,10 @@ export default defineNuxtConfig({
       baseURL: "/blog",
       domain: process.env.DOMAIN,
       gtagId: process.env.GTAGID,
+      pusherKey: process.env.PUSHER_KEY,
+      pusherWsHost: process.env.PUSHER_WSHOST,
+      pusherWsPort: process.env.PUSHER_WSPORT,
+      pusherForceTLS: process.env.PUSHER_FORCETLS,
     },
   },
   schemaOrg: {
