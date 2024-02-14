@@ -47,6 +47,7 @@ export default defineNuxtConfig({
       },
     },
     build: {
+      chunkSizeWarningLimit: 1000,
       rollupOptions: {
         output: {
           manualChunks(id) {
@@ -66,7 +67,7 @@ export default defineNuxtConfig({
   modules: [
     async (options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) =>
-        config.plugins.push(
+        config?.plugins?.push(
           vuetify({
             styles: { configFile: resolve("assets/styles/vuetify.scss") },
           })
