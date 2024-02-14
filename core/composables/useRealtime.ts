@@ -14,7 +14,7 @@ export const useRealtime = (channel, event, model) => {
         window.Echo = new Echo({
             broadcaster: 'pusher',
             key: 'seller_academy',
-            wsHost: 'sa-test.techstudio.diginext.ir',
+            wsHost: 'demo.sellerhub.diginext.ir',
             wsPort: 443,
             forceTLS: true,
             disableStats: true,
