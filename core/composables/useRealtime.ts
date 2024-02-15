@@ -19,7 +19,7 @@ export const useRealtime = (channel, event, model) => {
             wsPort: runTimeConfig.public.pusherWsPort,
             forceTLS: runTimeConfig.public.pusherForceTLS,
             disableStats: true,
-            cluster: 'us2'
+            cluster: ''
         });
 
         window.Echo.connector.pusher.connection.bind('connected', () => {
