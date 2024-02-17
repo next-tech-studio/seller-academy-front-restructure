@@ -232,7 +232,7 @@ export default (request) => ({
         method: "put",
         path: "/academy/panel/skill/status",
         loading: true,
-        alert: false,
+        alert: true,
       },
       payload.body
     );

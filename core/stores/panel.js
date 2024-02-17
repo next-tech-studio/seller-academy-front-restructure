@@ -1,3 +1,5 @@
+import moment from "jalali-moment";
+
 export const usePanelStore = defineStore("panel", {
   state: () => ({
     step: ref(1),
@@ -56,6 +58,7 @@ export const usePanelStore = defineStore("panel", {
       bannerUrlMobile: ref({}),
       content: [],
       information: [],
+      publicationDate: ''
     },
     editorCategories: [],
     editorAuthorOptions: [],
@@ -247,6 +250,7 @@ export const usePanelStore = defineStore("panel", {
             tags: this.draftContent.tags,
             slug: this.draftContent.slug,
             information: this.draftContent.information,
+            publicationDate: this.draftContent.publicationDate
           },
         };
         this.$repos.panel.saveDraft(finalContent).then((res) => {
@@ -309,6 +313,11 @@ export const usePanelStore = defineStore("panel", {
             url: this.draftContent.bannerUrlMobile,
           };
         else this.draftContent.bannerUrlMobile = ref({});
+        if (!this.draftContent.publicationDate) {
+          this.draftContent.publicationDate = moment().format(
+            "YYYY-MM-DD HH:mm:ss"
+          );
+        }
         nextTick(() => {
           if (res.id) {
             this.postSavedState = true;

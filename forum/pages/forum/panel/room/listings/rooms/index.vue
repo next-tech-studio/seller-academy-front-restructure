@@ -71,6 +71,7 @@
 import { useFilterStore } from "@core/stores/filter";
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
+const { $repos } = useNuxtApp();
 let filterStore = useFilterStore();
 const { t } = useI18n();
 let operations;
@@ -115,6 +116,11 @@ const init = () => {
       value: "active",
       function: roomsList.value.changeItemStatus,
     },
+    {
+      title: "پرطرفدارترین‌ها",
+      value: "most_popular",
+      function: updateMostPopular,
+    },
   ]);
   filters = ref([
     {
@@ -136,6 +142,26 @@ let payload = computed(() => {
     sortOrder: sharedStore.sortBy[0]?.order || "",
   };
 });
+const updateMostPopular = (item, action) => {
+  $repos.communityPanel
+    .saveRoom({
+      body: {
+        // id: item.id,
+        // slug: item.slug,
+        // categoryId: item.category.id,
+        ...item,
+        members: item.members.map(x => x.id),
+        mostPopular: !item.mostPopular,
+      },
+    })
+    .then(() => {
+      sharedStore.getListingItems(
+        "chatRoomsList",
+        payload.value,
+        "communityPanel"
+      );
+    });
+};
 const edit = () => {
   navigateTo(
     localePath({

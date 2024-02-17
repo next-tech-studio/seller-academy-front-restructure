@@ -17,7 +17,7 @@
       </template>
       <v-container class="d-flex align-center" v-if="!lgAndUp">
         <v-spacer></v-spacer>
-        <a href="/blog">
+        <a href="/">
           <v-img
             src="/images/logo/logo.svg"
             height="55"
@@ -42,7 +42,7 @@
         :fluid="!showNavberItems"
         class="d-flex align-center"
       >
-        <a href="/blog">
+        <a href="/">
           <v-img
             src="/images/logo/logo.svg"
             height="65"
@@ -91,6 +91,15 @@
           {{ $t("add_new_post") }}
         </v-btn>
         <auth-handler />
+        <v-btn
+        v-if="route.name.includes('panel')"
+          rounded="xl"
+          @click = "navigateTo('/')"
+          color="text-high-emphasis"
+          class="bg-secondary-lighten1 ms-4"
+          height="41"
+          >{{ $t("enter_website") }}</v-btn
+        >
       </v-container>
     </v-app-bar>
     <v-expand-transition>
