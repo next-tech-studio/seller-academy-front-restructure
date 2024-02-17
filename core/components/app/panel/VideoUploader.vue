@@ -180,6 +180,7 @@ export default defineComponent({
     :multiple="false"
     @change="onFileChanged"
   />
+  <progress :value="uploadProgress" max="100">{{ uploadProgress }}</progress>
   <!-- <input type="file" @change="handleFileChange" />
   <progress :value="uploadProgress" max="100">{{ uploadProgress }}%</progress> -->
 </template>
@@ -224,44 +225,25 @@ const onFileChanged = (e) => {
 const checkStatus = () => {
   $repos.other.uploadStatus({ fileId: fileId.value }).then((res) => {
     offsetLength.value = res.offsetLength;
-    const upload = createUploader(
-      selectedFiles.value.file,
-      {
-        // You can override default options here
-        headers: {
-          Authorization: "apikey 2787bcfc-a31d-50b6-87d4-4323985d8914",
-          "tus-resumable": "1.0.0",
-          "upload-offset": offsetLength.value,
-          "Content-Type": "application/offset+octet-stream",
-        },
-      },
-      fileId.value
-    );
-    upload.start();
   });
 };
 async function submit() {
   sendingRequest.value = true;
   let formData = new FormData();
   formData.append("file", selectedFiles?.value.file);
-  console.log('888888',formData,selectedFiles?.value.file)
-  if (fileId.value) checkStatus();
-  else {
-    await $repos.other
-      .uploadVideoGenerateId({
-        body: formData,
-      })
-      .then((response) => {
-        sendingRequest.value = false;
-        fileId.value = response;
-        checkStatus();
-      })
-      .catch(() => {
-        sendingRequest.value = false;
-        url = ref("");
-        selectedFiles?.value.splice(0, selectedFiles?.value.length);
-      });
-  }
+  console.log("888888", formData, selectedFiles?.value.file);
+  const upload = createUploader(selectedFiles.value.file, {
+    // You can override default options here
+    uploadSize: selectedFiles.value.file.length,
+    metadata: {
+      filename: selectedFiles.value.file.name,
+      filetype: selectedFiles.value.file.type,
+    },
+    onSuccess: () => {
+      console.log("Upload finished:", upload?.url);
+    },
+  });
+  upload.start();
 }
 
 // function handleFileChange(event) {

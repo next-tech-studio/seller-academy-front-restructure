@@ -192,10 +192,10 @@ export default (request) => ({
         path: "/file/generate",
         loading: true,
         alert: false,
-        headers:{
-          'Content-Type':'video/mp4',
-          'Accept':'multipart/form-data'
-        }
+        // headers:{
+        //   'Content-Type':'video/mp4',
+        //   'Accept':'multipart/form-data'
+        // }
       },
       payload.body
     );
@@ -214,7 +214,19 @@ export default (request) => ({
           'Accept':'application/json'
         }
       },
-      payload.body
+      payload
     );
   },
+  uploadBigFile(payload){
+    return request(
+      {
+        name: "checkStatus",
+        method: "post",
+        path: "/file/upload/large",
+        loading: true,
+        alert: false,
+      },
+      payload
+    );
+  }
 });

@@ -16,7 +16,7 @@ class HttpRequest {
     console.log('headersssssssssssss',{ ...this.headers, ...headers })
 
     try {
-      return new Promise((resolve, rejec) => {
+      return new Promise((resolve, reject) => {
         $fetch(url, {
           method: "POST",
           body: payload,
