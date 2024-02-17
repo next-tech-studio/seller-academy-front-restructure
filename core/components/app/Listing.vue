@@ -494,9 +494,9 @@ const setOperationIcon = (action, item) => {
     return { icon: "custom:infoCircleOutlined", color: "text-high-emphasis" };
   else if (action == "approved")
     return { icon: "custom:circleCheckSolid", color: "text-high-emphasis" };
-  else if (action == "most_popular" && item.mostPapular)
+  else if (action == "most_popular" && item.mostPopular)
     return { icon: "custom:star", color: "text-hint-caution" };
-  else if (action == "most_popular" && !item.mostPapular)
+  else if (action == "most_popular" && !item.mostPopular)
     return { icon: "custom:star", color: "text-low-emphasis" };
 };
 </script>
