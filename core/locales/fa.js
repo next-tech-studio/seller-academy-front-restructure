@@ -781,6 +781,7 @@ export default {
   linkedin:'لینکدین',
   mobile:'موبایل',
   username:'نام کاربری',
-  mobile_username:'موبایل(نام کاربری)'
+  mobile_username:'موبایل(نام کاربری)',
+  enter_website:'ورود به وبسایت'
 
 };
