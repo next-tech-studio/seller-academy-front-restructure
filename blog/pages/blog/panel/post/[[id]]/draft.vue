@@ -195,7 +195,9 @@
                   {{ channels[currentChannel].title }}
                 </div>
                 <v-text-field
-                  v-model="panelStore.draftContent.information[currentChannel].link"
+                  v-model="
+                    panelStore.draftContent.information[currentChannel].link
+                  "
                   flat
                   base-color="n300"
                   density="compact"
@@ -249,6 +251,36 @@
             single
           ></app-category>
         </div>
+        <client-only>
+          <div class="w-100 d-flex align-center">
+            <span
+              class="me-2"
+            >
+              {{ $t("publicationDate") }}
+          </span>
+            <input
+              type="text"
+              class="custom-input bg-n050 rounded px-4 py-2"
+              style="height: 46px"
+              :value="
+                $moment(panelStore.draftContent.publicationDate).format(
+                  'jYYYY/jMM/jDD'
+                )
+              "
+            />
+            <date-picker
+              auto-submit
+              color="rgba(var(--v-theme-primary-base))"
+              v-model="panelStore.draftContent.publicationDate"
+              custom-input=".custom-input"
+              format="YYYY-MM-DD hh:mm:ss"
+              simple
+              display-format="hh:mm:ss jYYYY-jMM-jDD"
+              popover="bottom-left"
+              type="datetime"
+            ></date-picker>
+          </div>
+        </client-only>
       </section>
     </v-form>
   </v-container>
@@ -265,42 +297,43 @@ let form = ref(null);
 const UPLOAD_ARTICLE_PATH = "/panel/articles/upload_cover";
 let dialog = ref(false);
 let currentChannel = ref(-1);
+const { $moment } = useNuxtApp();
 const channels = ref([
   {
     id: 1,
     title: "itunes",
     logo: "/images/channels/itunes.png",
-    link: null
+    link: null,
   },
   {
     id: 2,
     title: "castbox",
     logo: "/images/channels/castbox.png",
-    link: null
+    link: null,
   },
   {
     id: 3,
     title: "google podcast",
     logo: "/images/channels/googlepodcast.png",
-    link: null
+    link: null,
   },
   {
     id: 4,
     title: "spotify",
     logo: "/images/channels/spotify.png",
-    link: null
+    link: null,
   },
   {
     id: 5,
     title: "soundcloud",
     logo: "/images/channels/soundcloud.png",
-    link: null
+    link: null,
   },
   {
     id: 5,
     title: "shenoto",
     logo: "/images/channels/shenoto.png",
-    link: null
+    link: null,
   },
 ]);
 onMounted(() => {
@@ -317,7 +350,9 @@ onMounted(() => {
     content: [],
     information: channels.value,
   };
-  if (route.params.id) panelStore.getDraftInfo();
+  if (route.params.id) {
+    panelStore.getDraftInfo();
+  }
 });
 const { draftContent } = storeToRefs(panelStore);
 watch(
@@ -336,7 +371,8 @@ const openChannelDialog = (index) => {
   dialog.value = true;
 };
 const addChannel = () => {
-  panelStore.draftContent.information[currentChannel.value] = channels.value[currentChannel.value]
+  panelStore.draftContent.information[currentChannel.value] =
+    channels.value[currentChannel.value];
   dialog.value = false;
 };
 const type = computed(() =>
