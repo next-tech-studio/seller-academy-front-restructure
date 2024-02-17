@@ -162,18 +162,6 @@ export default (request) => ({
       payload.body
     );
   },
-  updateRoomStatus(payload) {
-    return request(
-      {
-        name: "updateRoomStatus",
-        method: "put",
-        path: `/panel/chat/set_status`,
-        loading: true,
-        alert: false,
-      },
-      payload.body
-    );
-  },
   //categories
   categoriesList(payload) {
     return request({
