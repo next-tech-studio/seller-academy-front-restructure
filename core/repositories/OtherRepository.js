@@ -11,6 +11,15 @@ export default (request) => ({
       alert: false,
     });
   },
+  loggedinHomepage() {
+    return request({
+      name: "loggedinHomepage",
+      method: "get",
+      path: "/landing/first",
+      loading: true,
+      alert: false,
+    });
+  },
   search(payload) {
     return request({
       name: "search",

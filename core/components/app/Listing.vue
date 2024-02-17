@@ -384,6 +384,7 @@ const emit = defineEmits([
   "show:dialog",
   "navigate:toItem",
   "update:hardDelete",
+  "update:mostPopular"
 ]);
 let pageNumber = computed({
   get() {
@@ -482,7 +483,10 @@ const setOperationIcon = (action, item) => {
     return { icon: "custom:notPublished", color: "text-high-emphasis" };
   else if (action == "active" && item.status == "deactive")
     return { icon: "custom:power", color: "text-hint-success" };
-  else if (action == "active" && item.status == "inactive")
+  else if (
+    action == "active" &&
+    (item.status == "inactive" || item.status == "draft")
+  )
     return { icon: "custom:power", color: "text-hint-success" };
   else if (action == "active" && item.status == "active") {
     return { icon: "custom:power", color: "text-primary" };
@@ -490,6 +494,10 @@ const setOperationIcon = (action, item) => {
     return { icon: "custom:infoCircleOutlined", color: "text-high-emphasis" };
   else if (action == "approved")
     return { icon: "custom:circleCheckSolid", color: "text-high-emphasis" };
+  else if (action == "most_popular" && item.mostPapular)
+    return { icon: "custom:star", color: "text-hint-caution" };
+  else if (action == "most_popular" && !item.mostPapular)
+    return { icon: "custom:star", color: "text-low-emphasis" };
 };
 </script>
 
