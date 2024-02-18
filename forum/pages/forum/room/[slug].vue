@@ -1,6 +1,7 @@
 <template>
   <div style="height: 100vh">
     <NuxtLayout name="no-footer">
+      {{ isAMemberOfRoom }}
       <not-logged-in-room-preview
         v-model="common"
         :btn-title="

@@ -7,6 +7,10 @@ x-buildargs: &buildargs
     SELLER_PANEL_LOGIN_URL: ${SELLER_PANEL_LOGIN_URL}
     NEED_AUTH: ${NEED_AUTH}
     ACADEMY_VERSION: ${ACADEMY_VERSION}
+    PUSHER_KEY: ${PUSHER_KEY}
+    PUSHER_WSHOST: ${PUSHER_WSHOST}
+    PUSHER_WSPORT: ${PUSHER_WSPORT}
+    PUSHER_FORCETLS: ${PUSHER_FORCETLS}
 
 x-module: &module
     env_file: .env
@@ -19,13 +23,17 @@ x-module: &module
             SELLER_PANEL_LOGIN_URL: ${SELLER_PANEL_LOGIN_URL}
             NEED_AUTH: ${NEED_AUTH}
             ACADEMY_VERSION: ${ACADEMY_VERSION}
+            PUSHER_KEY: ${PUSHER_KEY}
+            PUSHER_WSHOST: ${PUSHER_WSHOST}
+            PUSHER_WSPORT: ${PUSHER_WSPORT}
+            PUSHER_FORCETLS: ${PUSHER_FORCETLS}
     restart: unless-stopped
     depends_on:
         - core
 
 services:
     core:
-        image: seller-core-ui-core:latest
+        image: seller-refactored-ui-core:latest
         env_file: .env
         platform: linux/x86_64
         build:
