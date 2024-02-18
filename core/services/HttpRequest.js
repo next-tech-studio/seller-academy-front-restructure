@@ -7,25 +7,33 @@ class HttpRequest {
     this.me = app._route.query.me || 1;
     this.notifier = app.$notifier;
     this.toast = useToastStore();
-    this.headers = { Authorization: useAuthStore().user.token };
+    this.headers = {
+      Authorization: useAuthStore().user.token
+    };
   }
 
-  post(url, payload = {}, alert = false) {
+  post(url, payload = {}, alert = false, headers = {}) {
+    console.log('headersssssssssssss',{ ...this.headers, ...headers })
+
     try {
       return new Promise((resolve, reject) => {
         $fetch(url, {
           method: "POST",
           body: payload,
           credentials: "include",
-          headers: this.headers
+          headers: { ...this.headers, ...headers },
         })
           .then((resp) => {
             resolve(resp);
-            if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
+            if (alert && resp.message)
+              this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
-            console.log('err', err.response.status);
-            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
+            console.log("err", err.response.status);
+            this.toast.show(
+              { text: err.response._data.message },
+              err.response.status == 403 ? "info" : "error"
+            );
             reject(err);
           });
       });
@@ -39,14 +47,18 @@ class HttpRequest {
           method: "PUT",
           body: payload,
           credentials: "include",
-          headers: this.headers
+          headers: this.headers,
         })
           .then((resp) => {
             resolve(resp);
-            if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
+            if (alert && resp.message)
+              this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
-            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
+            this.toast.show(
+              { text: err.response._data.message },
+              err.response.status == 403 ? "info" : "error"
+            );
             reject(err);
           });
       });
@@ -60,14 +72,18 @@ class HttpRequest {
           method: "DELETE",
           body: payload,
           credentials: "include",
-          headers: this.headers
+          headers: this.headers,
         })
           .then((resp) => {
             resolve(resp);
-            if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
+            if (alert && resp.message)
+              this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
-            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
+            this.toast.show(
+              { text: err.response._data.message },
+              err.response.status == 403 ? "info" : "error"
+            );
             reject(err);
           });
       });
@@ -82,7 +98,10 @@ class HttpRequest {
             resolve(resp);
           })
           .catch((err) => {
-            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
+            this.toast.show(
+              { text: err.response._data.message },
+              err.response.status == 403 ? "info" : "error"
+            );
             reject(err);
           });
       });
@@ -94,7 +113,7 @@ class HttpRequest {
       return new Promise((resolve, reject) => {
         $fetch(url, {
           responseType: "blob",
-          headers: this.headers
+          headers: this.headers,
         })
           .then((resp) => {
             FileDownload(resp.data, "file." + type);
@@ -104,13 +123,17 @@ class HttpRequest {
                 color: "success",
               });
             resolve();
-            if(alert && resp.message) this.toast.show({ text: resp.message }, "success");
+            if (alert && resp.message)
+              this.toast.show({ text: resp.message }, "success");
           })
           .catch((err) => {
             if (!url.includes("checkLogin")) {
               this.toast.show({ text: "validation.unauthorized" }, "error");
             }
-            this.toast.show({ text: err.response._data.message }, err.response.status == 403 ? "info" : "error");
+            this.toast.show(
+              { text: err.response._data.message },
+              err.response.status == 403 ? "info" : "error"
+            );
             reject(err);
           });
       });

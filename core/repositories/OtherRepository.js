@@ -133,7 +133,7 @@ export default (request) => ({
     });
   },
   posts(payload) {
-    console.log('poossttss',payload)
+    console.log("poossttss", payload);
     return request({
       name: "posts",
       method: "get",
@@ -174,7 +174,7 @@ export default (request) => ({
       alert: false,
     });
   },
-  faqsCommon(){
+  faqsCommon() {
     return request({
       name: "common",
       method: "get",
@@ -182,5 +182,51 @@ export default (request) => ({
       loading: true,
       alert: false,
     });
+  },
+  uploadVideoGenerateId(payload) {
+    console.log('payload',payload.body)
+    return request(
+      {
+        name: "arvaneGenerateId",
+        method: "post",
+        path: "/file/generate",
+        loading: true,
+        alert: false,
+        // headers:{
+        //   'Content-Type':'video/mp4',
+        //   'Accept':'multipart/form-data'
+        // }
+      },
+      payload.body
+    );
+  },
+  uploadStatus(payload) {
+    console.log('payloadssss',payload)
+    return request(
+      {
+        name: "checkStatus",
+        method: "post",
+        path: "/file/status",
+        loading: true,
+        alert: false,
+        headers:{
+          'Content-Type':'application/json',
+          'Accept':'application/json'
+        }
+      },
+      payload
+    );
+  },
+  uploadBigFile(payload){
+    return request(
+      {
+        name: "checkStatus",
+        method: "post",
+        path: "/file/upload/large",
+        loading: true,
+        alert: false,
+      },
+      payload
+    );
   }
 });
