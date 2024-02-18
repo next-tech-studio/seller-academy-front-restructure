@@ -5,10 +5,10 @@
         <div class="text-h2 text-lg-h1 text-text-heading mt-lg-16 mt-3">
           {{ $t("sales_route_in_digikala") }}
         </div>
-        <div class="text-h5 text-text-high-emphasis mb-8">
+        <div class="text-h5 text-text-high-emphasis mb-lg-8 mb-4">
           {{ $t("sales_route_in_digikala_description") }}
         </div>
-        <div class="text-h5 text-text-high-emphasis mb-8">
+        <div class="text-h5 text-text-high-emphasis mb-lg-8 mb-4">
           {{ $t("sales_route_in_digikala_pros") }}
         </div>
         <v-row>
@@ -45,13 +45,22 @@ const pros = ref([
 <style lang="scss">
 .image__fixed {
   position: absolute;
-  top: 85px;
+  top: 120px;
   left: 0;
-  width: 538px;
+  width: 500px;
+
+  @include respond("md") {
+    position: relative;
+    width: 100%;
+    top: 50px;
+    bottom: 0;
+  }
 
   @include respond("sm") {
     position: relative;
     width: 100%;
+    top: 50px;
+    bottom: 0;
   }
 }
 </style>
