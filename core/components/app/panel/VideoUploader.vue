@@ -1,20 +1,30 @@
 <template>
+   <v-card rounded="lg" height="500" class="d-flex justify-center align-center">
   <v-btn
     icon="custom:simplePlay"
     color="light"
     class="loading-position bg-text-low-emphasis"
     flat
     @click="videoHasNotUploadedYet"
-    v-if="!/https/.test(modelValue.url)"
+    v-if="!!/https/.test(uploadedFiles.url) || !!uploadedFiles.url || uploadProgress==100"
   />
   <app-video-player
-    v-if="type == 'video' && /https/.test(modelValue.url)"
-    :video-src="modelValue.url"
+    v-if="type == 'video' && /https/.test(uploadedFiles.url)"
+    :video-src="uploadedFiles.url"
     :options="['volume', 'cog', 'forward', 'fullScreen']"
     small
   >
   </app-video-player>
-  <v-btn @click="handleFileImport"> Upload File</v-btn>
+  <v-btn
+    prepend-icon="custom:uploadPicture"
+    color="button-primary"
+    class="me-3 mb-3"
+    v-if="!uploadProgress && !uploadedFiles.url"
+    @click="handleFileImport"
+  >
+    <span class="text-button">{{ $t("upload_video") }}</span>
+  </v-btn>
+  <!-- <v-btn @click="handleFileImport"> {{ 'upload_video' }}</v-btn> -->
   <input
     ref="uploader"
     class="d-none"
@@ -27,7 +37,7 @@
     :rotate="360"
     :model-value="uploadProgress"
     :size="100"
-    v-if="uploadProgress"
+    v-if="uploadProgress  && !uploadedFiles.url && uploadProgress !='100'"
   >
     {{ uploadProgress }}%
   </v-progress-circular>
@@ -35,6 +45,7 @@
     v-model:dialog="dialog"
     approval-or-rejection-message="please_be_patient_your_video_is_processing_please_submit_the_content"
   ></app-rejection-approval>
+</v-card>
 
   <!-- <progress :value="uploadProgress" max="100">{{ uploadProgress }}</progress> -->
   <!-- <input type="file" @change="handleFileChange" />
@@ -44,6 +55,7 @@
 <script setup>
 let uploader = ref(null);
 let dialog = ref(false);
+const endpoint ="https://napi.arvancloud.ir/vod/2.0/channels/0b9bc134-caf3-4887-98eb-4b370c1f381b/files";
 const { $repos } = useNuxtApp();
 let isSelecting = ref(false);
 let selectedFiles = ref([]);
@@ -63,6 +75,18 @@ let uploadedFiles = computed({
     emit("update:modelValue", value);
   },
 });
+const removeAfterWord = (originalString, word) => {
+  const wordIndex = originalString.indexOf(word);
+  if (wordIndex === -1) {
+    return originalString; // The word isn't found, return the original string
+  }
+  // Return the part of the string after the word.
+  // wordIndex + word.length to include the word itself in the result.
+  return originalString.substring(wordIndex + word.length);
+  // const parts = originalString.split(word);
+  // return parts[1]; // Contains the string before the word
+}
+
 const handleFileImport = (index = 0) => {
   window.addEventListener(
     "focus",
@@ -97,6 +121,9 @@ async function submit() {
     },
     onSuccess: () => {
       console.log("Upload finished:", upload?.url);
+    //   let originalStr = "Blue Earth";
+    // let newStr = upload.url.replace("files/", ""); // Output: " Earth"
+      uploadedFiles.value.url = removeAfterWord(upload.url,'files/')
     },
   });
   upload.start();

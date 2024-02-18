@@ -785,6 +785,7 @@ export default {
   mobile:'موبایل',
   username:'نام کاربری',
   mobile_username:'موبایل(نام کاربری)',
-  enter_website:'ورود به وبسایت'
+  enter_website:'ورود به وبسایت',
+  upload_video:'آپلود ویدئو'
 
 };
