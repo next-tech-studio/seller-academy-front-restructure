@@ -789,7 +789,7 @@ export default {
   frequently_asked_questions:'پرسش‌های متداول',
   is_this_faq_frequent_in_this_category:'آیا این پرسش متداول جزو پرتکرارترین پرسش‌های این دسته‌بندی است؟',
   deactive:'غیرفعال',
-  faqs:"پرسش و پاسخ‌های متداول", 
+  faqs:"پرسش‌های متداول", 
   list:"لیست",
   is_frequent:'پرتکرار',
   job_title:'عنوان شغلی',

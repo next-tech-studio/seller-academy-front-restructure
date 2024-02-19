@@ -165,4 +165,26 @@ export default (request) => ({
       payload.body
     );
   },
+  rolesList(payload){
+    return request(
+      {
+        name: "rolesList",
+        method: "get",
+        path: "/panel/roles/list",
+        loading: true,
+        alert: false,
+      },
+    );
+  },
+  rolesListCommon(payload){
+    return request(
+      {
+        name: "rolesListCommon",
+        method: "get",
+        path: "/panel/roles/list",
+        loading: true,
+        alert: false,
+      },
+    );
+  }
 });
