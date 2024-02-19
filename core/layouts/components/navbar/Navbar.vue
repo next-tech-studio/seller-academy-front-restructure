@@ -92,7 +92,7 @@
         </v-btn> -->
         <auth-handler />
         <v-btn
-        v-if="route.name.includes('panel') && route.meta.layout == 'sidebar'"
+        v-if="route.name.includes('panel') && auth.hasPermission(['blog','community','academy'])"
           rounded="xl"
           @click = "navigateTo('/')"
           color="text-high-emphasis"
