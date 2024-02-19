@@ -162,7 +162,7 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
             ? ""
             : Array.isArray(element.modelValue)
             ? []
-            : {};
+            : typeof element.modelValue == "boolean" ? false : {};
       });
       if (this.edit == true || this.additionalOperation == true) {
         //   for (let field in this.currentItem) {
@@ -177,12 +177,12 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
         // }
         const handler = new APIHandler();
         dataForm.forEach((field) => {
+          console.log('82828282',typeof field.modelValue)
           if (field.dataPath) {
             const current = handler.getDeepData(
               this.currentItem,
               field.dataPath
             );
-            console.log(current)
             if (current && current[field.name]) {
               field.modelValue = current[field.name];
               console.log(field.name,field.modelValue )

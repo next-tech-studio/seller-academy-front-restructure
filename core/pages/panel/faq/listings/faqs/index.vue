@@ -300,7 +300,7 @@ const submitItem = () => {
     );
 
     $repos.sharedPanel.updateFAQ(payload).then((res) => {
-      Object.assign(sharedStore.listItems.data[itemIndex], res.data);
+      Object.assign(sharedStore.listItems.data[itemIndex], res);
       sharedStore.edit = false;
       sharedStore.closeDialog();
     });
@@ -308,7 +308,7 @@ const submitItem = () => {
     $repos.sharedPanel.updateFAQ(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
         ...sharedStore.listItems.data,
-        { ...res.data },
+        { ...res },
       ]);
       sharedStore.closeDialog();
     });
