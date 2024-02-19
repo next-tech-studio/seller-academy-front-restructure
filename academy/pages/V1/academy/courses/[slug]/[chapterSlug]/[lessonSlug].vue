@@ -137,7 +137,7 @@ useAsyncData(() => {
 watch(
   lesson.value,
   (newValue) => {
-    let content
+    let content;
     if (lesson.value?.content?.length) {
       lesson.value.content.forEach((item, index) => {
         if (item.type == "exam") {
@@ -150,7 +150,7 @@ watch(
           Object.assign(lesson.value.content[index], {
             ...item,
           });
-          Object.assign(lesson.value.content[index].content, {...content})
+          Object.assign(lesson.value.content[index].content, { ...content });
         }
       });
     }
@@ -171,8 +171,14 @@ const setAnswer = () => {
       },
     })
     .then((res) => {
-      lesson.value.content[0].content.userQuizStatus = res.status;
-      lesson.value.content[0].content.score = res.score;
+      Object.assign(lesson.value, {
+        ...lesson.value,
+        userQuizStatus: res.status,
+      });
+      Object.assign(lesson.value, {
+        ...lesson.value,
+        score: res.score,
+      });
       if (res.status == "fail") props.item.examAllowed = false;
     });
 };
