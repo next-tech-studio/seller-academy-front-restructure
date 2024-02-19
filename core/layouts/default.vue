@@ -8,9 +8,10 @@
             </div> -->
         <VitePwaManifest />
 
-        <client-only>
-          <component v-if="store.skeletonLoading && skeleton" :is="skeleton" />
-        </client-only>
+        <component
+          v-if="store.skeletonLoading && store.skeleton"
+          :is="skeleton"
+        />
         <div v-show="!store.skeletonLoading"><slot /></div>
         <!-- <v-row justify="end">
           <v-col cols="3">
@@ -23,7 +24,7 @@
           </v-col>
         </v-row> -->
       </v-main>
-      <Footer ref="footer" />
+      <Footer v-if="!store.skeletonLoading" ref="footer" />
       <app-toast></app-toast>
     </v-layout>
   </div>
@@ -38,7 +39,7 @@ import Search from "./components/navbar/components/Search.vue";
 
 const { lgAndUp } = useDisplay();
 const store = useGlobalStore();
-const skeleton = resolveComponent(store?.skeleton)
+let skeleton = null;
 const props = defineProps({
   hideFooter: {
     default: false,
@@ -47,4 +48,12 @@ const props = defineProps({
 });
 const footer = ref(null);
 provide("footer", footer);
+
+watch(
+  store,
+  (newValue) => {
+    skeleton = resolveComponent(newValue.skeleton);
+  },
+  { deep: true }
+);
 </script>

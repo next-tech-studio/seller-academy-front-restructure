@@ -1,6 +1,7 @@
 export const useGlobalStore = defineStore("global", {
   state: () => ({
     pendingRequest: false,
+    loading: false,
     skeletonLoading: false,
     skeleton: "",
     activeRequests: {},
