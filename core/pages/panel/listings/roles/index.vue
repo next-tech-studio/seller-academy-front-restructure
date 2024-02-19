@@ -2,7 +2,7 @@
   <NuxtLayout name="sidebar">
     <v-container fluid class="pa-8">
       <app-listing
-        ref="userList"
+        ref="roleList"
         :items="sharedStore.listItems"
         :headers="headers"
         :info="sharedStore.listInfo.counts"
@@ -24,13 +24,13 @@
           sharedStore.changeItemStatus(
             $event,
             'updateUserStatus',
-            'usersList',
+            'rolesList',
             payload,
             'sharedPanel'
           )
         "
         @update:page="
-          sharedStore.getListingItems('usersList', payload, 'sharedPanel')
+          sharedStore.getListingItems('rolesList', payload, 'sharedPanel')
         "
         default-status="deactive"
         :table-actions="operations"
@@ -42,7 +42,7 @@
             dataForm,
             null,
             $event.api,
-            'usersList',
+            'rolesList',
             true,
             payload,
             'sharedPanel'
@@ -50,7 +50,7 @@
         "
         @navigate:toItem="goToItem"
         @filter="
-          sharedStore.getListingItems('usersList', payload, 'sharedPanel')
+          sharedStore.getListingItems('rolesList', payload, 'sharedPanel')
         "
       >
         <template #displayName="{ item }">
@@ -133,36 +133,16 @@ let headers = ref([
   {
     align: "start",
     key: "displayName",
-    value: "profile.displayName",
+    value: "displayName",
     sortable: false,
-    title: t("display_name"),
+    title: t("role"),
     selectAll: true,
     size: "150px",
   },
   {
-    value: "profile.email",
-    title: t("email"),
-    sortable: true,
-    size: "150px",
-  },
-  {
-    value: "profile.mobile",
-    key: "mobile",
-    title: t("mobile"),
-    sortable: false,
-    size: "50px",
-  },
-  {
-    value: "role",
-    key: "role",
-    title: t("role"),
-    size: "75px",
-    sortable: false,
-  },
-  {
-    value: "status",
-    key: "status",
-    title: t("status"),
+    value: "key",
+    key: "key",
+    title: t("key"),
     sortable: false,
     size: "50px",
   },
@@ -320,7 +300,7 @@ const openDialog = () => {
 const onSearch = useDebounceFn(
   async () =>
     await sharedStore.getListingItems(
-      "usersList",
+      "rolesList",
       payload.value,
       "sharedPanel"
     ),
@@ -403,10 +383,10 @@ const submitItem = () => {
   }
 };
 onMounted(async () => {
-  await sharedStore.getListingCommon("usersListCommon", "sharedPanel");
-  init();
+  // await sharedStore.getListingCommon("rolesListCommon", "sharedPanel");
+  // init();
   await sharedStore.getListingItems(
-    "usersList",
+    "rolesList",
     payload.value,
     // headers.value,
     "sharedPanel"

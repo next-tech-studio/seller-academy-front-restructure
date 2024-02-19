@@ -789,7 +789,7 @@ export default {
   frequently_asked_questions:'پرسش‌های متداول',
   is_this_faq_frequent_in_this_category:'آیا این پرسش متداول جزو پرتکرارترین پرسش‌های این دسته‌بندی است؟',
   deactive:'غیرفعال',
-  faqs:"پرسش و پاسخ‌های متداول", 
+  faqs:"پرسش‌های متداول", 
   list:"لیست",
   is_frequent:'پرتکرار',
   job_title:'عنوان شغلی',
@@ -798,6 +798,7 @@ export default {
   username:'نام کاربری',
   mobile_username:'موبایل(نام کاربری)',
   enter_website:'ورود به وبسایت',
-  upload_video:'آپلود ویدئو'
+  upload_video:'آپلود ویدئو',
+  you_dont_have_any_rooms_right_now:'در حال حاضر در هیچ اتاقی عضو نیستید!'
 
 };

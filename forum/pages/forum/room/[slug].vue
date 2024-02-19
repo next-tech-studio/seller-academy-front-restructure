@@ -136,10 +136,8 @@ const editDescription = () => {
   $repos.community.editDescription(payload);
 };
 const getUsers = async (e) => {
-  console.log("ussseerss", e);
   let payload = { search: e };
   await $repos.community.getUsersList(payload).then((res) => {
-    console.log("resssssssUssee", res);
     Object.assign(users.value, res.data);
   });
 };
@@ -234,7 +232,6 @@ const remove = (e) => {
   });
 };
 const chatMembers = ($state) => {
-  console.log("heeellooo", $state);
   if (loadFirstPage.value) {
     members_page = 1;
     members.splice(0, members.length);
@@ -252,7 +249,6 @@ const chatMembers = ($state) => {
         members_total_pages = res.last_page;
         if (members_page == members_total_pages) $state.complete();
         members_page++;
-        console.log("page", members_page);
         loadFirstPage.value = false;
       } else {
         $state.complete();
