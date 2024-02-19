@@ -36,7 +36,7 @@ class Validation {
       persian: (v, attribute = "") => {
         const result =
           /^[\u0600-\u06FF\s]+$/.test(v) ||
-          app.$i18n.t("validation.persian", {
+          app.$i18n.t("زبان سیستم خود را به فارسی تغییر دهید", {
             attribute,
           });
         this.setMessage(result);
