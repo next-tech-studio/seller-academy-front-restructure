@@ -869,6 +869,7 @@ export default {
   registers: "ثبت‌نامی‌ها",
   see: "مشاهده",
   resume: "رزومه",
+  full_capacity: "تکمیل ظرفیت",
   'pre-register': "پیش‌ثبت‌نام",
   full: "تکمیل ظرفیت",
   written: "نوشته",

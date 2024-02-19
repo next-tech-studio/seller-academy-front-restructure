@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="pa-0 d-flex justify-center">
     <v-sheet
-      width="90%"
+      :width="mdAndUp ? '90%' : '100%'"
       class="d-flex"
       color="secondary-base rounded-b"
       :height="smAndDown ? 90 : 110"
