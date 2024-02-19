@@ -415,7 +415,7 @@ onMounted(async () => {
 definePageMeta({
   middleware: ["auth", "roles"],
   layout: false,
-  permissions: ["blogs", "community", "academy", "users"],
+  permissions: ["users"],
 });
 </script>
 

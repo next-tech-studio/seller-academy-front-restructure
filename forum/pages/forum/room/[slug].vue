@@ -252,7 +252,6 @@ const chatMembers = ($state) => {
         members_total_pages = res.last_page;
         if (members_page == members_total_pages) $state.complete();
         members_page++;
-        console.log("page", members_page);
         loadFirstPage.value = false;
       } else {
         $state.complete();

@@ -82,7 +82,7 @@
         <search @choose:article="toItem($event)" v-if="showNavberItems" />
         <v-divider vertical class="my-6 mx-4"></v-divider>
         <v-btn
-          v-if="auth.user.loggedIn"
+          v-if="auth.user.loggedIn && auth.hasPermission(['create-article'])"
           prepend-icon="custom:plus"
           color="secondary-base"
           class="text-button"
@@ -92,7 +92,7 @@
         </v-btn>
         <auth-handler />
         <v-btn
-        v-if="route.name.includes('panel')"
+        v-if="route.name.includes('panel') && route.meta.layout == 'sidebar'"
           rounded="xl"
           @click = "navigateTo('/')"
           color="text-high-emphasis"
