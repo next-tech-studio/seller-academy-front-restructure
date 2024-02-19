@@ -38,8 +38,9 @@
                 })
               "
               rounded="lg"
+              disabled
             >
-              {{ $t("sign_up") }}
+              {{ $t("full_capacity") }}
               <v-icon class="ms-2" icon="custom:chevronLeft"></v-icon>
             </v-btn>
           </template>
@@ -114,9 +115,9 @@
                 <v-btn
                   block
                   flat
-                  color="primary-base"
                   class="mt-4"
                   size="large"
+                  disabled
                   :to="
                     localePath({
                       name: 'innovation-bridge-slug-register',
@@ -124,7 +125,7 @@
                     })
                   "
                 >
-                  {{ $t("sign_up") }}
+                  {{ $t("full_capacity") }}
                   <v-icon icon="custom:chevronLeft" end></v-icon>
                 </v-btn>
               </v-card-text>
