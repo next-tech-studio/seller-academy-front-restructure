@@ -307,8 +307,8 @@ const submitItem = () => {
   } else {
     $repos.sharedPanel.updateFAQ(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
-        ...sharedStore.listItems.data,
         { ...res },
+        ...sharedStore.listItems.data,
       ]);
       sharedStore.closeDialog();
     });
