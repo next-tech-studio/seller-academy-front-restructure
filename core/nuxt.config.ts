@@ -47,6 +47,7 @@ export default defineNuxtConfig({
       },
     },
     build: {
+      chunkSizeWarningLimit: 1000,
       rollupOptions: {
         output: {
           manualChunks(id) {
@@ -66,7 +67,7 @@ export default defineNuxtConfig({
   modules: [
     async (options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) =>
-        config.plugins.push(
+        config?.plugins?.push(
           vuetify({
             styles: { configFile: resolve("assets/styles/vuetify.scss") },
           })
@@ -123,6 +124,10 @@ export default defineNuxtConfig({
       baseURL: "/blog",
       domain: process.env.DOMAIN,
       gtagId: process.env.GTAGID,
+      pusherKey: process.env.PUSHER_KEY,
+      pusherWsHost: process.env.PUSHER_WSHOST,
+      pusherWsPort: process.env.PUSHER_WSPORT,
+      pusherForceTLS: process.env.PUSHER_FORCETLS,
     },
   },
   schemaOrg: {

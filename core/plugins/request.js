@@ -19,6 +19,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     page = null,
     commits = null,
     model = null,
+    headers={}
   }) {
     const APIHandlerInstance = new APIHandler();
     const HttpRequestInstance = new HttpRequest(nuxtApp);
@@ -30,7 +31,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         useGlobalStore().skeletonLoading = true;
         useGlobalStore().activeRequests[name] = true;
       }
-      HttpRequestInstance[api.method](api.path, payload, alert)
+      HttpRequestInstance[api.method](api.path, payload, alert,headers)
         .then((resp) => {
           let data;
           if (model) {
@@ -82,6 +83,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       alert = true,
       commits = [],
       model = null,
+      headers={}
     },
     payload = null
   ) {
@@ -97,6 +99,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       page,
       commits,
       model,
+      headers
+
     });
   }
 

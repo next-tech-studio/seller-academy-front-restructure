@@ -225,6 +225,18 @@ export default (request) => ({
       payload.body
     );
   },
+  updateSkillStatus(payload) {
+    return request(
+      {
+        name: "updateSkillStatus",
+        method: "put",
+        path: "/academy/panel/skill/status",
+        loading: true,
+        alert: true,
+      },
+      payload.body
+    );
+  },
   studentsList(payload) {
     return request({
       name: "studentsList",

@@ -4,19 +4,20 @@ import { mapper } from "~/mappers";
 import collection from "~/mappers/models/schema/collection";
 import noPaginationCollection from "~/mappers/models/schema/noPaginationCollection";
 export const useRealtime = (channel, event, model) => {
+    const runTimeConfig = useRuntimeConfig()
     const status = ref('Connecting...');
     const stream = ref([]);
     let response = ref()
     let listeningTo = ref(null);
-
+    
     if (process.client) {
         window.Pusher = Pusher;
         window.Echo = new Echo({
             broadcaster: 'pusher',
-            key: 'seller_academy',
-            wsHost: 'sa-test.techstudio.diginext.ir',
-            wsPort: 443,
-            forceTLS: true,
+            key: runTimeConfig.public.pusherKey,
+            wsHost: runTimeConfig.public.pusherWsHost,
+            wsPort: runTimeConfig.public.pusherWsPort,
+            forceTLS: runTimeConfig.public.pusherForceTLS,
             disableStats: true,
             cluster: ''
         });

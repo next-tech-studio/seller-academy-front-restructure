@@ -2,7 +2,7 @@
   <v-row justify="center" tag="section" :dense="smAndDown">
     <v-col cols="12" class="py-0">
       <div class="d-flex justify-space-between align-center mb-md-8 mb-4">
-        <h2 class="text-md-h1 text-h2 text-text-high-emphasis" v-if="title">
+        <h2 class="text-h2 text-text-high-emphasis" v-if="title">
           {{ $t(title).split("-").join(" ") }}
         </h2>
         <app-category

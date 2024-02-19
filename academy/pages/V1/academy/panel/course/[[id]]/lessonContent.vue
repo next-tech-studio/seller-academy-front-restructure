@@ -122,6 +122,7 @@ import BlogContentUploader from "@core/components/app/panel/BlogContentUploader.
 import Banner from "@core/components/app/panel/Banner.vue";
 import Exam from "@core/components/app/panel/Exam.vue";
 import Reference from "@core/components/app/panel/Reference.vue";
+import VideoUploader from "@core/components/app/panel/VideoUploader.vue"
 import Media from "@core/components/app/panel/Media.vue";
 import draggable from "vuedraggable";
 let academyStore = useAcademyStore();
@@ -167,11 +168,6 @@ let pictureAlignment = [
   { icon: "custom:justifyCard", title: "وسط چین" },
   { icon: "custom:alignWhole", title: "تمام صفحه" },
 ];
-let videoUploaderProps = ref({
-  "area-size": { width: "100%", height: "327px" },
-  "upload-path": UPLOAD_ARTICLE_PATH,
-  "blog-content": true,
-});
 let uploaderProps = ref({
   "area-size": { width: "100%", height: "327px" },
   "upload-path": UPLOAD_ARTICLE_PATH,
@@ -210,7 +206,7 @@ const openSelectedContentSection = (type) => {
     case "vid":
       contentModel.value.push({
         type: "vid",
-        component: Media,
+        component: VideoUploader,
         content: {},
       });
       lesson.value.dominantType = "video";
@@ -295,7 +291,7 @@ let getComponent = (type) => {
     case "img":
       return BlogContentUploader;
     case "vid":
-      return Media;
+      return VideoUploader;
     case "audio":
       return Media;
     case "html":

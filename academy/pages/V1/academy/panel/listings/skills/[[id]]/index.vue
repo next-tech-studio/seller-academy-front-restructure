@@ -27,7 +27,7 @@
           )
         "
         @update:page="
-          sharedStore.getListingItems('skillList', payload,'academyPanel')
+          sharedStore.getListingItems('skillsList', payload,'academyPanel')
         "
         default-status="active"
         :table-actions="operations"

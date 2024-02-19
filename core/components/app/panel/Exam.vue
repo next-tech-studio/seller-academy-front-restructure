@@ -22,7 +22,7 @@
     <v-row class="pa-5">
       <v-col cols="12" class="d-flex justify-space-between">
         <p class="text-h3 mb-1">
-          {{ $t("quiz_question", { index: questionIndex + 1 }) }}
+          {{ $t("quiz_question") + (questionIndex + 1) }}
         </p>
         <v-btn icon flat @click="removeQuestion(questionIndex)">
           <v-icon icon="custom:x"></v-icon>
@@ -37,7 +37,6 @@
           :placeholder="$t('yoour_question_title')"
         />
       </v-col>
-
       <v-col
         v-for="(option, i) in item.choices"
         :key="i"
@@ -45,7 +44,7 @@
       >
         <v-text-field
           base-color="n300"
-          :placeholder="$t('question_option', { index: i + 1 })"
+          :placeholder="$t('question_option') + (i + 1)"
           variant="outlined"
           hide-details
           v-model="option.text"
@@ -64,8 +63,12 @@
             </v-checkbox-btn>
           </template>
           <template v-slot:append-inner>
-            <v-btn icon flat @click="removeOption(item,i)" density="compact">
-              <v-icon icon="custom:x" color="primary-base" size="small"></v-icon>
+            <v-btn icon flat @click="removeOption(item, i)" density="compact">
+              <v-icon
+                icon="custom:x"
+                color="primary-base"
+                size="small"
+              ></v-icon>
             </v-btn>
           </template> </v-text-field
       ></v-col>
@@ -112,6 +115,7 @@ const setTrueAnswers = () => {
     answers.value[i] = new Array(4).fill(false);
     answers.value[i].forEach((answer, index) => {
       answers.value[i][index] = isChecked(question, index + 1);
+      console.log('3333',answers.value[i][index])
     });
   });
 };
@@ -127,9 +131,14 @@ const isChecked = (item, index) => {
 const addToTrueAnswerList = (item, ind) => {
   let questionId = ind + 1;
   let existedQuestionIndex = props.store.quizTrueAnswers.findIndex(
-    (element) => element[questionId]
+    (element) => element[questionId] != undefined
   );
-  props.store.quizTrueAnswers.splice(existedQuestionIndex, 1);
+  console.log("existedQuestionIndex",item);
+  console.log("wwwwwww", props.store.quizTrueAnswers);
+
+  for (const itemss of props.store.quizTrueAnswers)
+    console.log("8888", itemss[questionId]);
+  if( existedQuestionIndex != -1) props.store.quizTrueAnswers.splice(existedQuestionIndex, 1);
   props.store.quizTrueAnswers.push({
     [questionId]: item.id,
   });
@@ -140,14 +149,14 @@ let cols = (options) => {
   else return 3;
 };
 const removeQuestion = (index) => {
-  console.log("hellloooooooo", index);
   model.value.questions.splice(index, 1);
 };
-const removeOption = (item,i) =>{
-  item.choices.splice(i,1)
-}
+const removeOption = (item, i) => {
+  item.choices.splice(i, 1);
+};
 const addNewOption = (item) => {
-  if (item.choices?.length <= 3)
-    item.choices?.push({ text: "", id: item?.choices.length + 1 });
+  if (item.choices?.length <= 3) {
+  }
+  item.choices?.push({ text: "", id: item?.choices.length + 1 });
 };
 </script>

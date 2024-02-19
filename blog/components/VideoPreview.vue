@@ -2,7 +2,7 @@
 <v-card class="mb-6">
     <v-row no-gutters>
         <v-col :cols="vertical ? 12 : 6" >
-            <video-player small video-src="/videos/video.mp4" :video-poster="content.previewUrl">
+            <video-player small video-src="/videos/video.mp4" :video-poster="content.previewUrl"><video-player small video-src="/videos/video.mp4" :video-poster="content.previewUrl"></video-player>
                 <client-only>
                     <v-btn class="type text-whit text-button" rounded="pill" flat :size="mdAndUp ? 'small' : 'x-small'"
                         :color="content.type == 'live' ? 'primary-base' : 'rgba(var(--v-theme-background-scrim-dark), 50%)'">{{ content.type == 'live' ? $t(content.type) : $moment.utc(content.duration*1000).format('HH:mm:ss') }}</v-btn>

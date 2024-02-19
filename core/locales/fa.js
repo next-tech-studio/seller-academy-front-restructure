@@ -19,7 +19,24 @@ export default {
   podcasts: "پادکست‌ها",
   all: "همه",
   answer_to_this_queston: "پاسخ دادن به این پرسش",
-  // answered_by_user_count: "پاسخ داده شده توسط {count} نفر",
+  most_popular_rooms: "پرطرفدارترین اتاق‌های گفتگو",
+  sales_route_in_digikala: "مسیر فروشندگی در دیجی‌کالا",
+  sales_route_in_digikala_description:
+    "در ۶ مرحله ساده به فروشنده دیجی‌کالا با مزایای ویژه تبدیل شوید.",
+  sales_route_in_digikala_pros: "مزایای فروشندگی در دیجی‌کالا",
+  steps_to_become_seller: "مراحل تبدیل شدن به فروشنده دیجی‌کالا",
+  congrates: "تبریک!",
+  congrates_description:
+    "حالا کالای شما روی وب‌سایت دیجی‌کالا نمایش داده می‌شود.",
+  receive_income: "دریافت درآمد از دیجی‌کالا",
+  receive_income_description:
+    "دیجی‌کالا خود را متعهد می‌داند که در سریع‌ترین زمان با فروشندگان تسویه‌حساب کند به همین دلیل بازه کوتاه ۱۵ روز را به عنوان اولین بازه پرداخت در نظر گرفته است که در مقایسه با شرایط پرداخت در سایر بازارهای فروش، بازه زمانی بسیار کوتاهی است. همچنین این زمان نیز قابل کاهش است و شما می‌توانید با افزایش فروش (فروشی بیشتر از هدف تعیین شده در یک ماه برای هر گروه کالایی) بازه تسویه‌حساب کوتاه‌تری را تجربه کنید.",
+  digikala_services_introduction: "معرفی سرویس‌های تبلیغاتی دیجی‌کالا",
+  start_ad_at_digikala: "همین حالا تبلیغات در دیجی‌کالا را شروع کن",
+  starting_ad: "شروع تبلیغات",
+  see_tutorial_article: "مشاهده مقاله آموزشی",
+    // answered_by_user_count: "پاسخ داده شده توسط {count} نفر",
+  latest_articles_and_news: "آخرین مقالات و اخبار",
   answered_by_user_count: "پاسخ داده شده توسط ",
   no_answer: "بی‌پاسخ",
   answers: "پاسخ‌ها",
@@ -347,7 +364,7 @@ export default {
     " ویدیوی شما در حال پردازش است، لطفا شکیبا باشید! برای ادامه‌ی پردازش دکمه‌ی ذخیره‌ی تغییرات را بزنید.",
   please_be_patient_your_video_is_processing:
     "ویدیوی شما در حال پردازش است، لطفا شکیبا باشید!",
-    related_questions_count:"سوالات مرتبط",
+  related_questions_count: "سوالات مرتبط",
   panel: {
     active: "فعال({count})",
     hidden: "پنهان شده({count})",
@@ -779,6 +796,8 @@ export default {
   linkedin:'لینکدین',
   mobile:'موبایل',
   username:'نام کاربری',
-  mobile_username:'موبایل(نام کاربری)'
+  mobile_username:'موبایل(نام کاربری)',
+  enter_website:'ورود به وبسایت',
+  upload_video:'آپلود ویدئو'
 
 };

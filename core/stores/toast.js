@@ -26,10 +26,8 @@ export const useToastStore = defineStore("toast", {
   }),
   actions: {
     show(config = this.config, type) {
-      if (this.type != "success") {
-        this.visible = true;
-        this.config = { ...this.config, ...this[type], ...config };
-      }
+      this.visible = true;
+      this.config = { ...this.config, ...this[type], ...config };
     },
     hide() {
       this.visible = false;
