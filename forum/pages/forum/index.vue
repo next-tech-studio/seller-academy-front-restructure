@@ -46,7 +46,7 @@
                   ? `${$t('your_rooms')} (${userChatRoomsCount})`
                   : `${$t('your_rooms')}`
               "
-              :items="rooms"
+              :items="userRooms"
               subtitle-key="subtitle"
               :show-alternative="
                 !authStore.user.loggedIn ||
