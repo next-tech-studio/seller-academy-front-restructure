@@ -8,6 +8,7 @@
     permanent
     id="sidebar"
     floating
+    expand-on-hover
   >
     <div class="d-flex w-75">
       <v-list-item :title="authStore?.user?.name" nav class="pt-8 pb-6">
