@@ -42,7 +42,7 @@
           title="latest_articles_and_news"
           :content="articles?.slice(0, 3)"
           :responsive-horizontal="true"
-          @to:item="toItem($event)"
+          @to:item="toArticle($event)"
           @load:more="navigateTo(localePath({ name: 'article-archive' }))"
           see-more-title="see_more"
           :showFilter="false"
@@ -130,4 +130,8 @@ const toRoom = (item) => {
     })
   );
 };
+
+function toArticle(e) {
+  navigateTo(localePath({ name: "article-preview-slug", params: { slug: e.slug } }));
+}
 </script>

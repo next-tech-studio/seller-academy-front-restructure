@@ -1,6 +1,7 @@
 import userDashboard from "~/mappers/models/dto/userDashboard";
 import uploader from "~/mappers/models/schema/uploader";
 import panelTable from "~/mappers/models/schema/panelTable";
+import academyHomepage from "../mappers/models/dto/academyHomepage";
 export default (request) => ({
   homepage() {
     return request({
@@ -18,6 +19,7 @@ export default (request) => ({
       path: "/landing/first",
       loading: true,
       alert: false,
+      model: { name: academyHomepage },
     });
   },
   search(payload) {
