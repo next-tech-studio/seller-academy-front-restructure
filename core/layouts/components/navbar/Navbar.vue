@@ -81,7 +81,7 @@
         <v-spacer></v-spacer>
         <search @choose:article="toItem($event)" v-if="showNavberItems" />
         <v-divider vertical class="my-6 mx-4"></v-divider>
-        <v-btn
+        <!-- <v-btn
           v-if="auth.user.loggedIn && auth.hasPermission(['create-article'])"
           prepend-icon="custom:plus"
           color="secondary-base"
@@ -89,7 +89,7 @@
           @click="goToPageBuilder"
         >
           {{ $t("add_new_post") }}
-        </v-btn>
+        </v-btn> -->
         <auth-handler />
         <v-btn
         v-if="route.name.includes('panel') && route.meta.layout == 'sidebar'"
@@ -185,13 +185,13 @@ const isActive = (item) => {
   });
   return !!found;
 };
-const goToPageBuilder = (item) => {
-  navigateTo(
-    localePath({
-      name: `blog-panel-post-id-draft`,
-    })
-  );
-};
+// const goToPageBuilder = (item) => {
+//   navigateTo(
+//     localePath({
+//       name: `blog-panel-post-id-draft`,
+//     })
+//   );
+// };
 const toItem = (e) => {
   navigateTo(
     localePath({

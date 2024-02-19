@@ -115,6 +115,13 @@ const goToDashboard = () => {
     { external: true }
   );
 };
+const goToPageBuilder = (item) => {
+  navigateTo(
+    localePath({
+      name: `blog-panel-post-id-draft`,
+    })
+  );
+};
 const items = [
   {
     title: "user_dashboard",
@@ -129,10 +136,16 @@ const items = [
     show: auth.hasPermission(["blogs", "community", "academy"]),
   },
   {
+    title: "add_new_post",
+    icon: "custom:plus",
+    action: goToPageBuilder,
+    show: auth.hasPermission(["create-article"]),
+  },
+  {
     title: "logout",
     icon: "custom:logout",
     action: logout,
     show: true,
-  },
+  }
 ];
 </script>
