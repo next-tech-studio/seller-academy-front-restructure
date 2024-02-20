@@ -137,10 +137,7 @@ useAsyncData(async () => {
     .then((res) => {
       Object.assign(item, { ...res, type: "podcast" });
     });
-
-    // Prevent calling request 2 times that affecting post views
-    return ''
-});
+}, {server: false});
 function toItem(e) {
   navigateTo(
     localePath({ name: "article-preview-slug", params: { slug: e.slug } })

@@ -118,11 +118,8 @@ useAsyncData(async() => {
       .then((res) => {
         Object.assign(item, { ...res, type: "article" });
       });
-
-      // Prevent calling request 2 times that affecting post views
-      return ''
   }
-});
+}, {server: false});
 
 const getComments = () => {
   $repos.article
