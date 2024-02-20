@@ -126,18 +126,23 @@ const {
   reactComment,
   reactPost,
   bookmarkPost,
+  page,
+  last_page,
 } = usePostActions("podcast");
 
-useAsyncData(async () => {
-  await $repos.article
-    .show({
-      slug: route.params.slug,
-      type: "podcast",
-    })
-    .then((res) => {
-      Object.assign(item, { ...res, type: "podcast" });
-    });
-}, {server: false});
+useAsyncData(
+  async () => {
+    await $repos.article
+      .show({
+        slug: route.params.slug,
+        type: "podcast",
+      })
+      .then((res) => {
+        Object.assign(item, { ...res, type: "podcast" });
+      });
+  },
+  { server: false }
+);
 function toItem(e) {
   navigateTo(
     localePath({ name: "article-preview-slug", params: { slug: e.slug } })
