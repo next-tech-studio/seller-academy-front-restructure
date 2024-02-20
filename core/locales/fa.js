@@ -806,4 +806,10 @@ export default {
   enter_website: "ورود به وبسایت",
   upload_video: "آپلود ویدئو",
   you_dont_have_any_rooms_right_now: "در حال حاضر در هیچ اتاقی عضو نیستید!",
+  permissions: "مجوز‌ها",
+  key: "کلید",
+  add_new_role: "افزودن نقش جدید",
+  choose_permissions:'مجوز‌ها',
+  add_new_role_description:'مشخصات نقش را وارد کنید.',
+  edit_role:'ویرایش نقش'
 };
