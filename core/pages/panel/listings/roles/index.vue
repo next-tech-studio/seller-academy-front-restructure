@@ -87,7 +87,7 @@
              color="icon-hint-caution"
               v-for="item in item?.item?.permissions"
               :key="item.key"
-              class="mb-1"
+              class="my-1"
               size="small"
             >
               {{ $t(item?.displayName) }}
