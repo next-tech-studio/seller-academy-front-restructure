@@ -104,6 +104,7 @@
       v-model:sort-by="store.sortBy"
       v-model="store.selectedTableItems"
       :headers="headers"
+      :cell-props="cellProps"
       :items="items.data"
       :items-per-page="itemsPerPage"
       @update:sort-by="$emit('filter')"
@@ -121,7 +122,7 @@
       >
         <tr>
           <template v-for="column in columns" :key="column.key">
-            <td class="border-b text-text-low-emphasis text-body-1">
+            <td class="border-b text-text-low-emphasis text-body-1" :style="`width: ${column.size} !important`">
               <span v-if="!column.sortable && !column.selectAll">{{
                 column?.title
               }}</span>
@@ -163,7 +164,6 @@
           :name="header.key"
           :item="{ item }"
           :header="{ header }"
-          class="pe-10"
         >
           <!-- <div class="cursor-pointer" v-if="header.key == 'title'"> -->
             <!-- <div
@@ -469,6 +469,21 @@ let sortedByIconType = (columnKey) => {
     return "custom:arrowDownWideShort";
 };
 
+const cellProps = (item) =>{
+        // Calculate dynamic width based on item properties
+        let cellWidth = 'auto'; // Default width
+        if (props.headers[item.index]?.size) {
+          cellWidth = `${props.headers[item.index]?.size}`; // Set width based on item property
+        }
+        console.log(cellWidth)
+        return {
+          style: {
+            width: `${cellWidth} !important` // Assign calculated width dynamically
+          }
+          // Add additional cell properties if needed
+        };
+      }
+
 const setOperationIcon = (action, item) => {
   if (action == "edit")
     return { icon: "custom:pencil", color: "text-high-emphasis" };
@@ -539,6 +554,7 @@ const setOperationIcon = (action, item) => {
   .v-table .v-table__wrapper > table > tbody > tr:not(:last-child) > td,
   .v-table .v-table__wrapper > table > tbody > tr:not(:last-child) > th {
     border: none !important;
+    max-width: 100px !important;
   }
   .v-pagination__list {
     justify-content: start;
@@ -548,6 +564,7 @@ const setOperationIcon = (action, item) => {
       border-color: rgba(var(--v-theme-primary-base)) !important;
     }
   }
+  
 }
 
 #search .v-input__control {

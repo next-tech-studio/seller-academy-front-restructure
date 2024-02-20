@@ -13,10 +13,10 @@ let layout = ref(null);
 
 definePageMeta({
   middleware: ["auth"],
-  permissions: ["create-article","blog"],
+  permissions: ["create-article","blogs"],
 });
 onMounted(()=>{
-  layout.value = auth.hasPermission(['blog'])? 'sidebar':'no-footer'
+  layout.value = auth.hasPermission(['blogs'])? 'sidebar':'no-footer'
   console.log('9393939',layout.value)
   setPageLayout(layout.value)
 })

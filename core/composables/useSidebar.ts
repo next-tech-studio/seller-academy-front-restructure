@@ -247,6 +247,15 @@ export const useSidebar = (user = { roles: [] }) => {
       to: localePath({ path: "/panel/listings/users" }),
     },
     {
+      title: t("roles"),
+      icon: "custom:userSolid",
+      roles: ["siteAdmin", "seller"],
+      get show() {
+        return auth.hasPermission(["users"]);
+      },
+      to: localePath({ path: "/panel/listings/roles" }),
+    },
+    {
       title: t("faqs"),
       icon: "custom:userSolid",
       roles: ["siteAdmin", "seller"],

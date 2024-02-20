@@ -37,6 +37,9 @@
         @navigate:toItem="goToItem"
         :table-actions="operations"
       >
+      <template #url="{ item, header }">
+        <div dir="ltr" class="text-truncate" :style="`width:${header.header.size} !important`">{{ item.item.url }}</div>
+      </template>
       </app-listing>
     </v-container>
   </NuxtLayout>
@@ -70,7 +73,7 @@ let headers = ref([
     sortable: false,
     title: t("title"),
     selectAll: true,
-    size: "100px",
+    size: "200px",
   },
   {
     key: "text",
@@ -82,7 +85,7 @@ let headers = ref([
     key: "url",
     title: t("link"),
     sortable: false,
-    size: "150px",
+    size: "250px",
   },
   { key: "operation", title: t("operation"), size: "50px" },
 ]);
@@ -169,12 +172,10 @@ const submitItem = () => {
   let payload;
   let body = {};
   sharedStore.editForm.forEach((field) => {
-    console.log("fiiieellldd", field);
     body[field.name] = sharedStore.editForm.find(
       (item) => item.name === field.name
     )?.modelValue;
   });
-  console.log("fossssssssssssssssssssssssssssssssssssssssssssrms", body);
   if (body.cover_url) body.cover_url = body.cover_url.url;
   // let formTitle = sharedStore.editForm.find((item) => item.name === "title");
   // let formCover = sharedStore.editForm.find((item) => item.name === "image");
@@ -185,7 +186,6 @@ const submitItem = () => {
       (item) => item.id === sharedStore.currentItem.id
     );
     payload = { ...body, id: sharedStore.currentItem.id };
-    console.log("paayylooaddddd", payload);
     $repos.sharedPanel
       .updateForm(payload)
       .then((res) => {
