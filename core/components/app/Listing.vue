@@ -167,18 +167,21 @@
               class="d-flex align-center justify-start"
               :style="`width: ${header.size} !important; flex: 0 1 0%`"
             >
-              <v-checkbox-btn
+              <v-checkbox
                 v-if="selectable"
                 true-icon="custom:squareCheck"
                 false-icon="custom:square"
                 :value="item"
                 multiple
                 v-model="store.selectedTableItems"
+                hide-details
               >
-              </v-checkbox-btn>
-              <span class="text-truncate text-body-1" @click="goToItem(item)">{{
+              <template #label>
+                <span class="text-truncate text-body-1" @click="goToItem(item)">{{
                 item[header.key]
               }}</span>
+              </template>
+              </v-checkbox>
             </div>
           </div>
           <div v-if="header.key == 'author'" style="width: fit-content">
