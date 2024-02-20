@@ -137,6 +137,9 @@ useAsyncData(async () => {
     .then((res) => {
       Object.assign(item, { ...res, type: "podcast" });
     });
+
+    // Prevent calling request 2 times that affecting post views
+    return ''
 });
 function toItem(e) {
   navigateTo(
