@@ -42,7 +42,7 @@
           :button-style="{
             color: 'rgba(var(--v-theme-text-high-emphasis))',
           }"
-          :button-title="{ before: 'sort_by', after: 'sort_by' }"
+          :button-title="{ before: 'sort_by', after: $t(`sort.${store.filter.sort[0]}`) }"
           v-model="store.filter.sort"
           single
           variant="tonal"

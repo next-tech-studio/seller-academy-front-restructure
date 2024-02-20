@@ -7,23 +7,24 @@
         :headers="headers"
         :info="sharedStore.listInfo.counts"
         :store="sharedStore"
+
         :filters="filters"
-        listing-title="users"
+        listing-title="roles"
         :show-dialog="true"
         :add-new-item="true"
         :group-actions="groupActions"
-        dialog-start-button-title="add_new_user"
-        :dialog-title="sharedStore.edit ? 'edit_user' : 'add_new_user'"
+        dialog-start-button-title="add_new_role"
+        :dialog-title="sharedStore.edit ? 'edit_role' : 'add_new_role'"
         v-model:page="payload.page"
         v-model:searchModel="payload.search"
         @update:searchModel="onSearch"
         @show:dialog="openDialog"
-        dialog-subtitle="add_new_user_description"
+        dialog-subtitle="add_new_role_description"
         view-address="/article/category/"
         @update:itemStatus="
           sharedStore.changeItemStatus(
             $event,
-            'updateUserStatus',
+            'updateRoleStatus',
             'rolesList',
             payload,
             'sharedPanel'
@@ -53,65 +54,46 @@
           sharedStore.getListingItems('rolesList', payload, 'sharedPanel')
         "
       >
-        <template #displayName="{ item }">
+        <template #name="{ item,header }">
           <div
             class="d-flex cursor-pointer"
-            v-if="item.item.profile.displayName"
+            v-if="item.item.name"
           >
             <div
               class="d-flex align-center justify-start"
-              :style="`width: ${item.size} !important; flex: 0 1 0%`"
+              :style="`width: ${header.header.size} !important; flex: 0 1 0%`"
             >
-              <v-checkbox-btn
+              <v-checkbox
                 true-icon="custom:squareCheck"
                 false-icon="custom:square"
                 :value="item.item"
                 multiple
                 v-model="sharedStore.selectedTableItems"
+                hide-details
               >
-              </v-checkbox-btn>
-              <span class="text-truncate text-body-1" @click="goToItem(item)">{{
-                item?.item?.profile?.displayName
-              }}</span>
+              <template #label>
+                <v-btn variant="text" :ripple="false" class="text-truncate text-body-1">{{
+                  item?.item?.name
+                }}</v-btn>
+              </template>
+              </v-checkbox>
+
             </div>
           </div>
         </template>
-        <template #mobile="{ item }">
-          <div
-            v-if="item.item.profile.mobile"
-            style="direction: ltr"
-            class="text-end"
-          >
-            {{ item?.item?.profile?.mobile }}
+        <template #permissions="{ item,header }">
+          <div :style="`width: ${header.header.size}`">
+            <v-chip
+             color="icon-hint-caution"
+              v-for="item in item?.item?.permissions"
+              :key="item.key"
+              class="my-1"
+              size="small"
+            >
+              {{ $t(item?.displayName) }}
+            </v-chip>
           </div>
-        </template>
-        <template #type="{ item }">
-          <v-chip
-            :color="sharedStore.statusColor(item.item.profile.type)"
-            v-if="item.item.profile.type"
-          >
-            {{ $t(item?.item?.profile?.type) }}
-          </v-chip>
-        </template>
-        <template #roles="{ item }">
-          <div
-            v-if="item.item.profile.roles"
-            style="direction: ltr"
-            class="text-end"
-          >
-            {{ item?.item?.profile?.roles?.displayName }}
-          </div>
-        </template>
-        <template #status="{ item }">
-          <div
-            v-if="item.item.status"
-            class="text-truncate"
-            style="width: 80px"
-            :class="sharedStore.statusColor(item?.item?.status)"
-          >
-            <v-icon icon="custom:dot" size="12" class="me-2" />
-            <span class="text-body-1">{{ $t(item?.item?.status) }}</span>
-          </div>
+
         </template>
       </app-listing>
     </v-container>
@@ -126,25 +108,35 @@ const filterStore = useFilterStore();
 const { t } = useI18n();
 const UPLOAD_AVATAR_PATH = "/panel/articles/inline_media";
 let page = ref(1);
-let userList = ref(null);
+let roleList = ref(null);
 let operations;
 let filters;
 let headers = ref([
   {
     align: "start",
-    key: "displayName",
-    value: "displayName",
+    key: "name",
     sortable: false,
     title: t("role"),
     selectAll: true,
-    size: "150px",
+    size: "100px",
   },
   {
-    value: "key",
     key: "key",
     title: t("key"),
     sortable: false,
-    size: "50px",
+    size: "100px",
+  },
+  {
+    key: "permissions",
+    title: t("permissions"),
+    sortable: false,
+    size: "600px",
+  },
+  {
+    key: "creationDate",
+    title: t("creation_date"),
+    sortable: false,
+    size: "120px",
   },
 
   { key: "operation", title: t("operation"), size: "50px" },
@@ -158,8 +150,7 @@ let payload = computed(() => {
   return {
     page: page.value,
     search: search.value,
-    role: filterStore?.filter?.role || "",
-    type: filterStore?.filter?.type || "",
+    permissions: filterStore?.filter?.permissions || "",
     sortKey: sharedStore.sortBy[0]?.key || "",
     sortOrder: sharedStore.sortBy[0]?.order || "",
   };
@@ -167,130 +158,36 @@ let payload = computed(() => {
 const { $repos } = useNuxtApp();
 let dataForm = ref([
   {
-    type: "uploader",
-    name: "avatarUrl",
-    show: true,
-    uploadPath: UPLOAD_AVATAR_PATH,
-    modelValue: ref({}),
-    size: 12,
-    multiple: false,
-    maxImage: 1,
-    hasStartButton: true,
+    type: "text-field",
+    name: "key",
+    modelValue: ref(""),
     validations: "required",
-    dataPath: "profile",
+    label: "key",
+    size: 6,
+    show:true
   },
   {
     type: "text-field",
-    name: "username",
-    show: true,
+    name: "name",
     modelValue: ref(""),
     validations: "required",
-    label: "mobile_username",
+    label: "title",
     size: 6,
-    hint: true,
+    show:true
   },
-  {
-    type: "text-field",
-    name: "firstName",
-    show: true,
-    modelValue: ref(""),
-    validations: "required",
-    label: "first_name",
-    size: 6,
-    hint: true,
-    dataPath: "profile",
-  },
-  {
-    type: "text-field",
-    name: "lastName",
-    show: true,
-    modelValue: ref(""),
-    validations: "required",
-    label: "last_name",
-    size: 6,
-    hint: true,
-    dataPath: "profile",
-  },
-  {
-    type: "text-field",
-    name: "email",
-    show: true,
-    modelValue: ref(""),
-    size: 6,
-    validations: "email",
-    label: "email",
-    hint: true,
-    dataPath: "profile",
-  },
-  // {
-  //   type: "text-field",
-  //   name: "mobile",
-  //   show: true,
-  //   modelValue: ref(""),
-  //   size: 6,
-  //   validations: "",
-  //   label: "mobile_username",
-  //   hint: true,
-  //   dataPath: "profile",
-  // },
   {
     type: "select",
+    name: "permissions",
     modelValue: ref(""),
     selectValue: "id",
-    show: true,
-    selectTitle: "name",
-    name: "role",
-    items: computed(() => sharedStore.listInfo?.roles),
+    selectTitle:"displayName",
     validations: "required",
-    label: "role",
-    size: 6,
-    hint: true,
-  },
-  {
-    type: "text-field",
-    name: "jobTitle",
-    show: true,
-    textFieldType: "jobTitle",
-    modelValue: ref(""),
-    size: 6,
-    validations: "",
-    label: "job_title",
-    hint: true,
-    dataPath: "profile",
-  },
-  {
-    type: "text-field",
-    name: "linkedin",
-    show: true,
-    textFieldType: "linkedin",
-    modelValue: ref(""),
-    size: 6,
-    validations: "",
-    label: "linkedin",
-    hint: true,
-    dataPath: "profile",
-  },
-  {
-    type: "text-field",
-    name: "password",
-    show: computed(() => (sharedStore.edit ? false : true)),
-    textFieldType: "password",
-    modelValue: ref(""),
+    items: computed(() => sharedStore.listInfo?.permissions),
+    label: "choose_permissions",
+    multiple:true,
     size: 12,
-    validations: computed(() => (!sharedStore.edit ? "required" : "")),
-    label: "password",
-    hint: true,
-  },
-  {
-    type: "text-area",
-    name: "description",
-    show: true,
-    modelValue: ref(""),
-    size: 12,
-    validations: "",
-    label: "description",
-    hint: true,
-    dataPath: "profile",
+    hint: false,
+    show:true
   },
 ]);
 const openDialog = () => {
@@ -311,20 +208,20 @@ const onSearch = useDebounceFn(
 );
 const init = () => {
   operations = ref([
-    { title: "ویرایش", value: "edit", function: userList.value.edit },
+    { title: "ویرایش", value: "edit", function: roleList.value.edit },
     {
-      title: "غیرفعال کردن",
-      value: "active",
-      function: userList.value.changeItemStatus,
+      title: "حذف کردن",
+      value: "deleted",
+      function: roleList.value.changeItemStatus,
     },
   ]);
   filters = ref([
     {
       type: "dropdown",
-      title: "role",
-      items: sharedStore.listInfo?.roles,
-      key: "name",
-      value: "key",
+      title: "permissions",
+      items: sharedStore.listInfo?.permissions,
+      key: "displayName",
+      value: "id",
     },
   ]);
 };
@@ -351,10 +248,9 @@ const submitItem = () => {
     payload = {
       ...body,
       id: sharedStore.currentItem.id,
-      profileId: sharedStore.currentItem.profile.id,
     };
     $repos.sharedPanel
-      .createUser(payload)
+      .updateRole(payload)
       .then((res) => {
         Object.assign(sharedStore.listItems.data[itemIndex], res);
         sharedStore.edit = false;
@@ -368,9 +264,8 @@ const submitItem = () => {
       body,
     };
     $repos.sharedPanel
-      .createUser(payload)
+      .updateRole(payload)
       .then((res) => {
-        console.log("dhcsdhvhcj", res);
         Object.assign(sharedStore.listItems.data, [
           ...sharedStore.listItems.data,
           { ...res.data },
@@ -383,8 +278,8 @@ const submitItem = () => {
   }
 };
 onMounted(async () => {
-  // await sharedStore.getListingCommon("rolesListCommon", "sharedPanel");
-  // init();
+  await sharedStore.getListingCommon("rolesListCommon", "sharedPanel");
+  init();
   await sharedStore.getListingItems(
     "rolesList",
     payload.value,

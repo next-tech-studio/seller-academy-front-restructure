@@ -57,12 +57,9 @@ let model = computed({
   },
 });
 const removeTag = (item) => {
-  console.log("93939393933939");
   const index = model.value.findIndex((object) => {
     return object === item.value;
   });
-  console.log("before", model, index);
   model.value.splice(index, 1);
-  console.log("after", model, index);
 };
 </script>

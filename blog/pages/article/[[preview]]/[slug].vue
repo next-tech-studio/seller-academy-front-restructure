@@ -119,7 +119,7 @@ useAsyncData(async() => {
         Object.assign(item, { ...res, type: "article" });
       });
   }
-});
+}, {server: false});
 
 const getComments = () => {
   $repos.article

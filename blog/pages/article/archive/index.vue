@@ -10,6 +10,7 @@
       @load:more="getList"
       @filter="getList($event, 1)"
       :show-sort-by="true"
+      :show-see-more="!lastPage"
     ></app-content-card-listing>
   </v-container>
 </template>

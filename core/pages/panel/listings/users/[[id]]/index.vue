@@ -62,17 +62,21 @@
               class="d-flex align-center justify-start"
               :style="`width: ${item.size} !important; flex: 0 1 0%`"
             >
-              <v-checkbox-btn
+              <v-checkbox
                 true-icon="custom:squareCheck"
                 false-icon="custom:square"
                 :value="item.item"
                 multiple
                 v-model="sharedStore.selectedTableItems"
+                hide-details
               >
-              </v-checkbox-btn>
-              <span class="text-truncate text-body-1" @click="goToItem(item)">{{
-                item?.item?.profile?.displayName
-              }}</span>
+              <template #label>
+                <v-btn variant="text" :ripple="false" class="text-truncate text-body-1">{{
+                  item?.item?.profile?.displayName
+                }}</v-btn>
+              </template>
+              </v-checkbox>
+
             </div>
           </div>
         </template>

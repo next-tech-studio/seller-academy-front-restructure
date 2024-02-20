@@ -155,29 +155,20 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
         return "text-icon-hint-caution";
     },
     initForm(dataForm) {
-      console.log("edit current item", this.currentItem);
-      dataForm.forEach((element) => {
-        element.modelValue =
-          typeof element.modelValue == "string"
-            ? ""
-            : Array.isArray(element.modelValue)
-            ? []
-            : typeof element.modelValue == "boolean" ? false : {};
-      });
+      if (!this.edit)
+        dataForm.forEach((element) => {
+          element.modelValue =
+            typeof element.modelValue == "string"
+              ? ""
+              : Array.isArray(element.modelValue)
+              ? []
+              : typeof element.modelValue == "boolean"
+              ? false
+              : {};
+        });
       if (this.edit == true || this.additionalOperation == true) {
-        //   for (let field in this.currentItem) {
-        //     let findedField = dataForm.find((item) => {
-        //       return item.name === field;
-        //     });
-        //     if (findedField) {
-        //       console.log('findedField',findedField)
-        //       findedField.modelValue = this.currentItem[field];
-        //     }
-        //   }
-        // }
         const handler = new APIHandler();
         dataForm.forEach((field) => {
-          console.log('82828282',typeof field.modelValue)
           if (field.dataPath) {
             const current = handler.getDeepData(
               this.currentItem,
@@ -185,7 +176,11 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
             );
             if (current && current[field.name]) {
               field.modelValue = current[field.name];
-              console.log(field.name,field.modelValue )
+              if (field.selectValue) {
+                field.modelValue = current[field.name].map(
+                  (element) => element[field.selectValue]
+                );
+              }
             } else if (typeof field.modelValue == "string")
               field.modelValue = "";
             else if (Array.isArray(field.modelValue)) field.modelValue = [];
@@ -193,8 +188,16 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
               field.modelValue = false;
             else field.modelValue = {};
           } else {
-            if (this.currentItem[field.name])
+            if (this.currentItem[field.name]){
               field.modelValue = this.currentItem[field.name];
+              if (field.selectValue) {
+                console.log('hello', field,this.currentItem)
+                field.modelValue = this.currentItem[field.name].map(
+                  (element) => element[field.selectValue]
+                );
+              }
+            }
+   
             else if (typeof field.modelValue == "string") field.modelValue = "";
             else if (Array.isArray(field.modelValue)) field.modelValue = [];
             else if (typeof field.modelValue == "boolean")

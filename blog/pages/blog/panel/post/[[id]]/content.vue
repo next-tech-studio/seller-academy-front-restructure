@@ -151,6 +151,7 @@ import Divider from "@core/components/app/panel/Divider.vue";
 import BlogContentUploader from "@core/components/app/panel/BlogContentUploader.vue";
 import Banner from "@core/components/app/panel/Banner.vue";
 import Exam from "@core/components/app/panel/Exam.vue";
+import VideoUploader from "@core/components/app/panel/VideoUploader.vue"
 import Reference from "@core/components/app/panel/Reference.vue";
 import Media from "@core/components/app/panel/Media.vue";
 import draggable from "vuedraggable";
@@ -204,7 +205,7 @@ const openSelectedContentSection = (componentType) => {
     case "vid":
       panelStore.draftContent.content.push({
         type: "vid",
-        component: Media,
+        component: VideoUploader,
         content: {},
         fixed: false,
       });
@@ -292,7 +293,7 @@ let getComponent = (type) => {
     case "img":
       return BlogContentUploader;
     case "vid":
-      return Media;
+      return VideoUploader;
     case "audio":
       return Media;
     case "html":

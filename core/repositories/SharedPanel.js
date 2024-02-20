@@ -170,9 +170,11 @@ export default (request) => ({
       {
         name: "rolesList",
         method: "get",
+        query: `?search=${payload?.search}&permissions=${payload?.permissions}& sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}`,
         path: "/panel/roles/list",
         loading: true,
         alert: false,
+        model: { name: panelTable,collection:true, pagination:true},
       },
     );
   },
@@ -181,10 +183,35 @@ export default (request) => ({
       {
         name: "rolesListCommon",
         method: "get",
-        path: "/panel/roles/list",
+        path: "/panel/roles/list/common",
         loading: true,
         alert: false,
       },
+    );
+  },
+  updateRole(payload){
+    return request(
+      {
+        name: "updateRole",
+        method: "put",
+        path: "/panel/roles/editor-data",
+        loading: true,
+        alert: false,
+        model: { name: panelTable,dataPath:'data'},
+      },
+      payload
+    );
+  },
+  updateRoleStatus(payload){
+    return request(
+      {
+        name: "updateRoleStatus",
+        method: "put",
+        path: "/panel/roles/set-status",
+        loading: true,
+        alert: false,
+      },
+      payload.body
     );
   }
 });

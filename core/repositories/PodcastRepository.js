@@ -41,7 +41,7 @@ export default (request) => ({
         name: "addComment",
         method: "post",
         path: `/podcast/${payload.slug}/comments`,
-        loading: true,
+        loading: false,
         alert: true,
       },
       payload.body
@@ -54,7 +54,7 @@ export default (request) => ({
         name: "reactComment",
         method: "post",
         path: `/podcast/${payload.slug}/comments/${payload.commentId}/feedback`,
-        loading: true,
+        loading: false,
         alert: false,
       },
       payload.body
@@ -67,7 +67,7 @@ export default (request) => ({
         name: "podcastFeedback",
         method: "post",
         path: `/podcast/${payload.slug}/feedback`,
-        loading: true,
+        loading: false,
         alert: false,
       },
       payload.body
@@ -80,7 +80,7 @@ export default (request) => ({
         name: "podcastBookmark",
         method: "post",
         path: `/podcast/${payload.slug}/bookmark`,
-        loading: true,
+        loading: false,
         alert: true,
       },
       payload.body
