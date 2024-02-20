@@ -142,8 +142,7 @@ let headers = ref([
   { key: "operation", title: t("operation"), size: "50px" },
 ]);
 let groupActions = ref([
-  { title: "فعال کردن", value: "active" },
-  { title: "غیرفعال کردن", value: "deactive" },
+  { title: "حذف کردن", value: "deleted" },
 ]);
 let search = ref("");
 let payload = computed(() => {
