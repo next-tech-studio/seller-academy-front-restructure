@@ -47,7 +47,7 @@ const getList = async (e, currentPage) => {
     .then((res) => {
       Object.assign(list, [...list, ...res.data]); 
       console.log(res.data,list)
-      lastPage.value = res.lastPage === res.currentPage ? true : false;
+      lastPage.value = res.last_page === res.current_page ? true : false;
       total_pages = res.total;
       if (res.total != page) page++;
     });
