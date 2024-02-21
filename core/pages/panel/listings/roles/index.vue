@@ -158,15 +158,6 @@ const { $repos } = useNuxtApp();
 let dataForm = ref([
   {
     type: "text-field",
-    name: "key",
-    modelValue: ref(""),
-    validations: "required",
-    label: "key",
-    size: 6,
-    show:true
-  },
-  {
-    type: "text-field",
     name: "name",
     modelValue: ref(""),
     validations: "required",
@@ -175,9 +166,18 @@ let dataForm = ref([
     show:true
   },
   {
+    type: "text-field",
+    name: "key",
+    modelValue: ref(""),
+    validations: "required",
+    label: "key",
+    size: 6,
+    show:true
+  },
+  {
     type: "select",
     name: "permissions",
-    modelValue: ref(""),
+    modelValue: null,
     selectValue: "id",
     selectTitle:"displayName",
     validations: "required",
@@ -260,14 +260,14 @@ const submitItem = () => {
       });
   } else {
     payload = {
-      body,
+      ...body,
     };
     $repos.sharedPanel
       .updateRole(payload)
       .then((res) => {
         Object.assign(sharedStore.listItems.data, [
+          { ...res },
           ...sharedStore.listItems.data,
-          { ...res.data },
         ]);
         sharedStore.closeDialog();
       })

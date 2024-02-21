@@ -2,7 +2,13 @@
   <div>
     <template v-if="!auth?.user?.loggedIn">
       <landing-header />
-      <landing-calculator :items="incomes" />
+      <landing-calculator
+        @get:subCategories="getSubcategories"
+        @submit:subCategory = "submitSubscription"
+        :calculator-categories="calculatorCategories"
+        :sub-categories ="subCategories"
+        :items="incomes"
+      />
       <landing-quote class="my-10 py-lg-10 py-0" />
       <v-container v-if="articles.length">
         <app-content-card-listing
@@ -92,6 +98,8 @@
 import { useDisplay } from "vuetify";
 import { useAuthStore } from "@core/stores/auth";
 import { useFilterStore } from "@core/stores/filter";
+import { useSharedPanelStore } from "@core/stores/sharedPanel";
+const sharedStore = useSharedPanelStore();
 const { lgAndUp } = useDisplay();
 const store = useFilterStore();
 const { isClient } = useSsrCorrection();
@@ -102,13 +110,18 @@ const articles = ref([]);
 const rooms = ref([]);
 const categories = ref({});
 let calculatorCategories = ref([]);
+let subCategories = ref([])
 // const categories = ref({});
 const incomes = ref([]);
 useAsyncData(async () => {
   if (!auth?.user?.loggedIn) {
-    await $repos.other.homepage().then((res) => {
+    await $repos.other.homepage().then(async (res) => {
       articles.value = res.articles;
       incomes.value = res.incomes;
+      await $repos.other.calculatorCategories().then((res) => {
+        console.log("calculatorCategories", res);
+        Object.assign(calculatorCategories.value, res.incomes);
+      });
     });
   } else {
     await $repos.other.loggedinHomepage().then((res) => {
@@ -119,6 +132,20 @@ useAsyncData(async () => {
     });
   }
 });
+const submitSubscription = () =>{
+  let body = {};
+  sharedStore.editForm.forEach((field) => {
+    body[field.name] = sharedStore.editForm.find(
+      (item) => item.name === field.name
+    )?.modelValue;
+  });
+  if (body.avatarUrl) body.avatarUrl = body.avatarUrl.url;
+  let payload = { body };
+  $repos.other
+    .submitSubscription(payload).catch(() => {
+      sharedStore.sendingRequest = false;
+    });
+}
 const toRoom = (item) => {
   navigateTo(
     localePath({
@@ -131,13 +158,12 @@ const toRoom = (item) => {
     })
   );
 };
-onMounted(() => {
-  $repos.other.calculatorCategories().then((res) => {
+const getSubcategories = (e) => {
+  $repos.other.subCategories(e).then((res) => {
     console.log("calculatorCategories", res);
-    Object.assign(calculatorCategories.value, res.incomes);
-    // calculatorCategories.value = res.incomes;
+    Object.assign(subCategories.value, res.incomes);
   });
-});
+};
 function toArticle(e) {
   navigateTo(
     localePath({ name: "article-preview-slug", params: { slug: e.slug } })

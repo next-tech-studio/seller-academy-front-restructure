@@ -111,10 +111,12 @@
                     class="mb-4"
                     :items="element.items"
                     base-color="n300"
+                    @update:model-value="$emit(`update:${element.name}`, element.modelValue)"
                     density="compact"
                     :multiple="element?.multiple"
                     :chips="element?.multiple"
-                    closable-chips
+                    :disabled="element?.disabled"
+                    :closable-chips = "element?.multiple"
                     :hint="element.hint"
                     :hide-details="!element.hint"
                     :readonly="element.readonly"

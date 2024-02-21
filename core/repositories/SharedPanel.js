@@ -82,7 +82,7 @@ export default (request) => ({
     );
   },
   createUser(payload) {
-    console.log('userPayload',payload)
+    console.log("userPayload", payload);
     return request(
       {
         name: "createUser",
@@ -122,7 +122,7 @@ export default (request) => ({
         name: "faqsList",
         method: "get",
         path: "/panel/faq/list",
-        query: `?search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}`,
+        query: `?search=${payload?.search}&sortKey=${payload?.sortKey}&categorySlug=${payload.category}&status=${payload.status}&sortOrder=${payload?.sortOrder}`,
         page: payload?.page,
         loading: true,
         alert: false,
@@ -148,7 +148,7 @@ export default (request) => ({
         path: "/panel/faq/edit-data",
         loading: true,
         alert: false,
-        model: { name: panelTable, dataPath:'data' },
+        model: { name: panelTable, dataPath: "data" },
       },
       payload.body
     );
@@ -165,31 +165,27 @@ export default (request) => ({
       payload.body
     );
   },
-  rolesList(payload){
-    return request(
-      {
-        name: "rolesList",
-        method: "get",
-        query: `?search=${payload?.search}&permissions=${payload?.permissions}& sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}`,
-        path: "/panel/roles/list",
-        loading: true,
-        alert: false,
-        model: { name: panelTable,collection:true, pagination:true},
-      },
-    );
+  rolesList(payload) {
+    return request({
+      name: "rolesList",
+      method: "get",
+      query: `?search=${payload?.search}&permissions=${payload?.permissions}& sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}`,
+      path: "/panel/roles/list",
+      loading: true,
+      alert: false,
+      model: { name: panelTable, collection: true, pagination: true },
+    });
   },
-  rolesListCommon(payload){
-    return request(
-      {
-        name: "rolesListCommon",
-        method: "get",
-        path: "/panel/roles/list/common",
-        loading: true,
-        alert: false,
-      },
-    );
+  rolesListCommon(payload) {
+    return request({
+      name: "rolesListCommon",
+      method: "get",
+      path: "/panel/roles/list/common",
+      loading: true,
+      alert: false,
+    });
   },
-  updateRole(payload){
+  updateRole(payload) {
     return request(
       {
         name: "updateRole",
@@ -197,12 +193,12 @@ export default (request) => ({
         path: "/panel/roles/editor-data",
         loading: true,
         alert: false,
-        model: { name: panelTable,dataPath:'data'},
+        model: { name: panelTable, dataPath: "data" },
       },
       payload
     );
   },
-  updateRoleStatus(payload){
+  updateRoleStatus(payload) {
     return request(
       {
         name: "updateRoleStatus",
@@ -213,5 +209,5 @@ export default (request) => ({
       },
       payload.body
     );
-  }
+  },
 });

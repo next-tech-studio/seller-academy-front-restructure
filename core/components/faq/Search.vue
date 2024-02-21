@@ -15,7 +15,7 @@
             color="n300"
             class="py-0 mt-4"
             variant="outlined"
-            v-model="mutedFaqs"
+            v-model="model"
             bg-color="rgba(255, 255, 255, 0.1)"
             :label="$t('your_question')"
             type="email"
@@ -24,13 +24,13 @@
           >
             <template #append-inner>
               <v-btn
-                style="border: 1px solid rgb(var(--v-theme-primary-base))"
+                class="bg-transparent"
                 flat
-                @click="$emit('update:modelValue', mutedFaqs)"
-                class="rounded-md text-button"
-                color="primary-base"
-                >{{ $t("search") }}</v-btn
-              >
+                v-if="model"
+                ripple="false"
+                icon="custom:x"
+                @click="clearSearch"
+              />
             </template>
           </v-text-field>
         </v-col>
@@ -47,16 +47,22 @@
 <script setup>
 import { useDisplay } from "vuetify";
 const { lgAndUp } = useDisplay();
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue","clear:search"]);
 const props = defineProps({
-  modelValue: "",
+  modelValue: String,
 });
-let mutedFaqs = computed({
-  get() {
-    props.modelValue;
-  },
-  set(value){
-    emit('update:modelValue', value)
-  }
-});
+const clearSearch = () => {
+
+  emit("clear:search");
+};
+let model = defineModel({ default: "" })
+// let model = computed({
+//   get() {
+//     props.modelValue;
+//   },
+//   set(value) {
+//     console.log("oeooeoe", value);
+//     emit("update:modelValue", value);
+//   },
+// });
 </script>
