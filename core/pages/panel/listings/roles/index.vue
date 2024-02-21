@@ -177,7 +177,7 @@ let dataForm = ref([
   {
     type: "select",
     name: "permissions",
-    modelValue: ref(""),
+    modelValue: null,
     selectValue: "id",
     selectTitle:"displayName",
     validations: "required",
@@ -266,8 +266,8 @@ const submitItem = () => {
       .updateRole(payload)
       .then((res) => {
         Object.assign(sharedStore.listItems.data, [
+          { ...res },
           ...sharedStore.listItems.data,
-          { ...res.data },
         ]);
         sharedStore.closeDialog();
       })
