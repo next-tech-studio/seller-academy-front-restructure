@@ -122,7 +122,7 @@ export default (request) => ({
         name: "faqsList",
         method: "get",
         path: "/panel/faq/list",
-        query: `?search=${payload?.search}&sortKey=${payload?.sortKey}&category=${payload.category}&status=${payload.status}&sortOrder=${payload?.sortOrder}`,
+        query: `?search=${payload?.search}&sortKey=${payload?.sortKey}&categorySlug=${payload.category}&status=${payload.status}&sortOrder=${payload?.sortOrder}`,
         page: payload?.page,
         loading: true,
         alert: false,
@@ -195,7 +195,7 @@ export default (request) => ({
         alert: false,
         model: { name: panelTable, dataPath: "data" },
       },
-      payload
+      payload.body
     );
   },
   updateRoleStatus(payload) {

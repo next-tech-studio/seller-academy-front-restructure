@@ -1,5 +1,9 @@
 <template>
-  <faq-search v-model="payload.search" @update:modelValue="onSearch" />
+  <faq-search
+    v-model="payload.search"
+    @update:modelValue="onSearch"
+    @clear:search="clearSearch"
+  />
   <div class="bg-n100 pt-3">
     <v-container>
       <div class="pt-7 pb-10" v-if="!payload.search?.length">
@@ -43,13 +47,17 @@ let payload = ref({
   search: search.value,
   category: { slug: "" },
 });
+const clearSearch = () => {
+  payload.value.search = ""
+  faqs.value.splice(0, faqs.value.length);
+};
 
 const getFaqs = async (e = {}) => {
   console.log("yyyeyeyeyeyeyeyeyyeyeyey", payload);
   Object.assign(payload.value.category, e);
 
   await $repos.other.faqs(payload.value).then((res) => {
-    faqs.value.splice(0,faqs.value.length)
+    faqs.value.splice(0, faqs.value.length);
     Object.assign(faqs.value, res.data);
     Object.assign(frequentFaqs.value, res.isFrequent);
     if (!payload.value.category.slug.length) {
