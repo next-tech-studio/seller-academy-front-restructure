@@ -27,16 +27,56 @@
         : 'rounded-lg'
     "
     dir="ltr"
+    :image="videoPoster"
   >
+    <!-- <div style="position: absolute; bottom: 0; left: 0; right: 0;"> -->
+    <!-- <img :src="videoPoster"> -->
     <iframe
+      v-if="!audioOnly"
       :src="videoSrc"
       class="w-100"
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen="true"
+      :allowFullScreen="true"
       webkitallowfullscreen="true"
       mozallowfullscreen="true"
+      :autoplay="false"
     ></iframe>
+
+    <div v-else>
+      <div v-if="isInitial" class="controls">
+        <div class="initial">
+          <v-btn
+            class="play-btn"
+            icon
+            :size="previewSize"
+            @click="playOrPause"
+            :loading="!isPlaying && !isInitial"
+            theme="dark"
+          >
+            <v-icon
+              color="white"
+              size="x-large"
+              icon="custom:simplePlay"
+            ></v-icon>
+          </v-btn>
+        </div>
+      </div>
+      <audio
+        v-else
+        style="
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+        "
+        :src="videoSrc"
+        controls
+        autoplay
+      ></audio>
+    </div>
+
+    <!-- </div> -->
 
     <!-- <video
       ref="video"
@@ -123,6 +163,7 @@
 import { useDisplay } from "vuetify";
 export default {
   props: {
+    audioOnly: Boolean,
     videoSrc: String,
     videoPoster: String,
     maxHeight: String,
@@ -307,5 +348,9 @@ export default {
       }
     }
   }
+}
+
+audio::-webkit-media-controls-panel {
+  // background-color: rgba(45, 45, 45, 65%);
 }
 </style>

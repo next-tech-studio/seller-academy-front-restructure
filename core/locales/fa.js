@@ -327,7 +327,7 @@ export default {
   popular_courses: "دوره‌های محبوب",
   recently_visits: "بازدید‌های اخیر",
   sort: {
-    recent: "جدیدرین",
+    recent: "جدیدترین",
     likes: "محبوب‌ترین",
     views: "پربازدیدترین",
   },
