@@ -257,7 +257,7 @@ export const useSidebar = (user = { roles: [] }) => {
     },
     {
       title: t("faqs"),
-      icon: "custom:userSolid",
+      icon: "custom:question",
       roles: ["siteAdmin", "seller"],
       get show() {
         return true;

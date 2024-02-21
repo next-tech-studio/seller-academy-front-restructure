@@ -29,7 +29,7 @@
             <div class="text-body-1 text-text-light my-2">
               {{ $t("for_more_info_about_your_intended_group") }}
             </div>
-            <v-btn class="text-button" size="large" color="primary-base">
+            <v-btn class="text-button" size="large" color="primary-base" @click="openDialog">
               {{ $t("request_more_info") }}
             </v-btn>
           </div>
@@ -39,7 +39,6 @@
             <v-card-text>
               <div class="text-center">
                 <div class="d-flex justify-center">
-
                   <v-img
                     src="/images/logo/logo.svg"
                     max-height="100"
@@ -109,18 +108,53 @@
       </v-row>
     </v-container>
   </v-card>
+  <app-dialog-form
+    :store="sharedStore"
+    button-title=""
+    subtitle=""
+    save-title="edit"
+    title="edit_general_info"
+    ref="dialogForm"
+    :add-new-item="false"
+    @update:fields="$emit('submit:subCategory')"
+  >
+    <template #formActions>
+      <slot name="formActions"></slot>
+    </template>
+  </app-dialog-form>
 </template>
 
 <script setup>
+import { useSharedPanelStore } from "@core/stores/sharedPanel";
+const sharedStore = useSharedPanelStore();
 const props = defineProps({
   items: Array,
 });
 
 let current = ref(1);
 
-onMounted(() => {
-  console.log("-==-=-=-==-=-=-=", current.value, props.items);
-});
+let dataForm =ref([
+{
+    type: "select",
+    name: "category",
+    modelValue: ref(""),
+    selectValue: "id",
+    selectTitle:"displayName",
+    validations: "required",
+    items: computed(() => sharedStore.listInfo?.permissions),
+    label: "choose_category",
+    multiple:true,
+    size: 12,
+    hint: false,
+    show:true
+  },
+])
+const openDialog = () => {
+  sharedStore.dialog = true;
+  sharedStore.edit = true;
+  sharedStore.currentItem = props.information;
+  sharedStore.initForm(dataForm.value);
+};
 
 let currentValue = computed(() => {
   if (typeof current.value == "number") {
