@@ -195,7 +195,7 @@ export default (request) => ({
         alert: false,
         model: { name: panelTable, dataPath: "data" },
       },
-      payload.body
+      payload
     );
   },
   updateRoleStatus(payload) {

@@ -158,19 +158,19 @@ const { $repos } = useNuxtApp();
 let dataForm = ref([
   {
     type: "text-field",
-    name: "key",
+    name: "name",
     modelValue: ref(""),
     validations: "required",
-    label: "key",
+    label: "title",
     size: 6,
     show:true
   },
   {
     type: "text-field",
-    name: "name",
+    name: "key",
     modelValue: ref(""),
     validations: "required",
-    label: "title",
+    label: "key",
     size: 6,
     show:true
   },
@@ -260,7 +260,7 @@ const submitItem = () => {
       });
   } else {
     payload = {
-      body,
+      ...body,
     };
     $repos.sharedPanel
       .updateRole(payload)
