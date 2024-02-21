@@ -22,6 +22,7 @@
       />
     </v-container>
   </div>
+
   <faq-frequent
     :categories="frequentCategories"
     v-model="currentCategory"
@@ -48,6 +49,7 @@ const getFaqs = async (e = {}) => {
   Object.assign(payload.value.category, e);
 
   await $repos.other.faqs(payload.value).then((res) => {
+    faqs.value.splice(0,faqs.value.length)
     Object.assign(faqs.value, res.data);
     Object.assign(frequentFaqs.value, res.isFrequent);
     if (!payload.value.category.slug.length) {
