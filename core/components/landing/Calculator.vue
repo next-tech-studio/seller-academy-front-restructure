@@ -113,7 +113,7 @@
     button-title=""
     subtitle=""
     save-title="submit"
-    title="edit_general_info"
+    title="subscribe_product"
     ref="dialogForm"
     :add-new-item="false"
     @update:category = "$emit('get:subCategories',$event)"
