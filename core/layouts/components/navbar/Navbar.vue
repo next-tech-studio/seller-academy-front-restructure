@@ -96,10 +96,9 @@
           rounded="xl"
           @click = "navigateTo('/')"
           color="text-high-emphasis"
-          class="bg-secondary-lighten1 ms-4"
+          class="bg-secondary-base ms-4"
           height="41"
-          >{{ $t("enter_website") }}</v-btn
-        >
+          > <span class="text-text-light">{{ $t("enter_website") }}</span></v-btn>
       </v-container>
     </v-app-bar>
     <v-expand-transition>
