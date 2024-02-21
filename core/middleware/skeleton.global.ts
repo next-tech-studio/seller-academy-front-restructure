@@ -1,7 +1,7 @@
 import { useGlobalStore } from "../stores/global";
 export default defineNuxtRouteMiddleware((to, from) => {
   // This middleware won't execute for specific routes in the array
-  if (["sales-route", "ad-services"].includes(to.name as string)) {
+  if (["sales-route", "ad-services", "contact-us", "about-us"].includes(to.name as string)) {
     return;
   }
 

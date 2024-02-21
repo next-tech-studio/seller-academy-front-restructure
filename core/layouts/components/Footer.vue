@@ -52,6 +52,7 @@
           <v-btn
             min-width="auto"
             v-for="link in item.links"
+            :to="link.to"
             :key="link"
             color="white"
             variant="text"

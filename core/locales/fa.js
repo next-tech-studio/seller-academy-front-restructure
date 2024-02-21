@@ -180,7 +180,7 @@ export default {
   footer_description:
     "توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه ",
   forget_password: "فراموشی رمز عبور",
-  forum: "فروم",
+  forum: "انجمن",
   from_the_students: "از زبان هنرجویان!",
   get_course_certificate_description:
     "یک سری توضیحات بابت مزایای گرفتن گواهی حضور در این دوره یک سری توضیحات بابت مزایای گرفتن گواهی حضور در این دوره یک سری توضیحات بابت مزایای گرفتن گواهی حضور در این دوره یک سری توضیحات بابت مزایای گرفتن گواهی حضور در این دوره",
@@ -610,7 +610,7 @@ export default {
   requested_forms: "فرم‌های درخواست",
   general_info: "مشخصات عمومی",
   supplementary_info: "اطلاعات تکمیلی",
-  faq: "پرسش‌های متداول",
+  faq: "سوال‌های پرتکرار",
   chapters: "سرفصل‌ها",
   add_new_question: "افزودن پرسش جدید",
   question_title: "عنوان پرسش",
@@ -652,6 +652,7 @@ export default {
   answer: "پاسخ",
   edit_answer: "ویرایش پاسخ",
   reject: "رد کردن",
+  about_us: "درباره ما",
   about_us_header: "سلرهاب دیجی‌کالا بستری تخصصی برای فروش در دنیای آنلاین",
   written: "نوشته",
   about_us_second_part_title: "سلرهاب دیجی کالا؛ نقطه آغاز همکاری ما",

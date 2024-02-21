@@ -13,7 +13,7 @@
         </v-row>
       </v-container>
     </header>
-    <div class="bg-n800">
+    <div class="bg-n700">
       <v-container>
         <v-row>
           <v-col v-for="(item, index) in socials" cols="12" lg="3" :key="index">
