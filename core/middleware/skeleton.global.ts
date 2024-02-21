@@ -30,6 +30,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
     console.log('============skeleton=============', skeleton);
 
     store.skeleton = skeleton;
-    store.skeletonLoading = true;
+    if (to.name != 'sales-route' && to.name != 'ad-services') store.skeletonLoading = true;
   }
 });
