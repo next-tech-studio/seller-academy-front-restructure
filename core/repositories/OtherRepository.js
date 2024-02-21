@@ -172,7 +172,7 @@ export default (request) => ({
       method: "get",
       path: "/faq/list",
       query: `?search=${payload?.search}&categorySlug=${payload.category?.slug}`,
-      loading: true,
+      loading: {show: !payload.search, skeleton: 'loading-indicator'},
       alert: false,
     });
   },

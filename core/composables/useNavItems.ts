@@ -17,6 +17,10 @@ export const useNavItems = () => {
     },
     { title: "requested_forms", to: "/forms",  children: ["forms"], },
     {
+      title: "faq",
+      to: "/faq",
+    },
+    {
       title: "be_seller_in_digikala",
       to: "/",
     },
