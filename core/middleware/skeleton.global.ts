@@ -1,14 +1,16 @@
 import { useGlobalStore } from "../stores/global";
 export default defineNuxtRouteMiddleware((to, from) => {
+  // This middleware won't execute for specific routes in the array
+  if (["sales-route", "ad-services"].includes(to.name as string)) {
+    return;
+  }
+
   const store = useGlobalStore();
   const router = useRouter();
   const route = router.currentRoute.value;
   let skeleton = "";
-  if (process.server) return
+  if (process.server) return;
   if (process.client) {
-    console.log('============route=============', route.name);
-    console.log('============to=============', to.name);
-    
     if (to.name == "blog") skeleton = "skeleton-blog";
     else if (to.name == "article-archive")
       skeleton = "skeleton-article-archive";
@@ -25,11 +27,9 @@ export default defineNuxtRouteMiddleware((to, from) => {
       skeleton = "skeleton-academy-courses-category-slug";
     else if (to.name == "academy-products")
       skeleton = "skeleton-academy-products";
-    else skeleton = "loading-indicator"
-
-    console.log('============skeleton=============', skeleton);
+    else skeleton = "loading-indicator";
 
     store.skeleton = skeleton;
-    if (to.name != 'sales-route' && to.name != 'ad-services') store.skeletonLoading = true;
+    store.skeletonLoading = true;
   }
 });
