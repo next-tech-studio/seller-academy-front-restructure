@@ -131,13 +131,13 @@ const toRoom = (item) => {
     })
   );
 };
-// onMounted(() => {
-//   $repos.other.calculatorCategories.then((res) => {
-//     console.log("calculatorCategories", res);
-//     Object.assign(calculatorCategories.value, res.incomes);
-//     // calculatorCategories.value = res.incomes;
-//   });
-// });
+onMounted(() => {
+  $repos.other.calculatorCategories().then((res) => {
+    console.log("calculatorCategories", res);
+    Object.assign(calculatorCategories.value, res.incomes);
+    // calculatorCategories.value = res.incomes;
+  });
+});
 function toArticle(e) {
   navigateTo(
     localePath({ name: "article-preview-slug", params: { slug: e.slug } })
