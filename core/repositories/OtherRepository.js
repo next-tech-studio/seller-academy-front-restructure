@@ -230,5 +230,16 @@ export default (request) => ({
       },
       payload
     );
+  },
+  calculatorCategories(){
+    return request(
+      {
+        name: "categories",
+        method: "get",
+        path: "/income/common",
+        loading: false,
+        alert: false,
+      },
+    );
   }
 });

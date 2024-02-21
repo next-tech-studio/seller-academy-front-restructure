@@ -26,9 +26,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     const api = APIHandlerInstance.getApi(method, path, params, query, page);
     const globalStore = useGlobalStore()
     return new Promise((resolve, reject) => {
-      console.log("request", name);
-      if (loading) {
+      const skeletonLoading = typeof loading == 'boolean' ? loading : loading.show
+      if (skeletonLoading) {
         globalStore.pendingRequest = true;
+        if (typeof loading != 'boolean') globalStore.skeleton = loading.skeleton;
         globalStore.skeletonLoading = true;
         globalStore.activeRequests[name] = true;
       }
@@ -60,7 +61,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           reject(err);
         })
         .finally(() => {
-          if (loading) {
+          if (skeletonLoading) {
             globalStore.activeRequests[name] = false;
             if (!globalStore.activeRequestsExists) {
               globalStore.skeletonLoading = false;

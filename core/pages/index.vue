@@ -101,6 +101,7 @@ const localePath = useLocalePath();
 const articles = ref([]);
 const rooms = ref([]);
 const categories = ref({});
+let calculatorCategories = ref([]);
 // const categories = ref({});
 const incomes = ref([]);
 useAsyncData(async () => {
@@ -130,8 +131,16 @@ const toRoom = (item) => {
     })
   );
 };
-
+onMounted(() => {
+  $repos.other.calculatorCategories().then((res) => {
+    console.log("calculatorCategories", res);
+    Object.assign(calculatorCategories.value, res.incomes);
+    // calculatorCategories.value = res.incomes;
+  });
+});
 function toArticle(e) {
-  navigateTo(localePath({ name: "article-preview-slug", params: { slug: e.slug } }));
+  navigateTo(
+    localePath({ name: "article-preview-slug", params: { slug: e.slug } })
+  );
 }
 </script>

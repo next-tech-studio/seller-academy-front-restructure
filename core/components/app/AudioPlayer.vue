@@ -17,6 +17,7 @@
           :video-poster="audioPoster"
           small
           :options="['volume', 'cog']"
+          audio-only
         ></app-video-player>
       </v-card>
     </v-img>

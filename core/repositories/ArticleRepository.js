@@ -37,7 +37,7 @@ export default (request) => ({
         method: "get",
         path: "/articles/archive/list",
         query,
-        loading: true,
+        loading: { show: payload.page == 1, skeleton: 'skeleton-article-archive' },
         page: payload.page,
       },
       payload
