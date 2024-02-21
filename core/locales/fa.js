@@ -812,5 +812,7 @@ export default {
   add_new_role: "افزودن نقش جدید",
   choose_permissions:'مجوز‌ها',
   add_new_role_description:'مشخصات نقش را وارد کنید.',
-  edit_role:'ویرایش نقش'
+  edit_role:'ویرایش نقش',
+  choose_product_from_category:'کالا از دسته‌بندی',
+  submit:'ثبت'
 };

@@ -172,7 +172,7 @@ export default (request) => ({
       method: "get",
       path: "/faq/list",
       query: `?search=${payload?.search}&categorySlug=${payload.category?.slug}`,
-      loading: {show: !payload.search, skeleton: 'loading-indicator'},
+      loading: { show: !payload.search, skeleton: "loading-indicator" },
       alert: false,
     });
   },
@@ -186,7 +186,7 @@ export default (request) => ({
     });
   },
   uploadVideoGenerateId(payload) {
-    console.log('payload',payload.body)
+    console.log("payload", payload.body);
     return request(
       {
         name: "arvaneGenerateId",
@@ -203,7 +203,7 @@ export default (request) => ({
     );
   },
   uploadStatus(payload) {
-    console.log('payloadssss',payload)
+    console.log("payloadssss", payload);
     return request(
       {
         name: "checkStatus",
@@ -211,15 +211,15 @@ export default (request) => ({
         path: "/file/status",
         loading: true,
         alert: false,
-        headers:{
-          'Content-Type':'application/json',
-          'Accept':'application/json'
-        }
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
       },
       payload
     );
   },
-  uploadBigFile(payload){
+  uploadBigFile(payload) {
     return request(
       {
         name: "checkStatus",
@@ -231,15 +231,35 @@ export default (request) => ({
       payload
     );
   },
-  calculatorCategories(){
+  calculatorCategories() {
+    return request({
+      name: "categories",
+      method: "get",
+      path: "/income/common",
+      loading: false,
+      alert: false,
+    });
+  },
+  subCategories(payload) {
+    return request({
+      name: "subCategories",
+      query:`?id=${payload}`,
+      method: "get",
+      path: "/income/subcategories",
+      loading: false,
+      alert: false,
+    });
+  },
+  submitSubscription(payload){
     return request(
       {
-        name: "categories",
-        method: "get",
-        path: "/income/common",
+        name: "submitSubscription",
+        method: "post",
+        path: "/income/submit",
         loading: false,
         alert: false,
       },
+      payload
     );
   }
 });

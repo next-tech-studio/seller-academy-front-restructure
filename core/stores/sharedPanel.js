@@ -155,7 +155,7 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
         return "text-icon-hint-caution";
     },
     initForm(dataForm) {
-      if (!this.edit)
+      if (!this.edit) {
         dataForm.forEach((element) => {
           element.modelValue =
             typeof element.modelValue == "string"
@@ -164,9 +164,11 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
               ? []
               : typeof element.modelValue == "boolean"
               ? false
+              : element.modelValue == null
+              ? null
               : {};
         });
-      if (this.edit == true || this.additionalOperation == true) {
+      } else if (this.edit == true || this.additionalOperation == true) {
         const handler = new APIHandler();
         dataForm.forEach((field) => {
           if (field.dataPath) {
@@ -186,23 +188,25 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
             else if (Array.isArray(field.modelValue)) field.modelValue = [];
             else if (typeof field.modelValue == "boolean")
               field.modelValue = false;
-            else field.modelValue = {};
+            else if (field.modelValue == null) {
+              field.modelValue = null;
+            } else field.modelValue = {};
           } else {
-            if (this.currentItem[field.name]){
+            if (this.currentItem[field.name]) {
               field.modelValue = this.currentItem[field.name];
               if (field.selectValue) {
-                console.log('hello', field,this.currentItem)
                 field.modelValue = this.currentItem[field.name].map(
                   (element) => element[field.selectValue]
                 );
               }
-            }
-   
-            else if (typeof field.modelValue == "string") field.modelValue = "";
+            } else if (typeof field.modelValue == "string")
+              field.modelValue = "";
             else if (Array.isArray(field.modelValue)) field.modelValue = [];
             else if (typeof field.modelValue == "boolean")
               field.modelValue = false;
-            else field.modelValue = {};
+            else if (field.modelValue == null) {
+              field.modelValue = null;
+            } else field.modelValue = {};
           }
         });
       }

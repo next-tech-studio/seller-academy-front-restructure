@@ -112,10 +112,11 @@
     :store="sharedStore"
     button-title=""
     subtitle=""
-    save-title="edit"
+    save-title="submit"
     title="edit_general_info"
     ref="dialogForm"
     :add-new-item="false"
+    @update:category = "$emit('get:subCategories',$event)"
     @update:fields="$emit('submit:subCategory')"
   >
     <template #formActions>
@@ -129,6 +130,8 @@ import { useSharedPanelStore } from "@core/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 const props = defineProps({
   items: Array,
+  calculatorCategories:Array,
+  subCategories: Array
 });
 
 let current = ref(1);
@@ -137,21 +140,54 @@ let dataForm =ref([
 {
     type: "select",
     name: "category",
-    modelValue: ref(""),
+    modelValue: null,
     selectValue: "id",
-    selectTitle:"displayName",
+    selectTitle:"title",
     validations: "required",
-    items: computed(() => sharedStore.listInfo?.permissions),
+    items: computed(() => props?.calculatorCategories),
     label: "choose_category",
+    multiple:false,
+    size: 12,
+    hint: false,
+    show:true
+  },
+  {
+    type: "select",
+    name: "subcategories",
+    modelValue: null,
+    selectValue: "id",
+    disabled:computed(() => !!!props?.subCategories.length),
+    selectTitle:"title",
+    validations: "required",
+    items: computed(() => props?.subCategories),
+    label: "choose_product_from_category",
     multiple:true,
     size: 12,
     hint: false,
     show:true
   },
+  {
+    type: "text-field",
+    name: "email",
+    modelValue: ref(""),
+    validations: "required|email",
+    label: "email",
+    size: 12,
+    hint: false,
+  },
+  {
+    type: "text-field",
+    textFieldType:'number',
+    name: "mobile",
+    modelValue: ref(""),
+    validations: "required|mobile",
+    label: "mobile",
+    size: 12,
+    hint: false,
+  },
 ])
 const openDialog = () => {
   sharedStore.dialog = true;
-  sharedStore.edit = true;
   sharedStore.currentItem = props.information;
   sharedStore.initForm(dataForm.value);
 };

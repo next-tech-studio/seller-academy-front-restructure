@@ -182,8 +182,6 @@ let payload = computed(() => {
     category: filterStore.filter?.categories || "",
     status: filterStore.filter?.status || "",
     search: search.value,
-    publicationDateMax: filterStore.filter?.publicationDateMax || "",
-    publicationDateMin: filterStore.filter?.publicationDateMin || "",
     sortKey: sharedStore.sortBy[0]?.key || "",
     sortOrder: sharedStore.sortBy[0]?.order || "",
   };
