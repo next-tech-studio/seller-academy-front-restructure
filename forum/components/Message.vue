@@ -356,7 +356,7 @@ const actions = [
     title: "remove_msg",
     action: remove,
     icon: "custom:trash",
-    show: auth.hasPermission(["community"]),
+    show: authStore.hasPermission(["community"]),
   },
 ];
 </script>
