@@ -332,6 +332,7 @@ watch(
     newDescriptionRealTime,
     newChatSidebarRealTime,
   ]) => {
+    console.log('383838838383838383838',newChatRealTime)
     if (newDeleteChatRealTime) {
       let index = chat.value.findIndex(
         (item) => item.id === newDeleteChatRealTime.deleteMessage.id

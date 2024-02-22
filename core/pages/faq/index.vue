@@ -2,7 +2,6 @@
   <faq-search
     v-model="payload.search"
     @update:modelValue="onSearch"
-    @clear:search="clearSearch"
   />
   <div class="bg-n100 pt-3">
     <v-container>
@@ -47,13 +46,8 @@ let payload = ref({
   search: search.value,
   category: { slug: "" },
 });
-const clearSearch = () => {
-  payload.value.search = ""
-  faqs.value.splice(0, faqs.value.length);
-};
 
 const getFaqs = async (e = {}) => {
-  console.log("yyyeyeyeyeyeyeyeyyeyeyey", payload);
   Object.assign(payload.value.category, e);
 
   await $repos.other.faqs(payload.value).then((res) => {
