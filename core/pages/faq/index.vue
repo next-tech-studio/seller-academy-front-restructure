@@ -48,7 +48,6 @@ let payload = ref({
 });
 
 const getFaqs = async (e = {}) => {
-  console.log("yyyeyeyeyeyeyeyeyyeyeyey", payload);
   Object.assign(payload.value.category, e);
 
   await $repos.other.faqs(payload.value).then((res) => {
