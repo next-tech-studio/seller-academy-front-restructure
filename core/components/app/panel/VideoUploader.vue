@@ -6,10 +6,10 @@
     class="loading-position bg-text-low-emphasis"
     flat
     @click="videoHasNotUploadedYet"
-    v-if="!!/https/.test(uploadedFiles.url) || !!uploadedFiles.url || uploadProgress==100"
+    v-if="(!/https/.test(uploadedFiles.url) || !uploadedFiles.url) && uploadProgress!==100"
   />
   <app-video-player
-    v-if="type == 'video' && /https/.test(uploadedFiles.url)"
+    v-if="/https/.test(uploadedFiles.url)"
     :video-src="uploadedFiles.url"
     :options="['volume', 'cog', 'forward', 'fullScreen']"
     small
@@ -37,7 +37,7 @@
     :rotate="360"
     :model-value="uploadProgress"
     :size="100"
-    v-if="uploadProgress  && !uploadedFiles.url && uploadProgress !='100'"
+    v-if="uploadProgress  && !uploadedFiles.url && uploadProgress <=99"
   >
     {{ uploadProgress }}%
   </v-progress-circular>

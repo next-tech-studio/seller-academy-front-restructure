@@ -15,6 +15,8 @@
             color="n300"
             class="py-0 mt-4"
             variant="outlined"
+            clear-icon="custom:x"
+            clearable
             v-model="model"
             bg-color="rgba(255, 255, 255, 0.1)"
             :label="$t('your_question')"
@@ -22,7 +24,7 @@
             theme="dark"
             hide-details
           >
-            <template #append-inner>
+            <!-- <template #append-inner>
               <v-btn
                 class="bg-transparent"
                 flat
@@ -31,7 +33,7 @@
                 icon="custom:x"
                 @click="clearSearch"
               />
-            </template>
+            </template> -->
           </v-text-field>
         </v-col>
         <v-col cols="12" lg="3">
