@@ -57,14 +57,14 @@ const clearSearch = () => {
 
   emit("clear:search");
 };
-// let model = defineModel({ default: "" })
-let model = computed({
-  get() {
-    props.modelValue;
-  },
-  set(value) {
-    console.log("oeooeoe", value);
-    emit("update:modelValue", value);
-  },
-});
+let model = defineModel({ default: "" })
+// let model = computed({
+//   get() {
+//     props.modelValue;
+//   },
+//   set(value) {
+//     console.log("oeooeoe", value);
+//     emit("update:modelValue", value);
+//   },
+// });
 </script>
