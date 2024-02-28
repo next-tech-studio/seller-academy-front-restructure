@@ -817,5 +817,9 @@ export default {
   edit_role:'ویرایش نقش',
   choose_product_from_category:'کالا از دسته‌بندی',
   submit:'ثبت',
-  subscribe_product:'اشتراک در دریافت اطلاعات'
+  subscribe_product:'اشتراک در دریافت اطلاعات',
+  room:'اتاق',
+  waiting:'در انتظار',
+  accept:'تایید',
+  join_requests:'درخواست‌های عضویت'
 };

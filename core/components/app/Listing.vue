@@ -122,7 +122,10 @@
       >
         <tr>
           <template v-for="column in columns" :key="column.key">
-            <td class="border-b text-text-low-emphasis text-body-1" :style="`width: ${column.size} !important`">
+            <td
+              class="border-b text-text-low-emphasis text-body-1"
+              :style="`width: ${column.size} !important`"
+            >
               <span v-if="!column.sortable && !column.selectAll">{{
                 column?.title
               }}</span>
@@ -134,9 +137,9 @@
                 @update:model-value="selectAll"
                 hide-details
               >
-              <template #label>
-                <span variant="text" class="ms-4">{{ column?.title }}</span>
-              </template>
+                <template #label>
+                  <span variant="text" class="ms-4">{{ column?.title }}</span>
+                </template>
               </v-checkbox>
               <div class="d-flex">
                 <span
@@ -160,37 +163,33 @@
         :key="header.key"
         v-slot:[`item.${header.key}`]="{ item }"
       >
-        <slot
-          :name="header.key"
-          :item="{ item }"
-          :header="{ header }"
-        >
+        <slot :name="header.key" :item="{ item }" :header="{ header }">
           <!-- <div class="cursor-pointer" v-if="header.key == 'title'"> -->
-            <!-- <div
+          <!-- <div
               class="d-flex align-center justify-start"
               :style="`width: ${header.size} !important; flex: 0 1 0%`"
             > -->
-            <v-checkbox
-              v-if="selectable && header.key == 'title'"
-              true-icon="custom:squareCheck"
-              false-icon="custom:square"
-              :value="item"
-              multiple
-              v-model="store.selectedTableItems"
-              hide-details
-            >
-              <template #label>
-                <v-btn
-                  @click="goToItem(item)"
-                  variant="text"
-                  :ripple="false"
-                  class="text-truncate text-body-1"
-                >
-                  {{ item[header.key] }}
-                </v-btn>
-              </template>
-            </v-checkbox>
-            <!-- </div> -->
+          <v-checkbox
+            v-if="selectable && header.key == 'title'"
+            true-icon="custom:squareCheck"
+            false-icon="custom:square"
+            :value="item"
+            multiple
+            v-model="store.selectedTableItems"
+            hide-details
+          >
+            <template #label>
+              <v-btn
+                @click="goToItem(item)"
+                variant="text"
+                :ripple="false"
+                class="text-truncate text-body-1"
+              >
+                {{ item[header.key] }}
+              </v-btn>
+            </template>
+          </v-checkbox>
+          <!-- </div> -->
           <!-- </div> -->
           <div v-if="header.key == 'author'" style="width: fit-content">
             <span class="text-body-1">{{ item.author.displayName }}</span>
@@ -469,20 +468,20 @@ let sortedByIconType = (columnKey) => {
     return "custom:arrowDownWideShort";
 };
 
-const cellProps = (item) =>{
-        // Calculate dynamic width based on item properties
-        let cellWidth = 'auto'; // Default width
-        if (props.headers[item.index]?.size) {
-          cellWidth = `${props.headers[item.index]?.size}`; // Set width based on item property
-        }
-        console.log(cellWidth)
-        return {
-          style: {
-            width: `${cellWidth} !important` // Assign calculated width dynamically
-          }
-          // Add additional cell properties if needed
-        };
-      }
+const cellProps = (item) => {
+  // Calculate dynamic width based on item properties
+  let cellWidth = "auto"; // Default width
+  if (props.headers[item.index]?.size) {
+    cellWidth = `${props.headers[item.index]?.size}`; // Set width based on item property
+  }
+  console.log(cellWidth);
+  return {
+    style: {
+      width: `${cellWidth} !important`, // Assign calculated width dynamically
+    },
+    // Add additional cell properties if needed
+  };
+};
 
 const setOperationIcon = (action, item) => {
   if (action == "edit")
@@ -524,6 +523,10 @@ const setOperationIcon = (action, item) => {
     return { icon: "custom:star", color: "text-hint-caution" };
   else if (action == "most_popular" && !item.mostPopular)
     return { icon: "custom:star", color: "text-low-emphasis" };
+  else if (action == "accept")
+    return { icon: "custom:check", color: "text-hint-success" };
+    else if (action == "reject")
+    return { icon: "custom:x", color: "text-primary" };
 };
 </script>
 
@@ -564,7 +567,6 @@ const setOperationIcon = (action, item) => {
       border-color: rgba(var(--v-theme-primary-base)) !important;
     }
   }
-  
 }
 
 #search .v-input__control {
