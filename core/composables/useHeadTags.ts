@@ -3,7 +3,8 @@ export const useHeadTags = (item) => {
     const config = useRuntimeConfig()
     let tags = () => item?.tags?.length ? `, ${item?.tags?.map(i => i.title).toString()}` : ''
     let title = () => `${config.public.appName} | ${item?.title || 'پلتفرم جامع فروشندگان'}`
-    let description = () => item?.seo?.description || 'پلتفرم جامع آموزش، ارتباط و ارتقای فروشندگان آنلاین'
+    // let description = () => item?.seo?.description || item.description || 'پلتفرم جامع آموزش، ارتباط و ارتقای فروشندگان آنلاین'
+    let description = () => item?.seo?.description || item.description || 'سلر هاب دیجی‌کالا بستری تخصصی برای فروش در دنیای آنلاین'
     let image = () => item.bannerUrl || config.public.domain + '/images/logo/1.png'
     
     return {

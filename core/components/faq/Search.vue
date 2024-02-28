@@ -38,7 +38,7 @@
         </v-col>
         <v-col cols="12" lg="3">
           <div class="d-flex justify-center align-center">
-            <v-img :max-width="lgAndUp ? 450 : 255" src="/images/faq.svg" />
+            <v-img :max-width="lgAndUp ? 450 : 255" src="/images/faq.svg" alt="faq" />
           </div>
         </v-col>
       </v-row>

@@ -36,6 +36,7 @@
 
 <script setup>
 const { $repos } = useNuxtApp();
+const { t } = useI18n();
 let faqs = ref([]);
 let frequentFaqs = ref([]);
 let frequentCategories = ref([]);
@@ -132,4 +133,10 @@ const items = [
     ],
   },
 ];
+
+useHead(
+  useHeadTags({
+    title: t("faq")
+  })
+);
 </script>

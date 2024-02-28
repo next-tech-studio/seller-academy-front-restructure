@@ -4,28 +4,23 @@
       <course-landing-header></course-landing-header>
     </v-container>
     <v-container class="py-lg-10 py-2">
-      <course-landing-our-courses :categories="data.categories"></course-landing-our-courses>
+      <course-landing-our-courses
+        :categories="data.categories"
+      ></course-landing-our-courses>
     </v-container>
     <v-container class="py-lg-10 py-2">
-      <v-img src="/images/landing_courses.png" />
+      <v-img src="/images/landing_courses.png" alt="academy courses" />
     </v-container>
     <v-container class="py-lg-10 py-2">
-      <v-img
-        src="/images/landing_pros.png"
-      ></v-img>
+      <v-img src="/images/landing_pros.png" alt="academy pros"></v-img>
     </v-container>
-    <v-img
-      class="py-lg-10 py-2"
-      src="/images/landing_statistics.png"
-    ></v-img>
+    <v-img class="py-lg-10 py-2" src="/images/landing_statistics.png" alt="academy statistics"></v-img>
     <v-container>
-      <course-landing-testimonial :items="data.comments"></course-landing-testimonial>
+      <course-landing-testimonial
+        :items="data.comments"
+      ></course-landing-testimonial>
     </v-container>
-    <v-img
-      class="pt-10"
-      cover
-      src="/images/landing_features.png"
-    ></v-img>
+    <v-img class="pt-10" cover src="/images/landing_features.png" alt="academy features"></v-img>
   </div>
   <div v-else>
     <div class="bg-background-dark">
@@ -72,6 +67,7 @@
 import { useAuthStore } from "@core/stores/auth";
 import { useFilterStore } from "@core/stores/filter";
 const { $repos } = useNuxtApp();
+const { t } = useI18n();
 const store = useFilterStore();
 const auth = useAuthStore();
 const data = reactive({});
@@ -146,4 +142,10 @@ Promise.all([
       : getLoggedInHomepageData();
   }),
 ]);
+
+useHead(
+  useHeadTags({
+    title: t("academy"),
+  })
+);
 </script>

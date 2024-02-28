@@ -24,16 +24,18 @@
           <p class="text-body-1 mb-4">
             {{ $t("about_us_second_part_explanation") }}
           </p>
-          <v-img src="/images/aboutus/second-part.png" />
+          <v-img src="/images/aboutus/second-part.png" alt="about us" />
           <v-img
             width="70px"
             src="/images/ornamentation/curve.svg"
             class="curve-position d-none d-md-block"
+            alt="curve shape"
           />
           <v-img
             width="50px"
             src="/images/ornamentation/star.svg"
             class="star-position d-none d-md-block"
+            alt="star"
           />
         </v-container>
       </div>
@@ -91,6 +93,7 @@
                 cover
                 :src="mdAndUp?'/images/aboutus/community.png':'/images/aboutus/community-mobile.png'"
                 height="100%"
+                alt="cmmunity"
               ></v-img>
             </v-col>
             <v-spacer class="d-none d-lg-block"></v-spacer>
@@ -140,6 +143,7 @@
                   width="144"
                   class="text-center"
                   src="/images/aboutus/logo.svg"
+                  alt="logo"
                 ></v-img>
               </div>
               <div class="text-h5 text-center">
@@ -200,7 +204,7 @@
 </template>
 <script setup>
 import { useDisplay } from 'vuetify';
-
+const { t } = useI18n();
 const {lgAndUp, mdAndUp} = useDisplay()
 const timelines = [
   { year: 1399, description: "about_us_timeline_1399" },
@@ -215,6 +219,12 @@ const advatages = [
   "advantage_4",
   "advantage_5",
 ];
+
+useHead(
+  useHeadTags({
+    title: t("about_us")
+  })
+);
 </script>
 <style lang="scss">
 #about-us {

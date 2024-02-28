@@ -39,6 +39,7 @@
                 width="100%"
                 cover
                 src="/images/loggedin-landing-header.png"
+                alt="landing banner"
               ></v-img>
             </v-card>
           </v-col>
@@ -99,6 +100,7 @@ import { useDisplay } from "vuetify";
 import { useAuthStore } from "@core/stores/auth";
 import { useFilterStore } from "@core/stores/filter";
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
+const { t } = useI18n();
 const sharedStore = useSharedPanelStore();
 const { lgAndUp } = useDisplay();
 const store = useFilterStore();
@@ -169,4 +171,10 @@ function toArticle(e) {
     localePath({ name: "article-preview-slug", params: { slug: e.slug } })
   );
 }
+
+useHead(
+  useHeadTags({
+    title: t("home")
+  })
+);
 </script>

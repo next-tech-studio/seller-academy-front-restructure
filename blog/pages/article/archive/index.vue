@@ -71,9 +71,7 @@ Promise.all([
 
 useHead(
   useHeadTags({
-    title: t("articles"),
-    description: "",
-    type: "website",
+    title: t("articles")
   })
 );
 </script>

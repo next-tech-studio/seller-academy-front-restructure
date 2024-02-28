@@ -4,6 +4,8 @@ export default {
   academy_header_description:
     "یکی از پرطرفدارترین شبکه‌های اجتماعی در سراسر دنیا تلگرام است. این اپلیکیشن به دلیل سرعت بالا، سادگی و امنیت مناسب، بسیار موردتوجه کاربران است و محبوبیت بسیار زیادی دارد.",
   academy: "آکادمی",
+  academy_courses: "دوره‌های آکادمی",
+  ad_service: "سرویس تبلیغاتی",
   accepting_rules_by_signing_up:
     "با ثبت نام در سلر آکادمی، قوانین و مقررات آن را می‌پذیرم.",
   add_from_gallery: "افزودن از گالری",
@@ -618,7 +620,7 @@ export default {
   course_faq_desc: "حداقل وارد کردن دو مورد اجباری است.",
   course_title: "عنوان دوره",
   save_changes: "ذخیره‌ی تغییرات",
-  rooms: "اتاق‌ها",
+  rooms: "اتاق‌های گفتگو",
   rooms_description: "رفع مشکلات و پرسیدن پرسش‌ها شما...",
   no_result_found: "هیچ نتیجه‌ای یافت نشد!",
   did_not_receive_the_code: "کدی دریافت نکردید؟",

@@ -30,6 +30,7 @@
               <v-img
                 src="/images/userdashboard/add-post.png"
                 :gradient="gradient"
+                alt="add post image"
               >
                 <div
                   class="text-text-light d-flex flex-column justify-end h-100 align-center pa-4"
@@ -47,6 +48,7 @@
               <v-img
                 src="/images/userdashboard/add-question.png"
                 :gradient="gradient"
+                alt="add question image"
               >
                 <div
                   class="text-text-light d-flex flex-column justify-end h-100 align-center pa-4"
@@ -70,6 +72,7 @@
 
 <script setup>
 import { useDisplay } from "vuetify";
+const { t } = useI18n();
 const route = useRoute();
 let tabs = ref("posts");
 const { lgAndUp, mdAndUp } = useDisplay();
@@ -96,6 +99,13 @@ definePageMeta({
   middleware: ["auth"],
   layout: false,
 });
+
+
+useHead(
+  useHeadTags({
+    title: t("user_dashboard"),
+  })
+);
 </script>
 
 <style lang="scss" scoped>

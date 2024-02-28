@@ -10,7 +10,7 @@
           :class="smAndDown ? 'py-0' : ' pt-0'"
         >
           <v-avatar size="36px" class="me-3">
-            <v-img :src="item?.user?.avatarUrl" />
+            <v-img :src="item?.user?.avatarUrl" :alt="item?.user?.name" />
           </v-avatar>
           {{ item?.user?.name }}
           <v-chip
@@ -66,7 +66,7 @@
                 cover
                 aspect-ratio="1.2"
                 class="rounded-md"
-                :alt="item.slug"
+                :alt="item.text"
                 :src="attachment.previewImageUrl"
               ></v-img>
             </v-card>
@@ -91,7 +91,7 @@
               aspect-ratio="1.2"
               cover
               class="rounded-md w-100"
-              :alt="item.slug"
+              :alt="item.text"
               :src="attachment.previewImageUrl"
               height="230"
             ></v-img>

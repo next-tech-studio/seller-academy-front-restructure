@@ -23,7 +23,7 @@
         </v-row>
       </div>
       <div class="image__fixed">
-        <v-img src="/images/sales-route.png"></v-img>
+        <v-img src="/images/sales-route.png" alt="sales route header"></v-img>
       </div>
     </v-container>
   </v-card>
