@@ -3,6 +3,7 @@
     <v-img
       class="d-none d-lg-block"
       src="/images/community_header.webp"
+      alt="forum banner"
     ></v-img>
     <v-container class="d-lg-none">
       <div class="d-flex justify-space-between align-center">
@@ -13,6 +14,7 @@
           class="px-0 text-button animated"
           variant="text"
           color="text-secondary"
+          :to="localePath({ name: 'forum-room-list' })"
           >{{ $t("see_more") }}</v-btn
         >
       </div>
@@ -270,9 +272,7 @@ Promise.all([
 
 useHead(
   useHeadTags({
-    title: t("forum"),
-    description: "",
-    type: "website",
+    title: t("forum")
   })
 );
 </script>

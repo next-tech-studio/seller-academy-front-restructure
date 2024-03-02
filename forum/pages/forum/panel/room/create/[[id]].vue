@@ -117,6 +117,10 @@
       </section>
       <section class="bg-background-light rounded-lg pa-6" style="width: 49%">
         <div class="mb-4">
+          <p class="mb-2 text-h3">{{ $t("room_link") }}</p>
+          <span class="text-text-low-emphasis">{{ room.joinLink }}</span>
+        </div>
+        <div class="mb-4">
           <p class="mb-2 text-h3">{{ $t("maximum_allowed_member") }}</p>
           <v-text-field
             v-model="room.maxMember"
@@ -151,6 +155,7 @@
           <p class="text-h3">{{ $t("is_private") }}</p>
           <v-select
             :label="$t('is_private')"
+            disabled
             density="compact"
             :rules="$rules({ isPrivate: 'required' }, room.isPrivate)"
             base-color="n300"
@@ -245,6 +250,7 @@ let room = ref({
   avatarUrl: { url: "" },
   bannerUrl: { url: "" },
   category: { id: 0 },
+  isPrivate:1
 });
 let common = ref({});
 let users = ref([]);
@@ -299,8 +305,6 @@ const onSearch = useDebounceFn(async (e) => await getUsers(e), 1000, {
 });
 const getRoomInfo = () => {
   $repos.communityPanel.roomInfo(route.params.id).then((res) => {
-    console.log("res", res);
-
     Object.assign(room.value, res);
   });
 };

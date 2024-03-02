@@ -2,7 +2,7 @@
   <div class="loading">
     <v-card width="149" height="123">
       <v-card-text class="text-center">
-        <v-img class="mx-auto pt-4" width="85" src="/images/logo/5.svg"></v-img>
+        <v-img class="mx-auto pt-4" width="85" src="/images/logo/5.svg" alt="logo"></v-img>
         <div class="bouncing-loader">
           <div></div>
           <div></div>

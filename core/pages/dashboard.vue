@@ -18,7 +18,7 @@
         <div class="d-flex">
           <v-window
             v-model="tabs"
-            class="rounded-lg me-4"
+            class="rounded-lg me-lg-4 me-0"
             :class="lgAndUp ? 'w-75' : 'w-100'"
           >
             <v-window-item :value="tabs">
@@ -30,6 +30,7 @@
               <v-img
                 src="/images/userdashboard/add-post.png"
                 :gradient="gradient"
+                alt="add post image"
               >
                 <div
                   class="text-text-light d-flex flex-column justify-end h-100 align-center pa-4"
@@ -47,6 +48,7 @@
               <v-img
                 src="/images/userdashboard/add-question.png"
                 :gradient="gradient"
+                alt="add question image"
               >
                 <div
                   class="text-text-light d-flex flex-column justify-end h-100 align-center pa-4"
@@ -70,6 +72,7 @@
 
 <script setup>
 import { useDisplay } from "vuetify";
+const { t } = useI18n();
 const route = useRoute();
 let tabs = ref("posts");
 const { lgAndUp, mdAndUp } = useDisplay();
@@ -96,6 +99,13 @@ definePageMeta({
   middleware: ["auth"],
   layout: false,
 });
+
+
+useHead(
+  useHeadTags({
+    title: t("user_dashboard"),
+  })
+);
 </script>
 
 <style lang="scss" scoped>

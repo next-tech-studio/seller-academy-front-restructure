@@ -18,7 +18,7 @@
     >
       <v-img
         :src="members[maxAvatarCount]?.avatarUrl"
-        :alt="members[maxAvatarCount]?.name"
+        :alt="members[maxAvatarCount]?.displayName"
         class="align-center"
         gradient="to bottom, rgba(0, 0, 0,.5), rgba(0, 0, 0,.5)"
       >

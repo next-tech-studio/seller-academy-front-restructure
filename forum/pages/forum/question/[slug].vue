@@ -291,6 +291,10 @@ const sendAnswer = (e) => {
       loading.value = false;
     });
 };
+
+useHead(useHeadTags({
+  title: route.params.slug.split('-').join(' ')
+}));
 </script>
 
 <style lang="scss" scoped></style>

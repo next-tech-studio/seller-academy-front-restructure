@@ -29,6 +29,7 @@
 <script setup>
 import { useAuthStore } from "@core/stores/auth";
 const auth = useAuthStore();
+const { t } = useI18n();
 watch(
   auth,
   (newValue) => {
@@ -93,4 +94,10 @@ const keepGoing = (step) => {
     default:
   }
 };
+
+useHead(
+  useHeadTags({
+    title: `${t("login")} /\ ${t("sign_up")}`,
+  })
+);
 </script>

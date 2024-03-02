@@ -15,6 +15,7 @@
           <v-img
             width="300px"
             src="/images/roomlist_header.png"
+            alt="rooms_header"
           ></v-img>
         </div>
       </v-container>
@@ -97,6 +98,7 @@ const { lgAndUp } = useDisplay();
 const { $repos } = useNuxtApp();
 const localePath = useLocalePath();
 const { isClient } = useSsrCorrection();
+const { t } = useI18n()
 import { useFilterStore } from "@core/stores/filter";
 const store = useFilterStore();
 let page = reactive(1);
@@ -152,6 +154,16 @@ const toRoom = (item) => {
     })
   );
 };
+
+definePageMeta({
+  middleware: ["auth"],
+});
+
+useHead(
+  useHeadTags({
+    title: t("rooms"),
+  })
+);
 </script>
 <style lang="scss">
 .top-room-postion {

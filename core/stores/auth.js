@@ -93,9 +93,13 @@ export const useAuthStore = defineStore("auth", {
       });
     },
     login(payload) {
+      const { history } = useRouter().options;
+      const localePath = useLocalePath()
+      const back = history.state.back;
+      const path = back || "/";
       this.$repos.auth.login(payload).then((res) => {
         this.user = { ...res, loggedIn: true };
-        navigateTo(useLocalePath({ name: "blog" }), { external: true });
+        navigateTo(localePath(path), { external: true });
       });
     },
     validateRegistrationCode(payload) {

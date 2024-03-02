@@ -74,6 +74,7 @@
             class="mx-auto"
             width="150"
             src="/images/certificate.png"
+            alt="certificate"
           ></v-img>
           <div class="text-text-heading text-h4">{{ $t("congrates") }}</div>
           <div class="text-text-high-emphasis text-h5">
@@ -138,4 +139,10 @@
 <script setup>
 import { useDisplay } from "vuetify";
 const { smAndDown } = useDisplay();
+const { t } = useI18n();
+useHead(
+  useHeadTags({
+    title: t("sales_route")
+  })
+);
 </script>

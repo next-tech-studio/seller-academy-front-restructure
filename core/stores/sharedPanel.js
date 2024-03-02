@@ -150,6 +150,8 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
       else if (status == "draft") return "text-icon-low-emphasis";
       else if (status == "published") return "text-icon-hint-success";
       else if (status == "approved") return "text-icon-hint-success";
+      else if (status == "accept") return "text-text-hint-success";
+      else if (status == "reject") return "text-background-error";
       else if (status == "inactive") return "text-text-primaryr";
       else if (status == "waiting_for_approval")
         return "text-icon-hint-caution";

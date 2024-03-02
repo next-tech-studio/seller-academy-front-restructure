@@ -10,6 +10,7 @@
           <v-img
             max-height="355"
             :src="`/images/ad-services/banners/${n}.png`"
+            :alt="`ad service ${n}`"
           ></v-img>
         </v-col>
         <v-btn

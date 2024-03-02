@@ -12,6 +12,7 @@
       cover
       max-height="398px"
       class="align-end"
+      alt="academy header"
     >
       <div class="w-50 mx-auto pb-6">
         <v-card-title class="text-md-h1 text-h5 text-text-light pb-2 pt-0">
