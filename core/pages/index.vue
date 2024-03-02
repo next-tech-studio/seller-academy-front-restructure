@@ -15,7 +15,7 @@
           :content="articles.slice(0, 4)"
           title="relevant_content"
           :responsive-horizontal="true"
-          @to:item="toItem($event)"
+          @to:item="toArticle($event)"
           :show-see-more="false"
           :show-filter="false"
           grid="3"
