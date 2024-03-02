@@ -14,6 +14,7 @@
           class="px-0 text-button animated"
           variant="text"
           color="text-secondary"
+          :to="localePath({ name: 'forum-room-list' })"
           >{{ $t("see_more") }}</v-btn
         >
       </div>

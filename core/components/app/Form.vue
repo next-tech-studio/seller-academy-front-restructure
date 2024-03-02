@@ -1,7 +1,7 @@
 <template>
   <v-card max-width="610" @click="toForm">
     <div class="d-flex justify-start">
-      <v-img class="rounded-lg me-4" aspect-ratio="1.65" width="50%" cover :src="item.cover_url.url" />
+      <v-img class="rounded-lg me-4" aspect-ratio="1.65" width="50%" cover :src="item.cover_url.url" :alt="item.title" />
       <div class="d-flex flex-wrap h-100 align-self-start">
         <v-card-title class="pa-0 mb-2 w-100">
           {{ item.title }}

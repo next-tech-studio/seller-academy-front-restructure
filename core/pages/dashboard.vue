@@ -18,7 +18,7 @@
         <div class="d-flex">
           <v-window
             v-model="tabs"
-            class="rounded-lg me-4"
+            class="rounded-lg me-lg-4 me-0"
             :class="lgAndUp ? 'w-75' : 'w-100'"
           >
             <v-window-item :value="tabs">

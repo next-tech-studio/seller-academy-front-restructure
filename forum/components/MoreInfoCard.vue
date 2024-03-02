@@ -1,31 +1,32 @@
 <template>
-  <v-card image="/images/bubble.webp">
-    <v-card-text
-      class="d-flex align-center justify-md-space-between px-4 py-lg-4 py-4"
-      :class="{'flex-column': !horizontal}"
-    >
-      <slot name="text">
-        <div
-          class="text-md-h5 text-body-2 text-text-light text-lg-start mb-2 mb-lg-0 w-50 me-auto"
-          :class="{'text-center': !horizontal}"
-        >
-          {{ $t("not_logged_in_ask_question") }}
-        </div>
-      </slot>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        @click="$emit('change:state')"
-        variant="flat"
-        class="text-button text-text-secondary"
-        :block="!horizontal"
+  <v-card>
+    <v-img cover="" src="/images/bubble.webp" alt="bubble">
+      <v-card-text
+        class="d-flex align-center justify-md-space-between px-4 py-lg-4 py-4"
+        :class="{ 'flex-column': !horizontal }"
       >
-        {{ $t(submitText) }}
-      </v-btn>
-      <div>
-      </div>
-    </v-card-text>
+        <slot name="text">
+          <div
+            class="text-md-h5 text-body-2 text-text-light text-lg-start mb-2 mb-lg-0 w-50 me-auto"
+            :class="{ 'text-center': !horizontal }"
+          >
+            {{ $t("not_logged_in_ask_question") }}
+          </div>
+        </slot>
+
+        <v-spacer></v-spacer>
+
+        <v-btn
+          @click="$emit('change:state')"
+          variant="flat"
+          class="text-button text-text-secondary"
+          :block="!horizontal"
+        >
+          {{ $t(submitText) }}
+        </v-btn>
+        <div></div>
+      </v-card-text>
+    </v-img>
   </v-card>
 </template>
 
@@ -37,8 +38,8 @@ let props = defineProps({
   url: String,
   horizontal: {
     default: true,
-    type: Boolean
-  }
+    type: Boolean,
+  },
 });
 const goTo = () => {
   navigateTo(

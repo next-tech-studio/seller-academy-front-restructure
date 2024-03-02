@@ -372,6 +372,7 @@ export default {
   please_be_patient_your_video_is_processing:
     "ویدیوی شما در حال پردازش است، لطفا شکیبا باشید!",
   related_questions_count: "سوالات مرتبط",
+  filters: "فیلتر‌ها",
   panel: {
     active: "فعال({count})",
     hidden: "پنهان شده({count})",
