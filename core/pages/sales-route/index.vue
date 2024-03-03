@@ -68,8 +68,9 @@
         description="۱-حالت اول: \n
  در صورتی کالای شما در حال حاضر در دیجی‌کالا به فروش می‌رسد، شما هم باید همان کالا را به پنل خود انتقال دهید و در مرحله بعد قیمت‌گذاری کنید، این نکته بسیار مهم است که کالای شما از لحاظ تمامی ویژگی‌ها و مشخصات باید همان کالای موجود در وب‌سایت باشد."
       ></sales-route-horizontal-info-card>
-      <v-card color="n100" class="mb-4">
-        <v-card-text class="text-center">
+      <v-card color="n100" class="mb-4 rounded-lg">
+        <v-img src="/images/sales-route-banner.png" aspect-ratio="3.2" cover></v-img>
+        <!-- <v-card-text class="text-center">
           <v-img
             class="mx-auto"
             width="150"
@@ -80,7 +81,7 @@
           <div class="text-text-high-emphasis text-h5">
             {{ $t("congrates_description") }}
           </div>
-        </v-card-text>
+        </v-card-text> -->
       </v-card>
     </sales-route-step>
     <sales-route-step

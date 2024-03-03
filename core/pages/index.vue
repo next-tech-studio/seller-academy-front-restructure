@@ -142,7 +142,7 @@ const submitSubscription = () =>{
     )?.modelValue;
   });
   if (body.avatarUrl) body.avatarUrl = body.avatarUrl.url;
-  let payload = { body };
+  let payload = { ...body };
   $repos.other
     .submitSubscription(payload).catch(() => {
       sharedStore.sendingRequest = false;
@@ -163,7 +163,7 @@ const toRoom = (item) => {
 const getSubcategories = (e) => {
   $repos.other.subCategories(e).then((res) => {
     console.log("calculatorCategories", res);
-    Object.assign(subCategories.value, res.incomes);
+    Object.assign(subCategories.value, res.subCategories);
   });
 };
 function toArticle(e) {

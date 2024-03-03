@@ -1,14 +1,16 @@
 import { useGlobalStore } from "../stores/global";
 export default defineNuxtRouteMiddleware((to, from) => {
-  // This middleware won't execute for specific routes in the array
-  if (["sales-route", "ad-services", "contact-us", "about-us"].includes(to.name as string)) {
-    return;
-  }
-
   const store = useGlobalStore();
   const router = useRouter();
   const route = router.currentRoute.value;
   let skeleton = "";
+
+  // This middleware won't execute for specific routes in the array
+  if (["sales-route", "ad-services", "contact-us", "about-us"].includes(to.name as string)) {
+    store.skeletonLoading = false;
+    return;
+  }
+
   if (process.server) return;
   if (process.client) {
     if (to.name == "blog") skeleton = "skeleton-blog";
