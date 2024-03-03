@@ -129,7 +129,7 @@ let payload = computed(() => {
 });
 const { $repos } = useNuxtApp();
 let dataForm = ref([
-{
+  {
     type: "uploader",
     name: "avatarUrl",
     uploadPath: UPLOAD_PATH,
@@ -222,10 +222,9 @@ const submitItem = () => {
       (item) => item.name === field.name
     )?.modelValue;
   });
-  if (body.avatarUrl)
-    body.avatarUrl = body.avatarUrl.url;
+  if (body.avatarUrl) body.avatarUrl = body.avatarUrl.url;
   payload = {
-    body: { ...body, id: sharedStore.currentItem.id || 0, status:'active' },
+    body: { ...body, id: sharedStore.currentItem.id || 0, status: "active" },
     type: "faq",
   };
   if (sharedStore.edit) {
@@ -240,8 +239,8 @@ const submitItem = () => {
   } else {
     $repos.communityPanel.updateCategory(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
-        ...sharedStore.listItems.data,
         { ...res.data },
+        ...sharedStore.listItems.data,
       ]);
       sharedStore.closeDialog();
     });

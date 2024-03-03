@@ -135,7 +135,7 @@ let dataForm = ref([
     name: "description",
     modelValue: ref(""),
     size: 12,
-    validations: "digits_between:20, 100",
+    validations: "",
     label: "related_descriptions",
     hint: false,
   },
@@ -184,39 +184,28 @@ const init = () => {
   ]);
 };
 const submitItem = () => {
-  console.log('submit item');
+  console.log('hhhheellooooooo')
   let payload;
-  let formTitle = sharedStore.editForm.find((item) => item.name === "title");
-  // let formStatus = sharedStore.editForm.find((item) => item.name === "status");
-  let formDescription = sharedStore.editForm.find(
-    (item) => item.name === "description"
-  );
+  let body = {};
+  sharedStore.editForm.forEach((field) => {
+    body[field.name] = sharedStore.editForm.find(
+      (item) => item.name === field.name
+    )?.modelValue;
+  });
+  if (body.avatarUrl) body.avatarUrl = body.avatarUrl.url;
+  payload = {
+    body: { ...body, id: sharedStore.currentItem.id || 0, status: "active" },
+  };
   if (sharedStore.edit) {
     let itemIndex = sharedStore.listItems.data.findIndex(
       (item) => item.id === sharedStore.currentItem.id
     );
-    payload = {
-      body: {
-        id: sharedStore.currentItem.id,
-        title: formTitle.modelValue,
-        description: formDescription.modelValue,
-        // status: sharedStore.currentItem.status,
-      },
-    };
     $repos.academyPanel.updateSkill(payload).then((res) => {
       Object.assign(sharedStore.listItems.data[itemIndex], res);
       sharedStore.edit = false;
       sharedStore.closeDialog();
     }).catch(() => sharedStore.sendingRequest = false);
   } else {
-    payload = {
-      body: {
-        id: 0,
-        title: formTitle.modelValue,
-        description: formDescription.modelValue,
-        // status: formStatus.modelValue
-      },
-    };
     $repos.academyPanel.updateSkill(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
         { ...res },
