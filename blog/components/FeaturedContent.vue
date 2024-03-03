@@ -1,10 +1,10 @@
 <template>
   <v-row :dense="smAndDown">
     <v-col cols="6" md="3" v-for="(item, index) in items" :key="item.title">
-      <v-card>
+      <v-card tag="a" :href="item.linkUrl">
         <v-img
-          :src="`/featuredArticles/${index+1}.jpg`"
-          aspect-ratio="2"
+          :src="item.imageUrl"
+          aspect-ratio="1.5"
           cover
           class="bg-grey-lighten-2"
         ></v-img>

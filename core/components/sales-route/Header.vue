@@ -1,30 +1,34 @@
 <template>
-  <v-card color="n100" class="rounded-b-lg rounded-0 overflow-visible">
+  <v-card color="primary-base" class="rounded-b-lg rounded-0 overflow-visible">
     <v-container class="position-relative">
-      <div class="mb-lg-10 mb-0" :class="lgAndUp ? 'w-50' : 'w-100'">
-        <div class="text-h2 text-lg-h1 text-text-heading mt-lg-16 mt-3">
-          {{ $t("sales_route_in_digikala") }}
-        </div>
-        <div class="text-h5 text-text-high-emphasis mb-lg-8 mb-4">
-          {{ $t("sales_route_in_digikala_description") }}
-        </div>
-        <div class="text-h5 text-text-high-emphasis mb-lg-8 mb-4">
-          {{ $t("sales_route_in_digikala_pros") }}
-        </div>
-        <v-row>
-          <v-col cols="12" md="6" v-for="(item, index) in pros" :key="index">
+      <v-row class="mt-lg-16 mt-3">
+        <v-col cols="12" md="6" class="mb-lg-10 mb-0">
+          <div>
+            <div class="text-h2 text-lg-h1 text-text-light">
+              {{ $t("sales_route_in_digikala") }}
+            </div>
+            <div class="text-h5 text-text-light mb-lg-8 mb-4">
+              {{ $t("sales_route_in_digikala_description") }}
+            </div>
+            <div class="text-h5 text-text-light mb-lg-8 mb-4">
+              {{ $t("sales_route_in_digikala_pros") }}
+            </div>
+          </div>
+          <v-row>
+            <v-col cols="12" md="6" v-for="(item, index) in pros" :key="index">
             <v-icon
-              class="bg-text-high-emphasis rounded-pill me-4"
+              class="bg-secondary-base rounded-pill me-4"
               size="24"
               icon="custom:check"
             ></v-icon>
             {{ item }}
           </v-col>
-        </v-row>
-      </div>
-      <div class="image__fixed">
-        <v-img src="/images/sales-route.png" alt="sales route header"></v-img>
-      </div>
+          </v-row>
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-img src="/images/sales_route.png" alt="sales route header"></v-img>
+        </v-col>
+      </v-row>
     </v-container>
   </v-card>
 </template>

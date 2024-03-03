@@ -8,12 +8,14 @@ export const useAuthStore = defineStore("auth", {
         title: "I_am_digikala_seller",
         description: "I_am_digikala_seller_desc",
         is_seller: true,
+        icon: '/images/dk_avatar.png'
       },
       {
         id: 2,
         title: "I_am_not_digikala_seller",
         description: "I_am_not_digikala_seller_desc",
         is_seller: false,
+        icon: '/images/avatar.png'
       },
     ],
     steps: [
