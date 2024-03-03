@@ -20,7 +20,11 @@
             {{ totalPages + " " + $t("result_founds") }}
           </v-btn>
         </div>
-        <course-filter-bottom-sheet v-if="!lgAndUp" :items="filters" v-model="filters" />
+        <course-filter-bottom-sheet
+          v-if="!lgAndUp"
+          :items="filters"
+          v-model="filters"
+        />
       </div>
       <v-row class="mt-6">
         <v-col cols="12" md="3" v-if="lgAndUp">
@@ -125,6 +129,7 @@ const roadmaps = [
 
 const data = reactive({});
 const { $repos } = useNuxtApp();
+const { t } = useI18n();
 let courses = reactive([]);
 let filters = reactive({
   categories: {
@@ -233,4 +238,10 @@ Promise.all([
   // useAsyncData(async () => await getCoursesList()),
   useAsyncData(async () => await getCourseFilters()),
 ]);
+
+useHead(
+  useHeadTags({
+    title: t("academy_courses"),
+  })
+);
 </script>

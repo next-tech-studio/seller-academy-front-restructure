@@ -81,25 +81,24 @@
         <v-spacer></v-spacer>
         <search @choose:article="toItem($event)" v-if="showNavberItems" />
         <v-divider vertical class="my-6 mx-4"></v-divider>
-        <v-btn
-          v-if="auth.user.loggedIn"
+        <!-- <v-btn
+          v-if="auth.user.loggedIn && auth.hasPermission(['create-article'])"
           prepend-icon="custom:plus"
           color="secondary-base"
           class="text-button"
           @click="goToPageBuilder"
         >
           {{ $t("add_new_post") }}
-        </v-btn>
+        </v-btn> -->
         <auth-handler />
         <v-btn
-        v-if="route.name.includes('panel')"
+        v-if="route.name.includes('panel') && auth.hasPermission(['blog','community','academy'])"
           rounded="xl"
           @click = "navigateTo('/')"
           color="text-high-emphasis"
-          class="bg-secondary-lighten1 ms-4"
+          class="bg-secondary-base ms-4"
           height="41"
-          >{{ $t("enter_website") }}</v-btn
-        >
+          > <span class="text-text-light">{{ $t("enter_website") }}</span></v-btn>
       </v-container>
     </v-app-bar>
     <v-expand-transition>
@@ -185,13 +184,13 @@ const isActive = (item) => {
   });
   return !!found;
 };
-const goToPageBuilder = (item) => {
-  navigateTo(
-    localePath({
-      name: `blog-panel-post-id-draft`,
-    })
-  );
-};
+// const goToPageBuilder = (item) => {
+//   navigateTo(
+//     localePath({
+//       name: `blog-panel-post-id-draft`,
+//     })
+//   );
+// };
 const toItem = (e) => {
   navigateTo(
     localePath({

@@ -4,12 +4,12 @@
       {{ item.title }}
     </v-card-title>
     <v-card-text class="pa-6">
-      <v-divider></v-divider>
-      <app-share-in
+      <!-- <v-divider></v-divider> -->
+      <!-- <app-share-in
         class="py-4"
         style="width: fit-content"
         justify=""
-      />
+      /> -->
       <v-divider></v-divider>
       <div class="d-flex justify-space-between my-4">
         <span class="text-body-1 text-text-low-emphasis">{{

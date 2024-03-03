@@ -63,6 +63,7 @@
               </div>
             </v-list>
           </v-card-text>
+          <p v-if="!items.length" class="text-text-low-emphasis text-caption text-center">{{$t('you_dont_have_any_rooms_right_now')}}</p>
           <v-card-text v-if="showAlternative" class="pb-0 pt-4">
             <div class="text-body-2 text-text-low-emphasis mb-4">
               {{ $t("should_be_digikala_seller") }}

@@ -128,7 +128,7 @@
               >
                 {{ column?.title }}
               </span>
-              <v-checkbox-btn
+              <!-- <v-checkbox-btn
                 v-if="column.selectAll && selectable"
                 true-icon="custom:squareCheck"
                 false-icon="custom:square"
@@ -136,7 +136,19 @@
                 :label="column?.title"
                 @update:model-value="selectAll"
               >
-              </v-checkbox-btn>
+              </v-checkbox-btn> -->
+              <v-checkbox
+                v-if="column.selectAll && selectable"
+                true-icon="custom:squareCheck"
+                false-icon="custom:square"
+                :model-value="allSelected"
+                @update:model-value="selectAll"
+                hide-details
+              >
+                <template #label>
+                  <span variant="text" class="ms-4">{{ column?.title }}</span>
+                </template>
+              </v-checkbox>
               <div class="d-flex">
                 <span
                   v-if="column.sortable"
@@ -165,7 +177,7 @@
           :header="{ header }"
           class="pe-10"
         >
-          <div class="d-flex cursor-pointer" v-if="header.key == 'title'">
+          <!-- <div class="d-flex cursor-pointer" v-if="header.key == 'title'">
             <div
               class="d-flex align-center justify-start"
               :style="`width: ${header.size} !important; flex: 0 1 0%`"
@@ -183,7 +195,27 @@
                 item[header.key]
               }}</span>
             </div>
-          </div>
+          </div> -->
+          <v-checkbox
+            v-if="selectable && header.key == 'title'"
+            true-icon="custom:squareCheck"
+            false-icon="custom:square"
+            :value="item"
+            multiple
+            v-model="store.selectedTableItems"
+            hide-details
+          >
+            <template #label>
+              <v-btn
+                @click="goToItem(item)"
+                variant="text"
+                :ripple="false"
+                class="text-truncate text-body-1"
+              >
+                {{ item[header.key] }}
+              </v-btn>
+            </template>
+          </v-checkbox>
           <div v-if="header.key == 'author'" style="width: fit-content">
             <span class="text-body-1">{{ item.author.displayName }}</span>
           </div>

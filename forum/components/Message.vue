@@ -88,10 +88,10 @@
                 density="compact"
                 class="py-0"
               >
-                <v-list-item
-                  v-for="(item, i) in actions"
-                  :key="i"
-                  @click="item.action(item)"
+              <template                
+               v-for="(item, i) in actions"
+              :key="i">
+                <v-list-item v-if="item.show"   @click="item.action(item)"
                 >
                   <div class="d-flex align-center">
                     <v-icon
@@ -105,6 +105,7 @@
                     }}</v-list-item-title>
                   </div>
                 </v-list-item>
+              </template>
               </v-list>
             </v-menu>
           </div>
@@ -349,11 +350,13 @@ const actions = [
     title: "copy",
     action: copy,
     icon: "custom:copy",
+    show:true
   },
   {
     title: "remove_msg",
     action: remove,
     icon: "custom:trash",
+    show: authStore.hasPermission(["community"]),
   },
 ];
 </script>

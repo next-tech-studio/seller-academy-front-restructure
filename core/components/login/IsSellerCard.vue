@@ -5,7 +5,9 @@
     class="d-flex flex-column mx-auto"
   >
     <v-card-title>
-      <v-avatar class="ml-4" color="grey-lighten-3"></v-avatar>
+      <v-avatar size="60">
+        <v-img :src="item.icon"></v-img>
+      </v-avatar>
       <span class="text-body-1 text-text-heading">{{ $t(item.title) }}</span>
     </v-card-title>
     <v-card-text class="text-text-low-emphasis">

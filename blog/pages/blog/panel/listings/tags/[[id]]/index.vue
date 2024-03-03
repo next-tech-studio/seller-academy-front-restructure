@@ -126,7 +126,7 @@ let dataForm = ref([
     type: "text-field",
     name: "title",
     modelValue: ref(""),
-    validations: "required",
+    validations: "required|persian",
     label: "title",
     size: 12,
     hint: "به زبان فارسی و بدون استفاده از هیچ کاراکتری نوشته شود.",
@@ -138,7 +138,7 @@ let dataForm = ref([
     validations: "required",
     label: "slug",
     size: 12,
-    hint: "به زبان انگلیسی و بدون فاصله نوشته شود.",
+    hint: "بدون فاصله نوشته شود.",
   },
   {
     type: "text-field",

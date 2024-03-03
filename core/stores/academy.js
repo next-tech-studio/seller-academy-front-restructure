@@ -277,6 +277,8 @@ export const useAcademyStore = defineStore("academy", {
               }),
               { external: true }
             );
+          }else if (publish) {
+            this.publishCourse();
           }
         });
       } else if (next) {

@@ -10,6 +10,7 @@
       @load:more="getList"
       @filter="getList($event, 1)"
       :show-sort-by="true"
+      :show-see-more="!lastPage"
     ></app-content-card-listing>
   </v-container>
 </template>
@@ -46,7 +47,7 @@ const getList = async (e, currentPage) => {
     .then((res) => {
       Object.assign(list, [...list, ...res.data]); 
       console.log(res.data,list)
-      lastPage.value = res.lastPage === res.currentPage ? true : false;
+      lastPage.value = res.last_page === res.current_page ? true : false;
       total_pages = res.total;
       if (res.total != page) page++;
     });
@@ -70,9 +71,7 @@ Promise.all([
 
 useHead(
   useHeadTags({
-    title: t("articles"),
-    description: "",
-    type: "website",
+    title: t("articles")
   })
 );
 </script>

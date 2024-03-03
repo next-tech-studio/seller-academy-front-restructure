@@ -210,4 +210,36 @@ export default (request) => ({
       payload.body
     );
   },
+  joinRequestList(payload) {
+    return request({
+      name: "joinRequestList",
+      method: "get",
+      path: `/panel/chat/join/list/data`,
+      query: `?search=${payload?.search}&sortKey=${payload?.sortKey}&sortOrder=${payload?.sortOrder}&page=${payload?.page}&status=${payload.status}`,
+      loading: true,
+      alert: false,
+      model: { name: panelTable, collection: true, pagination: true },
+    });
+  },
+  joinRequestCommon() {
+    return request({
+      name: "joinRequestCommon",
+      method: "get",
+      path: `/panel/chat/join/list/common`,
+      loading: true,
+      alert: false,
+    });
+  },
+  updateJoinRequestStatus(payload) {
+    return request(
+      {
+        name: "questionStatus",
+        method: "put",
+        path: `/panel/chat/join/set-status`,
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  },
 });

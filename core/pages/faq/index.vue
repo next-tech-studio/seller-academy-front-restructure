@@ -1,5 +1,8 @@
 <template>
-  <faq-search v-model="payload.search" @update:modelValue="onSearch" />
+  <faq-search
+    v-model="payload.search"
+    @update:modelValue="onSearch"
+  />
   <div class="bg-n100 pt-3">
     <v-container>
       <div class="pt-7 pb-10" v-if="!payload.search?.length">
@@ -22,6 +25,7 @@
       />
     </v-container>
   </div>
+
   <faq-frequent
     :categories="frequentCategories"
     v-model="currentCategory"
@@ -32,6 +36,7 @@
 
 <script setup>
 const { $repos } = useNuxtApp();
+const { t } = useI18n();
 let faqs = ref([]);
 let frequentFaqs = ref([]);
 let frequentCategories = ref([]);
@@ -44,10 +49,10 @@ let payload = ref({
 });
 
 const getFaqs = async (e = {}) => {
-  console.log("yyyeyeyeyeyeyeyeyyeyeyey", payload);
   Object.assign(payload.value.category, e);
 
   await $repos.other.faqs(payload.value).then((res) => {
+    faqs.value.splice(0, faqs.value.length);
     Object.assign(faqs.value, res.data);
     Object.assign(frequentFaqs.value, res.isFrequent);
     if (!payload.value.category.slug.length) {
@@ -128,4 +133,10 @@ const items = [
     ],
   },
 ];
+
+useHead(
+  useHeadTags({
+    title: t("faq")
+  })
+);
 </script>

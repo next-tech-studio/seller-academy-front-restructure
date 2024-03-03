@@ -24,12 +24,14 @@ export default defineNuxtPlugin((nuxtApp) => {
     const APIHandlerInstance = new APIHandler();
     const HttpRequestInstance = new HttpRequest(nuxtApp);
     const api = APIHandlerInstance.getApi(method, path, params, query, page);
+    const globalStore = useGlobalStore()
     return new Promise((resolve, reject) => {
-      console.log("request", name);
-      if (loading) {
-        useGlobalStore().pendingRequest = true;
-        useGlobalStore().skeletonLoading = true;
-        useGlobalStore().activeRequests[name] = true;
+      const skeletonLoading = typeof loading == 'boolean' ? loading : loading.show
+      if (skeletonLoading) {
+        globalStore.pendingRequest = true;
+        if (typeof loading != 'boolean') globalStore.skeleton = loading.skeleton;
+        globalStore.skeletonLoading = true;
+        globalStore.activeRequests[name] = true;
       }
       HttpRequestInstance[api.method](api.path, payload, alert,headers)
         .then((resp) => {
@@ -59,13 +61,13 @@ export default defineNuxtPlugin((nuxtApp) => {
           reject(err);
         })
         .finally(() => {
-          if (loading) {
-            useGlobalStore().activeRequests[name] = false;
-            if (!useGlobalStore().activeRequestsExists) {
-              useGlobalStore().skeletonLoading = false;
-              useGlobalStore().skeleton = "";
+          if (skeletonLoading) {
+            globalStore.activeRequests[name] = false;
+            if (!globalStore.activeRequestsExists) {
+              globalStore.skeletonLoading = false;
+              globalStore.skeleton = "";
             }
-            useGlobalStore().pendingRequest = false;
+            globalStore.pendingRequest = false;
           }
         });
     });

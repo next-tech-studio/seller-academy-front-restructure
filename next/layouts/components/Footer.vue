@@ -6,16 +6,22 @@
         color="rgba(var(--v-theme-n300), 30%)"
         class="mt-n12 mb-9 rounded-lg"
       >
-        <v-card-text class="bg-white d-flex flex-md-row flex-column justify-space-between align-center">
+        <v-card-text
+          class="bg-white d-flex flex-md-row flex-column justify-space-between align-center"
+        >
           <div>
             <div class="text-md-h5 text-body-2 font-weight-bold">
               {{
                 $t("subscribe_here_to_receive_the_latest_news_and_discounts")
               }}
             </div>
-            <div class="text-caption text-text-low-emphasis">{{ $t("sign_up_with_the_help_of_the_opposite_button") }}</div>
+            <div class="text-caption text-text-low-emphasis">
+              {{ $t("sign_up_with_the_help_of_the_opposite_button") }}
+            </div>
           </div>
-          <v-btn variant="flat" color="primary-base" class="mt-md-0 mt-2">{{ $t('newsletter_membership') }}</v-btn>
+          <v-btn variant="flat" color="primary-base" class="mt-md-0 mt-2">{{
+            $t("newsletter_membership")
+          }}</v-btn>
         </v-card-text>
       </v-card>
       <v-row>
@@ -78,19 +84,20 @@
             class="align-self-start px-0 text-body-1 animated d-flex"
           >
             <v-icon size="20" class="me-2" :icon="way.icon"></v-icon>
-            <span style="white-space: pre-wrap;">
+            <span style="white-space: pre-wrap">
               {{ $t(way.text) }}
             </span>
-            
           </v-btn>
         </v-col>
         <v-divider class="mt-10 d-none d-md-block"></v-divider>
         <v-col class="text-center my-10 d-none d-md-block" cols="12">
-          <v-img
-            class="mx-auto mb-2"
-            max-width="200"
-            src="/images/logo/logo.svg"
-          />
+          <a href="/">
+            <v-img
+              class="mx-auto mb-2"
+              max-width="200"
+              src="/images/logo/logo.svg"
+            />
+          </a>
           {{ $t("rights") }}
         </v-col>
       </v-row>
@@ -102,7 +109,7 @@
 const footerLinks = useFooterLinks();
 const socials = useSocials();
 const contactWays = useContactWays();
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 </script>
 
 <style lang="scss">

@@ -8,12 +8,14 @@ export const useAuthStore = defineStore("auth", {
         title: "I_am_digikala_seller",
         description: "I_am_digikala_seller_desc",
         is_seller: true,
+        icon: '/images/dk_avatar.png'
       },
       {
         id: 2,
         title: "I_am_not_digikala_seller",
         description: "I_am_not_digikala_seller_desc",
         is_seller: false,
+        icon: '/images/avatar.png'
       },
     ],
     steps: [
@@ -93,9 +95,13 @@ export const useAuthStore = defineStore("auth", {
       });
     },
     login(payload) {
+      const { history } = useRouter().options;
+      const localePath = useLocalePath()
+      const back = history.state.back;
+      const path = back || "/";
       this.$repos.auth.login(payload).then((res) => {
         this.user = { ...res, loggedIn: true };
-        navigateTo(useLocalePath({ name: "blog" }), { external: true });
+        navigateTo(localePath(path), { external: true });
       });
     },
     validateRegistrationCode(payload) {

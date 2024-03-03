@@ -104,6 +104,7 @@
       v-model:sort-by="store.sortBy"
       v-model="store.selectedTableItems"
       :headers="headers"
+      :cell-props="cellProps"
       :items="items.data"
       :items-per-page="itemsPerPage"
       @update:sort-by="$emit('filter')"
@@ -121,19 +122,25 @@
       >
         <tr>
           <template v-for="column in columns" :key="column.key">
-            <td class="border-b text-text-low-emphasis text-body-1">
+            <td
+              class="border-b text-text-low-emphasis text-body-1"
+              :style="`width: ${column.size} !important`"
+            >
               <span v-if="!column.sortable && !column.selectAll">{{
                 column?.title
               }}</span>
-              <v-checkbox-btn
+              <v-checkbox
                 v-if="column.selectAll && selectable"
                 true-icon="custom:squareCheck"
                 false-icon="custom:square"
                 :model-value="allSelected"
-                :label="column?.title"
                 @update:model-value="selectAll"
+                hide-details
               >
-              </v-checkbox-btn>
+                <template #label>
+                  <span variant="text" class="ms-4">{{ column?.title }}</span>
+                </template>
+              </v-checkbox>
               <div class="d-flex">
                 <span
                   v-if="column.sortable"
@@ -156,31 +163,34 @@
         :key="header.key"
         v-slot:[`item.${header.key}`]="{ item }"
       >
-        <slot
-          :name="header.key"
-          :item="{ item }"
-          :header="{ header }"
-          class="pe-10"
-        >
-          <div class="d-flex cursor-pointer" v-if="header.key == 'title'">
-            <div
+        <slot :name="header.key" :item="{ item }" :header="{ header }">
+          <!-- <div class="cursor-pointer" v-if="header.key == 'title'"> -->
+          <!-- <div
               class="d-flex align-center justify-start"
               :style="`width: ${header.size} !important; flex: 0 1 0%`"
-            >
-              <v-checkbox-btn
-                v-if="selectable"
-                true-icon="custom:squareCheck"
-                false-icon="custom:square"
-                :value="item"
-                multiple
-                v-model="store.selectedTableItems"
+            > -->
+          <v-checkbox
+            v-if="selectable && header.key == 'title'"
+            true-icon="custom:squareCheck"
+            false-icon="custom:square"
+            :value="item"
+            multiple
+            v-model="store.selectedTableItems"
+            hide-details
+          >
+            <template #label>
+              <v-btn
+                @click="goToItem(item)"
+                variant="text"
+                :ripple="false"
+                class="text-truncate text-body-1"
               >
-              </v-checkbox-btn>
-              <span class="text-truncate text-body-1" @click="goToItem(item)">{{
-                item[header.key]
-              }}</span>
-            </div>
-          </div>
+                {{ item[header.key] }}
+              </v-btn>
+            </template>
+          </v-checkbox>
+          <!-- </div> -->
+          <!-- </div> -->
           <div v-if="header.key == 'author'" style="width: fit-content">
             <span class="text-body-1">{{ item.author.displayName }}</span>
           </div>
@@ -384,7 +394,7 @@ const emit = defineEmits([
   "show:dialog",
   "navigate:toItem",
   "update:hardDelete",
-  "update:mostPopular"
+  "update:mostPopular",
 ]);
 let pageNumber = computed({
   get() {
@@ -435,7 +445,7 @@ const edit = (item, action) => {
 };
 defineExpose({ edit, changeItemStatus });
 const goToItem = (item) => {
-  props.store.currentItem = item.value;
+  props.store.currentItem = item;
   emit("navigate:toItem");
 };
 const operateGroupAction = (action) => {
@@ -456,6 +466,21 @@ let sortedByIconType = (columnKey) => {
     })
   )
     return "custom:arrowDownWideShort";
+};
+
+const cellProps = (item) => {
+  // Calculate dynamic width based on item properties
+  let cellWidth = "auto"; // Default width
+  if (props.headers[item.index]?.size) {
+    cellWidth = `${props.headers[item.index]?.size}`; // Set width based on item property
+  }
+  console.log(cellWidth);
+  return {
+    style: {
+      width: `${cellWidth} !important`, // Assign calculated width dynamically
+    },
+    // Add additional cell properties if needed
+  };
 };
 
 const setOperationIcon = (action, item) => {
@@ -498,6 +523,10 @@ const setOperationIcon = (action, item) => {
     return { icon: "custom:star", color: "text-hint-caution" };
   else if (action == "most_popular" && !item.mostPopular)
     return { icon: "custom:star", color: "text-low-emphasis" };
+  else if (action == "accept")
+    return { icon: "custom:check", color: "text-hint-success" };
+    else if (action == "reject")
+    return { icon: "custom:x", color: "text-primary" };
 };
 </script>
 
@@ -528,6 +557,7 @@ const setOperationIcon = (action, item) => {
   .v-table .v-table__wrapper > table > tbody > tr:not(:last-child) > td,
   .v-table .v-table__wrapper > table > tbody > tr:not(:last-child) > th {
     border: none !important;
+    max-width: 100px !important;
   }
   .v-pagination__list {
     justify-content: start;

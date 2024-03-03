@@ -34,89 +34,94 @@
         </div>
         <v-card-text class="pt-0">
           <v-row no-gutters>
-            <template v-for="(item, index) in store.editForm" :key="index">
+            <template v-for="(element, index) in store.editForm" :key="index">
               <v-col
                 class="d-flex align-center px-1"
-                :cols="item.sm || item.size"
-                :md="item.md || item.size"
-                :lg="item.size"
-                v-if="showFormItem(item)"
+                :cols="element.sm || element.size"
+                :md="element.md || element.size"
+                :lg="element.size"
+                v-if="showFormItem(element)"
               >
                 <div
-                  v-if="item.type === 'label'"
+                  v-if="element.type === 'label'"
                   class="text-body-2 font-weight-bold d-flex"
-                  :class="{ ' justify-space-between w-100': item.spaceBetween }"
+                  :class="{ ' justify-space-between w-100': element.spaceBetween }"
                 >
                   <p
                     class="me-1"
                     :class="
-                      item?.color
-                        ? `text-${item?.color}`
+                      element?.color
+                        ? `text-${element?.color}`
                         : 'text-text-low-emphasis '
                     "
                   >
-                    {{ $t(item.label) }}
+                    {{ $t(element.label) }}
                   </p>
-                  <span class="text-text-heding"> {{ item?.modelValue }}</span>
+                  <span class="text-text-heding"> {{ element?.modelValue }}</span>
                 </div>
-                <div v-if="item.type === 'divider'" class="w-100 mb-4 mt-2">
+                <div v-if="element.type === 'divider'" class="w-100 mb-4 mt-2">
                   <v-divider></v-divider>
-                  <!-- <span class="text-text-heding"> {{ item?.modelValue }}</span> -->
+                  <!-- <span class="text-text-heding"> {{ element?.modelValue }}</span> -->
                 </div>
                 <v-text-field
-                  v-if="item.type === 'text-field'"
-                  v-model="item.modelValue"
-                  @update:model-value="computedValue(item)"
+                  v-if="element.type === 'text-field'"
+                  v-model="element.modelValue"
+                  @update:model-value="computedValue(element)"
                   :rules="
-                    item?.validations
+                    element?.validations
                       ? $rules(
-                          { [item.name]: item?.validations },
-                          item.modelValue
+                          { [element.name]: element?.validations },
+                          element.modelValue
                         )
                       : ''
                   "
                   flat
                   base-color="n300"
-                  :type="item.textFieldType || 'text'"
+                  :type="element.textFieldType || 'text'"
                   density="compact"
-                  :hint="item.hint"
-                  :hide-details="!item.hint"
+                  :hint="element.hint"
+                  :hide-details="!element.hint"
                   variant="solo-filled"
-                  :label="$t(item.label)"
-                  :readonly="item.readonly"
+                  :label="$t(element.label)"
+                  :readonly="element.readonly"
                   persistent-placeholder
                   class="outside-label mb-4"
                   persistent-hint
                 ></v-text-field>
                 <div
-                  v-if="item.type === 'select'"
+                  v-if="element.type === 'select'"
                   class="d-flex flex-column w-100"
                 >
                   <span class="text-body-2 text-text-low-emphasis">{{
-                    $t(item.label)
+                    $t(element.label)
                   }}</span>
                   <v-select
-                    v-model="item.modelValue"
-                    :item-title="item.selectTitle"
-                    :item-value="item.selectValue"
+                    v-model="element.modelValue"
+                    :item-title="element.selectTitle"
+                    :item-value="element.selectValue"
                     :rules="
-                      item?.validations
+                      element?.validations
                         ? $rules(
-                            { [item.name]: item?.validations },
-                            item.modelValue
+                            { [element.name]: element?.validations },
+                            element.modelValue
                           )
                         : ''
                     "
                     flat
                     class="mb-4"
-                    :items="item.items"
+                    :items="element.items"
                     base-color="n300"
+                    @update:model-value="$emit(`update:${element.name}`, element.modelValue)"
                     density="compact"
-                    :hint="item.hint"
-                    :hide-details="!item.hint"
-                    :readonly="item.readonly"
+                    :multiple="element?.multiple"
+                    :chips="element?.multiple"
+                    :disabled="element?.disabled"
+                    :closable-chips = "element?.multiple"
+                    :hint="element.hint"
+                    :hide-details="!element.hint"
+                    :readonly="element.readonly"
                     variant="solo-filled"
-                    :placeholder="$t(item.label)"
+                    :placeholder="$t(element.label)"
                     persistent-placeholder
                     persistent-hint
                   >
@@ -125,6 +130,11 @@
                     </template>
                     <template v-slot:selection="{ item }">
                       {{ $t(item.title) }}
+                    </template>
+                    <template v-slot:chip = "{item}">
+                      <div style="cursor: pointer;">
+                        <v-chip close-icon="custom:x" @click:close="removeTag(element, item)" />
+                      </div>
                     </template>
                     <template v-slot:item="{ props, item }">
                       <v-list-item
@@ -135,85 +145,85 @@
                   </v-select>
                 </div>
                 <v-textarea
-                  v-if="item.type === 'text-area'"
-                  v-model="item.modelValue"
-                  @update:model-value="computedValue(item)"
+                  v-if="element.type === 'text-area'"
+                  v-model="element.modelValue"
+                  @update:model-value="computedValue(element)"
                   flat
                   no-resize
-                  :rows="item.rows"
+                  :rows="element.rows"
                   :rules="
-                    item?.validations
+                    element?.validations
                       ? $rules(
-                          { [item.name]: item?.validations },
-                          item.modelValue
+                          { [element.name]: element?.validations },
+                          element.modelValue
                         )
                       : ''
                   "
                   base-color="n300"
                   density="compact"
-                  :hint="item.hint"
+                  :hint="element.hint"
                   variant="solo-filled"
-                  :label="$t(item.label)"
+                  :label="$t(element.label)"
                   class="outside-label mb-4"
                   persistent-placeholder
                   persistent-hint
-                  :readonly="item.readonly"
-                  :hide-details="!item.hint"
+                  :readonly="element.readonly"
+                  :hide-details="!element.hint"
                 ></v-textarea>
                 <div
-                  v-if="item.type === 'uploader'"
+                  v-if="element.type === 'uploader'"
                   class="d-flex align-center"
                 >
                   <span
-                    v-if="item.title"
+                    v-if="element.title"
                     class="nowrap text-text-low-emphasis text-body-2"
                     style="white-space: nowrap"
-                    >{{ $t(item.title) }}</span
+                    >{{ $t(element.title) }}</span
                   >
                   <app-uploader
                     ref="uploader"
-                    :upload-path="item.uploadPath"
-                    v-model="item.modelValue"
-                    :multiple="item?.multiple"
+                    :upload-path="element.uploadPath"
+                    v-model="element.modelValue"
+                    :multiple="element?.multiple"
                     v-model:max="max"
-                    :round-images="item.roundImages || false"
-                    :has-start-button="item.hasStartButton"
+                    :round-images="element.roundImages || false"
+                    :has-start-button="element.hasStartButton"
                     :size="40"
                     class="me-2"
                   ></app-uploader>
                 </div>
                 <v-btn
-                  v-if="item.type === 'button'"
-                  :color="item.color"
-                  :icon="item.icon"
-                  :size="item.buttonSize || 'default'"
-                  :variant="item.variant"
-                  :text="item.icon ? '' : $t(item.label)"
-                  :prepend-icon="item.prependIcon"
-                  :append-icon="item.appendIcon"
-                  @click="item.function()"
+                  v-if="element.type === 'button'"
+                  :color="element.color"
+                  :icon="element.icon"
+                  :size="element.buttonSize || 'default'"
+                  :variant="element.variant"
+                  :text="element.icon ? '' : $t(element.label)"
+                  :prepend-icon="element.prependIcon"
+                  :append-icon="element.appendIcon"
+                  @click="element.function()"
                 >
                 </v-btn>
                 <div
                   class="w-100 me-1 align-self-baseline"
-                  v-if="item.type == 'date-picker'"
+                  v-if="element.type == 'date-picker'"
                 >
                   <div
                     class="text-text-low-emphasis text-body-2"
                     style="margin-bottom: 3px"
                   >
-                    {{ $t(item.label) }}
+                    {{ $t(element.label) }}
                   </div>
                   <input
                     type="text"
                     class="custom-input bg-n050 rounded px-4 py-2 w-100"
                     style="height: 46px"
-                    :value="$moment(item.modelValue).format('jYYYY/jMM/jDD')"
+                    :value="$moment(element.modelValue).format('jYYYY/jMM/jDD')"
                   />
                   <date-picker
                     auto-submit
                     color="rgba(var(--v-theme-primary-base))"
-                    v-model="item.modelValue"
+                    v-model="element.modelValue"
                     custom-input=".custom-input"
                     format="YYYY-MM-DD"
                     simple
@@ -222,30 +232,30 @@
                   ></date-picker>
                 </div>
                 <div
-                  v-if="item.type === 'radio'"
+                  v-if="element.type === 'radio'"
                   :class="{
-                    'd-flex justify-space-between w-100': item.spaceBetween,
+                    'd-flex justify-space-between w-100': element.spaceBetween,
                   }"
                 >
-                  <div>{{ $t(item.label) }}</div>
+                  <div>{{ $t(element.label) }}</div>
                   <div>
                     <v-spacer />
                     <v-radio-group
-                      v-model="item.modelValue"
-                      :inline="item.inline"
+                      v-model="element.modelValue"
+                      :inline="element.inline"
                     >
                       <v-radio
-                        v-for="option in item.options"
+                        v-for="option in element.options"
                         :key="option.key"
                         :label="$t(option.label)"
                         :value="option.key"
                         class="ms-3"
                         :color="
-                          item.modelValue == option.key ? 'primary-base' : ''
+                          element.modelValue == option.key ? 'primary-base' : ''
                         "
                         :class="{
                           'bg-primary-lighten1 text-primary-base rounded-lg py-1 px-2':
-                            item.modelValue == option.key,
+                            element.modelValue == option.key,
                         }"
                         false-icon="custom:radioFalse"
                         true-icon="custom:radioTrue"
@@ -254,11 +264,11 @@
                     </v-radio-group>
                   </div>
                 </div>
-                <div v-if="item.type === 'checkbox'">
+                <div v-if="element.type === 'checkbox'">
                   <div>
                     <v-checkbox
-                      v-model="item.modelValue"
-                      :label="$t(item.label)"
+                      v-model="element.modelValue"
+                      :label="$t(element.label)"
                       color="primary-base"
                       false-icon="custom:square"
                       true-icon="custom:squareCheck"
@@ -267,9 +277,9 @@
                     ></v-checkbox>
                   </div>
                 </div>
-                <div v-if="item.type == 'slot'" class="w-100">
+                <div v-if="element.type == 'slot'" class="w-100">
                   <!-- <template v-slot:[item.name]="slotProps"></template> -->
-                  <slot :name="item.name"></slot>
+                  <slot :name="element.name"></slot>
                 </div>
               </v-col>
             </template>
@@ -361,6 +371,13 @@ const showFormItem = (item) => {
   } else {
     return true;
   }
+};
+const removeTag = (element, item) => {
+  const foundIndex = element.modelValue.findIndex((object) => {
+    return object[element.selectValue] === item.value;
+  });
+  element.modelValue.splice(foundIndex, 1);
+  console.log('uuuuuuwwwwww',element,item.value)
 };
 const close = () => {
   props.store.closeDialog();

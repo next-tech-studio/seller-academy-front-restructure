@@ -81,7 +81,7 @@
         <span class="text-text-low-emphasis text-body-1">
           {{ $t("shop_link") }}
         </span>
-        <a class="text-text-heading text-body-1" :href="information?.shopLink">
+        <a v-if="information?.shopLink" class="text-text-heading text-body-1" :href="information?.shopLink" terget="_blank">
           {{ information?.shopLink }}
         </a>
       </div>

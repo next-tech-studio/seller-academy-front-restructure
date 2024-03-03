@@ -154,7 +154,7 @@ export default (request) => ({
       method: "get",
       path: "/question/search",
       query: `?query=${payload}`,
-      loading: true,
+      loading: false,
       alert: false,
     });
   },

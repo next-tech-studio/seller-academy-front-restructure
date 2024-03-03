@@ -37,7 +37,7 @@ export default (request) => ({
         method: "get",
         path: "/articles/archive/list",
         query,
-        loading: true,
+        loading: { show: payload.page == 1, skeleton: 'skeleton-article-archive' },
         page: payload.page,
       },
       payload
@@ -88,7 +88,7 @@ export default (request) => ({
         method: "post",
         query: `?type=${payload.type}`,
         path: `/article/${payload.slug}/comments`,
-        loading: true,
+        loading: false,
         alert: true,
       },
       payload.body
@@ -102,7 +102,7 @@ export default (request) => ({
         method: "post",
         query: `?type=${payload.type}`,
         path: `/article/${payload.slug}/comments/${payload.commentId}/feedback`,
-        loading: true,
+        loading: false,
         alert: false,
       },
       payload.body
@@ -116,7 +116,7 @@ export default (request) => ({
         method: "post",
         query: `?type=${payload.type}`,
         path: `/article/${payload.slug}/feedback`,
-        loading: true,
+        loading: false,
         alert: false,
       },
       payload.body
@@ -130,7 +130,7 @@ export default (request) => ({
         method: "post",
         query: `?type=${payload.type}`,
         path: `/article/${payload.slug}/bookmark`,
-        loading: true,
+        loading: false,
         alert: true,
       },
       payload.body

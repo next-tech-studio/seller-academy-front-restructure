@@ -185,23 +185,23 @@ const edit = () => {
   );
 };
 const goToItem = () => {
-  if (panel.currentItem.status === "draft") {
+  if (sharedStore.currentItem.status === "draft" && type.value == 'article') {
     navigateTo(
       localePath({
-        path: "/article/preview/" + `${sharedStore.currentItem.id}`,
+        path: `/${type.value}/preview/${sharedStore.currentItem.id}`,
       }),
       {
         external: true,
       }
     );
-  } else {
+  } else if (sharedStore.currentItem.status === "published") {
     navigateTo(
-      localePath({ path: "/artricle/" + `${sharedStore.currentItem.slug}` }),
+      localePath({ path: `/${type.value}/${sharedStore.currentItem.slug}` }),
       {
         external: true,
       }
     );
-  }
+  } else return
 };
 const onSearch = useDebounceFn(
   async () =>

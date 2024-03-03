@@ -102,7 +102,7 @@ const logout = () => {
 const goToPanel = () => {
   navigateTo(
     localePath({
-      path: "/blog/panel/listings/posts",
+      path: "/panel",
     }),
     { external: true }
   );
@@ -113,6 +113,13 @@ const goToDashboard = () => {
       path: "/dashboard/user-account",
     }),
     { external: true }
+  );
+};
+const goToPageBuilder = (item) => {
+  navigateTo(
+    localePath({
+      name: `blog-panel-post-id-draft`,
+    })
   );
 };
 const items = [
@@ -129,10 +136,16 @@ const items = [
     show: auth.hasPermission(["blogs", "community", "academy"]),
   },
   {
+    title: "add_new_post",
+    icon: "custom:plus",
+    action: goToPageBuilder,
+    show: auth.hasPermission(["create-article"]),
+  },
+  {
     title: "logout",
     icon: "custom:logout",
     action: logout,
     show: true,
-  },
+  }
 ];
 </script>

@@ -1,7 +1,7 @@
 <template>
   <v-card
     color="n100"
-    :height="lgAndUp ? 355 : auto"
+    :height="lgAndUp ? 555 : auto"
     class="d-flex align-center rounded-0 rounded-b-lg"
   >
     <v-container>
@@ -10,9 +10,11 @@
           <v-img
             max-height="355"
             :src="`/images/ad-services/banners/${n}.png`"
+            :alt="`ad service ${n}`"
           ></v-img>
         </v-col>
         <v-btn
+          v-if="lgAndUp"
           style="position: absolute; bottom: 0"
           color="icon-low-emphasis"
           flat

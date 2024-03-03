@@ -5,7 +5,7 @@
         variant="text"
         class="me-5"
         :text="$t('editor.save_draft')"
-        @click="saveRoom"
+        @click="saveRoom(false)"
       ></v-btn>
       <v-btn
         :text="$t('activate_room')"
@@ -117,6 +117,10 @@
       </section>
       <section class="bg-background-light rounded-lg pa-6" style="width: 49%">
         <div class="mb-4">
+          <p class="mb-2 text-h3">{{ $t("room_link") }}</p>
+          <span class="text-text-low-emphasis">{{ room.joinLink }}</span>
+        </div>
+        <div class="mb-4">
           <p class="mb-2 text-h3">{{ $t("maximum_allowed_member") }}</p>
           <v-text-field
             v-model="room.maxMember"
@@ -151,6 +155,7 @@
           <p class="text-h3">{{ $t("is_private") }}</p>
           <v-select
             :label="$t('is_private')"
+            disabled
             density="compact"
             :rules="$rules({ isPrivate: 'required' }, room.isPrivate)"
             base-color="n300"
@@ -245,14 +250,26 @@ let room = ref({
   avatarUrl: { url: "" },
   bannerUrl: { url: "" },
   category: { id: 0 },
+  isPrivate:1
 });
 let common = ref({});
 let users = ref([]);
 let newMembers = ref([]);
 const { $repos } = useNuxtApp();
 const addMember = (item, index) => {
-  newMembers.value.push(item.id);
+  console.log("bbeeffoore", newMembers.value, chosenIndex.value,index,item.id);
+
+  if (!!!chosenIndex.value[item.id]) {
+    console.log('838383')
+    newMembers.value.push(item.id);
   chosenIndex.value[item.id] = true;
+  } else {
+    console.log('222222')
+
+    newMembers.value.splice(index,1)
+    chosenIndex.value[item.id] = false;
+  }
+  console.log("cchhoosseennnnn", newMembers.value, chosenIndex.value[index]);
 };
 let privacyStatus = [
   { id: 1, title: t("private") },
@@ -288,8 +305,6 @@ const onSearch = useDebounceFn(async (e) => await getUsers(e), 1000, {
 });
 const getRoomInfo = () => {
   $repos.communityPanel.roomInfo(route.params.id).then((res) => {
-    console.log("res", res);
-
     Object.assign(room.value, res);
   });
 };
@@ -303,7 +318,8 @@ const getRoomInfo = () => {
 //   };
 //   $repos.communityPanel.updateRoomStatus(payload);
 // };
-const saveRoom = (publish = false) => {
+const saveRoom = (publishًRoom = false) => {
+  console.log('puubblish',publishًRoom)
   if (edit.value)
     newMembers.value.push(...room.value.members.map((member) => member.id));
   let payload = {
@@ -314,12 +330,14 @@ const saveRoom = (publish = false) => {
       members: newMembers.value || [],
     },
   };
+  console.log('puubblish',publishًRoom,payload,newMembers.value)
+
   $repos.communityPanel.saveRoom(payload).then((res) => {
     if (!edit.value)
       navigateTo(
         localePath({ path: `/forum/panel/room/create/${res}` })
       );
-    if (publish) {
+    if (publishًRoom) {
       let payload = {
         body: {
           status: "active",

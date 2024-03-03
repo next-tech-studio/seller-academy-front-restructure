@@ -29,7 +29,7 @@
             <div class="text-body-1 text-text-light my-2">
               {{ $t("for_more_info_about_your_intended_group") }}
             </div>
-            <v-btn class="text-button" size="large" color="primary-base">
+            <v-btn class="text-button" size="large" color="primary-base" @click="openDialog">
               {{ $t("request_more_info") }}
             </v-btn>
           </div>
@@ -39,7 +39,6 @@
             <v-card-text>
               <div class="text-center">
                 <div class="d-flex justify-center">
-
                   <v-img
                     src="/images/logo/logo.svg"
                     max-height="100"
@@ -109,18 +108,89 @@
       </v-row>
     </v-container>
   </v-card>
+  <app-dialog-form
+    :store="sharedStore"
+    button-title=""
+    subtitle=""
+    save-title="submit"
+    title="subscribe_product"
+    ref="dialogForm"
+    :add-new-item="false"
+    @update:category = "$emit('get:subCategories',$event)"
+    @update:fields="$emit('submit:subCategory')"
+  >
+    <template #formActions>
+      <slot name="formActions"></slot>
+    </template>
+  </app-dialog-form>
 </template>
 
 <script setup>
+import { useSharedPanelStore } from "@core/stores/sharedPanel";
+const sharedStore = useSharedPanelStore();
 const props = defineProps({
   items: Array,
+  calculatorCategories:Array,
+  subCategories: Array
 });
 
 let current = ref(1);
 
-onMounted(() => {
-  console.log("-==-=-=-==-=-=-=", current.value, props.items);
-});
+let dataForm =ref([
+{
+    type: "select",
+    name: "category",
+    modelValue: null,
+    selectValue: "id",
+    selectTitle:"title",
+    validations: "required",
+    items: computed(() => props?.calculatorCategories),
+    label: "choose_category",
+    multiple:false,
+    size: 12,
+    hint: false,
+    show:true
+  },
+  {
+    type: "select",
+    name: "subcategories",
+    modelValue: null,
+    selectValue: "id",
+    disabled:computed(() => !!!props?.subCategories.length),
+    selectTitle:"title",
+    validations: "required",
+    items: computed(() => props?.subCategories),
+    label: "choose_product_from_category",
+    multiple:true,
+    size: 12,
+    hint: false,
+    show:true
+  },
+  {
+    type: "text-field",
+    name: "email",
+    modelValue: ref(""),
+    validations: "required|email",
+    label: "email",
+    size: 12,
+    hint: false,
+  },
+  {
+    type: "text-field",
+    textFieldType:'number',
+    name: "mobile",
+    modelValue: ref(""),
+    validations: "required|mobile",
+    label: "mobile",
+    size: 12,
+    hint: false,
+  },
+])
+const openDialog = () => {
+  sharedStore.dialog = true;
+  sharedStore.currentItem = props.information;
+  sharedStore.initForm(dataForm.value);
+};
 
 let currentValue = computed(() => {
   if (typeof current.value == "number") {

@@ -8,12 +8,12 @@
             <p class="text-body-1">{{ $t("contact_us_desc") }}</p>
           </v-col>
           <v-col cols="12" lg="6">
-            <v-img src="/images/contactus/contactus.svg" />
+            <v-img src="/images/contactus/contactus.svg" alt="contact us banner" />
           </v-col>
         </v-row>
       </v-container>
     </header>
-    <div class="bg-n800">
+    <div class="bg-n700">
       <v-container>
         <v-row>
           <v-col v-for="(item, index) in socials" cols="12" lg="3" :key="index">
@@ -42,6 +42,7 @@
   </article>
 </template>
 <script setup>
+const { t } = useI18n();
 const socials = [
   {
     title: "contact_us_phone",
@@ -68,6 +69,12 @@ const socials = [
     link: "",
   },
 ];
+
+useHead(
+  useHeadTags({
+    title: t("contact_us")
+  })
+);
 </script>
 
 <style lang="scss" scoped>
