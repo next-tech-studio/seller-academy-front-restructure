@@ -7,6 +7,7 @@
           md="3"
           class="d-flex flex-column w-100 justify-space-between mb-11 mb-md-8"
         >
+        <a href="/">
           <v-img
             src="/images/logo/logo.svg"
             max-height="112"
@@ -15,6 +16,7 @@
             class="mb-4 mb-md-6"
             alt="logo"
           />
+        </a>
           <p class="text-body-1">
             {{ $t("footer_description") }}
           </p>
