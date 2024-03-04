@@ -82,7 +82,7 @@
           </div>
         </template>
         <template #permissions="{ item,header }">
-          <div :style="`width: ${header.header.size}`">
+          <div :style="`width: ${header.header.size}; white-space: wrap`">
             <v-chip
              color="icon-hint-caution"
               v-for="item in item?.item?.permissions"

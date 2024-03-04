@@ -37,6 +37,7 @@ const panelTable: Mapping = {
     },
   },
   avatarUrl: {
+    defaultValue: "/images/user.jpeg",
     processValue: (value) => {
       return { url: value };
     },

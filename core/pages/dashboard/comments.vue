@@ -106,7 +106,7 @@ const headers = ref([
     key: "title",
     sortable: false,
     title: t("title"),
-    minWidth: "200px",
+    minWidth: "250px",
   },
   {
     align: "start",
