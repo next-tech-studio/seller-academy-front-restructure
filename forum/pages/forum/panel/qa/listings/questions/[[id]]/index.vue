@@ -258,7 +258,7 @@ const { $repos } = useNuxtApp();
 let questionForm = ref([
   {
     type: "text-area",
-    name: "QText",
+    name: "qText",
     modelValue: ref(""),
     validations: "required",
     validations: "required",
