@@ -55,6 +55,7 @@
           :showFilter="false"
         />
         <course-landing-our-courses
+          v-if="categories.length > 0"
           class="my-10"
           :categories="categories"
         ></course-landing-our-courses>
@@ -130,7 +131,7 @@ useAsyncData(async () => {
       articles.value = res.articles;
       rooms.value = res.chatRooms;
       categories.value = res.categories;
-      store.buttonDefault = res.categories[0].slug;
+      if (res.categories.length > 0) store.buttonDefault = res.categories[0].slug;
     });
   }
 });
