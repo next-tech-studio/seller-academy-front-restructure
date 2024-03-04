@@ -103,7 +103,7 @@ const submit = () => {
 };
 // const url = computed(() => decodeURI(document?.URL));
 const url = computed(
-  () => 'http://localhost:3000/'+ `forum/room?join-token=${props.joinLink}/`
+  () => config.public.domain+ `forum/room?join-token=${props.joinLink}/`
 );
 function copyText() {
   // Get the text field

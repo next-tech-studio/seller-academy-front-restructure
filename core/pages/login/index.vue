@@ -28,6 +28,7 @@
 
 <script setup>
 import { useAuthStore } from "@core/stores/auth";
+const { $previousRoute } = useNuxtApp();
 const auth = useAuthStore();
 const { t } = useI18n();
 watch(
@@ -40,6 +41,7 @@ watch(
 );
 
 onMounted(() => {
+  console.log('previuosRoute',window.history);
   if (!auth.user.loggedIn) auth.initUserState();
 });
 

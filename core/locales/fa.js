@@ -603,8 +603,8 @@ export default {
   remove: "حذف",
   lesson_content: "محتوای درسی",
   correct_choice: "پاسخ صحیح",
-  quiz_question: "پرسش {index}",
-  question_option: "گزینه‌ی {index}",
+  quiz_question: "پرسش",
+  question_option: "گزینه‌ی",
   yoour_question_title: "عنوان پرسش شما...",
   add_new_option: "افزودن گزینه‌ی جدید",
   quiz_again: "آزمون مجدد",
@@ -808,7 +808,7 @@ export default {
   username: "نام کاربری",
   mobile_username: "موبایل(نام کاربری)",
   enter_website: "ورود به وبسایت",
-  upload_video: "آپلود ویدئو",
+  upload_video: "بارگذاری ویدئو",
   you_dont_have_any_rooms_right_now: "در حال حاضر در هیچ اتاقی عضو نیستید!",
   permissions: "مجوز‌ها",
   key: "کلید",
@@ -824,5 +824,7 @@ export default {
   accept:'تایید',
   join_requests:'درخواست‌های عضویت',
   your_post_will_be_published_after_review:'پست شما پس از بررسی توسط ادمین منتشر خواهد شد.',
-  successful_copy:'متن شما با موفقیت کپی شد!'
+  successful_copy:'متن شما با موفقیت کپی شد!',
+  join_requests:'درخواست‌های عضویت',
+  upload_audio:'بارگذاری صوت',
 };

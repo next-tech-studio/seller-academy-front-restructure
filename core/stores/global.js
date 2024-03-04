@@ -5,6 +5,7 @@ export const useGlobalStore = defineStore("global", {
     skeletonLoading: true,
     skeleton: "",
     activeRequests: {},
+    previousRoute:null,
   }),
   getters: {
     activeRequestsExists: (state) => Object.values(state.activeRequests).includes(true),
