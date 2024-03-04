@@ -185,7 +185,7 @@
       </slot>
     </div>
     <v-card-text v-if="item?.tags?.length">
-      <app-tags :items="item.tags" />
+      <app-tags :items="item.tags" :type="type" />
     </v-card-text>
     <!-- <v-card-text
       class="text-text-low-emphasis text-body-1 content px-0"
@@ -199,6 +199,7 @@
 import { useDisplay } from "vuetify";
 const socials = useSocials();
 const { mdAndUp } = useDisplay();
+const route = useRoute()
 const props = defineProps({
   item: Object,
   useDesktop: { type: Boolean, default: false },
@@ -212,6 +213,9 @@ const props = defineProps({
     type: Boolean,
   },
 });
+const type = computed(() =>
+  route.name.includes("podcast") ? "podcast" : "article"
+);
 onUpdated(() => {
   let content = document.getElementById("content");
   for (let i = 0; i < content.getElementsByTagName("p").length; i++) {
