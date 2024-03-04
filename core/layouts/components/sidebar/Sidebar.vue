@@ -14,7 +14,8 @@
         <template v-slot:prepend>
           <v-avatar size="50">
             <v-img
-              :src="authStore?.user?.avatarUrl"
+              cover
+              :src="authStore?.user?.avatarUrl?.url || authStore.user?.avatarUrl"
               :alt="authStore?.user?.displayName"
             ></v-img>
           </v-avatar>
@@ -122,7 +123,7 @@ watch(rail, (newValue, oldValue) => {
 });
 const sidebarItems = useSidebar(authStore.user);
 onMounted(() => {
-  console.log('route', route)
+  console.log("route", route);
   if (rail.value === true) opened.value.splice(0, opened.value.length);
 });
 const navigateToPage = (address) => {

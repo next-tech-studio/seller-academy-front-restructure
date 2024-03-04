@@ -98,6 +98,7 @@ export const useAuthStore = defineStore("auth", {
       const { history } = useRouter().options;
       const localePath = useLocalePath()
       const back = history.state.back;
+      console.log('bbbaccckkk',useRouter().options)
       const path = back || "/";
       this.$repos.auth.login(payload).then((res) => {
         this.user = { ...res, loggedIn: true };

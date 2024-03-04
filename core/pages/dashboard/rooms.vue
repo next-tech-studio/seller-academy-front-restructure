@@ -5,7 +5,7 @@
       <app-room-card
         :max-width="296"
         :item="room"
-        @to:item="toRoom"
+        @to:item="toRoom(room)"
       ></app-room-card>
       </v-col>
     </v-row>
@@ -28,10 +28,17 @@ const getRooms = () => {
     Object.assign(rooms.value, res.data);
   });
 };
-const navigateToItem = (e) => {
-  navigateTo(localePath({ path: `/forum/question/${e.slug}` }), {
-    external: true,
-  });
+const toRoom = (item) => {
+  navigateTo(
+    localePath({
+      name: "forum-room-slug",
+      params: { slug: item?.slug },
+      query: {
+        category: item?.category?.slug,
+        roomId: item?.roomId,
+      },
+    })
+  );
 };
 onMounted(async () => {
   getRooms();

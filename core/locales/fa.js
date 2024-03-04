@@ -822,5 +822,7 @@ export default {
   room:'اتاق',
   waiting:'در انتظار',
   accept:'تایید',
-  join_requests:'درخواست‌های عضویت'
+  join_requests:'درخواست‌های عضویت',
+  your_post_will_be_published_after_review:'پست شما پس از بررسی توسط ادمین منتشر خواهد شد.',
+  successful_copy:'متن شما با موفقیت کپی شد!'
 };

@@ -152,7 +152,7 @@ const save = (e) => {
     .message({
       body: {
         ...body,
-        message: `Inoovation Bridge Event`,
+        message: `Inoovation Bridge Event - Tarbiat Modarres`,
         type: "innovation_bridge",
       },
     })

@@ -5,7 +5,7 @@
       v-for="item in items"
       :to="
         localePath({
-          name: 'article-tag-slug',
+          name: `${type}-tag-slug`,
           params: { slug: item?.slug },
         })
       "
@@ -19,7 +19,7 @@
       <v-chip
         :to="
           localePath({
-            name: 'article-tag-slug',
+            name: `${type}-tag-slug`,
             params: { slug: item?.slug },
           })
         "
@@ -35,6 +35,10 @@
 const localePath = useLocalePath();
 const props = defineProps({
   items: Array,
-  title: String
+  title: String,
+  type: {
+    default: "article",
+    type: String
+  }
 });
 </script>

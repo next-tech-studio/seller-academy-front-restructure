@@ -29,6 +29,7 @@
           variant="outlined"
         ></v-btn>
         <v-btn
+          v-if="auth.hasPermission(['blogs'])"
           :text="$t('editor.publish')"
           color="button-secondary"
           @click="
@@ -121,8 +122,10 @@
 
 <script setup>
 import { usePanelStore } from "@core/stores/panel";
-let panelStore = usePanelStore();
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useAuthStore } from "@core/stores/auth";
+const auth = useAuthStore();
+let panelStore = usePanelStore();
 const sharedStore = useSharedPanelStore();
 import { storeToRefs } from "pinia";
 const route = useRoute();

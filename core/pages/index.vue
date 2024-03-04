@@ -55,11 +55,12 @@
           :showFilter="false"
         />
         <course-landing-our-courses
-          class="my-10"
+          v-if="categories.length > 0"
+          class="mt-10"
           :categories="categories"
         ></course-landing-our-courses>
         <client-only>
-          <h2 class="text-h2 text-text-high-emphasis mb-6">
+          <h2 class="text-h2 text-text-high-emphasis mb-6 mt-10">
             {{ $t("most_popular_rooms") }}
           </h2>
           <app-switch-wrapper class="pa-0 me-0" one-side-margin>
@@ -130,7 +131,7 @@ useAsyncData(async () => {
       articles.value = res.articles;
       rooms.value = res.chatRooms;
       categories.value = res.categories;
-      store.buttonDefault = res.categories[0].slug;
+      if (res.categories.length > 0) store.buttonDefault = res.categories[0].slug;
     });
   }
 });

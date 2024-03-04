@@ -38,9 +38,9 @@
                 })
               "
               rounded="lg"
-              disabled
+              :disabled="current?.status == 'full_capacity'"
             >
-              {{ $t("full_capacity") }}
+              {{ $t(current?.status || '') }}
               <v-icon class="ms-2" icon="custom:chevronLeft"></v-icon>
             </v-btn>
           </template>
@@ -98,7 +98,7 @@
                   <v-btn
                     color="primary-base"
                     variant="text"
-                    href="https://maps.app.goo.gl/YeqbJYLqKS4bWH24A"
+                    :href="current?.locationUrl"
                     target="_blank"
                   >
                     مشاهده روی نقشه
@@ -117,15 +117,16 @@
                   flat
                   class="mt-4"
                   size="large"
-                  disabled
+                  :disabled="current?.status == 'full_capacity'"
                   :to="
                     localePath({
                       name: 'innovation-bridge-slug-register',
                       params: { slug: route.params.slug },
                     })
                   "
+                  :color="current?.status == 'full_capacity' ? '' : 'primary-base'"
                 >
-                  {{ $t("full_capacity") }}
+                  {{ $t(current?.status || '') }}
                   <v-icon icon="custom:chevronLeft" end></v-icon>
                 </v-btn>
               </v-card-text>
@@ -167,7 +168,7 @@
       class="mb-4"
     >
       <template #bottom="{ item }">
-        <div>
+        <div v-if="item.presentationTopic">
           <v-divider color="n400" class="my-1"></v-divider>
           <div class="text-text-low-emphasis text-caption">
             {{ $t("presentation_topic") }}
