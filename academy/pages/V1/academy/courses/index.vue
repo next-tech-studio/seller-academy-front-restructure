@@ -5,6 +5,7 @@
     </v-container>
     <v-container class="py-lg-10 py-2">
       <course-landing-our-courses
+        v-if="data.categories?.length > 0"
         :categories="data.categories"
       ></course-landing-our-courses>
     </v-container>
@@ -14,13 +15,22 @@
     <v-container class="py-lg-10 py-2">
       <v-img src="/images/landing_pros.png" alt="academy pros"></v-img>
     </v-container>
-    <v-img class="py-lg-10 py-2" src="/images/landing_statistics.png" alt="academy statistics"></v-img>
+    <v-img
+      class="py-lg-10 py-2"
+      src="/images/landing_statistics.png"
+      alt="academy statistics"
+    ></v-img>
     <v-container>
       <course-landing-testimonial
         :items="data.comments"
       ></course-landing-testimonial>
     </v-container>
-    <v-img class="pt-10" cover src="/images/landing_features.png" alt="academy features"></v-img>
+    <v-img
+      class="pt-10"
+      cover
+      src="/images/landing_features.png"
+      alt="academy features"
+    ></v-img>
   </div>
   <div v-else>
     <div class="bg-background-dark">
@@ -30,6 +40,7 @@
     </div>
     <v-container>
       <course-landing-our-courses
+        v-if="data.categories?.length > 0"
         :categories="data.categories"
         class="py-10"
       ></course-landing-our-courses>
@@ -124,14 +135,17 @@ const suggestedRoadmaps = [
 const getNotLoggedInHomepageData = async () => {
   await $repos.academy.getHomepageData().then((res) => {
     Object.assign(data, res);
-    store.buttonDefault = data.categories[0].slug;
+    if (data.categories.length > 0)
+      store.buttonDefault = data.categories[0].slug;
   });
 };
 
 const getLoggedInHomepageData = async () => {
   await $repos.academy.getLoggedInHomepageData().then((res) => {
     Object.assign(data, res);
-    store.buttonDefault = data.categories[0].slug;
+    if (data.categories.length > 0) {
+      store.buttonDefault = data.categories[0].slug;
+    }
   });
 };
 
