@@ -56,11 +56,11 @@
         />
         <course-landing-our-courses
           v-if="categories.length > 0"
-          class="my-10"
+          class="mt-10"
           :categories="categories"
         ></course-landing-our-courses>
         <client-only>
-          <h2 class="text-h2 text-text-high-emphasis mb-6">
+          <h2 class="text-h2 text-text-high-emphasis mb-6 mt-10">
             {{ $t("most_popular_rooms") }}
           </h2>
           <app-switch-wrapper class="pa-0 me-0" one-side-margin>
