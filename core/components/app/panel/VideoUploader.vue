@@ -1,51 +1,85 @@
 <template>
-   <v-card rounded="lg" height="500" class="d-flex justify-center align-center">
-  <v-btn
-    icon="custom:simplePlay"
-    color="light"
-    class="loading-position bg-text-low-emphasis"
-    flat
-    @click="videoHasNotUploadedYet"
-    v-if="(!/https/.test(uploadedFiles.url) || !uploadedFiles.url) && uploadProgress!==100"
-  />
-  <app-video-player
-    v-if="/https/.test(uploadedFiles.url)"
-    :video-src="uploadedFiles.url"
-    :options="['volume', 'cog', 'forward', 'fullScreen']"
-    small
+  <v-card
+    rounded="lg"
+    height="500"
+    class="d-flex justify-center align-center position-relative"
   >
-  </app-video-player>
-  <v-btn
-    prepend-icon="custom:uploadPicture"
-    color="button-primary"
-    class="me-3 mb-3"
-    v-if="!uploadProgress && !uploadedFiles.url"
-    @click="handleFileImport"
-  >
-    <span class="text-button">{{ $t("upload_video") }}</span>
-  </v-btn>
-  <!-- <v-btn @click="handleFileImport"> {{ 'upload_video' }}</v-btn> -->
-  <input
-    ref="uploader"
-    class="d-none"
-    type="file"
-    :multiple="false"
-    @change="onFileChanged"
-  />
-  <v-progress-circular
-    color="primary-base"
-    :rotate="360"
-    :model-value="uploadProgress"
-    :size="100"
-    v-if="uploadProgress  && !uploadedFiles.url && uploadProgress <=99"
-  >
-    {{ uploadProgress }}%
-  </v-progress-circular>
-  <app-rejection-approval
-    v-model:dialog="dialog"
-    approval-or-rejection-message="please_be_patient_your_video_is_processing_please_submit_the_content"
-  ></app-rejection-approval>
-</v-card>
+    <!-- <div class="bg-red">{{  uploadProgress == 100}}</div>
+    <div class="bg-yellow">{{ !!/https/.test(uploadedFiles.url) }}</div>
+    <div class="bg-orange">{{ !!uploadedFiles.url  }}</div> -->
+    <v-btn
+      icon="custom:simplePlay"
+      color="light"
+      class="loading-position bg-text-low-emphasis"
+      flat
+      @click="videoHasNotUploadedYet"
+      v-if="
+        (!!uploadedFiles.url || !!/https/.test(uploadedFiles.url)) &&
+        (uploadProgress == 100 || uploadProgress == 0)
+      "
+    />
+    <app-video-player
+      v-if="/https/.test(uploadedFiles.url) && type == 'video'"
+      :video-src="uploadedFiles.url"
+      :options="['volume', 'cog', 'forward', 'fullScreen']"
+      small
+    >
+    </app-video-player>
+    <app-audio-player
+      v-if="type == 'audio' && /https/.test(uploadedFiles.url)"
+      :audio-src="uploadedFiles.url"
+      :audio-poster="uploadedFiles.cover"
+    />
+    <v-btn
+      prepend-icon="custom:uploadPicture"
+      color="button-primary"
+      class="me-3 mb-3"
+      v-if="!uploadProgress && !uploadedFiles.url"
+      @click="handleFileImport"
+    >
+      <span class="text-button" v-if="type == 'video'">{{
+        $t("upload_video")
+      }}</span>
+      <span class="text-button" v-if="type == 'audio'">{{
+        $t("upload_audio")
+      }}</span>
+    </v-btn>
+    <!-- <v-btn @click="handleFileImport"> {{ 'upload_video' }}</v-btn> -->
+    <input
+      ref="uploader"
+      class="d-none"
+      type="file"
+      :multiple="false"
+      @change="onFileChanged"
+    />
+    <v-btn
+      v-if="uploadProgress == 100"
+      flat
+      prepend-icon="custom:uploadPicture"
+      color="primary-base"
+      class="me-4 cover-button-position"
+      :text="$t('add_cover')"
+      @click="cover.click()"
+    />
+    <v-file-input
+      v-model="coverValue"
+      ref="cover"
+      class="d-none"
+    ></v-file-input>
+    <v-progress-circular
+      color="primary-base"
+      :rotate="360"
+      :model-value="uploadProgress"
+      :size="100"
+      v-if="uploadProgress && !uploadedFiles.url && uploadProgress <= 99"
+    >
+      {{ uploadProgress }}%
+    </v-progress-circular>
+    <app-rejection-approval
+      v-model:dialog="dialog"
+      approval-or-rejection-message="please_be_patient_your_video_is_processing_please_submit_the_content"
+    ></app-rejection-approval>
+  </v-card>
 
   <!-- <progress :value="uploadProgress" max="100">{{ uploadProgress }}</progress> -->
   <!-- <input type="file" @change="handleFileChange" />
@@ -55,7 +89,9 @@
 <script setup>
 let uploader = ref(null);
 let dialog = ref(false);
-const endpoint ="https://napi.arvancloud.ir/vod/2.0/channels/0b9bc134-caf3-4887-98eb-4b370c1f381b/files";
+let cover = ref(null);
+const endpoint =
+  "https://napi.arvancloud.ir/vod/2.0/channels/0b9bc134-caf3-4887-98eb-4b370c1f381b/files";
 const { $repos } = useNuxtApp();
 let isSelecting = ref(false);
 let selectedFiles = ref([]);
@@ -66,6 +102,10 @@ let sendingRequest = ref(false);
 const { uploadProgress, createUploader } = useTus();
 const props = defineProps({
   modelValue: Object,
+  type: {
+    default: "video",
+    type: String,
+  },
 });
 let uploadedFiles = computed({
   get() {
@@ -80,12 +120,8 @@ const removeAfterWord = (originalString, word) => {
   if (wordIndex === -1) {
     return originalString; // The word isn't found, return the original string
   }
-  // Return the part of the string after the word.
-  // wordIndex + word.length to include the word itself in the result.
   return originalString.substring(wordIndex + word.length);
-  // const parts = originalString.split(word);
-  // return parts[1]; // Contains the string before the word
-}
+};
 
 const handleFileImport = (index = 0) => {
   window.addEventListener(
@@ -121,9 +157,9 @@ async function submit() {
     },
     onSuccess: () => {
       console.log("Upload finished:", upload?.url);
-    //   let originalStr = "Blue Earth";
-    // let newStr = upload.url.replace("files/", ""); // Output: " Earth"
-      uploadedFiles.value.url = removeAfterWord(upload.url,'files/')
+      //   let originalStr = "Blue Earth";
+      // let newStr = upload.url.replace("files/", ""); // Output: " Earth"
+      uploadedFiles.value.url = removeAfterWord(upload.url, "files/");
     },
   });
   upload.start();
@@ -132,4 +168,52 @@ async function submit() {
 const videoHasNotUploadedYet = () => {
   dialog.value = true;
 };
+
+const createPreview = async (file, type) => {
+  let formData = new FormData();
+  formData.append("files[0]", file);
+  await $repos.other
+    .uploadFiles(
+      {
+        body: formData,
+      },
+      "/panel/articles/inline_media",
+      true
+    )
+    .then((res) => {
+      console.log("0e0e0e0e0", res.data[0].url);
+      // uploadedFiles.value[type] = res.data[0].url
+      // Object.assign(uploadedFiles.value[type]?.url,res.data[0].url)
+      emit("update:modelValue", {
+        ...uploadedFiles.value,
+        cover: { url: res.data[0].url },
+      });
+      // uploadedFiles.value[type].url = res.data[0].url;
+      console.log("838383838", props.modelValue);
+    });
+
+  // const reader = new FileReader();
+  // reader.onload = (e) => {
+  //   props.modelValue[type] = e.target.result;
+  // };
+  // reader.readAsDataURL(file);
+};
+let coverValue = computed({
+  get() {
+    return props.modelValue.cover;
+  },
+  set(newValue) {
+    console.log("coverValue", newValue);
+    // emit("update:modelValue", { ...uploadedFiles.value, cover: newValue });
+    createPreview(newValue[0], "cover");
+  },
+});
 </script>
+
+<style>
+.cover-button-position {
+  position: absolute;
+  top: 1%;
+  left: 0;
+}
+</style>

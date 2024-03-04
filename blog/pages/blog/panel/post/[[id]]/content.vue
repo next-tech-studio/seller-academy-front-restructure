@@ -213,7 +213,7 @@ const openSelectedContentSection = (componentType) => {
     case "audio":
       panelStore.draftContent.content.push({
         type: "audio",
-        component: Media,
+        component: VideoUploader,
         content: {},
         fixed: false,
       });
@@ -295,7 +295,7 @@ let getComponent = (type) => {
     case "vid":
       return VideoUploader;
     case "audio":
-      return Media;
+      return VideoUploader;
     case "html":
       return TextEditor;
     case "banner":
