@@ -238,7 +238,7 @@
             required
           />
         </div>
-        <div class="mb-4">
+        <div class="mb-4" v-if="auth.hasPermission(['blogs'])">
           <span>{{ $t("publish_with_which_role") }}</span>
           <app-category
             v-model="panelStore.draftContent.author.slug"
@@ -288,8 +288,10 @@
 
 <script setup>
 import { usePanelStore } from "@core/stores/panel";
-let panelStore = usePanelStore();
 import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useAuthStore } from "@core/stores/auth";
+const auth = useAuthStore();
+let panelStore = usePanelStore();
 const sharedStore = useSharedPanelStore();
 import { storeToRefs } from "pinia";
 const route = useRoute();

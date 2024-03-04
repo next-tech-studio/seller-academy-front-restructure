@@ -159,6 +159,7 @@
               v-if="dialog.type == 'add_member'"
               @add:member="newMember"
               :users="users"
+              :join-link = "item.joinLink"
               @search="$emit('search:users', $event)"
             />
             <edit-room-description

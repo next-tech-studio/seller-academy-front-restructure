@@ -207,7 +207,7 @@ export default (request) => ({
       path: "/community/chat/recentChatsSidebar",
       loading: true,
       alert: false,
-      model: { name: roomListPreview},
+      model: { name: roomListPreview },
     });
   },
   removeMember(payload) {
@@ -244,6 +244,15 @@ export default (request) => ({
       },
       payload.body
     );
+  },
+  membershipRequest(payload) {
+    return request({
+      name: "memberShipRequest",
+      method: "post",
+      path: `/community/chat/join/${payload}`,
+      loading: true,
+      alert: false,
+    });
   },
   // uploadFiles(payload, path) {
   //     return request({
