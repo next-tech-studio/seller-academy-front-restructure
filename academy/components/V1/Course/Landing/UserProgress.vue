@@ -6,7 +6,7 @@
           <v-avatar
             :size="mdAndUp ? 104 : 48"
             color="grey-darken-3"
-            :image="auth?.user?.avatarUrl"
+            :image="auth?.user?.avatarUrl?.url || auth?.user?.avatarUrl"
           ></v-avatar>
         </template>
 
