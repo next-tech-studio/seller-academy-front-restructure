@@ -10,6 +10,7 @@
       <span dir="ltr" class="justify-start">{{ url }}</span>
       <v-btn
         variant="text"
+        @click="copyText"
         color="icon-high-emphasis"
         icon="custom:copy"
       ></v-btn>
@@ -67,20 +68,24 @@
 </template>
 
 <script setup>
+import { useToastStore } from "~/core/stores/toast";
+const toast = useToastStore();
 let search = ref("");
 let chosenUser = ref({});
+const {t} = useI18n()
 let chosenIndex = ref([]);
 let userCount = ref(0);
 const emit = defineEmits(["add:member"]);
+const config = useRuntimeConfig();
 const props = defineProps({
   hasLink: {
     type: Boolean,
     default: true,
   },
+  joinLink: String,
   users: Array,
 });
 const addMember = (item, index) => {
-  console.log("bbeeffoore", chosenUser.value, chosenIndex.value[index]);
 
   if (!!!chosenIndex.value[index]) {
     userCount.value++;
@@ -92,24 +97,23 @@ const addMember = (item, index) => {
     chosenUser.value = {};
     chosenIndex.value[index] = false;
   }
-  console.log("cchhoosseennnnn", chosenUser.value, chosenIndex.value[index]);
 };
 const submit = () => {
   emit("add:member", chosenUser.value);
 };
-const url = computed(() => decodeURI(document?.URL));
-const items = [
-  {
-    name: "نام و نام خانوادگی",
-    avatarUrl: "/images/user.jpeg",
-    bio: " درباره کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات  کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات درباره",
-  },
-  {
-    name: "نام و نام خانوادگی",
-    avatarUrl: "/images/user.jpeg",
-    bio: "توضیحات درباره کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات \ کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات درباره کاربر توضیحات",
-  },
-];
+// const url = computed(() => decodeURI(document?.URL));
+const url = computed(
+  () => 'http://localhost:3000/'+ `forum/room?join-token=${props.joinLink}/`
+);
+function copyText() {
+  // Get the text field
+  let copyText = url.value;
+
+  navigator.clipboard.writeText(copyText);
+
+  // Alert the copied text
+  toast.show({ text: t("successful_copy") }, "success");
+}
 </script>
 <style lang="scss">
 .chosen-member {
