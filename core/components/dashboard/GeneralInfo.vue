@@ -2,7 +2,7 @@
   <div class="d-flex justify-space-between align-center">
     <div class="d-flex align-center">
       <v-avatar size="64" class="me-4">
-        <v-img :src="information?.avatarUrl?.url" />
+        <v-img cover :src="information?.avatarUrl?.url" />
       </v-avatar>
       <div class="text-text-heading text-body-1 font-weight-bold">
         {{ information?.name }}
