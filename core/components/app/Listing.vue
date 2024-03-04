@@ -138,7 +138,7 @@
                 hide-details
               >
                 <template #label>
-                  <span variant="text" class="ms-4">{{ column?.title }}</span>
+                  <span style="white-space: nowrap;" variant="text" class="ms-4">{{ column?.title }}</span>
                 </template>
               </v-checkbox>
               <div class="d-flex">
@@ -183,9 +183,9 @@
                 @click="goToItem(item)"
                 variant="text"
                 :ripple="false"
-                class="text-truncate text-body-1"
+                class="text-truncate text-body-1 text-right"
               >
-                {{ item[header.key] }}
+                <span style="width: 250px;" class="text-truncate">{{ item[header.key] }}</span>
               </v-btn>
             </template>
           </v-checkbox>
@@ -572,5 +572,9 @@ const setOperationIcon = (action, item) => {
 #search .v-input__control {
   width: 320px;
   height: 48px;
+}
+
+td {
+  white-space: nowrap !important;
 }
 </style>

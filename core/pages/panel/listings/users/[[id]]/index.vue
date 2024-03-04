@@ -56,7 +56,6 @@
         <template #displayName="{ item }">
           <div
             class="d-flex cursor-pointer"
-            v-if="item.item.profile.displayName"
           >
             <div
               class="d-flex align-center justify-start"
@@ -71,8 +70,8 @@
                 hide-details
               >
               <template #label>
-                <v-btn variant="text" :ripple="false" class="text-truncate text-body-1">{{
-                  item?.item?.profile?.displayName
+                <v-btn :class="{'bg-primary-lighten3': !item.item.profile.displayName}" variant="text" :ripple="false" class="text-truncate text-body-1">{{
+                  item?.item?.profile?.displayName || 'فاقد مشخصات فردی'
                 }}</v-btn>
               </template>
               </v-checkbox>
@@ -82,11 +81,10 @@
         </template>
         <template #mobile="{ item }">
           <div
-            v-if="item.item.profile.mobile"
             style="direction: ltr"
             class="text-end"
           >
-            {{ item?.item?.profile?.mobile }}
+            {{ item?.item?.profile?.mobile || item?.item?.username }}
           </div>
         </template>
         <template #type="{ item }">
