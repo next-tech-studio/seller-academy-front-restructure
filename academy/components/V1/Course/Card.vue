@@ -23,9 +23,9 @@
           <div :style="!horizontal ? 'flex: 1 0 auto' : 'flex: 0 0 50%'">
             <slot name="content">
               <v-card-text class="py-0">
-                <v-icon icon="custom:digikala" class="ml-2" />
+                <v-avatar :image="item?.instructor?.avatarUrl"></v-avatar>
                 <span class="text-caption text-high-emphasis">
-                  {{ item?.instructor?.displayName }}
+                  {{ item?.instructor?.name }}
                 </span>
               </v-card-text>
 
