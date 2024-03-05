@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100vh">
-    <NuxtLayout name="no-footer">
+    <!-- <NuxtLayout name="no-footer"> -->
       <not-logged-in-room-preview
         v-model="common"
         :btn-title="
@@ -75,7 +75,7 @@
           </v-card>
         </v-container>
       </div>
-    </NuxtLayout>
+    <!-- </NuxtLayout> -->
   </div>
 </template>
 
@@ -376,7 +376,7 @@ watch(
 
 definePageMeta({
   // middleware: ["auth"],
-  layout: false,
+  layout: 'no-footer',
 });
 </script>
 

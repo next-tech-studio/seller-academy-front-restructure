@@ -22,7 +22,7 @@
         class="px-2"
         @click="showPreview = !showPreview"
       >
-        <v-avatar :image="authStore.user.avatarUrl"></v-avatar>
+        <v-avatar :image="item.bannerUrl"></v-avatar>
         <div class="text-caption mr-2">
           <div class="text-text-heading">{{ item?.name }}</div>
           <div class="text-text-low-emphasis text-right">
@@ -44,7 +44,7 @@
           : ''
       "
       rounded="0"
-      class="preview d-flex flex-column pr-lg-64"
+      class="preview d-flex flex-column pr-lg-64 pr-0"
       v-if="showPreview"
     >
       <v-img
@@ -52,7 +52,7 @@
         aspect-ratio="1.98"
         cover
         gradient="180deg, rgba(0, 0, 0, 0) 0%, #000000 100%"
-        height="35%"
+        height="40%"
       >
         <div class="d-flex flex-column h-100">
           <v-card-text
