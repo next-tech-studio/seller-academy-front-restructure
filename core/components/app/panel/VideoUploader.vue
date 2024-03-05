@@ -53,7 +53,7 @@
       @change="onFileChanged"
     />
     <v-btn
-      v-if="uploadProgress == 100"
+      v-if="uploadProgress == 100 && type=='audio'"
       flat
       prepend-icon="custom:uploadPicture"
       color="primary-base"
