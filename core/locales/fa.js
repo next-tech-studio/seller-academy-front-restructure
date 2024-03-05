@@ -827,5 +827,6 @@ export default {
   successful_copy:'متن شما با موفقیت کپی شد!',
   join_requests:'درخواست‌های عضویت',
   upload_audio:'بارگذاری صوت',
-  submit_room:'ثبت اتاق'
+  submit_room:'ثبت اتاق',
+  room_link:'لینک عضویت در اتاق'
 };
