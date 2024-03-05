@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100vh">
+  <div style="height: calc(100vh - 64px)">
     <!-- <NuxtLayout name="no-footer"> -->
       <not-logged-in-room-preview
         v-model="common"
