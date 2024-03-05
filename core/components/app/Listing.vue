@@ -573,7 +573,7 @@ const setOperationIcon = (action, item) => {
   height: 48px;
 }
 
-td {
+#listing td {
   white-space: nowrap !important;
 }
 </style>
