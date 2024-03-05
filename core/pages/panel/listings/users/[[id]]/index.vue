@@ -206,7 +206,7 @@ let dataForm = ref([
     name: "username",
     show: true,
     modelValue: ref(""),
-    validations: "required",
+    validations: "english|mobile|required",
     label: "mobile_username",
     size: 6,
     hint: true,
@@ -387,7 +387,7 @@ const submitItem = () => {
       });
   } else {
     payload = {
-      body,
+      ...body,
     };
     $repos.sharedPanel
       .createUser(payload)
