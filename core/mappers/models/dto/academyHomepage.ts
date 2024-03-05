@@ -1,6 +1,7 @@
 //@ts-ignore
 import { Mapping, mapperCollection } from "~/mappers";
 import course from "../schema/course";
+import room from "../schema/room";
 
 const academyHomepage: Mapping = {
   categories: {
@@ -24,6 +25,9 @@ const academyHomepage: Mapping = {
       return courses
     },
   },
+  chatRooms: {
+    processValue: (value) => mapperCollection(value, room)
+},
 };
 
 export default academyHomepage;
