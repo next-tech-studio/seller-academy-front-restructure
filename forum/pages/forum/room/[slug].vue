@@ -62,7 +62,7 @@
               <Chat
                 :style="
                   !smAndDown
-                    ? 'width: calc(100% - 264px); position: absolute; left: 0;'
+                    ? 'width: calc(100% - 364px); position: absolute; left: 0;'
                     : ''
                 "
                 @react="react"
@@ -383,7 +383,7 @@ definePageMeta({
 <style lang="scss">
 .pr-lg-64 {
   @include respond("lg") {
-    padding-right: 264px;
+    padding-right: 364px;
   }
 }
 </style>

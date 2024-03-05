@@ -40,7 +40,7 @@
     <v-card
       :style="
         !smAndDown
-          ? 'width: calc(100% - 264px); position: absolute; left: 0;'
+          ? 'width: calc(100% - 364px); position: absolute; left: 0;'
           : ''
       "
       rounded="0"
