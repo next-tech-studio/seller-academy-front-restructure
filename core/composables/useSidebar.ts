@@ -5,15 +5,15 @@ export const useSidebar = (user = { roles: [] }) => {
   const localePath = useLocalePath();
 
   return ref([
-    {
-      title: t("dashboard"),
-      icon: "custom:dashboard",
-      roles: ["siteAdmin", "seller"],
-      get show() {
-        return true;
-      },
-      to: localePath({ path: "/panel" }),
-    },
+    // {
+    //   title: t("dashboard"),
+    //   icon: "custom:dashboard",
+    //   roles: ["siteAdmin", "seller"],
+    //   get show() {
+    //     return true;
+    //   },
+    //   to: localePath({ path: "/panel" }),
+    // },
     {
       title: t("blog"),
       icon: "custom:blog",
