@@ -44,14 +44,14 @@
       <v-textarea
         v-model="message"
         hide-details
-        :label="$t('your_message')"
+        :placeholder="$t('your_message')"
         variant="solo"
         flat
         rounded="0"
         no-resize
         auto-grow
         rows="1"
-        class="bg-white textarea-bt pt-0"
+        class="bg-white textarea-bt pt-0 ou"
       >
         <template #prepend>
           <v-avatar

@@ -261,6 +261,7 @@ Promise.all([
   useAsyncData(async () => await getQuestionData()),
   useAsyncData(async () => {
     await $repos.community.questionsCommon().then((res) => {
+      console.log('8383883838383838',res.suggestedChatRooms)
       Object.assign(suggestedChatRooms, res.suggestedChatRooms);
       Object.assign(rooms, res.rooms);
       Object.assign(userRooms, res.userRooms);

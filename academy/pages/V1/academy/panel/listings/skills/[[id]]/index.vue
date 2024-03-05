@@ -201,14 +201,14 @@ const submitItem = () => {
       (item) => item.id === sharedStore.currentItem.id
     );
     $repos.academyPanel.updateSkill(payload).then((res) => {
-      Object.assign(sharedStore.listItems.data[itemIndex], res);
+      Object.assign(sharedStore.listItems.data[itemIndex], res.data);
       sharedStore.edit = false;
       sharedStore.closeDialog();
     }).catch(() => sharedStore.sendingRequest = false);
   } else {
     $repos.academyPanel.updateSkill(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
-        { ...res },
+        { ...res.data },
         ...sharedStore.listItems.data,
       ]);
       sharedStore.closeDialog();
