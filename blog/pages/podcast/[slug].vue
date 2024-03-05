@@ -10,9 +10,10 @@
       <v-col cols="12" lg="8" md="12" tag="article">
         <v-card flat class="article-card mx-auto over-flow-hidden rounded-0">
           <v-card-text>
+            {{ itemContent }}
             <app-audio-player
               :audio-src="itemContent.url"
-              :audio-poster="itemContent.coverPreview"
+              :audio-poster="item.bannerUrl"
             />
           </v-card-text>
           <post-content
