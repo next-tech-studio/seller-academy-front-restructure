@@ -368,7 +368,9 @@ const saveRoom = (publishًRoom = false) => {
           ids: [room.value.id],
         },
       };
-      $repos.communityPanel.updateRoomStatus(payload);
+      $repos.communityPanel.updateRoomStatus(payload).then((res) => {
+        navigateTo(localePath({ path: `/forum/panel/room/listings/rooms` }));
+      });
     }
   });
 };
