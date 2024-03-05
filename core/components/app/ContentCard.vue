@@ -56,7 +56,7 @@
         </div>
         <div class="d-flex justify-center align-center h-100" v-if="playable">
           <v-btn class="play-btn" icon size="small" theme="dark">
-            <v-icon color="white" size="small" class="ml-1">fas fa-play</v-icon>
+            <v-icon color="white" class="ml-1" icon="custom:simplePlay"></v-icon>
           </v-btn>
         </div>
       </v-img>

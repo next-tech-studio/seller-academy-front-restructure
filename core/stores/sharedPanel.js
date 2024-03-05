@@ -197,9 +197,11 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
             if (this.currentItem[field.name]) {
               field.modelValue = this.currentItem[field.name];
               if (field.selectValue) {
-                field.modelValue = this.currentItem[field.name].map(
-                  (element) => element[field.selectValue]
-                );
+                if (Array.isArray(this.currentItem[field.name])) {
+                  field.modelValue = this.currentItem[field.name].map(
+                    (element) => element[field.selectValue]
+                  );
+                }
               }
             } else if (typeof field.modelValue == "string")
               field.modelValue = "";

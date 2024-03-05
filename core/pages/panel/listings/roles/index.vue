@@ -139,7 +139,7 @@ let headers = ref([
     size: "120px",
   },
 
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 let groupActions = ref([
   { title: "حذف کردن", value: "deleted" },

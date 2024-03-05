@@ -12,7 +12,7 @@
           <v-card-text>
             <app-audio-player
               :audio-src="itemContent.url"
-              :audio-poster="itemContent.coverPreview"
+              :audio-poster="item.bannerUrl"
             />
           </v-card-text>
           <post-content

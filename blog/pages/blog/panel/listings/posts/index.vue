@@ -84,7 +84,7 @@ let headers = ref([
   { key: "viewsCount", title: t("viewsCount") },
   { key: "commentsCount", title: t("commentsCount") },
   { key: "bookmarksCount", title: t("bookmarksCount") },
-  { key: "operation", title: t("operation") },
+  { key: "operation", title: t("operation"), sortable: false },
 ]);
 const route = useRoute();
 const type = computed(() =>

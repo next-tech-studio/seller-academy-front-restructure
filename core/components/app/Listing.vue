@@ -474,7 +474,6 @@ const cellProps = (item) => {
   if (props.headers[item.index]?.size) {
     cellWidth = `${props.headers[item.index]?.size}`; // Set width based on item property
   }
-  console.log(cellWidth);
   return {
     style: {
       width: `${cellWidth} !important`, // Assign calculated width dynamically
@@ -574,7 +573,7 @@ const setOperationIcon = (action, item) => {
   height: 48px;
 }
 
-td {
+#listing td {
   white-space: nowrap !important;
 }
 </style>
