@@ -72,7 +72,7 @@
       />
     </div>
     <v-container class="pb-10">
-      <v-row justify="center" :class="isClient ? 'd-flex' : 'd-none'">
+      <v-row :class="isClient ? 'd-flex' : 'd-none'">
         <v-col cols="12" lg="3" md="6" v-for="item in rooms" :key="item.id">
           <room-card :item="item" @to:item="toRoom"></room-card>
         </v-col>
@@ -123,7 +123,7 @@ const getRooms = (resetPage = false) => {
     } else {
       Object.assign(rooms.value, [...rooms.value, ...res.data]);
     }
-    lastPage.value = res.last_page === res.current_page ? true : false;
+    lastPage.value = res.pagination.lastPage === res.pagination.currentPage ? true : false;
     if (res.pagination.total != page) page++;
   });
 };
