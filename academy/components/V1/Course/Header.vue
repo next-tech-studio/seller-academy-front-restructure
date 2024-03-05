@@ -22,8 +22,8 @@
           {{ item.description }}
         </div>
         <div class="text-body-2 text-text-light font-weight-bold mb-4">
-          <v-icon icon="custom:digikala" class="ml-2"></v-icon>
-          {{ `${$t("instructor")} : ${item?.instructor?.displayName}` }}
+          <v-avatar size="24" :image="item?.instructor?.avatarUrl" class="ml-2"></v-avatar>
+          {{ `${$t("instructor")} : ${item?.instructor?.name}` }}
         </div>
         <div class="d-lg-flex">
           <div class="mb-lg-0 mb-4">
