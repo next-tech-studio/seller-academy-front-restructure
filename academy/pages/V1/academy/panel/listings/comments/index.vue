@@ -9,7 +9,9 @@
         :store="sharedStore"
         :filters="filters"
         :show-dialog="true"
-        :dialog-title="sharedStore.additionalOperation? 'reject':'submit_and_publish'"
+        :dialog-title="
+          sharedStore.additionalOperation ? 'reject' : 'submit_and_publish'
+        "
         listing-title="comments"
         dialog-subtitle="check_comment_description"
         dialog-start-button-title="reject_comment"
@@ -44,11 +46,7 @@
         "
         @update:items="submitItem"
         @filter="
-          sharedStore.getListingItems(
-            'commentList',
-            payload,
-            'academyPanel'
-          )
+          sharedStore.getListingItems('commentList', payload, 'academyPanel')
         "
       >
         <template #author="{ item }">
@@ -102,7 +100,10 @@
                 class="me-4 text-body-1 font-weight-bold"
                 @click="commentsListing.edit(item.item, action)"
               >
-                <v-icon :icon="action.icon" size="20"></v-icon>
+                <v-icon :icon="action.icon" size="20" />
+                <v-tooltip activator="parent" location="bottom">
+                  {{ $t(action.title) }}</v-tooltip
+                >
               </v-btn>
             </div>
           </div>
@@ -171,7 +172,7 @@ let commentsListing = ref(null);
 let search = ref("");
 let filters;
 let operations;
-let rejectionReasons = ref([])
+let rejectionReasons = ref([]);
 let editForm = ref([
   {
     type: "label",
@@ -285,7 +286,7 @@ const publish = () => {
 const init = () => {
   operations = ref([
     {
-      title: "ویرایش انتشار",
+      title: "ویرایش و انتشار",
       value: "edit",
       icon: "custom:pencil",
       hasDialog: true,
@@ -345,7 +346,7 @@ const submitItem = () => {
         text: text?.modelValue,
       },
     };
-    console.log('test',payload);
+    console.log("test", payload);
 
     $repos.panel.updateCommentText(payload).then((res) => {
       Object.assign(sharedStore.listItems.data[itemIndex], payload.body);
