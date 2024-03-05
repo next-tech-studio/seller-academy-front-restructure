@@ -13,6 +13,7 @@
           :key="index"
           :item="item"
           variant="text"
+          @to:item="toCourse"
         >
           <template #actions>
             <div class="d-flex flex-column align-center">
@@ -37,6 +38,7 @@
           :key="index"
           :item="item"
           variant="text"
+          @to:item="toCourse"
         ></app-card-horizontal>
       </v-window-item>
       <v-window-item value="done">
@@ -45,6 +47,7 @@
           :key="index"
           :item="item"
           variant="text"
+          @to:item="toCourse"
         ></app-card-horizontal>
       </v-window-item>
       <v-window-item value="bookmark">
@@ -53,6 +56,7 @@
           :key="index"
           :item="item"
           variant="text"
+          @to:item="toCourse"
         ></app-card-horizontal>
       </v-window-item>
     </v-window>
@@ -113,6 +117,15 @@ const navigateToItem = (e) => {
   navigateTo(localePath({ path: `/forum/question/${e.slug}` }), {
     external: true,
   });
+};
+const toCourse = (item) => {
+  console.log('svhjdv', item.slug);
+  return navigateTo(
+    localePath({
+      name: "academy-courses-slug",
+      params: { slug: item.slug },
+    }), {external: true}
+  );
 };
 onMounted(() => {
   getCourses();
