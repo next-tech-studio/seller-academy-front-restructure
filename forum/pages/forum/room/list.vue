@@ -151,6 +151,7 @@ const onSearch = (e, timeout) => {
 }
 
 onMounted(() => {
+  store.buttonDefault = ''
   getCommon();
   getRooms();
 });
