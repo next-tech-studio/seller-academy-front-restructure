@@ -77,7 +77,7 @@
             :loading="loading"
             :color="message ? 'icon-primary' : 'icon-low-emphasis'"
             type="submit"
-            :disabled="!message"
+            :disabled="!message && !attachments.length"
           ></v-btn>
         </template>
       </v-textarea>
