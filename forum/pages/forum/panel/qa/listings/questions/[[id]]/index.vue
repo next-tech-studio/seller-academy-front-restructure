@@ -150,9 +150,9 @@
           </div>
         </template>
         <template #category="{ item }">
-          <span class="text-truncate text-body-1">{{
+          <div class="text-truncate text-body-1">{{
             item.item.category.title
-          }}</span>
+          }}</div>
         </template>
         <template #dislikesCount="{ item, header }">
           <div
@@ -420,8 +420,8 @@ const submitItem = () => {
   } else if (!sharedStore.edit && !sharedStore.additionalOperation) {
     $repos.communityPanel.sendQuestion(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
+      { ...res },
         ...sharedStore.listItems.data,
-        { ...res },
       ]);
       sharedStore.closeDialog();
     });
@@ -431,8 +431,8 @@ const submitItem = () => {
     };
     $repos.communityPanel.sendAnswer(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
+      { ...res.data },
         ...sharedStore.listItems.data,
-        { ...res },
       ]);
       sharedStore.closeDialog();
     });
