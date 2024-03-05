@@ -7,6 +7,6 @@
 
 <script setup>
 defineProps({
-    content: Object
+    element: Object
 })
 </script>

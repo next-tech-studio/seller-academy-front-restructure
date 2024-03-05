@@ -174,7 +174,7 @@
             :key="index"
             class="pt-0 pb-4 content px-4"
           >
-            <app-content :type="element?.type" :content="element?.content" />
+            <app-content :type="element?.type" :content="element?.content" :element="item" />
           </v-card-text>
           <!-- <app-share-in
             justify="justify-start"
