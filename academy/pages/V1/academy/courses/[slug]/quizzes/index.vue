@@ -3,6 +3,7 @@
   <app-listing
     :items="items"
     class="mt-4"
+    :store="sharedStore"
     :headers="headers"
     :has-header="false"
     :show-dialog="false"
@@ -45,6 +46,8 @@
 definePageMeta({
   middleware: ["auth"],
 });
+import { useSharedPanelStore } from '~/core/stores/sharedPanel';
+const sharedStore = useSharedPanelStore()
 const localePath = useLocalePath();
 const emit = defineEmits(["update:sidebar"]);
 const { $repos } = useNuxtApp();
