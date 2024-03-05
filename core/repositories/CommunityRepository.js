@@ -164,7 +164,7 @@ export default (request) => ({
       method: "get",
       path: "/community/chat/rooms/data",
       query: `?categorySlug=${payload.categorySlug}&search=${payload.search}`,
-      loading: true,
+      loading: { show: payload.page == 1, skeleton: 'loading-indicator' },
       page: payload.page,
       alert: false,
       model: { name: room, collection: true, pagination: true, raw: false },
