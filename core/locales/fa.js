@@ -22,6 +22,8 @@ export default {
   all: "همه",
   answer_to_this_queston: "پاسخ دادن به این پرسش",
   most_popular_rooms: "پرطرفدارترین اتاق‌های گفتگو",
+  sales_route: "مسیر فروشندگی",
+  connect_with_each_other: "با یکدیگر در ارتباط باشیم!",
   sales_route_in_digikala: "مسیر فروشندگی در دیجی‌کالا",
   sales_route_in_digikala_description:
     "در ۶ مرحله ساده به فروشنده دیجی‌کالا با مزایای ویژه تبدیل شوید.",
@@ -180,7 +182,7 @@ export default {
   faq: "پرسش‌های متداول",
   first_name: "نام",
   footer_description:
-    "توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه ",
+    "سلرهاب دیجی‌کالا، خانه شرکای تجاری دیجی‌کالا برای حضور و فعالیت در بزرگترین بازار آنلاین ایران همیشه، همراه شما هستیم",
   forget_password: "فراموشی رمز عبور",
   forum: "انجمن",
   from_the_students: "از زبان هنرجویان!",

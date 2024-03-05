@@ -32,6 +32,9 @@
               thickness="1"
               :icon="item.icon"
               variant="text"
+              tag="a"
+              :href="item.link"
+              target="_blank"
             ></v-btn>
           </div>
         </v-col>
@@ -54,11 +57,14 @@
           <v-btn
             min-width="auto"
             v-for="link in item.links"
-            :to="link.to"
+            :to="!link.to.includes('http') ? link.to : ''"
             :key="link"
             color="white"
             variant="text"
             class="align-self-start px-0 text-body-1 animated"
+            :href="link.to.includes('http') ? link.to : ''"
+            :target="link.to.includes('http') ? '_blank' : '_self'"
+            tag="a"
           >
             {{ $t(link.title) }}
           </v-btn>
@@ -80,7 +86,7 @@
             ></v-btn>
           </div>
         </v-col>
-        <v-col md="3" cols="12">
+        <!-- <v-col md="3" cols="12">
           <p class="text-h5">{{ $t("newsletter") }}</p>
           <v-divider
             thickness="1"
@@ -112,7 +118,7 @@
               >
             </template>
           </v-text-field>
-        </v-col>
+        </v-col> -->
         <v-divider class="mt-10 d-none d-md-block"></v-divider>
         <v-col class="text-center mt-3 d-none d-md-block" cols="12">
           {{ $t("rights") }}
