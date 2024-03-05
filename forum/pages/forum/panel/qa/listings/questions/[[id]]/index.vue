@@ -45,7 +45,7 @@
             'communityPanel'
           )
         "
-        default-status="active"
+        default-status="waiting_for_approval"
         :table-actions="operations"
         @update:items="submitItem"
         @init:form="sharedStore.initForm(questionForm)"

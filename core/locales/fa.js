@@ -7,7 +7,7 @@ export default {
   academy_courses: "دوره‌های آکادمی",
   ad_service: "سرویس تبلیغاتی",
   accepting_rules_by_signing_up:
-    "با ثبت نام در سلر آکادمی، قوانین و مقررات آن را می‌پذیرم.",
+    "با ثبت نام در سلرهاب، قوانین و مقررات آن را می‌پذیرم.",
   add_from_gallery: "افزودن از گالری",
   add_new_post: "افزودن پست جدید",
   add_new_post: "افزودن پست",

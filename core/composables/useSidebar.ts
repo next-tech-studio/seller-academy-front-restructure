@@ -182,7 +182,7 @@ export const useSidebar = (user = { roles: [] }) => {
       ],
     },
     {
-      title: t("forums"),
+      title: t("forum"),
       icon: "custom:chat",
       roles: ["siteAdmin", "seller"],
       get show() {
