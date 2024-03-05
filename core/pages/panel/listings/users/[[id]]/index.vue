@@ -255,8 +255,9 @@ let dataForm = ref([
   // },
   {
     type: "select",
-    modelValue: ref(""),
+    modelValue: null,
     selectValue: "id",
+    multiple:false,
     show: true,
     selectTitle: "name",
     name: "role",
