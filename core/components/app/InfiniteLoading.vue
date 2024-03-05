@@ -89,8 +89,10 @@ watch(items, async (newValue, oldValue) => {
 });
 let height = ref(100);
 const setHeight = () => {
-  console.log('setHeight');
-  height.value = document.getElementById(props.id).offsetHeight - props.offset;
+  const history = useRouter().options.history.state
+  const padding = !history.replaced ? 16 : 0
+  height.value = document.getElementById(props.id).offsetHeight - props.offset + padding;
+  console.log('client', useRouter());
 }
 
 onMounted(() => {
