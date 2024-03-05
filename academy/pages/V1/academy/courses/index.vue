@@ -131,7 +131,22 @@ const suggestedRoadmaps = [
     stars: 4.8,
   },
 ];
+const joinArrayValues = (obj) => {
+  let allArraysJoined = [];
+  // Iterate over the object's keys
+  for (const key in obj) {
+    // Check if the current property is an array
+    if (Array.isArray(obj[key])) {
+      // Concatenate the current array to the allArraysJoined array
+      allArraysJoined = allArraysJoined.concat(obj[key]);
+    }
+  }
+  // Add the new 'all' key with the concatenated array to the object
+  const newObj = { all: allArraysJoined, ...obj };
 
+  // Return the modified object
+  return newObj;
+};
 const getNotLoggedInHomepageData = async () => {
   await $repos.academy.getHomepageData().then((res) => {
     Object.assign(data, res);
@@ -143,6 +158,7 @@ const getNotLoggedInHomepageData = async () => {
 const getLoggedInHomepageData = async () => {
   await $repos.academy.getLoggedInHomepageData().then((res) => {
     Object.assign(data, res);
+    data.userCourses = joinArrayValues(data.userCourses)
     if (data.categories.length > 0) {
       store.buttonDefault = data.categories[0].slug;
     }
