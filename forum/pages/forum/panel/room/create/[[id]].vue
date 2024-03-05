@@ -8,7 +8,7 @@
         @click="saveRoom(false)"
       ></v-btn>
       <v-btn
-        :text="$t('activate_room')"
+        :text="$t('submit_room')"
         color="button-secondary"
         @click="saveRoom(true)"
       ></v-btn>
