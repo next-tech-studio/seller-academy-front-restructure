@@ -44,13 +44,10 @@
             </template>
           </question>
           <v-card
-            height="159"
+            height="220"
             class="mt-6 d-md-none d-block"
-            color="primary-base"
           >
-            <div class="d-flex justify-center align-center h-100">
-              بنر مرتبط
-            </div>
+          <v-img cover src="/images/increase_sale_in_dk.jpg"></v-img>
           </v-card>
           <v-card color="transparent" class="my-6">
             <div
@@ -127,13 +124,12 @@
         </v-col>
         <v-col cols="12" md="3">
           <v-card
-            height="159"
+            height="200"
             class="mb-6 d-none d-md-block"
             color="primary-base"
           >
-            <div class="d-flex justify-center align-center h-100">
-              بنر مرتبط
-            </div>
+          <v-img cover src="/images/increase_sale_in_dk.jpg"></v-img>
+
           </v-card>
           <v-card>
             <v-card-title class="text-body-1 font-weight-bold">
