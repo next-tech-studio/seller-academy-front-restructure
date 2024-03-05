@@ -37,7 +37,7 @@
         }}</v-card-text>
       </v-card>
       <div class="mt-6">
-        <div class="d-flex mb-4" v-if="item.certificateEnabled">
+        <div class="d-flex mb-4" v-for="feature in item.features" :key="feature">
           <v-icon
             size="24"
             class="rounded-xl bg-icon-secondary pa-1 ml-3"
@@ -45,27 +45,7 @@
             variant="compact"
             icon="custom:pencil"
           ></v-icon>
-          <span>{{ $t("certificate_enabled") }}</span>
-        </div>
-        <div class="d-flex mb-4" v-if="item.instructoSupport">
-          <v-icon
-            size="24"
-            class="rounded-xl bg-icon-secondary pa-1 ml-3"
-            color="icon-light"
-            variant="compact"
-            icon="custom:pencil"
-          ></v-icon>
-          <span>{{ $t("instructo_support") }}</span>
-        </div>
-        <div class="d-flex" v-if="item.moneyReturnGuarantee">
-          <v-icon
-            size="24"
-            class="rounded-xl bg-icon-secondary pa-1 ml-3"
-            color="icon-light"
-            variant="compact"
-            icon="custom:pencil"
-          ></v-icon>
-          <span>{{ $t("money_return_guarantee") }}</span>
+          <span>{{ feature }}</span>
         </div>
       </div>
     </v-card-text>

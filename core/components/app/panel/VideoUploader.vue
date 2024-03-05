@@ -14,7 +14,7 @@
       flat
       @click="videoHasNotUploadedYet"
       v-if="
-        (!!uploadedFiles.url || !!/https/.test(uploadedFiles.url)) &&
+        (!!uploadedFiles.url && !/https/.test(uploadedFiles.url)) &&
         (uploadProgress == 100 || uploadProgress == 0)
       "
     />
@@ -25,10 +25,11 @@
       small
     >
     </app-video-player>
+
     <app-audio-player
       v-if="type == 'audio' && /https/.test(uploadedFiles.url)"
       :audio-src="uploadedFiles.url"
-      :audio-poster="uploadedFiles.cover"
+      :audio-poster="coverUrl"
     />
     <v-btn
       prepend-icon="custom:uploadPicture"
@@ -52,8 +53,8 @@
       :multiple="false"
       @change="onFileChanged"
     />
-    <v-btn
-      v-if="uploadProgress == 100"
+    <!-- <v-btn
+      v-if="uploadProgress == 100 && type=='audio'"
       flat
       prepend-icon="custom:uploadPicture"
       color="primary-base"
@@ -65,7 +66,7 @@
       v-model="coverValue"
       ref="cover"
       class="d-none"
-    ></v-file-input>
+    ></v-file-input> -->
     <v-progress-circular
       color="primary-base"
       :rotate="360"
@@ -102,6 +103,7 @@ let sendingRequest = ref(false);
 const { uploadProgress, createUploader } = useTus();
 const props = defineProps({
   modelValue: Object,
+  coverUrl:String,
   type: {
     default: "video",
     type: String,

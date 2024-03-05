@@ -34,7 +34,8 @@
                 variant="outlined"
                 bg-color="background-light"
                 type="search"
-                @update:model-value="onSearch"
+                @update:model-value="onSearch($event, 3000)"
+                @keyup.enter="onSearch($event, 0)"
                 hide-details
               ></v-text-field>
             </v-col>
@@ -107,6 +108,7 @@ let search = ref("");
 const categories = ref([]);
 const topRooms = reactive([]);
 let lastPage = ref(false);
+let timeoutId = ref()
 const getRooms = (resetPage = false) => {
   if (resetPage) page = 1;
   let payload = {
@@ -132,9 +134,22 @@ const getCommon = () => {
     store.buttonDefault = categories.value[0].slug;
   });
 };
-const onSearch = useDebounceFn(async () => await getRooms(true), 1000, {
-  maxWait: 5000,
-});
+
+function debounce(func, timeout) {
+  return (...args) => {
+    clearTimeout(timeoutId.value);
+    timeoutId.value = setTimeout(() => {
+      func(...args);
+    }, timeout);
+    console.log(timeoutId.value);
+  };
+}
+
+const onSearch = (e, timeout) => {
+  if (typeof e != 'string') clearTimeout(timeoutId.value)
+  debounce(getRooms, timeout)(true)
+}
+
 onMounted(() => {
   getCommon();
   getRooms();

@@ -293,7 +293,7 @@ let questionForm = ref([
     maxImage: 3,
     title: "add_picture",
     uploadPath: UPLOAD_PATH,
-    modelValue: ref([]),
+    modelValue: [],
     size: 1,
     maxImage: 3,
     hasStartButton: false,
@@ -306,7 +306,7 @@ let answerForm = ref([
     name: "aText",
     modelValue: ref(""),
     validations: "required",
-    label: "question",
+    label: "answer",
     size: 12,
     rows: 6,
   },
@@ -316,7 +316,7 @@ let answerForm = ref([
     multiple: true,
     title: "add_picture",
     uploadPath: UPLOAD_PATH,
-    modelValue: "",
+    modelValue: [],
     size: 1,
     maxImage: 3,
     hasStartButton: false,
@@ -412,7 +412,6 @@ const submitItem = () => {
     let itemIndex = sharedStore.listItems.data.findIndex(
       (item) => item.id === sharedStore.currentItem.id
     );
-
     $repos.communityPanel.sendQuestion(payload).then((res) => {
       Object.assign(sharedStore.listItems.data[itemIndex], res);
       sharedStore.edit = false;
@@ -428,7 +427,7 @@ const submitItem = () => {
     });
   } else {
     payload = {
-      body: { ...body, id: 0 },
+      body: { ...body, id: 0, questionId: sharedStore.currentItem.id},
     };
     $repos.communityPanel.sendAnswer(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [

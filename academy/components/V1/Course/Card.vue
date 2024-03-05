@@ -22,8 +22,8 @@
           />
           <div :style="!horizontal ? 'flex: 1 0 auto' : 'flex: 0 0 50%'">
             <slot name="content">
-              <v-card-text class="py-0">
-                <v-avatar :image="item?.instructor?.avatarUrl"></v-avatar>
+              <v-card-text class="py-0 mt-4">
+                <v-avatar class="me-1" size="24" :image="item?.instructor?.avatarUrl"></v-avatar>
                 <span class="text-caption text-high-emphasis">
                   {{ item?.instructor?.name }}
                 </span>
