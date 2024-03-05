@@ -32,8 +32,8 @@ const props = defineProps({
   },
 });
 let remaining = ref({
-  minutes: 0,
-  seconds: 10,
+  minutes: 5,
+  seconds: 0,
 });
 const submit = () => {
   emit("submit");

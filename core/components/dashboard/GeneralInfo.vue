@@ -170,7 +170,7 @@ let dataForm = ref([
   {
     type: "text-field",
     name: "category",
-    modelValue: ref(""),
+    modelValue: null,
     validations: "",
     label: "category",
     size: 6,
