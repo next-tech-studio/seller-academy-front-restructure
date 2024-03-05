@@ -155,11 +155,11 @@
 <script setup>
 const emit = defineEmits("rate");
 let dialog = ref(false);
-defineProps({
+const props = defineProps({
   data: Object,
 });
 const save = () => {
-  emit("rate", data);
+  emit("rate", props.data);
   dialog.value = false;
 };
 </script>
