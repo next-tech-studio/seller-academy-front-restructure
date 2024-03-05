@@ -91,7 +91,7 @@ export default (request) => ({
         loading: true,
         alert: false,
       },
-      payload.body
+      payload
     );
   },
   updateUserStatus(payload) {

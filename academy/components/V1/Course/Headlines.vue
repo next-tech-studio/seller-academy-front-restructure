@@ -26,8 +26,8 @@
               >
                 <v-card-text class="pa-3 d-flex flex-column">
                   <v-btn disabled block variant="flat" class="mb-6 text-truncate">
-                    <span class="text-text-secondary text-truncate">{{
-                      headline.title
+                    <span class="text-text-secondary text-truncate font-weight-bold">{{
+                      `بخش ${index + 1}`
                     }}</span>
                   </v-btn>
                   <span class="mb-4">

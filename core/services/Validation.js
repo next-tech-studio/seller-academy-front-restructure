@@ -42,6 +42,15 @@ class Validation {
         this.setMessage(result);
         return result;
       },
+      english: (v, attribute = "") => {
+        const result =
+          /^[A-Za-z0-9]*$/.test(v) ||
+          $t("زبان سیستم خود را به انگلیسی تغییر دهید", {
+            attribute,
+          });
+        this.setMessage(result);
+        return result;
+      },
       email: (v, attribute = "") => {
         const result =
           /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
