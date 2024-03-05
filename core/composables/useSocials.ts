@@ -1,24 +1,19 @@
 export const useSocials = () => {
   return ref([
       {
-          title: 'facebook',
-          icon: 'fab fa-facebook',
-          link: '',
-      },
-      {
-          title: 'twitter',
-          icon: 'fab fa-twitter',
-          link: '',
-      },
-      {
-          title: 'linkedin',
-          icon: 'fab fa-linkedin',
-          link: '',
+          title: 'telegram',
+          icon: 'custom:telegram',
+          link: 'https://www.telegram.me/s/Digikala.Marketplace',
       },
       {
           title: 'instagram',
-          icon: 'fab fa-instagram',
-          link: '',
+          icon: 'custom:instagram',
+          link: 'https://www.instagram.com/Digikal_Marketplace',
       },
+      {
+          title: 'phone',
+          icon: 'custom:phone',
+          link: 'tel:02161930600',
+      }
   ])
 }
