@@ -54,9 +54,7 @@
         "
       >
         <template #displayName="{ item }">
-          <div
-            class="d-flex cursor-pointer"
-          >
+          <div class="d-flex cursor-pointer">
             <div
               class="d-flex align-center justify-start"
               :style="`width: ${item.size} !important; flex: 0 1 0%`"
@@ -69,21 +67,25 @@
                 v-model="sharedStore.selectedTableItems"
                 hide-details
               >
-              <template #label>
-                <v-btn :class="{'bg-primary-lighten3': !item.item.profile.displayName}" variant="text" :ripple="false" class="text-truncate text-body-1">{{
-                  item?.item?.profile?.displayName || 'فاقد مشخصات فردی'
-                }}</v-btn>
-              </template>
+                <template #label>
+                  <v-btn
+                    :class="{
+                      'bg-primary-lighten3': !item.item.profile.displayName,
+                    }"
+                    variant="text"
+                    :ripple="false"
+                    class="text-truncate text-body-1"
+                    >{{
+                      item?.item?.profile?.displayName || "فاقد مشخصات فردی"
+                    }}</v-btn
+                  >
+                </template>
               </v-checkbox>
-
             </div>
           </div>
         </template>
         <template #mobile="{ item }">
-          <div
-            style="direction: ltr"
-            class="text-end"
-          >
+          <div style="direction: ltr" class="text-end">
             {{ item?.item?.profile?.mobile || item?.item?.username }}
           </div>
         </template>
@@ -95,13 +97,9 @@
             {{ $t(item?.item?.profile?.type) }}
           </v-chip>
         </template>
-        <template #roles="{ item }">
-          <div
-            v-if="item.item.profile.roles"
-            style="direction: ltr"
-            class="text-end"
-          >
-            {{ item?.item?.profile?.roles?.displayName }}
+        <template #role="{ item }">
+          <div style="direction: ltr" class="text-end">
+            {{ item?.item?.role?.name }}
           </div>
         </template>
         <template #status="{ item }">
@@ -206,7 +204,7 @@ let dataForm = ref([
     name: "username",
     show: true,
     modelValue: ref(""),
-    validations: "required",
+    validations: "english|mobile|required",
     label: "mobile_username",
     size: 6,
     hint: true,
@@ -257,8 +255,9 @@ let dataForm = ref([
   // },
   {
     type: "select",
-    modelValue: ref(""),
+    modelValue: null,
     selectValue: "id",
+    multiple:false,
     show: true,
     selectTitle: "name",
     name: "role",
@@ -387,7 +386,7 @@ const submitItem = () => {
       });
   } else {
     payload = {
-      body,
+      ...body,
     };
     $repos.sharedPanel
       .createUser(payload)

@@ -76,6 +76,8 @@ export default (request) => ({
         path: `/panel/question/question_edit`,
         loading: true,
         alert: false,
+        model: { name: panelTable, dataPath: "data" },
+        
       },
       payload.body
     );
