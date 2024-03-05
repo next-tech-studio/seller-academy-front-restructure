@@ -158,7 +158,7 @@ let headers = ref([
     sortable: true,
     size: "200px",
   },
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 const init = () => {
   operations = ref([

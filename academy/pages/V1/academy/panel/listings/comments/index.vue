@@ -243,7 +243,7 @@ let headers = ref([
   { key: "status", title: t("status"), sortable: false, size: "80px" },
   { key: "rate", title: t("rate"), sortable: true, size: "100px" },
   { key: "ip", title: t("ip"), sortable: false, size: "100px" },
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 const { $repos } = useNuxtApp();
 const onSearch = useDebounceFn(

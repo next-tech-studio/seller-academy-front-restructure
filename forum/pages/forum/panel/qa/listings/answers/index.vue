@@ -210,7 +210,7 @@ let headers = ref([
     sortable: false,
   },
 
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 let search = ref("");
 const route = useRoute();

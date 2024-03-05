@@ -121,7 +121,7 @@ let headers = ref([
   },
   { key: "user", title: t("user"), sortable: true },
   { key: "status", title: t("status"), sortable: false },
-  { key: "operation", title: t("operation") },
+  { key: "operation", title: t("operation"), sortable: false },
 ]);
 const route = useRoute();
 const localePath = useLocalePath();

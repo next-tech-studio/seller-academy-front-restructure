@@ -238,7 +238,7 @@ let headers = ref([
     size: "50px",
     sortable: false,
   },
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 let search = ref("");
 let payload = computed(() => {

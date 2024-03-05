@@ -113,7 +113,7 @@ let headers = ref([
   },
   { key: "status", title: t("status"), sortable: false, size: "50px" },
   { key: "viewsCount", title: t("viewsCount"), size: "50px" },
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 let search = ref("");
 let payload = computed(() => {
