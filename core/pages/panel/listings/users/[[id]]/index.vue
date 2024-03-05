@@ -415,7 +415,7 @@ onMounted(async () => {
   );
 });
 definePageMeta({
-  middleware: ["auth", "roles"],
+  middleware: ["auth"],
   layout: false,
   permissions: ["users"],
 });
