@@ -177,6 +177,7 @@ let uploaderProps = ref({
 });
 let audioProps = ref({
   type: "audio",
+  coverUrl: computed(()=>panelStore.draftContent.bannerUrl.url)
 });
 let newSection = ref(false);
 let onDeleteComponent = (index) => {

@@ -1,9 +1,10 @@
 <template>
-  <v-card rounded="lg" height="100%">
+  <v-card rounded="lg" height="100%" class="d-flex align-center">
     <v-img
       :src="audioPoster"
       gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
       cover
+      height="100%"
       content-class="d-flex align-center justify-center pa-md-16 bg pa-4"
     >
       <v-card
