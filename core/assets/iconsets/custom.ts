@@ -102,7 +102,11 @@ import instagram from "../../components/icons/instagram.vue";
 import power from "../../components/icons/power.vue";
 import table from "../../components/icons/table.vue";
 import quote from "../../components/icons/quote.vue";
-import simplePlay from "../../components/icons/simplePlay.vue"
+import simplePlay from "../../components/icons/simplePlay.vue";
+import desktopChat from "../../components/icons/desktopChat.vue";
+import findContent from "../../components/icons/findContent.vue";
+import truck from "../../components/icons/truck.vue";
+import wallet from "../../components/icons/wallet.vue";
 
 const aliases: any = {
   search,
@@ -207,7 +211,11 @@ const aliases: any = {
   power,
   table,
   quote,
-  simplePlay
+  simplePlay,
+  desktopChat,
+  findContent,
+  truck,
+  wallet,
 };
 
 const custom: IconSet = {
