@@ -136,7 +136,7 @@ const joinArrayValues = (obj) => {
   // Iterate over the object's keys
   for (const key in obj) {
     // Check if the current property is an array
-    if (Array.isArray(obj[key])) {
+    if (Array.isArray(obj[key]) && key !='bookmarks') {
       // Concatenate the current array to the allArraysJoined array
       allArraysJoined = allArraysJoined.concat(obj[key]);
     }

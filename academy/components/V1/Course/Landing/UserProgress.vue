@@ -1,5 +1,5 @@
 <template>
-  <v-card color="background-light" :rounded="mdAndUp ? 'lg' : 0">
+  <v-card color="background-light" align="start" :rounded="mdAndUp ? 'lg' : 0">
     <v-card-actions class="py-lg-3 py-1">
       <v-list-item class="w-100">
         <template v-slot:prepend>
@@ -44,14 +44,23 @@
       </v-tabs>
     </v-card-text>
   </v-card>
-  <v-card class="mt-6 rounded-lg">
+  <v-card class="mt-6 rounded-lg" align="start">
     <v-window v-model="tab" class="py-2">
       <v-window-item v-for="(value, key) of items" :key="key" :value="key">
-        <template v-for="item in value" :key="item.id">
-          <v-card-text class="py-2">
-            <course-card-horizontal :item="item" />
+        <div v-if="value.length">
+          <template v-for="item in value" :key="item.id">
+            <v-card-text class="py-2">
+              <course-card-horizontal :item="item" />
+            </v-card-text>
+          </template>
+        </div>
+
+        <v-card v-else class="d-flex flex-column align-center py-12">
+          <v-img width="120" src="/images/empty/no_comment.svg" />
+          <v-card-text class="text-body-1 font-weight-bold text-center">
+            {{ $t("no_courses") }}
           </v-card-text>
-        </template>
+        </v-card>
       </v-window-item>
     </v-window>
   </v-card>
