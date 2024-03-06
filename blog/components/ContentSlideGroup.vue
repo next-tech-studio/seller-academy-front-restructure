@@ -9,13 +9,13 @@
     <v-slide-group>
         <template #next>
             <v-btn width="24" height="50" class="rounded-md" icon size="x-small" color="rgba(var(--v-theme-background-scrim-dark), 30%)">
-                <v-icon color="white">fas fa-chevron-left</v-icon>
+                <v-icon color="white" icon="custom:chevronLeft"></v-icon>
             </v-btn>
         </template>
 
         <template #prev>
             <v-btn width="24" height="50" class="rounded-md" icon size="x-small" color="rgba(var(--v-theme-background-scrim-dark), 30%)">
-                <v-icon color="white">fas fa-chevron-right</v-icon>
+                <v-icon color="white" icon="custom:chevronRight"></v-icon>
             </v-btn>
         </template>
 
