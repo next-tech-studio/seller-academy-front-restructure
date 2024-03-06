@@ -97,7 +97,7 @@
             <!-- <v-img src="/images/kasra-nikpoor.webp" class="rounded-lg"></v-img> -->
             <app-video-player
               video-poster="/images/home-header.png"
-              video-src="https://player.arvancloud.ir/index.html?config=https://next-test.arvanvod.ir/ZaMv0Glomq/51w0ZXnzBE/origin_config.json"
+              video-src="https://player.arvancloud.ir/index.html?config=https://next-test.arvanvod.ir/ZaMv0Glomq/vxGAkenR95/origin_config.json"
               small
             />
           </v-col>
@@ -142,7 +142,7 @@
             <!-- <v-img src="/images/kasra-nikpoor.webp" class="rounded-lg"></v-img> -->
             <app-video-player
               video-poster="/images/home-header.png"
-              video-src="https://player.arvancloud.ir/index.html?config=https://next-test.arvanvod.ir/ZaMv0Glomq/51w0ZXnzBE/origin_config.json"
+              video-src="https://player.arvancloud.ir/index.html?config=https://next-test.arvanvod.ir/ZaMv0Glomq/ZlEpAoz6dy/origin_config.json"
               small
             />
           </v-col>
