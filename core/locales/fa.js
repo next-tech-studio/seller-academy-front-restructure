@@ -314,6 +314,7 @@ export default {
   video_colon_duration: "ویدیو: ",
   // quiz_colon_duration: "آزمون: {variable} پرسش",
   quiz_colon_duration: "آزمون: ",
+  exam_colon_duration: "سوال: ",
   question: "پرسش",
   title_1: "عنوان اول",
   title_2: "عنوان دوم",
