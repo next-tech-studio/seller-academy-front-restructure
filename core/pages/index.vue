@@ -38,7 +38,7 @@
                 height="100%"
                 width="100%"
                 cover
-                src="/images/loggedin-landing-header.png"
+                src="/images/loggedin-landing-header.jpg"
                 alt="landing banner"
               ></v-img>
             </v-card>
