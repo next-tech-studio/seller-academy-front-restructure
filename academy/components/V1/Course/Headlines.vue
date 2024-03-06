@@ -33,16 +33,16 @@
                   <span class="mb-4">
                     <v-icon icon="custom:book"></v-icon>
                     {{
-                      headline.totalMinutesToRead + " " + $t("study_duration")
+                      headline.totalMinutesToRead + " " + $t("minutes")
                     }}
                   </span>
                   <span class="mb-4">
                     <v-icon icon="custom:quiz"></v-icon>
-                    {{ headline.totalQuizQuestionsCount + " " + $t("quiz") }}
+                    {{ headline.totalQuizQuestionsCount + " " + $t("question") }}
                   </span>
                   <span>
                     <v-icon icon="custom:play"></v-icon>
-                    {{ headline.totalVideoDuration + ' ' + $t("video_duration") }}
+                    {{ headline.totalVideoDuration + ' ' + $t("minutes") }}
                   </span>
                 </v-card-text>
               </div>
@@ -91,21 +91,21 @@
                 class="text-icon-low-emphasis"
                 icon="custom:book"
               ></v-icon>
-              {{ item.totalMinutesToRead + " " + $t("study_duration") }}
+              {{ item.totalMinutesToRead + " " + $t("minutes") }}
             </span>
             <span class="mb-4 me-2 text-text-high-emphasis">
               <v-icon
                 class="text-icon-low-emphasis"
                 icon="custom:quiz"
               ></v-icon>
-              {{ item.totalQuizQuestionsCount + " " + $t("quiz") }}
+              {{ item.totalQuizQuestionsCount + " " + $t("question") }}
             </span>
             <span class="text-text-high-emphasis">
               <v-icon
                 class="text-icon-low-emphasis"
                 icon="custom:play"
               ></v-icon>
-              {{ item.totalVideoDuration + ' ' + $t("video_duration") }}
+              {{ item.totalVideoDuration + ' ' + $t("minutes") }}
 
             </span>
           </v-card-text>
