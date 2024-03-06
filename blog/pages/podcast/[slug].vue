@@ -18,7 +18,8 @@
           <post-content
             @reactto:article="reactPost(item)"
             @bookmark:article="bookmarkPost(item)"
-            :item="item"
+            v-if="remainingContent"
+            :item="remainingContent"
             :show-banner-url="false"
             inline-bookmark
           ></post-content>
@@ -148,6 +149,12 @@ function toItem(e) {
     localePath({ name: "article-preview-slug", params: { slug: e.slug } })
   );
 }
+const remainingContent = computed(()=> {
+  let remain = {...item}
+  console.log('rrreeemmain',item)
+  remain?.content?.splice(0, 1)
+  return remain
+})
 onMounted(() => getComments());
 const itemContent = computed(() => {
   let content = {};
