@@ -72,7 +72,7 @@
             <v-btn
               class="ml-4"
               variant="outlined"
-              color="primary-base"
+              :color="!item.previous? 'primary-lighten2':'primary-base'"
               @click="onNavigate('previous')"
               :disabled="!item.previous"
             >
@@ -80,7 +80,7 @@
             </v-btn>
             <v-btn
               variant="flat"
-              color="primary-base"
+              :color="!item.next? 'primary-lighten2':'primary-base'"
               @click="onNavigate('next')"
               :disabled="!item.next"
             >
