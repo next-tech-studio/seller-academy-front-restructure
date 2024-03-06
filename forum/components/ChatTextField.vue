@@ -52,6 +52,7 @@
         auto-grow
         rows="1"
         class="bg-white textarea-bt pt-0 ou"
+        @keydown.enter.prevent="submit"
       >
         <template #prepend>
           <v-avatar
