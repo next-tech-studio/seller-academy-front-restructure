@@ -237,6 +237,7 @@ export default {
   newsletter_membership: "عضویت در خبرنامه",
   newsletter: "خبرنامه",
   no_comment: "هیچ نظری ثبت نشده است.",
+  no_courses:'هیچ دوره‌ای یافت نشد.',
   no_stars: "بدون امتیاز",
   not_completed: "تکمیل شده",
   not_logged_in_ask_question:
