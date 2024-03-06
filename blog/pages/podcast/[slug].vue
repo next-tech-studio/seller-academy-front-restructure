@@ -150,8 +150,7 @@ function toItem(e) {
   );
 }
 const remainingContent = computed(()=> {
-  let remain = {...item}
-  console.log('rrreeemmain',item)
+  const remain = JSON.parse(JSON.stringify(item));
   remain?.content?.splice(0, 1)
   return remain
 })
