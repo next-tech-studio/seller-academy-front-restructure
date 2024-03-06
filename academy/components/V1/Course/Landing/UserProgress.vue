@@ -1,5 +1,5 @@
 <template>
-  <v-card color="background-light" :rounded="mdAndUp ? 'lg' : 0">
+  <v-card color="background-light" align="start" :rounded="mdAndUp ? 'lg' : 0">
     <v-card-actions class="py-lg-3 py-1">
       <v-list-item class="w-100">
         <template v-slot:prepend>
@@ -44,7 +44,7 @@
       </v-tabs>
     </v-card-text>
   </v-card>
-  <v-card class="mt-6 rounded-lg">
+  <v-card class="mt-6 rounded-lg" align="start">
     <v-window v-model="tab" class="py-2">
       <v-window-item v-for="(value, key) of items" :key="key" :value="key">
         <div v-if="value.length">
