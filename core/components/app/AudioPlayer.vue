@@ -1,5 +1,5 @@
 <template>
-  <v-card rounded="lg" height="100%" class="d-flex align-center">
+  <v-card rounded="lg" height="461px" class="d-flex align-center">
     <v-img
       :src="audioPoster"
       gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"

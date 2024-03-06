@@ -33,7 +33,13 @@
               class="text-button"
               @click="toItem(item)"
             >
-              {{ $t("participate_in_the_course") }}
+              <span v-if="item.currentUserEnroled">
+                {{ $t("continue_the_course") }}
+              </span>
+              <span v-else>
+                {{ $t("participate_in_the_course") }}
+              </span>
+              
             </v-btn>
             <v-btn
               color="primary-base mx-4"

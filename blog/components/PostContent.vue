@@ -103,7 +103,7 @@
         </v-card-subtitle>
         <v-card-text class="d-flex align-center py-0 pe-0">
           <v-spacer></v-spacer>
-          <!-- <app-share-in /> -->
+          <app-share-in />
           <v-divider class="mr-lg-6 mr-3" vertical></v-divider>
           <div class="mx-4 d-flex align-center">
             <v-btn
@@ -176,11 +176,11 @@
           >
             <app-content :type="element?.type" :content="element?.content" :element="item"/>
           </v-card-text>
-          <!-- <app-share-in
+          <app-share-in
             justify="justify-start"
             class="d-flex d-md-none px-4"
             :class="item?.tags?.length != 0 ? 'mb-0' : 'mb-4'"
-          /> -->
+          />
         </div>
       </slot>
     </div>

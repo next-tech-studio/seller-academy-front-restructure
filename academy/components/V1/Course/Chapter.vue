@@ -6,19 +6,19 @@
         <div>
           <v-icon size="20" icon="custom:play"></v-icon>
           <span class="pr-1 pl-5 text-text-low-emphasis text-body-2">
-            {{ chapter.totalVideoDuration + ' ' + $t("video_duration") }}
+            {{ chapter.totalVideoDuration + " " + $t("minutes") }}
           </span>
         </div>
         <div>
           <v-icon size="20" icon="custom:file"></v-icon>
           <span class="pr-1 pl-5 text-text-low-emphasis text-body-2">
-            {{ chapter.totalQuizQuestionsCount + ' ' + $t("quiz") }}
+            {{ chapter.totalQuizQuestionsCount + " " + $t("questions") }}
           </span>
         </div>
         <div>
           <v-icon size="20" icon="custom:book"></v-icon>
           <span class="pr-1 pl-5 text-text-low-emphasis text-body-2">
-            {{ chapter.totalMinutesToRead + ' ' + $t("study_duration") }}
+            {{ chapter.totalMinutesToRead + " " + $t("minutes") }}
           </span>
         </div>
       </div>
@@ -48,13 +48,15 @@
                 {{ lesson.title }}
               </div>
               <div class="text-body-2 text-text-low-emphasis">
+                {{ $t(`${lesson.dominantType}_colon_duration`) }}
                 {{
-                  $t(`${lesson.dominantType}_colon_duration`, {
-                    variable:
-                      lesson.duration ||
-                      lesson.minutesToRead ||
-                      lesson.numberOfQuestions,
-                  })
+                  lesson.textDuration
+                    ? lesson.textDuration + " " + $t("minutes")
+                    : lesson.videoDuration
+                    ? lesson.videoDuration + " " + $t("minutes")
+                    : lesson.examDuration
+                    ? lesson.examDuration
+                    : ""
                 }}
               </div>
             </v-list-item>
