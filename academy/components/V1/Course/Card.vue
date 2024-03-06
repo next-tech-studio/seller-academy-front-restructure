@@ -67,7 +67,7 @@
               </span>
               &nbsp;
               <span class="text-text-heading text-body-2">
-                {{ $t("contain_course") }} 6
+                {{ $t("contain_course") }} {{ item.lessonsCount }}
               </span>
             </v-card-text>
             <v-card-text
