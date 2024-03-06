@@ -27,7 +27,7 @@
                   >
                 </div>
                 <v-spacer></v-spacer>
-                <!-- <app-share-in v-if="mdAndUp" /> -->
+                <app-share-in v-if="mdAndUp" />
               </div>
               <question-form
                 ref="answerForm"
@@ -40,7 +40,7 @@
                 :need-acception="false"
                 @submit="sendAnswer"
               />
-              <!-- <app-share-in v-if="!mdAndUp" class="mt-4" /> -->
+              <app-share-in v-if="!mdAndUp" class="mt-4" />
             </template>
           </question>
           <v-card
