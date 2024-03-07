@@ -106,7 +106,6 @@
       class="pa-4"
       next-icon="custom:chevronRightLight"
       prev-icon="custom:chevronLeftLight"
-      center-active
       show-arrows
     >
       <v-slide-group-item
