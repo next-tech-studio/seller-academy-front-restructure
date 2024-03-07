@@ -1,4 +1,6 @@
 import moment from "jalali-moment";
+import { useAuthStore } from "@core/stores/auth";
+import { useToastStore } from "./toast";
 
 export const usePanelStore = defineStore("panel", {
   state: () => ({
@@ -48,17 +50,18 @@ export const usePanelStore = defineStore("panel", {
     reject: ref(false),
     postSavedState: ref(true),
     postRouteId: ref(0),
-    // localePath: useLocalePath(),
     draftContent: {
       title: "",
       summary: "",
       category: "",
-      author: { slug: {} },
+      author: {
+        slug: {},
+      },
       bannerUrl: ref({}),
       bannerUrlMobile: ref({}),
       content: [],
       information: [],
-      publicationDate: ''
+      publicationDate: "",
     },
     editorCategories: [],
     editorAuthorOptions: [],
@@ -66,7 +69,6 @@ export const usePanelStore = defineStore("panel", {
     listInfo: reactive({}),
     listItems: reactive({}),
     headers: ref([]),
-    // type: useRoute().name.includes('podcast') ? 'podcast' : 'article'
   }),
   actions: {
     type() {
@@ -87,7 +89,6 @@ export const usePanelStore = defineStore("panel", {
       listingPayload = null,
       repo = "panel"
     ) {
-      console.log("action", action);
       if (hasDialog) {
         this.dialog = true;
         if (action === "edit") {
@@ -213,6 +214,9 @@ export const usePanelStore = defineStore("panel", {
       preview = false,
       publish = false
     ) {
+      const authStore = useAuthStore();
+      const toast = useToastStore();
+      // const {t} = useI18n()
       let localePath = useLocalePath();
       let date = new Date();
       let finalContent = ref({});
@@ -250,7 +254,7 @@ export const usePanelStore = defineStore("panel", {
             tags: this.draftContent.tags,
             slug: this.draftContent.slug,
             information: this.draftContent.information,
-            publicationDate: this.draftContent.publicationDate
+            publicationDate: this.draftContent.publicationDate,
           },
         };
         this.$repos.panel.saveDraft(finalContent).then((res) => {
@@ -268,14 +272,38 @@ export const usePanelStore = defineStore("panel", {
           } else if (publish) {
             this.publishArticle();
           } else if (!this.postRouteId) {
-            navigateTo(
-              localePath({
-                path: `/blog/panel/${
-                  this.type() == "podcast" ? "podcast" : "post"
-                }/${res.id}/${currentState}`,
-              }),
-              { external: true }
-            );
+            if (!authStore.hasPermission(["blogs"])) {
+              navigateTo(
+                localePath({
+                  path: `/blog/panel/${
+                    this.type() == "podcast" ? "podcast" : "post"
+                  }/${res.id}/${currentState}`,
+                }),
+                { external: true }
+              );
+              toast.show(
+                { text: this.$t("your_post_will_be_published_after_review") },
+                "info"
+              );
+              console.log("dddd", res.id);
+              if (currentState == "seo") {
+                navigateTo(
+                  localePath({
+                    path: `/dashboard/posts`,
+                  }),
+                  { external: true }
+                );
+              }
+            } else {
+              navigateTo(
+                localePath({
+                  path: `/blog/panel/${
+                    this.type() == "podcast" ? "podcast" : "post"
+                  }/${res.id}/${currentState}`,
+                }),
+                { external: true }
+              );
+            }
           }
         });
       } else if (next) {
@@ -293,12 +321,17 @@ export const usePanelStore = defineStore("panel", {
       }
     },
     getEditorPanelCommon() {
+      const authStore = useAuthStore();
+      console.log({ id: authStore.user.id, displayName: authStore.user.name });
       this.$repos.panel.editorCommon({ type: this.type() }).then((res) => {
         Object.assign(this.editorCategories, res.categories);
         Object.assign(this.editorAuthorOptions, res.authorOptions);
         Object.assign(this.editorTags, res.tags);
         if (!this.postRouteId)
-          Object.assign(this.draftContent.author, res.authorOptions[0]);
+          Object.assign(this.draftContent.author.slug, {
+            id: authStore.user.id,
+            displayName: authStore.user.name,
+          });
       });
     },
     getDraftInfo() {

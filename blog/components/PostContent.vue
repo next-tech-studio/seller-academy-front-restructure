@@ -103,7 +103,7 @@
         </v-card-subtitle>
         <v-card-text class="d-flex align-center py-0 pe-0">
           <v-spacer></v-spacer>
-          <!-- <app-share-in /> -->
+          <app-share-in />
           <v-divider class="mr-lg-6 mr-3" vertical></v-divider>
           <div class="mx-4 d-flex align-center">
             <v-btn
@@ -174,18 +174,18 @@
             :key="index"
             class="pt-0 pb-4 content px-4"
           >
-            <app-content :type="element?.type" :content="element?.content" />
+            <app-content :type="element?.type" :content="element?.content" :element="item"/>
           </v-card-text>
-          <!-- <app-share-in
+          <app-share-in
             justify="justify-start"
             class="d-flex d-md-none px-4"
             :class="item?.tags?.length != 0 ? 'mb-0' : 'mb-4'"
-          /> -->
+          />
         </div>
       </slot>
     </div>
     <v-card-text v-if="item?.tags?.length">
-      <app-tags :items="item.tags" />
+      <app-tags :items="item.tags" :type="type" />
     </v-card-text>
     <!-- <v-card-text
       class="text-text-low-emphasis text-body-1 content px-0"
@@ -199,6 +199,7 @@
 import { useDisplay } from "vuetify";
 const socials = useSocials();
 const { mdAndUp } = useDisplay();
+const route = useRoute()
 const props = defineProps({
   item: Object,
   useDesktop: { type: Boolean, default: false },
@@ -212,6 +213,9 @@ const props = defineProps({
     type: Boolean,
   },
 });
+const type = computed(() =>
+  route.name.includes("podcast") ? "podcast" : "article"
+);
 onUpdated(() => {
   let content = document.getElementById("content");
   for (let i = 0; i < content.getElementsByTagName("p").length; i++) {

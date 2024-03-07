@@ -106,7 +106,7 @@ const headers = ref([
     key: "title",
     sortable: false,
     title: t("title"),
-    minWidth: "200px",
+    minWidth: "250px",
   },
   {
     align: "start",
@@ -129,7 +129,7 @@ const headers = ref([
     title: t("time"),
     minWidth: "100x",
   },
-  { key: "operation", title: t("operation"), size: "100px" },
+  { key: "operation", title: t("operation"), size: "100px", sortable: false },
 ]);
 let responsiveHeaders = ref([
   "author.avatarUrl",

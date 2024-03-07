@@ -22,10 +22,10 @@
           />
           <div :style="!horizontal ? 'flex: 1 0 auto' : 'flex: 0 0 50%'">
             <slot name="content">
-              <v-card-text class="py-0">
-                <v-icon icon="custom:digikala" class="ml-2" />
+              <v-card-text class="py-0 mt-4">
+                <v-avatar class="me-1" size="24" :image="item?.instructor?.avatarUrl"></v-avatar>
                 <span class="text-caption text-high-emphasis">
-                  {{ item?.instructor?.displayName }}
+                  {{ item?.instructor?.name }}
                 </span>
               </v-card-text>
 
@@ -67,7 +67,7 @@
               </span>
               &nbsp;
               <span class="text-text-heading text-body-2">
-                {{ $t("contain_course") }} 6
+                {{ $t("contain_course") }} {{ item.lessonsCount }}
               </span>
             </v-card-text>
             <v-card-text

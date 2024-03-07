@@ -8,7 +8,7 @@
         @click="saveRoom(false)"
       ></v-btn>
       <v-btn
-        :text="$t('activate_room')"
+        :text="$t('submit_room')"
         color="button-secondary"
         @click="saveRoom(true)"
       ></v-btn>
@@ -118,7 +118,15 @@
       <section class="bg-background-light rounded-lg pa-6" style="width: 49%">
         <div class="mb-4">
           <p class="mb-2 text-h3">{{ $t("room_link") }}</p>
-          <span class="text-text-low-emphasis">{{ room.joinLink }}</span>
+          <div class="text-text-low-emphasis text-body d-flex align-center">
+            <span dir="ltr" class="justify-start">{{ url }}</span>
+            <v-btn
+              variant="text"
+              @click="copyText"
+              color="icon-high-emphasis"
+              icon="custom:copy"
+            ></v-btn>
+          </div>
         </div>
         <div class="mb-4">
           <p class="mb-2 text-h3">{{ $t("maximum_allowed_member") }}</p>
@@ -240,6 +248,7 @@
 <script setup>
 const route = useRoute();
 let search = ref([]);
+const config = useRuntimeConfig();
 let edit = ref(false);
 let form = ref(null);
 const UPLOAD_CHAT_PATH = "/community/chat/attachment";
@@ -250,23 +259,29 @@ let room = ref({
   avatarUrl: { url: "" },
   bannerUrl: { url: "" },
   category: { id: 0 },
-  isPrivate:1
+  isPrivate: 1,
 });
 let common = ref({});
 let users = ref([]);
 let newMembers = ref([]);
 const { $repos } = useNuxtApp();
 const addMember = (item, index) => {
-  console.log("bbeeffoore", newMembers.value, chosenIndex.value,index,item.id);
+  console.log(
+    "bbeeffoore",
+    newMembers.value,
+    chosenIndex.value,
+    index,
+    item.id
+  );
 
   if (!!!chosenIndex.value[item.id]) {
-    console.log('838383')
+    console.log("838383");
     newMembers.value.push(item.id);
-  chosenIndex.value[item.id] = true;
+    chosenIndex.value[item.id] = true;
   } else {
-    console.log('222222')
+    console.log("222222");
 
-    newMembers.value.splice(index,1)
+    newMembers.value.splice(index, 1);
     chosenIndex.value[item.id] = false;
   }
   console.log("cchhoosseennnnn", newMembers.value, chosenIndex.value[index]);
@@ -280,7 +295,18 @@ const getRoomCommon = () => {
     Object.assign(common.value, res);
   });
 };
+const url = computed(
+  () => config.public.domain + `forum/room?join-token=${room.value.joinLink}/`
+);
+function copyText() {
+  // Get the text field
+  let copyText = url.value;
 
+  navigator.clipboard.writeText(copyText);
+
+  // Alert the copied text
+  toast.show({ text: t("successful_copy") }, "success");
+}
 const removeMember = (member) => {
   let payload = {
     categorySlug: room.value.category.slug,
@@ -319,7 +345,7 @@ const getRoomInfo = () => {
 //   $repos.communityPanel.updateRoomStatus(payload);
 // };
 const saveRoom = (publishًRoom = false) => {
-  console.log('puubblish',publishًRoom)
+  console.log("puubblish", publishًRoom);
   if (edit.value)
     newMembers.value.push(...room.value.members.map((member) => member.id));
   let payload = {
@@ -330,13 +356,11 @@ const saveRoom = (publishًRoom = false) => {
       members: newMembers.value || [],
     },
   };
-  console.log('puubblish',publishًRoom,payload,newMembers.value)
+  console.log("puubblish", publishًRoom, payload, newMembers.value);
 
   $repos.communityPanel.saveRoom(payload).then((res) => {
     if (!edit.value)
-      navigateTo(
-        localePath({ path: `/forum/panel/room/create/${res}` })
-      );
+      navigateTo(localePath({ path: `/forum/panel/room/create/${res}` }));
     if (publishًRoom) {
       let payload = {
         body: {
@@ -344,7 +368,9 @@ const saveRoom = (publishًRoom = false) => {
           ids: [room.value.id],
         },
       };
-      $repos.communityPanel.updateRoomStatus(payload);
+      $repos.communityPanel.updateRoomStatus(payload).then((res) => {
+        navigateTo(localePath({ path: `/forum/panel/room/listings/rooms` }));
+      });
     }
   });
 };

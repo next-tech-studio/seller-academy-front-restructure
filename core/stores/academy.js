@@ -91,6 +91,7 @@ export const useAcademyStore = defineStore("academy", {
       this.content.supportItems.push("");
     },
     addNewFaq() {
+      if (!this.content.faq.content.faq) this.content.faq.content.faq = []
       this.content.faq.content.faq.push({ question: "", answers: "" });
     },
     addNewLearningPoint() {

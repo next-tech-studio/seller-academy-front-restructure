@@ -22,8 +22,8 @@
           {{ item.description }}
         </div>
         <div class="text-body-2 text-text-light font-weight-bold mb-4">
-          <v-icon icon="custom:digikala" class="ml-2"></v-icon>
-          {{ `${$t("instructor")} : ${item?.instructor?.displayName}` }}
+          <v-avatar size="24" :image="item?.instructor?.avatarUrl" class="ml-2"></v-avatar>
+          {{ `${$t("instructor")} : ${item?.instructor?.name}` }}
         </div>
         <div class="d-lg-flex">
           <div class="mb-lg-0 mb-4">
@@ -33,7 +33,13 @@
               class="text-button"
               @click="toItem(item)"
             >
-              {{ $t("participate_in_the_course") }}
+              <span v-if="item.currentUserEnroled">
+                {{ $t("continue_the_course") }}
+              </span>
+              <span v-else>
+                {{ $t("participate_in_the_course") }}
+              </span>
+              
             </v-btn>
             <v-btn
               color="primary-base mx-4"
@@ -54,7 +60,7 @@
       :gradient="`to ${
         lgAndUp ? 'right' : 'top'
       }, rgba(35, 41, 51, 0), rgba(35, 41, 51, 1)`"
-      src="/images/digikala_banner.png"
+      :src="item.bannerUrl"
       :alt="item?.title"
       style="flex: 0 0 auto; position: absolute; left: 0"
       :style="lgAndUp ? 'top: 0' : 'bottom: 0'"

@@ -11,6 +11,7 @@ import quiz from "@/components/app/content/Quiz.vue";
 import faq from "@/components/app/content/Faq.vue";
 import img from "@/components/app/content/Img.vue";
 import vid from "@/components/app/content/Vid.vue";
+import audio from "@/components/app/content/Audio.vue";
 import contentCardListing from "@/components/app/ContentCardListing.vue";
 
 const props = defineProps({
@@ -22,6 +23,7 @@ const props = defineProps({
     default: "html",
     type: String,
   },
+  element: Object,
 });
 
 let componentProps = ref(null);
@@ -42,6 +44,10 @@ const component = computed(() => {
       break;
     case "vid":
       component = vid;
+      break;
+    case "audio":
+      component = audio;
+      componentProps.value = { bannerUrl: props.element.bannerUrl };
       break;
     case "exam":
       component = quiz;

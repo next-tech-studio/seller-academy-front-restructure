@@ -142,7 +142,7 @@ let headers = ref([
     sortable: false,
     title: t("title"),
     selectAll: true,
-    size: "200px",
+    size: "250px",
   },
   {
     key: "startAt",
@@ -188,7 +188,7 @@ let headers = ref([
     size: "100px",
   },
   { key: "registers", title: t("registers"), size: "50px" },
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 const init = () => {
   operations = ref([

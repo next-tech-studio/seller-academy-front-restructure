@@ -4,14 +4,14 @@
     style="top: 0; right: 0; left: 0; bottom: 0;"
     class="h-100"
     elevation="0"
-    :width="smAndDown ? '100%' : 264"
-    :rail-width="smAndDown ? '100%' : 264"
+    :width="smAndDown ? '100%' : 364"
+    :rail-width="smAndDown ? '100%' : 364"
     :model-value="modelValue"
     :rail="rail"
     :scrim="false"
     :class="{'bg-background-dark': smAndDown}"
   >
-    <v-list :max-width="smAndDown ? '100%' : 300" class="pt-4 px-4" color="secondary">
+    <v-list :max-width="smAndDown ? '100%' : 400" class="pt-4 px-4" color="secondary">
       <template v-for="(item, index) in items" :key="index">
         <app-profile-list-item
           avatar-size="40px"

@@ -34,7 +34,8 @@
                 variant="outlined"
                 bg-color="background-light"
                 type="search"
-                @update:model-value="onSearch"
+                @update:model-value="onSearch($event, 3000)"
+                @keyup.enter="onSearch($event, 0)"
                 hide-details
               ></v-text-field>
             </v-col>
@@ -70,8 +71,8 @@
         :filters="filters"
       />
     </div>
-    <v-container>
-      <v-row justify="center" :class="isClient ? 'd-flex' : 'd-none'">
+    <v-container class="pb-10">
+      <v-row :class="isClient ? 'd-flex' : 'd-none'">
         <v-col cols="12" lg="3" md="6" v-for="item in rooms" :key="item.id">
           <room-card :item="item" @to:item="toRoom"></room-card>
         </v-col>
@@ -83,7 +84,7 @@
         <v-btn
           @click="getRooms(false)"
           flat
-          class="my-6 text-button"
+          class="mt-6 text-button"
           color="primary-base"
           >{{ $t("see_more") }}</v-btn
         >
@@ -98,7 +99,7 @@ const { lgAndUp } = useDisplay();
 const { $repos } = useNuxtApp();
 const localePath = useLocalePath();
 const { isClient } = useSsrCorrection();
-const { t } = useI18n()
+const { t } = useI18n();
 import { useFilterStore } from "@core/stores/filter";
 const store = useFilterStore();
 let page = reactive(1);
@@ -106,37 +107,54 @@ let rooms = ref([]);
 let search = ref("");
 const categories = ref([]);
 const topRooms = reactive([]);
-let lastPage = ref(false)
-const getRooms =  (resetPage = false) => {
+let lastPage = ref(false);
+let timeoutId = ref()
+const getRooms = (resetPage = false) => {
   if (resetPage) page = 1;
   let payload = {
     page,
     search: search.value,
     categorySlug: store.buttonDefault,
   };
-   $repos.community.getRoomsData(payload).then((res) => {
+  $repos.community.getRoomsData(payload).then((res) => {
     if (resetPage) {
       rooms.value.splice(0, rooms.value.length);
       Object.assign(rooms.value, res.data);
-      lastPage.value = res.last_page === res.current_page ? true : false;
-    } else Object.assign(rooms.value, [...rooms.value, ...res.data]);
+    } else {
+      Object.assign(rooms.value, [...rooms.value, ...res.data]);
+    }
+    lastPage.value = res.pagination.lastPage === res.pagination.currentPage ? true : false;
     if (res.pagination.total != page) page++;
   });
 };
-const getCommon =  () => {
-   $repos.community.getRoomsCommon().then((res) => {
+const getCommon = () => {
+  $repos.community.getRoomsCommon().then((res) => {
     Object.assign(categories.value, res.categories);
     Object.assign(topRooms, res.top_rooms);
     store.buttonDefault = categories.value[0].slug;
   });
 };
-const onSearch = useDebounceFn(async () => await getRooms(true), 1000, {
-  maxWait: 5000,
-});
-onMounted(()=>{
+
+function debounce(func, timeout) {
+  return (...args) => {
+    clearTimeout(timeoutId.value);
+    timeoutId.value = setTimeout(() => {
+      func(...args);
+    }, timeout);
+    console.log(timeoutId.value);
+  };
+}
+
+const onSearch = (e, timeout) => {
+  if (typeof e != 'string') clearTimeout(timeoutId.value)
+  debounce(getRooms, timeout)(true)
+}
+
+onMounted(() => {
+  store.buttonDefault = ''
   getCommon();
   getRooms();
-})
+});
 
 let filters = computed(() => {
   return [{ type: "button", items: categories.value }];

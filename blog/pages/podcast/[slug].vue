@@ -12,13 +12,14 @@
           <v-card-text>
             <app-audio-player
               :audio-src="itemContent.url"
-              :audio-poster="itemContent.coverPreview"
+              :audio-poster="item.bannerUrl"
             />
           </v-card-text>
           <post-content
             @reactto:article="reactPost(item)"
             @bookmark:article="bookmarkPost(item)"
-            :item="item"
+            v-if="remainingContent"
+            :item="remainingContent"
             :show-banner-url="false"
             inline-bookmark
           ></post-content>
@@ -148,6 +149,11 @@ function toItem(e) {
     localePath({ name: "article-preview-slug", params: { slug: e.slug } })
   );
 }
+const remainingContent = computed(()=> {
+  const remain = JSON.parse(JSON.stringify(item));
+  remain?.content?.splice(0, 1)
+  return remain
+})
 onMounted(() => getComments());
 const itemContent = computed(() => {
   let content = {};

@@ -17,7 +17,6 @@ definePageMeta({
 });
 onMounted(()=>{
   layout.value = auth.hasPermission(['blogs'])? 'sidebar':'no-footer'
-  console.log('9393939',layout.value)
   setPageLayout(layout.value)
 })
 </script>

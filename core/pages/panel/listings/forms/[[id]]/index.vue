@@ -73,7 +73,7 @@ let headers = ref([
     sortable: false,
     title: t("title"),
     selectAll: true,
-    size: "200px",
+    size: "250px",
   },
   {
     key: "text",
@@ -87,7 +87,7 @@ let headers = ref([
     sortable: false,
     size: "250px",
   },
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 let dialogForm = ref([
   {

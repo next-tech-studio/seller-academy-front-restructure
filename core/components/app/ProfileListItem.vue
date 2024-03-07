@@ -72,6 +72,7 @@ const props = defineProps({
 <style lang="scss">
 #profile-list-item .v-list-item__prepend {
   height: 100%;
+  margin-inline: 8px;
   // align-items: flex-end;
 }
 #profile-list-item .v-list-item-subtitle {
@@ -94,6 +95,7 @@ const props = defineProps({
   .v-list-item__append .v-icon {
     opacity: 1;
     color: rgba(var(--v-theme-text-light)) !important;
+    margin-inline: 8px;
   }
   [class*="v-list-item-"] {
     position: relative;

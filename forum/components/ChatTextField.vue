@@ -44,14 +44,15 @@
       <v-textarea
         v-model="message"
         hide-details
-        :label="$t('your_message')"
+        :placeholder="$t('your_message')"
         variant="solo"
         flat
         rounded="0"
         no-resize
         auto-grow
         rows="1"
-        class="bg-white textarea-bt pt-0"
+        class="bg-white textarea-bt pt-0 ou"
+        @keydown.enter.prevent="submit"
       >
         <template #prepend>
           <v-avatar
@@ -77,7 +78,7 @@
             :loading="loading"
             :color="message ? 'icon-primary' : 'icon-low-emphasis'"
             type="submit"
-            :disabled="!message"
+            :disabled="!message && !attachments.length"
           ></v-btn>
         </template>
       </v-textarea>

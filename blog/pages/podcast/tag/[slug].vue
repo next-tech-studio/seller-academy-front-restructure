@@ -13,7 +13,13 @@
       @load:more="getList"
       :show-filter="false"
       :title="title"
-    ></app-content-card-listing>
+      :show-see-more="!lastPage"
+      grid="2"
+    >
+      <template v-slot="{ item }">
+        <podcast-card :item="item" />
+      </template>
+    </app-content-card-listing>
   </v-container>
 </template>
 
@@ -36,14 +42,14 @@ const getList = async () => {
       sort: "recent",
       category: "",
       tag: route.params.slug,
-      type: 'podcast'
+      type: "podcast",
     })
     .then((res) => {
       Object.assign(list, [...list, ...res.data]);
       lastPage.value = res.lastPage === res.currentPage ? true : false;
       if (res.lastPage != page) page++;
     });
-}
+};
 function toItem(e) {
   navigateTo(localePath({ name: "podcast-slug", params: { slug: e.slug } }));
 }

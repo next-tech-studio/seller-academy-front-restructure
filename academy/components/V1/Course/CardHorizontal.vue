@@ -17,9 +17,9 @@
       </v-card-text>
       <v-card-text class="ps-0" style="flex: 1 0 25%">
         <div>
-          <v-icon class="ml-2" icon="custom:digikala"></v-icon>
+          <v-avatar size="24" :image="item?.instructor?.avatarUrl" class="ml-2" icon="custom:digikala"></v-avatar>
           <span class="text-caption text-text-high-emphasis">{{
-            item?.instructor?.displayName
+            item?.instructor?.name
           }}</span>
         </div>
         <div class="text-text-heading text-body-1">

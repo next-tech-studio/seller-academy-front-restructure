@@ -78,7 +78,7 @@ let headers = ref([
     sortable: false,
     title: t("title"),
     selectAll: true,
-    size: "200px",
+    size: "250px",
   },
   {
     key: "courses_count",
@@ -99,7 +99,7 @@ let headers = ref([
     size: "50px",
     sortable: true,
   },
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 let search = ref("");
 let payload = computed(() => {
@@ -201,14 +201,14 @@ const submitItem = () => {
       (item) => item.id === sharedStore.currentItem.id
     );
     $repos.academyPanel.updateSkill(payload).then((res) => {
-      Object.assign(sharedStore.listItems.data[itemIndex], res);
+      Object.assign(sharedStore.listItems.data[itemIndex], res.data);
       sharedStore.edit = false;
       sharedStore.closeDialog();
     }).catch(() => sharedStore.sendingRequest = false);
   } else {
     $repos.academyPanel.updateSkill(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
-        { ...res },
+        { ...res.data },
         ...sharedStore.listItems.data,
       ]);
       sharedStore.closeDialog();

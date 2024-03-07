@@ -164,7 +164,7 @@ export default (request) => ({
       method: "get",
       path: "/community/chat/rooms/data",
       query: `?categorySlug=${payload.categorySlug}&search=${payload.search}`,
-      loading: true,
+      loading: { show: payload.page == 1, skeleton: 'loading-indicator' },
       page: payload.page,
       alert: false,
       model: { name: room, collection: true, pagination: true, raw: false },
@@ -207,7 +207,7 @@ export default (request) => ({
       path: "/community/chat/recentChatsSidebar",
       loading: true,
       alert: false,
-      model: { name: roomListPreview},
+      model: { name: roomListPreview },
     });
   },
   removeMember(payload) {
@@ -244,6 +244,15 @@ export default (request) => ({
       },
       payload.body
     );
+  },
+  membershipRequest(payload) {
+    return request({
+      name: "memberShipRequest",
+      method: "post",
+      path: `/community/chat/join/${payload}`,
+      loading: true,
+      alert: false,
+    });
   },
   // uploadFiles(payload, path) {
   //     return request({

@@ -179,9 +179,9 @@ export const useBreadrumbs = (item = {}) => {
       to: localePath({ name: "academy" }),
     },
     {
-      title: item?.category,
+      title: "courses",
       disabled: true,
-      to: localePath({ name: "academy-category-slug" }),
+      to: localePath({ name: "academy-courses-category-slug" }),
     },
   ];
   const requestedForms = () => [

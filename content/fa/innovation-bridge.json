@@ -93,16 +93,125 @@
       },
       {
         "status": "register",
+        "title": "پل نوآوری تهران",
+        "event_title": "رویداد پل نوآوری دیجی نکست در تهران با حضور مدیران گروه دیجی کالا",
+        "image": "/images/innovation-bridge/universities/tehran.jpg",
+        "date": "۲۱ اسفند ۱۴۰۲",
+        "location": "دانشگاه تهران",
+        "locationUrl": "https://maps.app.goo.gl/KHgzy1SRb7ha57Sw8",
+        "slug": "پل-نوآوری-تهران",
+        "information": "در این رویداد سه ساعته، مدیران دیجی کالا به بیان مسائل و چالش های فعلی صنعت تجارت الکترونیک می پردازند. این رویداد برای علاقه مندان حوزه کارآفرینی فرصتی ایجاد می کند تا با نیازهای صنعت آشنا شده و به دنبال ارائه راه حلی فناور محور در راستای رفع این چالش ها برآیند. در ادامه، طرح های ارائه شده توسط شرکت کنندگان مورد ارزیابی تیم دیجی نکست قرار می گیرد و در صورت تأیید اولیه، جلسات منتورشیپ برگزار شده و فرصت حضور در کمپ استارتاپی دیجی نکست را پیدا می کنید.",
+        "disable_navigation": false,
+        "holdingDate": "۲۱ اسفند ساعت ۱۲ تا ۱۵",
+        "price": "رایگان و برای عموم آزاد",
+        "eventType": "حضوری",
+        "eventPlace": "سالن پندار، پارک علم و فناوری دانشگاه تهران",
+        "eventAudiences": "دانشجویان ، کارآفرینان، علاقمندان حوزه نوآوری و استارتاپ ، فعالان اکوسیستم نوآوری ، فعالان صنعت ، تیم های استارتاپی ",
+        "pros": [
+          "آشنایی با چالش های صنعت تجارت الکترونیک",
+          "فرصت ارائه راه حل های فناورانه برای چالش های گروه دیجی کالا",
+          "ارتباط با مدیران گروه دیجی کالا",
+          "امکان حضور در کمپ استارتاپی دیجی نکست",
+          "بهره مندی از جلسات منتورشیپ دیجی نکست",
+          "برقراری ارتباط با اعضای فعال اکوسیستم استارتاپی مشهد و تهران",
+          "عضویت در شبکه استعدادهای دیجی نکست در ایران"
+        ],
+        "speakers": [
+          {
+            "avatar": "/images/innovation-bridge/speakers/alireza khaleghi.png",
+            "firstName": "علیرضا",
+            "lastName": "خالقی",
+            "jobTitle": "سرپرست ارشد واحد تکنولوژی و نوآوری دیجی‌نکست",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": ""
+          },
+          {
+            "avatar": "/images/innovation-bridge/speakers/ali fadaei.png",
+            "firstName": "علی",
+            "lastName": "فدایی",
+            "jobTitle": "مدیرکل پلتفرم واحد بازرگانی دیجی‌کالا",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": ""
+          },
+          {
+            "avatar": "/images/innovation-bridge/speakers/mohamad esmaeili.webp",
+            "firstName": "محمدحسن",
+            "lastName": "اسمعیلی",
+            "jobTitle": "راهبر پورتفولیو دیجی‌نکست",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": ""
+          },
+          {
+            "avatar": "/images/innovation-bridge/speakers/hoseinpour.png",
+            "firstName": "محمدحسین",
+            "lastName": "حسین‌پور",
+            "jobTitle": "مدیر‌کل مرکز پردازش دیجی‌کالا",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": ""
+          },
+          {
+            "avatar": "/images/innovation-bridge/speakers/keyvan mohitmafi.png",
+            "firstName": "کیوان",
+            "lastName": "محیط‌مافی",
+            "jobTitle": "مدیرعامل دیجی‌نکست",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": ""
+          },
+          {
+            "avatar": "/images/innovation-bridge/speakers/chitsaz.png",
+            "firstName": "احسان ",
+            "lastName": "چیت‌ساز",
+            "jobTitle": "مدیرکل سیاستگذاری فناوری و نوآوری دانشگاه تهران",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": ""
+          },
+          {
+            "avatar": "/images/innovation-bridge/speakers/hasti.png",
+            "firstName": "هستی",
+            "lastName": "توسلی",
+            "jobTitle": "هم بنیانگذار استارتاپ موبیشا",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": ""
+          },
+          {
+            "avatar": "/images/innovation-bridge/speakers/farshid.png",
+            "firstName": "فرشید",
+            "lastName": "دیلمی",
+            "jobTitle": "هم بنیانگذار و مدیرعامل استارتاپ زیترون",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": ""
+          },
+          {
+            "avatar": "/images/innovation-bridge/speakers/aye.png",
+            "firstName": "آیه",
+            "lastName": "غفرانی",
+            "jobTitle": "هم بنیان‌گذار استارتاپ کارپو",
+            "linkedin": "",
+            "email": "",
+            "presentationTopic": ""
+          }
+        ]
+      },
+      { 
+        "status": "register",
         "title": "پل نوآوری تربیت مدرس",
         "event_title": "رویداد پل نوآوری دیجی نکست در تهران با حضور مدیران گروه دیجی کالا",
         "image": "/images/innovation-bridge/universities/modares.jpg",
-        "date": "۱۹ اسفند ۱۴۰۲",
+        "date": "به زودی",
         "location": "دانشگاه تربیت مدرس",
         "locationUrl": "https://maps.app.goo.gl/jAfhv1akwKxmCb7k8",
         "slug": "پل-نوآوری-تربیت-مدرس",
         "information": "در این رویداد سه ساعته، مدیران دیجی کالا به بیان مسائل و چالش های فعلی صنعت تجارت الکترونیک می پردازند. این رویداد برای علاقه مندان حوزه کارآفرینی فرصتی ایجاد می کند تا با نیازهای صنعت آشنا شده و به دنبال ارائه راه حلی فناور محور در راستای رفع این چالش ها برآیند. در ادامه، طرح های ارائه شده توسط شرکت کنندگان مورد ارزیابی تیم دیجی نکست قرار می گیرد و در صورت تأیید اولیه، جلسات منتورشیپ برگزار شده و فرصت حضور در کمپ استارتاپی دیجی نکست را پیدا می کنید.",
-        "disable_navigation": false,
-        "holdingDate": "۱۹ اسفند ساعت ۱۳ تا ۱۶",
+        "disable_navigation": true,
+        "holdingDate": "به زودی",
         "price": "رایگان و برای عموم آزاد",
         "eventType": "حضوری",
         "eventPlace": "سالن مطهری دانشگاه تربیت مدرس",

@@ -102,7 +102,7 @@ const logout = () => {
 const goToPanel = () => {
   navigateTo(
     localePath({
-      path: "/panel",
+      path: "/blog/panel/listings/posts",
     }),
     { external: true }
   );

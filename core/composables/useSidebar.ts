@@ -5,15 +5,15 @@ export const useSidebar = (user = { roles: [] }) => {
   const localePath = useLocalePath();
 
   return ref([
-    {
-      title: t("dashboard"),
-      icon: "custom:dashboard",
-      roles: ["siteAdmin", "seller"],
-      get show() {
-        return true;
-      },
-      to: localePath({ path: "/panel" }),
-    },
+    // {
+    //   title: t("dashboard"),
+    //   icon: "custom:dashboard",
+    //   roles: ["siteAdmin", "seller"],
+    //   get show() {
+    //     return true;
+    //   },
+    //   to: localePath({ path: "/panel" }),
+    // },
     {
       title: t("blog"),
       icon: "custom:blog",
@@ -182,7 +182,7 @@ export const useSidebar = (user = { roles: [] }) => {
       ],
     },
     {
-      title: t("forums"),
+      title: t("forum"),
       icon: "custom:chat",
       roles: ["siteAdmin", "seller"],
       get show() {
@@ -206,6 +206,15 @@ export const useSidebar = (user = { roles: [] }) => {
             return true;
           },
           to: localePath({ path: "/forum/panel/room/listings/rooms" }),
+        },
+        {
+          title: t("join_requests"),
+          roles: ["siteAdmin", "seller"],
+          get show() {
+            // return checkUserRoles(this.roles);
+            return true;
+          },
+          to: localePath({ path: "/forum/panel/room/listings/join-requests" }),
         },
         {
           title: t("questions"),
@@ -247,8 +256,8 @@ export const useSidebar = (user = { roles: [] }) => {
       to: localePath({ path: "/panel/listings/users" }),
     },
     {
-      title: t("roles"),
-      icon: "custom:userSolid",
+      title: t("permissions"),
+      icon: "custom:key",
       roles: ["siteAdmin", "seller"],
       get show() {
         return auth.hasPermission(["users"]);

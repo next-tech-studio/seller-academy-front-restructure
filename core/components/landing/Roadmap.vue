@@ -22,7 +22,9 @@
             :key="index"
             :style="mdAndUp ? '' :`position: absolute; left: ${step.left}; top: ${step.top}`"
           >
-            <span class="text-h2 text-text-light step">{{ index + 1 }}</span>
+            <span class="text-h2 text-text-light step">
+              <v-icon size="56" color="white" :icon="step.icon"></v-icon>
+            </span>
             <div v-if="!mdAndUp">
               <div class="text-text-heading text-h4">{{ step?.title }}</div>
               <div class="text-text-low-emphasis text-body-1">
@@ -57,31 +59,35 @@ let steps = [
     description: "در کمتر از ۵ دقیقه ثبت‌نام کنید!",
     left: "50%",
     top: "-5%",
+    icon: 'custom:desktopChat'
   },
   {
     title: "ثبت کالا و قیمت‌گذاری",
     description: "در کمتر از ۵ دقیقه ثبت‌نام کنید!",
     left: "20%",
     top: "33%",
+    icon: 'custom:findContent'
   },
   {
     title: "ارسال سفارش‌ها",
     description: "در کمتر از ۵ دقیقه ثبت‌نام کنید!",
     left: "-5%",
     top: "66%",
+    icon: 'custom:truck'
   },
   {
     title: "کسب درآمد",
     description: "در کمتر از ۵ دقیقه ثبت‌نام کنید!",
     left: "10%",
     top: "100%",
+    icon: 'custom:wallet'
   },
 ];
 </script>
 
 <style lang="scss">
 .step {
-  background-color: rgba(var(--v-theme-icon-secondary));
+  background-color: rgba(var(--v-theme-primary-base));
   width: 80px;
   height: 80px;
   border-radius: 24px;

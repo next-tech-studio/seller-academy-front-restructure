@@ -88,9 +88,9 @@
             >
           </div>
         </template>
-        <template #question="{ item }">
-          <div style="direction: ltr">{{ item.item.question }}</div>
-        </template>
+        <!-- <template #question="{ item }">
+          <div style="direction: rtl">{{ item.item.question }}</div>
+        </template> -->
         <template #likesCount="{ item, header }">
           <div
             class="d-flex"
@@ -210,7 +210,7 @@ let headers = ref([
     sortable: false,
   },
 
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 let search = ref("");
 const route = useRoute();

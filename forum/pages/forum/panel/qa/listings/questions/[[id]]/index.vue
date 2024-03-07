@@ -45,7 +45,7 @@
             'communityPanel'
           )
         "
-        default-status="active"
+        default-status="waiting_for_approval"
         :table-actions="operations"
         @update:items="submitItem"
         @init:form="sharedStore.initForm(questionForm)"
@@ -150,9 +150,9 @@
           </div>
         </template>
         <template #category="{ item }">
-          <span class="text-truncate text-body-1">{{
+          <div class="text-truncate text-body-1">{{
             item.item.category.title
-          }}</span>
+          }}</div>
         </template>
         <template #dislikesCount="{ item, header }">
           <div
@@ -238,7 +238,7 @@ let headers = ref([
     size: "50px",
     sortable: false,
   },
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 let search = ref("");
 let payload = computed(() => {
@@ -258,7 +258,7 @@ const { $repos } = useNuxtApp();
 let questionForm = ref([
   {
     type: "text-area",
-    name: "QText",
+    name: "qText",
     modelValue: ref(""),
     validations: "required",
     validations: "required",
@@ -293,7 +293,7 @@ let questionForm = ref([
     maxImage: 3,
     title: "add_picture",
     uploadPath: UPLOAD_PATH,
-    modelValue: ref([]),
+    modelValue: [],
     size: 1,
     maxImage: 3,
     hasStartButton: false,
@@ -306,7 +306,7 @@ let answerForm = ref([
     name: "aText",
     modelValue: ref(""),
     validations: "required",
-    label: "question",
+    label: "answer",
     size: 12,
     rows: 6,
   },
@@ -316,7 +316,7 @@ let answerForm = ref([
     multiple: true,
     title: "add_picture",
     uploadPath: UPLOAD_PATH,
-    modelValue: "",
+    modelValue: [],
     size: 1,
     maxImage: 3,
     hasStartButton: false,
@@ -412,7 +412,6 @@ const submitItem = () => {
     let itemIndex = sharedStore.listItems.data.findIndex(
       (item) => item.id === sharedStore.currentItem.id
     );
-
     $repos.communityPanel.sendQuestion(payload).then((res) => {
       Object.assign(sharedStore.listItems.data[itemIndex], res);
       sharedStore.edit = false;
@@ -421,19 +420,19 @@ const submitItem = () => {
   } else if (!sharedStore.edit && !sharedStore.additionalOperation) {
     $repos.communityPanel.sendQuestion(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
+      { ...res },
         ...sharedStore.listItems.data,
-        { ...res },
       ]);
       sharedStore.closeDialog();
     });
   } else {
     payload = {
-      body: { ...body, id: 0 },
+      body: { ...body, id: 0, questionId: sharedStore.currentItem.id},
     };
     $repos.communityPanel.sendAnswer(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
+      { ...res.data },
         ...sharedStore.listItems.data,
-        { ...res },
       ]);
       sharedStore.closeDialog();
     });

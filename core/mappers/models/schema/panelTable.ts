@@ -1,6 +1,7 @@
 //@ts-ignore
 import { Mapping, $moment, mapperCollection } from "~/mappers";
 import user from "./user";
+import uploader from "./uploader";
 const panelTable: Mapping = {
   question: {
     processValue: (value) => {
@@ -37,6 +38,7 @@ const panelTable: Mapping = {
     },
   },
   avatarUrl: {
+    defaultValue: "/images/user.jpeg",
     processValue: (value) => {
       return { url: value };
     },
@@ -46,6 +48,12 @@ const panelTable: Mapping = {
       return { url: value };
     },
   },
+  attachments:{
+    processValue: (value) => {
+      return mapperCollection(value, uploader)
+    },
+  },
+
   cover_url: {
     processValue: (value) => {
       return { url: value };

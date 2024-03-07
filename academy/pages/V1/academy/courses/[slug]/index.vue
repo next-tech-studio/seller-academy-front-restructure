@@ -2,55 +2,34 @@
   <course-header :item="item" @bookmark="bookmark" />
   <div class="tabs bg-white" id="tabs">
     <v-container class="pa-0">
-      <v-tabs selected-class="text-button-primary" hide-slider height="72">
-        <v-tab
-          :value="1"
-          class="text-text-disabled text-button-1 font-weight-bold"
-          href="#description"
-          >{{ $t("description") }}</v-tab
-        >
-        <v-tab
-          :value="2"
-          class="text-text-disabled text-button-1 font-weight-bold"
-          href="#goals"
-          >{{ $t("course_goals") }}</v-tab
-        >
-        <v-tab
-          :value="3"
-          class="text-text-disabled text-button-1 font-weight-bold"
-          href="#headlines"
-          >{{ $t("headlines") }}</v-tab
-        >
-        <v-tab
-          :value="4"
-          class="text-text-disabled text-button-1 font-weight-bold"
-          href="#comments"
-          >{{ $t("user_comments") }}</v-tab
-        >
-        <v-tab
-          :value="5"
-          class="text-text-disabled text-button-1 font-weight-bold"
-          href="#teacher"
-          >{{ $t("teacher") }}</v-tab
-        >
-        <v-tab
-          :value="6"
-          class="text-text-disabled text-button-1 font-weight-bold"
-          href="#faq"
-          >{{ $t("faq") }}</v-tab
-        >
-        <v-spacer></v-spacer>
-        <v-tab :value="7" v-if="sticked">
-          <div>
-            <span class="text-high-emphasis text-body-2 ml-4">
-              {{ item.participantsCount + $t("course_participants") }}
-            </span>
-            <v-btn color="primary-base" variant="flat" class="text-button">
-              {{ $t("enroll_course") }}
-            </v-btn>
-          </div>
-        </v-tab>
-      </v-tabs>
+      <client-only>
+        <v-tabs hide-slider height="72">
+          <v-tab
+            v-for="(tab, index) in tabItems"
+            :key="index + 1"
+            :value="index + 1"
+            :class="
+              $route.fullPath.split('#').pop() == tab.hash
+                ? 'text-button-primary'
+                : 'text-text-disabled'
+            "
+            class="text-button-1 font-weight-bold"
+            :href="`#${tab.hash}`"
+            >{{ $t(`${tab.title}`) }}
+          </v-tab>
+          <v-spacer></v-spacer>
+          <v-tab :value="7" v-if="sticked">
+            <div>
+              <span class="text-high-emphasis text-body-2 ml-4">
+                {{ item.participantsCount + $t("course_participants") }}
+              </span>
+              <v-btn color="primary-base" variant="flat" class="text-button">
+                {{ $t("enroll_course") }}
+              </v-btn>
+            </div>
+          </v-tab>
+        </v-tabs>
+      </client-only>
     </v-container>
   </div>
   <div class="bg-background-dark mb-12">
@@ -105,6 +84,33 @@ const route = useRoute();
 const { $repos } = useNuxtApp();
 let preview = !!route.query.preview;
 
+const tabItems = [
+  {
+    hash: "description",
+    title: "description",
+  },
+  {
+    hash: "goals",
+    title: "course_goals",
+  },
+  {
+    hash: "headlines",
+    title: "headlines",
+  },
+  {
+    hash: "comments",
+    title: "user_comments",
+  },
+  {
+    hash: "teacher",
+    title: "teacher",
+  },
+  {
+    hash: "faq",
+    title: "faq",
+  },
+];
+
 const myFunction = () => {
   sticked.value = window.pageYOffset > sticky;
   if (window.pageYOffset > sticky) {
@@ -140,11 +146,10 @@ const getCoursePreview = () => {
   });
 };
 onMounted(() => {
-  console.log('previeewwww',preview)
+  console.log("previeewwww", preview);
   tabs = document.getElementById("tabs");
   sticky = tabs.offsetTop;
   window.onscroll = function () {
-    console.log("onscroll");
     myFunction();
   };
   if (preview) getCoursePreview();

@@ -6,7 +6,7 @@
   >
     <v-card
       :dir="authStore.user.id == item.userId ? 'rtl' : 'ltr'"
-      min-width="60%"
+      min-width="20%"
       max-width="75%"
     >
       <v-list-item class="px-0 pb-2">

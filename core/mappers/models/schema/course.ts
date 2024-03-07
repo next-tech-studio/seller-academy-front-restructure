@@ -62,6 +62,9 @@ const course: Mapping = {
   rooms: {
     processValue: (value) => mapperCollection(value, room),
   },
+  instructor: {
+    processValue: (value) => mapper(value, user)
+  },
   quizzes: {
     processValue: (value, object) => {
       return mapperCollection(value, lesson);

@@ -51,7 +51,7 @@
                     isOpen ? 'custom:chevronTop' : 'custom:chevronDown'
                   "
                   tag="NuxtLink"
-                  :class="{ 'right-border': isOpen }"
+                  :class="{ 'right-border mb-1': isOpen }"
                   :active-class="isOpen ? 'right-border' : ''"
                   @click="toItem(subItem)"
                 ></v-list-item>

@@ -1,6 +1,6 @@
 <template>
-  <div style="height: 100vh">
-    <NuxtLayout name="no-footer">
+  <div style="height: calc(100vh - 70px)">
+    <!-- <NuxtLayout name="no-footer"> -->
       <not-logged-in-room-preview
         v-model="common"
         :btn-title="
@@ -62,7 +62,7 @@
               <Chat
                 :style="
                   !smAndDown
-                    ? 'width: calc(100% - 264px); position: absolute; left: 0;'
+                    ? 'width: calc(100% - 364px); position: absolute; left: 0;'
                     : ''
                 "
                 @react="react"
@@ -75,7 +75,7 @@
           </v-card>
         </v-container>
       </div>
-    </NuxtLayout>
+    <!-- </NuxtLayout> -->
   </div>
 </template>
 
@@ -376,14 +376,14 @@ watch(
 
 definePageMeta({
   // middleware: ["auth"],
-  layout: false,
+  layout: 'no-footer',
 });
 </script>
 
 <style lang="scss">
 .pr-lg-64 {
   @include respond("lg") {
-    padding-right: 264px;
+    padding-right: 364px;
   }
 }
 </style>

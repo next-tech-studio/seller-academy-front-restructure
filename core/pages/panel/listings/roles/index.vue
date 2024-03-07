@@ -82,7 +82,7 @@
           </div>
         </template>
         <template #permissions="{ item,header }">
-          <div :style="`width: ${header.header.size}`">
+          <div :style="`width: ${header.header.size}; white-space: wrap`">
             <v-chip
              color="icon-hint-caution"
               v-for="item in item?.item?.permissions"
@@ -139,7 +139,7 @@ let headers = ref([
     size: "120px",
   },
 
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 let groupActions = ref([
   { title: "حذف کردن", value: "deleted" },
@@ -287,7 +287,7 @@ onMounted(async () => {
   );
 });
 definePageMeta({
-  middleware: ["auth", "roles"],
+  middleware: ["auth"],
   layout: false,
   permissions: ["users"],
 });

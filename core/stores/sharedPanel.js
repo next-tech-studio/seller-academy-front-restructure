@@ -159,6 +159,7 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
     initForm(dataForm) {
       if (!this.edit) {
         dataForm.forEach((element) => {
+          console.log('fiiieeldd',element ,typeof element.modelValue)
           element.modelValue =
             typeof element.modelValue == "string"
               ? ""
@@ -197,9 +198,13 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
             if (this.currentItem[field.name]) {
               field.modelValue = this.currentItem[field.name];
               if (field.selectValue) {
-                field.modelValue = this.currentItem[field.name].map(
-                  (element) => element[field.selectValue]
-                );
+                if (Array.isArray(this.currentItem[field.name])) {
+                  field.modelValue = this.currentItem[field.name].map(
+                    (element) => element[field.selectValue]
+                  );
+                } else if(typeof this.currentItem[field.name] == 'object'){
+                  field.modelValue = this.currentItem[field.name][field.selectValue]
+                }
               }
             } else if (typeof field.modelValue == "string")
               field.modelValue = "";
@@ -210,6 +215,7 @@ export const useSharedPanelStore = defineStore("sharedPanel", {
               field.modelValue = null;
             } else field.modelValue = {};
           }
+          console.log('fiiieeldd', field)
         });
       }
       this.editForm.push(...dataForm);

@@ -89,7 +89,10 @@
                 class="me-4 text-body-1 font-weight-bold"
                 @click="commentsListing.edit(item.item, action)"
               >
-                <v-icon :icon="action.icon" size="20"></v-icon>
+                <v-icon :icon="action.icon" size="20"/>
+                <v-tooltip activator="parent" location="bottom">
+                  {{ $t(action.title) }}</v-tooltip
+                >
               </v-btn>
             </div>
           </div>
@@ -238,7 +241,7 @@ let headers = ref([
   { key: "status", title: t("status"), sortable: false, size: "80px" },
   { key: "rate", title: t("rate"), size: "100px" },
   { key: "ip", title: t("ip"), size: "100px" },
-  { key: "operation", title: t("operation"), size: "50px" },
+  { key: "operation", title: t("operation"), size: "50px", sortable: false },
 ]);
 const { $repos } = useNuxtApp();
 const onSearch = useDebounceFn(
@@ -271,7 +274,7 @@ const publish = () => {
 const init = () => {
   operations = ref([
     {
-      title: "ویرایش انتشار",
+      title: "ویرایش و انتشار",
       value: "edit",
       icon: "custom:pencil",
       hasDialog: true,

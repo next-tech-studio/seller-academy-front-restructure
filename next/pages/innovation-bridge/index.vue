@@ -65,9 +65,10 @@
                 color="background-dark"
                 :image="topic.image"
               ></v-avatar>
-              <span class="text-text-heading text-body-2 font-weight-bold w-75 text-md-right text-center">{{
-                topic.title
-              }}</span>
+              <span
+                class="text-text-heading text-body-2 font-weight-bold w-75 text-md-right text-center"
+                >{{ topic.title }}</span
+              >
             </div>
           </v-col>
         </v-row>
@@ -93,14 +94,26 @@
   <!-- PREVIOUS INNOVATION BRIDGE -->
   <v-container fluid class="pb-md-16 mb-md-4 pb-8 mb-2">
     <div class="text-h4 mb-6 text-center">پل‌های نوآوری پیش رو</div>
-    <v-row>
+    <!-- <v-row>
       <v-col
         cols="12"
         md="4"
         v-for="(university, index) in universities.data"
         :key="index"
+      > -->
+      <v-slide-group
+      v-model="model"
+      class="pa-4"
+      next-icon="custom:chevronRightLight"
+      prev-icon="custom:chevronLeftLight"
+      center-active
+      show-arrows
+    >
+      <v-slide-group-item
+        v-for="(university, index) in universities.data"
+        :key="index"
       >
-        <v-card :height="smAndDown ? 219 : 287">
+        <v-card :height="smAndDown ? 219 : 287" width="400" class="me-2">
           <v-img
             height="100%"
             cover
@@ -113,7 +126,17 @@
                 <div class="text-text-light text-h4">
                   {{ university.title }}
                 </div>
-                <v-btn v-if="!university.disable_navigation" :to="localePath({ name: 'innovation-bridge-slug', params: { slug: university.slug } })" size="x-small" icon="custom:chevronLeft"></v-btn>
+                <v-btn
+                  v-if="!university.disable_navigation"
+                  :to="
+                    localePath({
+                      name: 'innovation-bridge-slug',
+                      params: { slug: university.slug },
+                    })
+                  "
+                  size="x-small"
+                  icon="custom:chevronLeft"
+                ></v-btn>
               </div>
               <div class="d-flex align-center">
                 <div class="text-text-light">
@@ -140,15 +163,17 @@
             </v-card-text>
           </v-img>
         </v-card>
-      </v-col>
-    </v-row>
+      </v-slide-group-item>
+      </v-slide-group>
+    <!-- </v-col>
+    </v-row> -->
   </v-container>
 </template>
 
 <script setup>
 import { useDisplay } from "vuetify";
 const { lgAndUp, mdAndUp, smAndDown } = useDisplay();
-const universities = ref([])
+const universities = ref([]);
 const topics = [
   {
     title: "زنجیره ارزش تجارت الکترونیک",
@@ -177,10 +202,8 @@ const topics = [
 ];
 
 useAsyncData(async () => {
-    universities.value = await queryContent(
-      `/fa/innovation-bridge`
-    ).findOne()
-})
+  universities.value = await queryContent(`/fa/innovation-bridge`).findOne();
+});
 </script>
 
 <style>
