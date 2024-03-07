@@ -1,4 +1,4 @@
-import APIHandler from "~/services/APIHandler";
+import APIHandler from "@core/services/APIHandler";
 export const useSharedPanelStore = defineStore("sharedPanel", {
   state: () => ({
     step: ref(1),
