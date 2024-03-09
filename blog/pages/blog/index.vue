@@ -51,7 +51,9 @@
       @filter="getHomeData($event)"
       see-more-title="see_more_articles"
       :show-see-more="!lastPage"
-    />
+      :grid="blogHomepageGrid"
+      :horizontal="blogHomepageHorizontalShow == 'true'"
+    ></app-content-card-listing>
   </v-container>
 </template>
 
@@ -67,6 +69,7 @@ let lastPage = ref(false);
 let filters = computed(() => {
   return [{ type: "button", items: blog.categories }];
 });
+const { blogHomepageGrid, blogHomepageHorizontalShow } = useRuntimeConfig().public
 const toItem = (e) => {
   navigateTo(
     localePath({
