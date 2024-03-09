@@ -101,18 +101,20 @@
         v-for="(university, index) in universities.data"
         :key="index"
       > -->
+      <v-sheet min-width="420">
       <v-slide-group
       v-model="model"
-      class="pa-4"
+      class="pa-md-4 pa-0"
       next-icon="custom:chevronRightLight"
       prev-icon="custom:chevronLeftLight"
       show-arrows
+      center-active
     >
       <v-slide-group-item
         v-for="(university, index) in universities.data"
         :key="index"
       >
-        <v-card :height="smAndDown ? 219 : 287" width="400" class="me-2">
+        <v-card :height="smAndDown ? 213 : 287" :width="smAndDown?300:400" class="me-2">
           <v-img
             height="100%"
             cover
@@ -164,6 +166,7 @@
         </v-card>
       </v-slide-group-item>
       </v-slide-group>
+    </v-sheet>
     <!-- </v-col>
     </v-row> -->
   </v-container>
