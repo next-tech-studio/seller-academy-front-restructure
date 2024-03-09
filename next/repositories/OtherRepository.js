@@ -10,7 +10,7 @@ export default (request) => ({
       alert: false,
     });
   },
-  groupSearch(payload){
+  groupSearch(payload) {
     return request({
       name: "search",
       method: "get",
@@ -21,7 +21,7 @@ export default (request) => ({
     });
   },
   uploadFiles(payload, path, multiple = true) {
-    console.log('uploader',payload, path,multiple)
+    console.log("uploader", payload, path, multiple);
     return request(
       {
         name: "uploadFiles",
@@ -39,32 +39,41 @@ export default (request) => ({
       payload.body
     );
   },
-  forms(payload){
+  forms(payload) {
     return request({
       name: "forms",
       method: "get",
       page: payload.page,
-      path: '/forms/list',
+      path: "/forms/list",
       loading: true,
       alert: false,
-    })
+    });
   },
-  getRejectionReasons(){
+  getRejectionReasons() {
     return request({
       name: "rejectionReasons",
       method: "get",
-      path: '/report/list',
+      path: "/report/list",
       loading: true,
       alert: false,
-    })
+    });
   },
-  getRolesList(){
+  getRolesList() {
     return request({
       name: "roles",
       method: "get",
-      path: '/panel/users/ligeneral',
+      path: "/panel/users/ligeneral",
       loading: true,
       alert: false,
-    })
-  }
+    });
+  },
+  getUserProfileSidebar(payload) {
+    return request({
+      name: "userProfileSidebar",
+      method: "get",
+      path: `/panel/userProfile/${payload}`,
+      loading: true,
+      alert: false,
+    });
+  },
 });
