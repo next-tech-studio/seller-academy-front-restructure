@@ -65,9 +65,10 @@
                 color="background-dark"
                 :image="topic.image"
               ></v-avatar>
-              <span class="text-text-heading text-body-2 font-weight-bold w-75 text-md-right text-center">{{
-                topic.title
-              }}</span>
+              <span
+                class="text-text-heading text-body-2 font-weight-bold w-75 text-md-right text-center"
+                >{{ topic.title }}</span
+              >
             </div>
           </v-col>
         </v-row>
@@ -93,62 +94,100 @@
   <!-- PREVIOUS INNOVATION BRIDGE -->
   <v-container fluid class="pb-md-16 mb-md-4 pb-8 mb-2">
     <div class="text-h4 mb-6 text-center">پل‌های نوآوری پیش رو</div>
-    <v-row>
+    <!-- <v-row>
       <v-col
         cols="12"
         md="4"
         v-for="(university, index) in universities.data"
         :key="index"
+      > -->
+    <v-sheet min-width="420">
+      <v-slide-group
+        v-model="model"
+        class="pa-md-4 pa-0"
+        next-icon="custom:chevronRightLight"
+        prev-icon="custom:chevronLeftLight"
+        show-arrows
+        center-active
       >
-        <v-card :height="smAndDown ? 219 : 287">
-          <v-img
-            height="100%"
-            cover
-            :src="university.image"
-            class="align-end"
-            gradient="180deg, rgba(255, 255, 255, 0.00) 2.87%, rgba(0, 0, 0, 0.90) 100%"
+        <v-slide-group-item
+          v-for="(university, index) in universities.data"
+          :key="index"
+        >
+          <v-card
+            :height="smAndDown ? 213 : 287"
+            :width="smAndDown ? 300 : 400"
+            class="me-2"
+            :to="
+              !university.disable_navigation
+                ? localePath({
+                    name: 'innovation-bridge-slug',
+                    params: { slug: university.slug },
+                  })
+                : ''
+            "
           >
-            <v-card-text>
-              <div class="d-flex justify-space-between align-center">
-                <div class="text-text-light text-h4">
-                  {{ university.title }}
+            <v-img
+              height="100%"
+              cover
+              :src="university.image"
+              class="align-end"
+              gradient="180deg, rgba(255, 255, 255, 0.00) 2.87%, rgba(0, 0, 0, 0.90) 100%"
+            >
+              <v-card-text>
+                <div class="d-flex justify-space-between align-center">
+                  <div class="text-text-light text-h4">
+                    {{ university.title }}
+                  </div>
+                  <v-btn
+                    v-if="!university.disable_navigation"
+                    :to="
+                      localePath({
+                        name: 'innovation-bridge-slug',
+                        params: { slug: university.slug },
+                      })
+                    "
+                    size="x-small"
+                    icon="custom:chevronLeft"
+                  ></v-btn>
                 </div>
-                <v-btn v-if="!university.disable_navigation" :to="localePath({ name: 'innovation-bridge-slug', params: { slug: university.slug } })" size="x-small" icon="custom:chevronLeft"></v-btn>
-              </div>
-              <div class="d-flex align-center">
-                <div class="text-text-light">
-                  <v-icon
-                    size="24"
-                    color="icon-light"
-                    icon="custom:calendar"
-                  ></v-icon>
-                  <span class="text-text-light text-body-2 ms-2">{{
-                    university.date
-                  }}</span>
+                <div class="d-flex align-center">
+                  <div class="text-text-light">
+                    <v-icon
+                      size="24"
+                      color="icon-light"
+                      icon="custom:calendar"
+                    ></v-icon>
+                    <span class="text-text-light text-body-2 ms-2">{{
+                      university.date
+                    }}</span>
+                  </div>
+                  <div class="text-text-light ms-6">
+                    <v-icon
+                      size="24"
+                      color="icon-light"
+                      icon="custom:location"
+                    ></v-icon>
+                    <span class="text-text-light text-body-2 ms-2">{{
+                      university.location
+                    }}</span>
+                  </div>
                 </div>
-                <div class="text-text-light ms-6">
-                  <v-icon
-                    size="24"
-                    color="icon-light"
-                    icon="custom:location"
-                  ></v-icon>
-                  <span class="text-text-light text-body-2 ms-2">{{
-                    university.location
-                  }}</span>
-                </div>
-              </div>
-            </v-card-text>
-          </v-img>
-        </v-card>
-      </v-col>
-    </v-row>
+              </v-card-text>
+            </v-img>
+          </v-card>
+        </v-slide-group-item>
+      </v-slide-group>
+    </v-sheet>
+    <!-- </v-col>
+    </v-row> -->
   </v-container>
 </template>
 
 <script setup>
 import { useDisplay } from "vuetify";
 const { lgAndUp, mdAndUp, smAndDown } = useDisplay();
-const universities = ref([])
+const universities = ref([]);
 const topics = [
   {
     title: "زنجیره ارزش تجارت الکترونیک",
@@ -177,10 +216,8 @@ const topics = [
 ];
 
 useAsyncData(async () => {
-    universities.value = await queryContent(
-      `/fa/innovation-bridge`
-    ).findOne()
-})
+  universities.value = await queryContent(`/fa/innovation-bridge`).findOne();
+});
 </script>
 
 <style>
