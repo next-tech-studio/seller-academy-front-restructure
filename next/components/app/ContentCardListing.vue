@@ -64,7 +64,7 @@ v-if="showFilter && !dropDownFilter"
           :key="index"
           :class="{
             'px-2': position(index) == 'center',
-            'ps-4': position(index) == 'start',
+            'ps-4': position(index) == 'start' && blogHomepageHorizontalShow == 'false',
             'pe-4': position(index) == 'end',
           }"
           class="pb-md-6 py-0 position-relative"
@@ -106,6 +106,7 @@ const { mdAndUp, smAndDown } = useDisplay();
 import { useFilterStore } from "@core/stores/filter";
 const store = useFilterStore();
 const emit = defineEmits(["filter", "update:filters"]);
+const { blogHomepageHorizontalShow } = useRuntimeConfig().public
 const props = defineProps({
   content: Array,
   categories: Array,
