@@ -101,70 +101,82 @@
         v-for="(university, index) in universities.data"
         :key="index"
       > -->
-      <v-sheet min-width="420">
+    <v-sheet min-width="420">
       <v-slide-group
-      v-model="model"
-      class="pa-md-4 pa-0"
-      next-icon="custom:chevronRightLight"
-      prev-icon="custom:chevronLeftLight"
-      show-arrows
-      center-active
-    >
-      <v-slide-group-item
-        v-for="(university, index) in universities.data"
-        :key="index"
+        v-model="model"
+        class="pa-md-4 pa-0"
+        next-icon="custom:chevronRightLight"
+        prev-icon="custom:chevronLeftLight"
+        show-arrows
+        center-active
       >
-        <v-card :height="smAndDown ? 213 : 287" :width="smAndDown?300:400" class="me-2">
-          <v-img
-            height="100%"
-            cover
-            :src="university.image"
-            class="align-end"
-            gradient="180deg, rgba(255, 255, 255, 0.00) 2.87%, rgba(0, 0, 0, 0.90) 100%"
+        <v-slide-group-item
+          v-for="(university, index) in universities.data"
+          :key="index"
+        >
+          <v-card
+            :height="smAndDown ? 213 : 287"
+            :width="smAndDown ? 300 : 400"
+            class="me-2"
+            :to="
+              !university.disable_navigation
+                ? localePath({
+                    name: 'innovation-bridge-slug',
+                    params: { slug: university.slug },
+                  })
+                : ''
+            "
           >
-            <v-card-text>
-              <div class="d-flex justify-space-between align-center">
-                <div class="text-text-light text-h4">
-                  {{ university.title }}
+            <v-img
+              height="100%"
+              cover
+              :src="university.image"
+              class="align-end"
+              gradient="180deg, rgba(255, 255, 255, 0.00) 2.87%, rgba(0, 0, 0, 0.90) 100%"
+            >
+              <v-card-text>
+                <div class="d-flex justify-space-between align-center">
+                  <div class="text-text-light text-h4">
+                    {{ university.title }}
+                  </div>
+                  <v-btn
+                    v-if="!university.disable_navigation"
+                    :to="
+                      localePath({
+                        name: 'innovation-bridge-slug',
+                        params: { slug: university.slug },
+                      })
+                    "
+                    size="x-small"
+                    icon="custom:chevronLeft"
+                  ></v-btn>
                 </div>
-                <v-btn
-                  v-if="!university.disable_navigation"
-                  :to="
-                    localePath({
-                      name: 'innovation-bridge-slug',
-                      params: { slug: university.slug },
-                    })
-                  "
-                  size="x-small"
-                  icon="custom:chevronLeft"
-                ></v-btn>
-              </div>
-              <div class="d-flex align-center">
-                <div class="text-text-light">
-                  <v-icon
-                    size="24"
-                    color="icon-light"
-                    icon="custom:calendar"
-                  ></v-icon>
-                  <span class="text-text-light text-body-2 ms-2">{{
-                    university.date
-                  }}</span>
+                <div class="d-flex align-center">
+                  <div class="text-text-light">
+                    <v-icon
+                      size="24"
+                      color="icon-light"
+                      icon="custom:calendar"
+                    ></v-icon>
+                    <span class="text-text-light text-body-2 ms-2">{{
+                      university.date
+                    }}</span>
+                  </div>
+                  <div class="text-text-light ms-6">
+                    <v-icon
+                      size="24"
+                      color="icon-light"
+                      icon="custom:location"
+                    ></v-icon>
+                    <span class="text-text-light text-body-2 ms-2">{{
+                      university.location
+                    }}</span>
+                  </div>
                 </div>
-                <div class="text-text-light ms-6">
-                  <v-icon
-                    size="24"
-                    color="icon-light"
-                    icon="custom:location"
-                  ></v-icon>
-                  <span class="text-text-light text-body-2 ms-2">{{
-                    university.location
-                  }}</span>
-                </div>
-              </div>
-            </v-card-text>
-          </v-img>
-        </v-card>
-      </v-slide-group-item>
+              </v-card-text>
+            </v-img>
+          </v-card>
+        </v-slide-group-item>
       </v-slide-group>
     </v-sheet>
     <!-- </v-col>
