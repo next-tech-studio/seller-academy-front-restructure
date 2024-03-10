@@ -2,9 +2,6 @@
   <NuxtLayout name="default">
     <div class="bg-n100">
       <v-container>
-        <div dir="ltr">
-
-        </div>
         <client-only>
           <dashboard-menu
             class="mb-4"
@@ -93,7 +90,6 @@ const navigateToTab = () => {
 };
 onMounted(() => {
   tabs.value = route.fullPath.split("/").pop();
-  console.log('dslkjfjdslk',route.fullPath)
 });
 definePageMeta({
   middleware: ["auth"],

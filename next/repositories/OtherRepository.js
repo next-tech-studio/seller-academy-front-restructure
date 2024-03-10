@@ -73,7 +73,7 @@ export default (request) => ({
         method: "get",
         query: `?userId=${payload}`,
         path: `/kns/user/data`,
-        loading: true,
+        loading: false,
         alert: false,
       },
     );
@@ -83,9 +83,10 @@ export default (request) => ({
       {
         name: "userPosts",
         method: "get",
-        query: `?userId=${payload}`,
+        page: payload.page,
+        query: `?userId=${payload.id}`,
         path: `/kns/user/posts`,
-        loading: true,
+        loading: false,
         alert: false,
       },
     );
