@@ -78,15 +78,15 @@ const props = defineProps({
 #profile-list-item .v-list-item-subtitle {
   opacity: 1 !important;
 }
-#profile-list-item.hover.v-list-item {
-  .v-list-item__append {
-    position: relative;
-    .v-btn {
-      background-color: rgba(var(--v-theme-icon-secondary)) !important;
-      color: rgba(var(--v-theme-text-light)) !important;
-    }
-  }
-}
+// #profile-list-item.hover.v-list-item {
+//   .v-list-item__append {
+//     position: relative;
+//     .v-btn {
+//       background-color: rgba(var(--v-theme-icon-secondary)) !important;
+//       color: rgba(var(--v-theme-text-light)) !important;
+//     }
+//   }
+// }
 #profile-list-item.hover.v-list-item:hover,
 #profile-list-item.hover.v-list-item.active {
   .v-list-item-title {

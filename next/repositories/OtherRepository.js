@@ -21,7 +21,6 @@ export default (request) => ({
     });
   },
   uploadFiles(payload, path, multiple = true) {
-    console.log("uploader", payload, path, multiple);
     return request(
       {
         name: "uploadFiles",
@@ -68,12 +67,27 @@ export default (request) => ({
     });
   },
   getUserProfileSidebar(payload) {
-    return request({
-      name: "userProfileSidebar",
-      method: "get",
-      path: `/panel/userProfile/${payload}`,
-      loading: true,
-      alert: false,
-    });
+    return request(
+      {
+        name: "userProfileSidebar",
+        method: "get",
+        query: `?userId=${payload}`,
+        path: `/kns/user/data`,
+        loading: true,
+        alert: false,
+      },
+    );
+  },
+  getUserPosts(payload) {
+    return request(
+      {
+        name: "userPosts",
+        method: "get",
+        query: `?userId=${payload}`,
+        path: `/kns/user/posts`,
+        loading: true,
+        alert: false,
+      },
+    );
   },
 });
