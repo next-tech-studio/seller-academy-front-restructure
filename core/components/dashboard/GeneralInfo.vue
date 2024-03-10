@@ -151,6 +151,8 @@ let dataForm = ref([
     type: "text-field",
     name: "phone",
     modelValue: ref(""),
+    readOnly:true,
+    disabled:true,
     validations: "required",
     label: "phone_number",
     size: 6,

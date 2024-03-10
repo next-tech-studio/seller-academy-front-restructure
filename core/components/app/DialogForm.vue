@@ -77,13 +77,14 @@
                   "
                   flat
                   base-color="n300"
+                  :disabled="element?.disabled"
                   :type="element.textFieldType || 'text'"
                   density="compact"
                   :hint="element.hint"
                   :hide-details="!element.hint"
                   variant="solo-filled"
                   :label="$t(element.label)"
-                  :readonly="element.readonly"
+                  :readonly="element.readOnly"
                   persistent-placeholder
                   class="outside-label mb-4"
                   persistent-hint
@@ -119,7 +120,7 @@
                     :closable-chips = "element?.multiple"
                     :hint="element.hint"
                     :hide-details="!element.hint"
-                    :readonly="element.readonly"
+                    :readonly="element.readOnly"
                     variant="solo-filled"
                     :placeholder="$t(element.label)"
                     persistent-placeholder
@@ -167,7 +168,8 @@
                   class="outside-label mb-4"
                   persistent-placeholder
                   persistent-hint
-                  :readonly="element.readonly"
+                  :disabled="element?.disabled"
+                  :readonly="element.readOnly"
                   :hide-details="!element.hint"
                 ></v-textarea>
                 <div
