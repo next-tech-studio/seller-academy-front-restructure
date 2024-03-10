@@ -36,11 +36,11 @@
           >
           </v-textarea>
           <v-card-text class="px-0" v-if="similarQuestions.length > 0">
-            <similar-questions
+            <SimilarQuestions
               :items="similarQuestions"
               @to:item="$emit('to:item', $event)"
             >
-            </similar-questions>
+            </SimilarQuestions>
           </v-card-text>
           <v-select
             :placeholder="$t('choose_category')"

@@ -882,4 +882,7 @@ export default {
     register: "ثبت‌نام",
     pre_register: "پیش‌ثبت‌نام",
   },
+  followers:'نفر دنبال کننده',
+  following:'نفر را دنبال می‌کند'
+
 };
