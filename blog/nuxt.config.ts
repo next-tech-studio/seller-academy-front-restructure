@@ -41,7 +41,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       blogHomepageGrid: process.env.BLOG_HOMEPAGE_GRID,
-      blogHomepageHorizontalShow: process.env.BLOG_HOMEPAGE_HORIZONTAL_SHOW
+      blogHomepageHorizontalShow: process.env.BLOG_HOMEPAGE_HORIZONTAL_SHOW,
+      blogHomepageSidebar: process.env.BLOG_HOMEPAGE_SIDEBAR
     },
   },
 });

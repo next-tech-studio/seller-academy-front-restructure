@@ -39,21 +39,78 @@
     >
     </app-filterings>
   </div>
-  <v-container id="blog" class="mb-8">
-    <app-content-card-listing
-      :class="isClient ? 'd-flex' : 'd-none'"
-      :filters="filters"
-      :categories="blog.categories"
-      :content="blog.data"
-      :responsive-horizontal="true"
-      @to:item="toItem($event)"
-      @load:more="toMore"
-      @filter="getHomeData($event)"
-      see-more-title="see_more_articles"
-      :show-see-more="!lastPage"
-      :grid="blogHomepageGrid"
-      :horizontal="blogHomepageHorizontalShow == 'true'"
-    ></app-content-card-listing>
+  <v-container>
+    <v-row>
+      <v-col :cols="blogHomepageHorizontalShow == 'true' ? 9 : 12" class="pa-0">
+        <v-container
+          id="blog"
+          :class="{ 'mb-8': blogHomepageHorizontalShow == 'false' }"
+        >
+          <app-content-card-listing
+            :class="isClient ? 'd-flex' : 'd-none'"
+            :filters="filters"
+            :categories="blog.categories"
+            :content="blog.data"
+            :responsive-horizontal="true"
+            @to:item="toItem($event)"
+            @load:more="toMore"
+            @filter="getHomeData($event)"
+            see-more-title="see_more_articles"
+            :show-see-more="!lastPage"
+            :grid="blogHomepageGrid"
+            :horizontal="blogHomepageHorizontalShow == 'true'"
+          ></app-content-card-listing>
+        </v-container>
+      </v-col>
+      <v-col cols="3" v-if="blogHomepageSidebar == 'true'">
+        <v-card>
+          <v-card-title>{{ $t("staff_picks") }}</v-card-title>
+          <template v-for="(item, index) in followingSuggestion" :key="index">
+            <app-profile-list-item
+              :item="item"
+              :title="item.displayName"
+              subtitle-key="description"
+              :avatar="item.avatarUrl"
+              avatar-size="48"
+              :hover="false"
+              class="mb-4 px-1 rounded"
+            >
+              <template #append>
+                <v-btn flat size="small" variant="outlined">{{
+                  $t("follow")
+                }}</v-btn>
+              </template>
+            </app-profile-list-item>
+          </template>
+
+          <v-card-title class="mt-10">{{ $t("top_users") }}</v-card-title>
+          <template v-for="(item, index) in followingSuggestion" :key="index">
+            <app-profile-list-item
+              :item="item"
+              :title="item.displayName"
+              subtitle-key="description"
+              :avatar="item.avatarUrl"
+              avatar-size="48"
+              :hover="false"
+              class="mb-4 px-1 rounded"
+            >
+              <template #prepend>
+                <div></div>
+              </template>
+              <template #title>
+                <v-avatar color="n050" size="36">
+                  <v-img cover :alt="item.name" :src="item.avatarUrl"></v-img>
+                </v-avatar>
+                <small class="ps-1">{{ item.name }}</small>
+              </template>
+              <template v-slot:subtitle>
+                <div class="font-weight-bold text-body-1">{{ item.description }}</div>
+              </template>
+            </app-profile-list-item>
+          </template>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -69,7 +126,8 @@ let lastPage = ref(false);
 let filters = computed(() => {
   return [{ type: "button", items: blog.categories }];
 });
-const { blogHomepageGrid, blogHomepageHorizontalShow } = useRuntimeConfig().public
+const { blogHomepageGrid, blogHomepageHorizontalShow, blogHomepageSidebar } =
+  useRuntimeConfig().public;
 const toItem = (e) => {
   navigateTo(
     localePath({
@@ -125,6 +183,24 @@ useHead(
     type: "website",
   })
 );
+
+const followingSuggestion = ref([
+  {
+    name: "Dare Obasanjo",
+    avatarUrl: "/images/user.jpeg",
+    description: "Disruption Comes to Google ",
+  },
+  {
+    name: "Maria Garcia in A-Culturated",
+    avatarUrl: "/images/user.jpeg",
+    description: "The Infinite Shades of Saudade Blue",
+  },
+  {
+    name: "Dustin Moskovitz",
+    avatarUrl: "/images/user.jpeg",
+    description: "Works in Progress: The Long Journey to Doing Good Better",
+  }
+]);
 </script>
 
 <style lang="scss">
