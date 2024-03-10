@@ -7,19 +7,13 @@
             <span class="text-n400">{{ $t("result_for") }}</span>
             {{ route.query.q }}
           </div>
-          <v-tabs
+          <dashboard-menu
             v-model="tab"
-            align-tabs="start"
-            color="primary-base"
-            class="mb-10"
-          >
-            <v-tab
-              v-for="(item, index) in tabs"
-              :key="index + 1"
-              :value="index + 1"
-              >{{ $t(item.title) }}</v-tab
-            >
-          </v-tabs>
+            :menu="tabs"
+            selected-class="text-high-emphasis"
+            :grow="false"
+            class="mb-4"
+          ></dashboard-menu>
           <v-window v-model="tab">
             <v-window-item
               v-for="(item, index) in tabs"
