@@ -883,6 +883,10 @@ export default {
     pre_register: "پیش‌ثبت‌نام",
   },
   followers:'نفر دنبال کننده',
-  following:'نفر را دنبال می‌کند'
-
+  following:'نفر را دنبال می‌کند',
+  result_for: "نتایج جستجو برای",
+  top_posts: "مقالات پیشنهادی",
+  top_users: "فعال‌ترین کاربران",
+  top_categories: "دسته‌بندی‌های پیشنهادی",
+  top_tags: "تگ‌های پیشنهادی"
 };
