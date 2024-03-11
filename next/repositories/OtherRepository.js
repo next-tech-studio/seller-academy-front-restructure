@@ -91,4 +91,28 @@ export default (request) => ({
       },
     );
   },
+  follow(payload) {
+    return request(
+      {
+        name: "follow_user",
+        method: "put",
+        path: `/kns/user/follow`,
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  },
+  universalSearch(payload) {
+    return request(
+      {
+        name: "universalSearch",
+        method: "get",
+        page: payload.page,
+        path: `/kns/search/${payload.type}/${payload.keyword}`,
+        loading: false,
+        alert: false,
+      },
+    );
+  }
 });

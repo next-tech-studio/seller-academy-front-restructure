@@ -64,47 +64,67 @@
       </v-col>
       <v-col cols="3" v-if="blogHomepageSidebar == 'true'">
         <v-card>
-          <v-card-title>{{ $t("staff_picks") }}</v-card-title>
-          <template v-for="(item, index) in followingSuggestion" :key="index">
+          <v-card-title>{{ $t("top_users") }}</v-card-title>
+          <template
+            v-for="(item, index) in blog.popularAuthor?.slice(0, 6)"
+            :key="index"
+          >
             <app-profile-list-item
               :item="item"
-              :title="item.displayName"
+              :title="item?.displayName"
               subtitle-key="description"
               :avatar="item.avatarUrl"
               avatar-size="48"
               :hover="false"
               class="mb-4 px-1 rounded"
+              @click.self="toUser(item)"
             >
+              <template #title>
+                <div @click.self="toUser(item)" class="ps-1 text-caption font-weight-bold">{{ item.displayName }}</div>
+              </template>
+              <!-- <template #subtitle>
+                <small class="ps-1 text-caption text-text-high-emphasis">{{ item.description }}</small>
+              </template> -->
               <template #append>
-                <v-btn flat size="small" variant="outlined">{{
-                  $t("follow")
-                }}</v-btn>
+                <v-btn
+                  @click="follow(item)"
+                  flat
+                  size="small"
+                  color="primary-base"
+                  >{{ $t(item.isFollowed ? "unfollow" : "follow") }}</v-btn
+                >
               </template>
             </app-profile-list-item>
           </template>
 
-          <v-card-title class="mt-10">{{ $t("top_users") }}</v-card-title>
-          <template v-for="(item, index) in followingSuggestion" :key="index">
+          <v-card-title class="pt-10">{{ $t("staff_picks") }}</v-card-title>
+          <template
+            v-for="(item, index) in blog.articleStar?.slice(0, 6)"
+            :key="index"
+          >
             <app-profile-list-item
               :item="item"
-              :title="item.displayName"
+              :title="item.title"
               subtitle-key="description"
               :avatar="item.avatarUrl"
               avatar-size="48"
               :hover="false"
               class="mb-4 px-1 rounded"
+              @click="toItem(item)"
             >
               <template #prepend>
                 <div></div>
               </template>
               <template #title>
                 <v-avatar color="n050" size="36">
-                  <v-img cover :alt="item.name" :src="item.avatarUrl"></v-img>
+                  <v-img cover :alt="item.title" :src="item.bannerUrl"></v-img>
                 </v-avatar>
-                <small class="ps-1">{{ item.name }}</small>
+                <small class="ps-1">{{ item.title }}</small>
               </template>
               <template v-slot:subtitle>
-                <div class="font-weight-bold text-body-1">{{ item.description }}</div>
+                <div class="font-weight-bold text-body-1 truncate-2">
+                  {{ item.summary }}
+                </div>
               </template>
             </app-profile-list-item>
           </template>
@@ -115,8 +135,11 @@
 </template>
 
 <script setup>
+import { useAuthStore } from "@core/stores/auth";
 import { useFilterStore } from "@core/stores/filter";
+import category from "~/core/mappers/models/schema/category";
 const store = useFilterStore();
+const auth = useAuthStore();
 let blog = reactive([]);
 const { isClient } = useSsrCorrection();
 const { $repos } = useNuxtApp();
@@ -126,8 +149,12 @@ let lastPage = ref(false);
 let filters = computed(() => {
   return [{ type: "button", items: blog.categories }];
 });
-const { blogHomepageGrid, blogHomepageHorizontalShow, blogHomepageSidebar } =
-  useRuntimeConfig().public;
+const {
+  blogHomepageGrid,
+  blogHomepageHorizontalShow,
+  blogHomepageSidebar,
+  followFeature,
+} = useRuntimeConfig().public;
 const toItem = (e) => {
   navigateTo(
     localePath({
@@ -155,6 +182,13 @@ const getHomeCommon = async () => {
     .then((res) => {
       Object.assign(blog, res);
       store.buttonDefault = blog.categories[0].slug;
+
+      // if (auth.user.loggedIn) Object.assign(blog.categories, [...blog.categories, { title: 'following' }])
+      if (auth.user.loggedIn && followFeature == "true")
+        blog.categories.splice(1, 0, {
+          title: t("following"),
+          slug: "following",
+        });
     });
 };
 
@@ -171,6 +205,18 @@ const getHomeData = async () => {
       lastPage.value = res.last_page === res.current_page ? true : false;
     });
 };
+
+const follow = (item) => {
+  console.log(item);
+  $repos.other.follow({
+    body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
+  });
+};
+
+const toUser = (item) => {
+  navigateTo(localePath({ name: 'user-profile-id', params: { id: item.id } }))
+}
+
 Promise.all([
   useAsyncData(async () => await getHomeData()),
   useAsyncData(async () => await getHomeCommon()),
@@ -199,7 +245,7 @@ const followingSuggestion = ref([
     name: "Dustin Moskovitz",
     avatarUrl: "/images/user.jpeg",
     description: "Works in Progress: The Long Journey to Doing Good Better",
-  }
+  },
 ]);
 </script>
 
