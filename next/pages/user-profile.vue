@@ -5,8 +5,10 @@
         <NuxtPage :user="user.info" />
       </v-col>
       <v-col cols="12" lg="3">
-        <profile-user-preview :user="user"> </profile-user-preview>
-
+        <profile-user-preview :user="user" class="mb-8"> </profile-user-preview>
+        <h4>
+          {{$t('following')}}
+        </h4>
         <template v-for="item in user.following" :key="item.id">
           <app-profile-list-item
             avatar-size="48"
@@ -38,6 +40,21 @@
             </template>
           </app-profile-list-item>
         </template>
+        <v-btn
+          @click="
+            navigateTo(
+              localePath({
+                name: 'user-profile-id-followType',
+                params: { id: route.params.id, followType:'following' },
+              })
+            )
+          "
+          color="primary-base"
+          variant="text"
+          class="mt-3 mb-10 mx-auto px-0"
+        >
+          {{ $t("see_more") }}
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -46,6 +63,7 @@
 import { useDisplay } from "vuetify";
 const { smAndDown } = useDisplay();
 let user = ref({});
+const localePath = useLocalePath();
 const { $repos } = useNuxtApp();
 const route = useRoute();
 const getUserprofile = () => {
