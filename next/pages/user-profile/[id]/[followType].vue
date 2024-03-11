@@ -7,37 +7,37 @@
     }}
     {{ $t(route.params.followType) }}
   </h2>
-    <template v-for="item in followingOrFollower" :key="item.id">
-      <app-profile-list-item
-        avatar-size="48"
-        :item="item"
-        :hover="false"
-        subtitle-key="description"
-        @click.self="toUser(item)"
-        class="mb-4 px-1 rounded"
-      >
-        <template #title>
-          <span class="text-caption font-weight-bold">{{
-            item?.displayName
-          }}</span>
-        </template>
-        <!-- <template #subtitle>
+  <template v-for="item in followingOrFollower" :key="item.id">
+    <app-profile-list-item
+      avatar-size="48"
+      :item="item"
+      :hover="false"
+      subtitle-key="description"
+      @click.self="toUser(item)"
+      class="mb-4 px-1 rounded"
+    >
+      <template #title>
+        <span class="text-caption font-weight-bold">{{
+          item?.displayName
+        }}</span>
+      </template>
+      <!-- <template #subtitle>
           <span class="text-caption text-text-high-emphasis">{{
             item?.description
           }}</span>
         </template> -->
-        <template #append>
-          <v-btn
-            :text="$t('follow')"
-            @click="follow(item)"
-            class="bg-background-primary"
-            slim
-            variant="text"
-            size="small"
-          />
-        </template>
-      </app-profile-list-item>
-    </template>
+      <template #append>
+        <v-btn
+          :text="$t(item.isFollowed ? 'unfollow' : 'follow')"
+          @click="follow(item)"
+          class="bg-background-primary"
+          slim
+          variant="text"
+          size="small"
+        />
+      </template>
+    </app-profile-list-item>
+  </template>
   <v-btn
     @click="
       route.params.followType == 'followers'
@@ -89,13 +89,21 @@ const getFollowersList = (e) => {
 };
 const follow = (item) => {
   console.log(item);
-  $repos.other.follow({
-    body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
-  });
+  let itemIndex = followingOrFollower.value.findIndex(
+    (element) => item.id === item.id
+  );
+  $repos.other
+    .follow({
+      body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
+    })
+    .then((res) => {
+      followingOrFollower.value[itemIndex].isFollowed =
+        !followingOrFollower.value[itemIndex].isFollowed;
+    });
 };
 const toUser = (item) => {
-  navigateTo(localePath({ name: 'user-profile-id', params: { id: item.id } }))
-}
+  navigateTo(localePath({ name: "user-profile-id", params: { id: item.id } }));
+};
 onMounted(() => {
   route.params.followType == "followers"
     ? getFollowersList()

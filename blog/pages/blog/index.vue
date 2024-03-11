@@ -80,7 +80,12 @@
               @click.self="toUser(item)"
             >
               <template #title>
-                <div @click.self="toUser(item)" class="ps-1 text-caption font-weight-bold">{{ item.displayName }}</div>
+                <div
+                  @click.self="toUser(item)"
+                  class="ps-1 text-caption font-weight-bold"
+                >
+                  {{ item.displayName }}
+                </div>
               </template>
               <!-- <template #subtitle>
                 <small class="ps-1 text-caption text-text-high-emphasis">{{ item.description }}</small>
@@ -209,14 +214,19 @@ const getHomeData = async () => {
 
 const follow = (item) => {
   console.log(item);
-  $repos.other.follow({
-    body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
-  });
+  $repos.other
+    .follow({
+      body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
+    })
+    .then((res) => {
+      blog.popularAuthor[itemIndex].isFollowed =
+        !blog.popularAuthor[itemIndex].isFollowed;
+    });
 };
 
 const toUser = (item) => {
-  navigateTo(localePath({ name: 'user-profile-id', params: { id: item.id } }))
-}
+  navigateTo(localePath({ name: "user-profile-id", params: { id: item.id } }));
+};
 
 Promise.all([
   useAsyncData(async () => await getHomeData()),

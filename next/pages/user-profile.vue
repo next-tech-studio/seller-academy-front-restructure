@@ -72,9 +72,14 @@ const getUserprofile = () => {
   });
 };
 const follow = (item) => {
-  $repos.other.follow({
-    body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
-  });
+  $repos.other
+    .follow({
+      body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
+    })
+    .then((res) => {
+      user.value.following[itemIndex].isFollowed =
+        ! user.value.following[itemIndex].isFollowed;
+    });
 };
 const toUser = (item) => {
   navigateTo(localePath({ name: "user-profile-id", params: { id: item.id } }));
