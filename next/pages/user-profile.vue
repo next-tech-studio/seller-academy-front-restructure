@@ -7,7 +7,7 @@
       <v-col cols="12" lg="3">
         <profile-user-preview :user="user" class="mb-8"> </profile-user-preview>
         <h4>
-          {{$t('following')}}
+          {{ $t("following") }}
         </h4>
         <template v-for="item in user.following" :key="item.id">
           <app-profile-list-item
@@ -15,9 +15,8 @@
             :hover="false"
             subtitle-key="description"
             :item="item"
-            class="px-0"
-            @click="$emit('to:item', item.id)"
-            :class="{ 'bg-white rounded-md mb-1': smAndDown }"
+            @click.self="toUser(item)"
+            class="mb-4 px-1 rounded"
           >
             <template #title>
               <span class="text-caption font-weight-bold">{{
@@ -32,6 +31,7 @@
             <template #append>
               <v-btn
                 :text="$t('follow')"
+                @click="follow(item)"
                 class="bg-background-primary"
                 slim
                 variant="text"
@@ -45,7 +45,7 @@
             navigateTo(
               localePath({
                 name: 'user-profile-id-followType',
-                params: { id: route.params.id, followType:'following' },
+                params: { id: route.params.id, followType: 'following' },
               })
             )
           "
@@ -70,6 +70,14 @@ const getUserprofile = () => {
   $repos.other.getUserProfileSidebar(route.params.id).then((res) => {
     Object.assign(user.value, res.data);
   });
+};
+const follow = (item) => {
+  $repos.other.follow({
+    body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
+  });
+};
+const toUser = (item) => {
+  navigateTo(localePath({ name: "user-profile-id", params: { id: item.id } }));
 };
 onMounted(() => {
   getUserprofile();
