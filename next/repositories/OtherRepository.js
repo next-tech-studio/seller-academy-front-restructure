@@ -91,4 +91,30 @@ export default (request) => ({
       },
     );
   },
+  getUserFollowingList(payload) {
+    return request(
+      {
+        name: "userFollowingList",
+        method: "get",
+        page: payload.page,
+        query: `?followingId=${payload.id}`,
+        path: `/kns/user/following/list`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
+  getUserFollowersList(payload) {
+    return request(
+      {
+        name: "userFollowingList",
+        method: "get",
+        page: payload.page,
+        query: `?followerId=${payload.id}`,
+        path: `/kns/user/followers/list`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
 });
