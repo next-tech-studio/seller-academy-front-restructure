@@ -208,6 +208,15 @@ export const useSidebar = (user = { roles: [] }) => {
           to: localePath({ path: "/forum/panel/room/listings/rooms" }),
         },
         {
+          title: t("categories"),
+          roles: ["siteAdmin", "seller"],
+          get show() {
+            // return checkUserRoles(this.roles);
+            return true;
+          },
+          to: localePath({ path: "/forum/panel/room/listings/categories" }),
+        },
+        {
           title: t("join_requests"),
           roles: ["siteAdmin", "seller"],
           get show() {

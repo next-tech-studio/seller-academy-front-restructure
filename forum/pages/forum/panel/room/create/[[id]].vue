@@ -116,7 +116,7 @@
         </div>
       </section>
       <section class="bg-background-light rounded-lg pa-6" style="width: 49%">
-        <div class="mb-4">
+        <div class="mb-4" v-if="route.params.id">
           <p class="mb-2 text-h3">{{ $t("room_link") }}</p>
           <div class="text-text-low-emphasis text-body d-flex align-center">
             <span dir="ltr" class="justify-start">{{ url }}</span>
@@ -266,25 +266,15 @@ let users = ref([]);
 let newMembers = ref([]);
 const { $repos } = useNuxtApp();
 const addMember = (item, index) => {
-  console.log(
-    "bbeeffoore",
-    newMembers.value,
-    chosenIndex.value,
-    index,
-    item.id
-  );
 
   if (!!!chosenIndex.value[item.id]) {
-    console.log("838383");
     newMembers.value.push(item.id);
     chosenIndex.value[item.id] = true;
   } else {
-    console.log("222222");
 
     newMembers.value.splice(index, 1);
     chosenIndex.value[item.id] = false;
   }
-  console.log("cchhoosseennnnn", newMembers.value, chosenIndex.value[index]);
 };
 let privacyStatus = [
   { id: 1, title: t("private") },

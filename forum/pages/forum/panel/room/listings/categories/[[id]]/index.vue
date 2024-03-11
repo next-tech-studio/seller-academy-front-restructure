@@ -212,7 +212,7 @@ const submitItem = () => {
   if (body.attachments)
     body.attachments = body.attachments.map((item) => item.id);
   payload = {
-    body: { ...body, id: sharedStore.currentItem.id || 0, status:'active' },
+    body: { ...body, id: sharedStore.currentItem.id || 0, status: "active" },
     type: "chatRoom",
   };
   if (sharedStore.edit) {
@@ -220,15 +220,15 @@ const submitItem = () => {
       (item) => item.id === sharedStore.currentItem.id
     );
     $repos.communityPanel.updateCategory(payload).then((res) => {
-      Object.assign(sharedStore.listItems.data[itemIndex], res);
+      Object.assign(sharedStore.listItems.data[itemIndex], res.data);
       sharedStore.edit = false;
       sharedStore.closeDialog();
     });
   } else {
     $repos.communityPanel.updateCategory(payload).then((res) => {
       Object.assign(sharedStore.listItems.data, [
-        ...sharedStore.listItems.data,
         { ...res.data },
+        ...sharedStore.listItems.data,
       ]);
       sharedStore.closeDialog();
     });

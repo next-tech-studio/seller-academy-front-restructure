@@ -10,7 +10,7 @@ export default (request) => ({
       alert: false,
     });
   },
-  groupSearch(payload){
+  groupSearch(payload) {
     return request({
       name: "search",
       method: "get",
@@ -21,7 +21,6 @@ export default (request) => ({
     });
   },
   uploadFiles(payload, path, multiple = true) {
-    console.log('uploader',payload, path,multiple)
     return request(
       {
         name: "uploadFiles",
@@ -39,32 +38,107 @@ export default (request) => ({
       payload.body
     );
   },
-  forms(payload){
+  forms(payload) {
     return request({
       name: "forms",
       method: "get",
       page: payload.page,
-      path: '/forms/list',
+      path: "/forms/list",
       loading: true,
       alert: false,
-    })
+    });
   },
-  getRejectionReasons(){
+  getRejectionReasons() {
     return request({
       name: "rejectionReasons",
       method: "get",
-      path: '/report/list',
+      path: "/report/list",
       loading: true,
       alert: false,
-    })
+    });
   },
-  getRolesList(){
+  getRolesList() {
     return request({
       name: "roles",
       method: "get",
-      path: '/panel/users/ligeneral',
+      path: "/panel/users/ligeneral",
       loading: true,
       alert: false,
-    })
-  }
+    });
+  },
+  getUserProfileSidebar(payload) {
+    return request(
+      {
+        name: "userProfileSidebar",
+        method: "get",
+        query: `?userId=${payload}`,
+        path: `/kns/user/data`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
+  getUserPosts(payload) {
+    return request(
+      {
+        name: "userPosts",
+        method: "get",
+        page: payload.page,
+        query: `?userId=${payload.id}`,
+        path: `/kns/user/posts`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
+  follow(payload) {
+    return request(
+      {
+        name: "follow_user",
+        method: "put",
+        path: `/kns/user/follow`,
+        loading: true,
+        alert: true,
+      },
+      payload.body
+    );
+  },
+  universalSearch(payload) {
+    return request(
+      {
+        name: "universalSearch",
+        method: "get",
+        page: payload.page,
+        path: `/kns/search/${payload.type}/${payload.keyword}`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
+  getUserFollowingList(payload) {
+    return request(
+      {
+        name: "userFollowingList",
+        method: "get",
+        page: payload.page,
+        query: `?followingId=${payload.id}`,
+        path: `/kns/user/following/list`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
+  getUserFollowersList(payload) {
+    return request(
+      {
+        name: "userFollowingList",
+        method: "get",
+        page: payload.page,
+        query: `?followerId=${payload.id}`,
+        path: `/kns/user/followers/list`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
 });

@@ -1,5 +1,6 @@
 <template>
   <div id="search-navbar" :class="!lgAndUp ? 'px-4' : ''">
+  <!-- {{ searchItems }} -->
     <div class="position-relative size">
       <v-btn
         size="small"
@@ -27,9 +28,10 @@
               : ''
           "
           type="search"
-          label="جستجوی مقالات و دوره‌ها ..."
+          label="جستجوی مقالات و پادکست‌ها ..."
           item-title="title"
           hide-details
+          :menu="showMenu"
           menu-icon=""
           :clearable="true"
           open-on-clear
@@ -39,6 +41,7 @@
           variant="outlined"
           single-line
           @update:search="onSearch"
+          @keydown.enter="onUniversalSearch"
           :menu-props="{
             contentClass: 'search-input__content--bordered',
             offset: lgAndUp ? '-2px' : '0px',
@@ -58,13 +61,18 @@
             <div
               class="d-flex flex-column py-1"
               style="cursor: pointer"
-              @click="toItem(item.value)"
+              @click="chooseArticle(item.raw)"
             >
-              <span>{{ item.title }}</span>
-              <span
+              <div class="d-flex text-body-1">
+                <v-avatar class="me-3">
+                  <v-img cover :src="item.raw.bannerUrl" />
+                </v-avatar>
+                <span>{{ item.title }}</span>
+              </div>
+              <span class="ms-13 text-subtitle-1"
                 >در
                 <span class="text-secondary-base">{{
-                  $t(item.value.type)
+                  $t(item.raw.type)
                 }}</span>
               </span>
             </div>
@@ -82,43 +90,46 @@
 import { useDisplay } from "vuetify";
 const { $repos } = useNuxtApp();
 const localePath = useLocalePath();
-let showMenu = ref(false);
 const { lgAndUp } = useDisplay();
-const emit = defineEmits(["search"]);
+const emit = defineEmits(["search",'choose:article']);
 import { useDebounceFn } from "@vueuse/core";
+const props = defineProps({
+  universal: {
+    type: Boolean,
+    default: false
+  }
+})
 let search = ref("");
-let searchItems = reactive([]);
+let searchItems = ref([]);
+let showMenu = ref(false)
 let expandedSearch = ref(false);
-const onSearch = useDebounceFn(
+const onSearch = !props.universal ? useDebounceFn(
   async () => {
-    showMenu.value = false;
     await $repos.other.search(search.value).then((res) => {
-      Object.assign(searchItems, [...res]);
-      showMenu.value = true;
+      searchItems.value = res;
+      if(res) showMenu.value = true
+      console.log('searchItems',searchItems.value, searchItems.value.length)
     });
   },
   100,
   { maxWait: 100 }
-);
-const toItem = (item) => {
+) : () => {};
+
+const onUniversalSearch = () => {
+  navigateTo(localePath({ name: 'blog-search', query: { q: search.value } }))
+}
+
+const chooseArticle= (item) => {
   search.value = item.title;
-  navigateTo(
-    localePath({
-      path: `/article/${item?.slug}`,
-    }), {external: true}
-  );
-  search.value = ''
-  searchItems.value = ''
-  expandedSearch.value = false
+  emit('choose:article', item)
+  search.value = "";
+  // searchItems.value = "";
+  expandedSearch.value = false;
 };
-watch([search, showMenu], ([newSearchValue, newMenuValue]) => {
-  if(newSearchValue) showMenu.value = true
-  if (!newSearchValue) searchItems.splice(0, searchItems.length);
-  // if (newMenuValue.value) {
-  //   document.querySelector("html").classList.add("overflow-hidden");
-  // } else {
-  //   document.querySelector("html").classList.remove("overflow-hidden");
-  // }
+watch(search, (newSearchValue) => {
+  console.log('wwatch',!newSearchValue)
+  console.log('83883838383838383838',searchItems.value)
+  if (!newSearchValue) searchItems.value.splice(0, searchItems.value.length);
 });
 </script>
 

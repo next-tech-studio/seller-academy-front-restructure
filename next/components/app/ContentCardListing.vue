@@ -1,7 +1,10 @@
 <template>
   <v-row justify="center" tag="section" :dense="smAndDown">
     <v-col cols="12" class="py-0">
-      <div class="d-flex justify-space-between align-center mb-md-8 mb-4">
+      <div
+        class="d-flex justify-space-between align-center mb-md-8"
+        :class="{ 'mb-4': blogHomepageHorizontalShow == 'false' }"
+      >
         <h2 class="text-md-h1 text-h2 text-text-high-emphasis" v-if="title">
           {{ $t(title).split("-").join(" ") }}
         </h2>
@@ -64,7 +67,9 @@ v-if="showFilter && !dropDownFilter"
           :key="index"
           :class="{
             'px-2': position(index) == 'center',
-            'ps-4': position(index) == 'start',
+            'ps-4':
+              position(index) == 'start' &&
+              blogHomepageHorizontalShow == 'false',
             'pe-4': position(index) == 'end',
           }"
           class="pb-md-6 py-0 position-relative"
@@ -80,7 +85,7 @@ v-if="showFilter && !dropDownFilter"
           </slot>
           <v-btn
             v-if="selectable"
-            class='remove-article-position'
+            class="remove-article-position"
             icon="custom:x"
             flat
             @click="$emit('remove:item', post)"
@@ -106,6 +111,7 @@ const { mdAndUp, smAndDown } = useDisplay();
 import { useFilterStore } from "@core/stores/filter";
 const store = useFilterStore();
 const emit = defineEmits(["filter", "update:filters"]);
+const { blogHomepageHorizontalShow } = useRuntimeConfig().public;
 const props = defineProps({
   content: Array,
   categories: Array,
@@ -171,7 +177,7 @@ const position = (index) => {
 </script>
 
 <style lang="scss">
-.remove-article-position{
+.remove-article-position {
   position: absolute;
   left: 0;
   top: 0;

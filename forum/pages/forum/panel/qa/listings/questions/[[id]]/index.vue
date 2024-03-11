@@ -430,10 +430,10 @@ const submitItem = () => {
       body: { ...body, id: 0, questionId: sharedStore.currentItem.id},
     };
     $repos.communityPanel.sendAnswer(payload).then((res) => {
-      Object.assign(sharedStore.listItems.data, [
-      { ...res.data },
-        ...sharedStore.listItems.data,
-      ]);
+      // Object.assign(sharedStore.listItems.data, [
+      // { ...res.data },
+      //   ...sharedStore.listItems.data,
+      // ]);
       sharedStore.closeDialog();
     });
   }
