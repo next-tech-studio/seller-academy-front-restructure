@@ -13,9 +13,8 @@
         :item="item"
         :hover="false"
         subtitle-key="description"
-        class="px-0"
-        @click="$emit('to:item', item.id)"
-        :class="{ 'bg-white rounded-md mb-1': smAndDown }"
+        @click.self="toUser(item)"
+        class="mb-4 px-1 rounded"
       >
         <template #title>
           <span class="text-caption font-weight-bold">{{
@@ -30,6 +29,7 @@
         <template #append>
           <v-btn
             :text="$t('follow')"
+            @click="follow(item)"
             class="bg-background-primary"
             slim
             variant="text"
@@ -87,6 +87,15 @@ const getFollowersList = (e) => {
       console.log("rrrreeesssss", res);
     });
 };
+const follow = (item) => {
+  console.log(item);
+  $repos.other.follow({
+    body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
+  });
+};
+const toUser = (item) => {
+  navigateTo(localePath({ name: 'user-profile-id', params: { id: item.id } }))
+}
 onMounted(() => {
   route.params.followType == "followers"
     ? getFollowersList()

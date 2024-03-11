@@ -89,6 +89,7 @@
                 <v-btn
                   @click="follow(item)"
                   flat
+                  slim
                   size="small"
                   color="primary-base"
                   >{{ $t(item.isFollowed ? "unfollow" : "follow") }}</v-btn
