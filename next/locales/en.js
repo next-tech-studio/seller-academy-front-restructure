@@ -190,4 +190,5 @@ export default {
   investment: "ّInvestment",
   research_and_development: "Research & Development",
   faq: "Frequently Asked Questions",
+  result_for: "Result for"
 };

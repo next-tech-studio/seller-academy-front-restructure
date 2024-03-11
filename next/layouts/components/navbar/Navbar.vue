@@ -66,6 +66,7 @@
         </template>
         <v-spacer></v-spacer>
         <div class="d-flex align-center">
+          <search universal />
           <app-share-in class="mx-4" :color="color.text" />
           <!-- <div class="mx-4">
             <lang-switcher />

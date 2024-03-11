@@ -21,7 +21,6 @@ export default (request) => ({
     });
   },
   uploadFiles(payload, path, multiple = true) {
-    console.log("uploader", payload, path, multiple);
     return request(
       {
         name: "uploadFiles",
@@ -68,12 +67,78 @@ export default (request) => ({
     });
   },
   getUserProfileSidebar(payload) {
-    return request({
-      name: "userProfileSidebar",
-      method: "get",
-      path: `/panel/userProfile/${payload}`,
-      loading: true,
-      alert: false,
-    });
+    return request(
+      {
+        name: "userProfileSidebar",
+        method: "get",
+        query: `?userId=${payload}`,
+        path: `/kns/user/data`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
+  getUserPosts(payload) {
+    return request(
+      {
+        name: "userPosts",
+        method: "get",
+        page: payload.page,
+        query: `?userId=${payload.id}`,
+        path: `/kns/user/posts`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
+  follow(payload) {
+    return request(
+      {
+        name: "follow_user",
+        method: "put",
+        path: `/kns/user/follow`,
+        loading: true,
+        alert: true,
+      },
+      payload.body
+    );
+  },
+  universalSearch(payload) {
+    return request(
+      {
+        name: "universalSearch",
+        method: "get",
+        page: payload.page,
+        path: `/kns/search/${payload.type}/${payload.keyword}`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
+  getUserFollowingList(payload) {
+    return request(
+      {
+        name: "userFollowingList",
+        method: "get",
+        page: payload.page,
+        query: `?followingId=${payload.id}`,
+        path: `/kns/user/following/list`,
+        loading: false,
+        alert: false,
+      },
+    );
+  },
+  getUserFollowersList(payload) {
+    return request(
+      {
+        name: "userFollowingList",
+        method: "get",
+        page: payload.page,
+        query: `?followerId=${payload.id}`,
+        path: `/kns/user/followers/list`,
+        loading: false,
+        alert: false,
+      },
+    );
   },
 });

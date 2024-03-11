@@ -119,6 +119,7 @@ export default defineNuxtConfig({
       domain: process.env.DOMAIN,
       gtagId: process.env.GTAGID,
       needAuth: process.env.NEED_AUTH,
+      followFeature: process.env.FOLLOW_FEATURE
     },
   },
   // schemaOrg: {
