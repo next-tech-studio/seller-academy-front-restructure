@@ -98,7 +98,7 @@ export default (request) => ({
         method: "put",
         path: `/kns/user/follow`,
         loading: true,
-        alert: false,
+        alert: true,
       },
       payload.body
     );
