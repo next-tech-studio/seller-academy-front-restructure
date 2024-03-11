@@ -36,9 +36,15 @@
                       </div>
                     </template>
                     <template #append>
-                      <v-btn @click="follow(user)" flat size="small" color="primary-base">{{
-                        $t(user.isFollowed ? "unfollow" : "follow")
-                      }}</v-btn>
+                      <v-btn
+                        @click="follow(user)"
+                        flat
+                        size="small"
+                        color="primary-base"
+                        >{{
+                          $t(user.isFollowed ? "unfollow" : "follow")
+                        }}</v-btn
+                      >
                     </template>
                   </app-profile-list-item>
                 </template>
@@ -79,10 +85,7 @@
         <v-card>
           <template v-if="tab != 1">
             <v-card-title>{{ $t("top_users") }}</v-card-title>
-            <template
-              v-for="(user, index) in users.slice(0, 5)"
-              :key="index"
-            >
+            <template v-for="(user, index) in users.slice(0, 5)" :key="index">
               <app-profile-list-item
                 :item="user"
                 subtitle-key="description"
@@ -97,9 +100,13 @@
                   </div>
                 </template>
                 <template #append>
-                  <v-btn @click="follow(user)" flat size="small" variant="outlined">{{
-                    $t("follow")
-                  }}</v-btn>
+                  <v-btn
+                    @click="follow(user)"
+                    flat
+                    size="small"
+                    variant="outlined"
+                    >{{ $t(user.isFollowed ? "unfollow" : "follow") }}</v-btn
+                  >
                 </template>
               </app-profile-list-item>
             </template>
@@ -107,7 +114,10 @@
 
           <template v-if="tab != 2">
             <v-card-title class="mt-10">{{ $t("top_posts") }}</v-card-title>
-            <template v-for="(article, index) in articles.slice(0, 5)" :key="index">
+            <template
+              v-for="(article, index) in articles.slice(0, 5)"
+              :key="index"
+            >
               <app-profile-list-item
                 :item="article"
                 subtitle-key="description"
@@ -120,7 +130,11 @@
                 </template>
                 <template #title>
                   <v-avatar color="n050" size="36">
-                    <v-img cover :alt="article.title" :src="article.bannerUrl"></v-img>
+                    <v-img
+                      cover
+                      :alt="article.title"
+                      :src="article.bannerUrl"
+                    ></v-img>
                   </v-avatar>
                   <small class="ps-1">{{ article.title }}</small>
                 </template>
@@ -147,7 +161,10 @@
           <template v-if="tab != 4">
             <v-card-title class="mt-10">{{ $t("top_tags") }}</v-card-title>
             <v-chip-group selected-class="text-primary" column>
-              <v-chip v-for="category in categories.slice(0, 10)" :key="category">
+              <v-chip
+                v-for="category in categories.slice(0, 10)"
+                :key="category"
+              >
                 {{ category.title }}
               </v-chip>
             </v-chip-group>
@@ -188,10 +205,17 @@ const tags = ref([]);
 const categories = ref([]);
 
 const follow = (item) => {
-  console.log(item);
-  $repos.other.follow({
-    body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
-  });
+  let itemIndex = users.value.findIndex(
+    (element) => element.id === item.id
+  );
+  $repos.other
+    .follow({
+      body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
+    })
+    .then((res) => {
+      users.value[itemIndex].isFollowed =
+        !users.value[itemIndex].isFollowed;
+    });
 };
 
 const search = async (type) => {

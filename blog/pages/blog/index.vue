@@ -213,7 +213,9 @@ const getHomeData = async () => {
 };
 
 const follow = (item) => {
-  console.log(item);
+  let itemIndex = blog.popularAuthor.findIndex(
+    (element) => element.id === item.id
+  );
   $repos.other
     .follow({
       body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },

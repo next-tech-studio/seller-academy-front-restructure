@@ -90,7 +90,7 @@ const getFollowersList = (e) => {
 const follow = (item) => {
   console.log(item);
   let itemIndex = followingOrFollower.value.findIndex(
-    (element) => item.id === item.id
+    (element) => element.id === item.id
   );
   $repos.other
     .follow({

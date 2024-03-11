@@ -5,7 +5,12 @@
         <NuxtPage :user="user.info" />
       </v-col>
       <v-col cols="12" lg="3">
-        <profile-user-preview :user="user" class="mb-8"> </profile-user-preview>
+        <profile-user-preview
+          :user="user"
+          class="mb-8"
+          @update:followStatus="follow(user.info, true)"
+        >
+        </profile-user-preview>
         <h4>
           {{ $t("following") }}
         </h4>
@@ -71,14 +76,17 @@ const getUserprofile = () => {
     Object.assign(user.value, res.data);
   });
 };
-const follow = (item) => {
+const follow = (item, self = false) => {
+  let itemIndex = self
+    ? user.value.findIndex((element) => element.id === item.id)
+    : -1;
   $repos.other
     .follow({
       body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
     })
     .then((res) => {
-      user.value.following[itemIndex].isFollowed =
-        ! user.value.following[itemIndex].isFollowed;
+      const profile = self ? user.value.info : user.value.following[itemIndex];
+      profile.isFollowed = !profile.isFollowed;
     });
 };
 const toUser = (item) => {
