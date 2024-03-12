@@ -11,7 +11,7 @@
         @click="expandedSearch = !expandedSearch"
         color="border-grade-2"
       >
-        <v-icon color="icon-high-emphasis" icon="custom:search" />
+        <v-icon color="border-grade-2" icon="custom:search" />
       </v-btn>
       <div class="d-flex align-center h-100">
         <v-combobox
