@@ -8,60 +8,74 @@
         <profile-user-preview
           :user="user"
           class="mb-8"
+          @to:followings="
+            navigateTo(
+              localePath({ name: 'user-profile-id-followType', params: { id: route.params.id,followType: 'following' } }),
+              { external: true }
+            )
+          "
+                    @to:followers="
+            navigateTo(
+              localePath({ name: 'user-profile-id-followType', params: { id: route.params.id,followType: 'followers' } }),
+              { external: true }
+            )
+          "
           @update:followStatus="follow(user.info, true)"
         >
         </profile-user-preview>
-        <div class="d-none d-lg-block">
-        <h4>
-          {{ $t("following") }}
-        </h4>
-        <template v-for="item in user.followers" :key="item.id">
-          <app-profile-list-item
-            avatar-size="48"
-            :hover="false"
-            subtitle-key="description"
-            :item="item"
-            @click.self="toUser(item)"
-            class="mb-4 px-1 rounded"
-          >
-            <template #title>
-              <span class="text-caption font-weight-bold">{{
-                item.displayName
-              }}</span>
-            </template>
-            <!-- <template #subtitle>
+        <div class="d-none d-lg-block" v-if="user?.followers?.length">
+          <h4>
+            {{ $t("following") }}
+          </h4>
+          <template v-for="item in user.followers" :key="item.id">
+            <app-profile-list-item
+              avatar-size="48"
+              :hover="false"
+              subtitle-key="description"
+              :item="item"
+              @click.self="toUser(item)"
+              class="mb-4 px-1 rounded"
+            >
+              <template #title>
+                <span
+                  @click.self="toUser(item)"
+                  class="text-caption font-weight-bold"
+                  >{{ item.displayName }}</span
+                >
+              </template>
+              <!-- <template #subtitle>
                   <span class="text-caption text-text-high-emphasis">{{
                     item?.description
                   }}</span>
                 </template> -->
-            <template #append>
-              <v-btn
-                :text="$t('follow')"
-                @click="follow(item)"
-                class="bg-background-primary"
-                slim
-                variant="text"
-                size="small"
-              />
-            </template>
-          </app-profile-list-item>
-        </template>
-        <v-btn
-          @click="
-            navigateTo(
-              localePath({
-                name: 'user-profile-id-followType',
-                params: { id: route.params.id, followType: 'following' },
-              })
-            )
-          "
-          color="primary-base"
-          variant="text"
-          class="mt-3 mb-10 mx-auto px-0"
-        >
-          {{ $t("see_more") }}
-        </v-btn>
-      </div>
+              <template #append>
+                <v-btn
+                  :text="$t('follow')"
+                  @click="follow(item)"
+                  class="bg-background-primary"
+                  slim
+                  variant="text"
+                  size="small"
+                />
+              </template>
+            </app-profile-list-item>
+          </template>
+          <v-btn
+            @click="
+              navigateTo(
+                localePath({
+                  name: 'user-profile-id-followType',
+                  params: { id: route.params.id, followType: 'following' },
+                })
+              )
+            "
+            color="primary-base"
+            variant="text"
+            class="mt-3 mb-10 mx-auto px-0"
+          >
+            {{ $t("see_more") }}
+          </v-btn>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -92,7 +106,9 @@ const follow = (item, self = false) => {
     });
 };
 const toUser = (item) => {
-  navigateTo(localePath({ name: "user-profile-id", params: { id: item.id } }));
+  navigateTo(localePath({ name: "user-profile-id", params: { id: item.id } }), {
+    external: true,
+  });
 };
 onMounted(() => {
   getUserprofile();
