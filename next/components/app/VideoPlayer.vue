@@ -3,7 +3,11 @@
     flat
     v-if="videoSrc?.startsWith('https://www.aparat.com')"
     class="h_iframe-aparat_embed_frame"
-    :class="!$vuetify.display.mdAndUp && isHeader ? ' rounded-t-0 rounded-b-lg':'rounded-lg'"
+    :class="
+      !$vuetify.display.mdAndUp && isHeader
+        ? ' rounded-t-0 rounded-b-lg'
+        : 'rounded-lg'
+    "
   >
     <span style="display: block; padding-top: 57%"></span>
     <iframe
@@ -16,11 +20,66 @@
   <v-card
     v-else
     flat
-    class="video-player"
-    :class="!$vuetify.display.mdAndUp && isHeader ? ' rounded-t-0 rounded-b-lg':'rounded-lg'"
+    class="video-player h-100"
+    :class="
+      !$vuetify.display.mdAndUp && isHeader
+        ? ' rounded-t-0 rounded-b-lg'
+        : 'rounded-lg'
+    "
     dir="ltr"
+    :image="videoPoster"
   >
-    <video
+    <!-- <div style="position: absolute; bottom: 0; left: 0; right: 0;"> -->
+    <!-- <img :src="videoPoster"> -->
+    <iframe
+      v-if="!audioOnly"
+      :src="videoSrc"
+      class="w-100"
+      height="100%"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      :allowFullScreen="true"
+      webkitallowfullscreen="true"
+      mozallowfullscreen="true"
+      :autoplay="false"
+    ></iframe>
+
+    <div v-else>
+      <div v-if="isInitial" class="controls">
+        <div class="initial">
+          <v-btn
+            class="play-btn"
+            icon
+            :size="previewSize"
+            @click="playOrPause"
+            :loading="!isPlaying && !isInitial"
+            theme="dark"
+          >
+            <v-icon
+              color="white"
+              size="x-large"
+              icon="custom:simplePlay"
+            ></v-icon>
+          </v-btn>
+        </div>
+      </div>
+      <audio
+        v-else
+        style="
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+        "
+        :src="videoSrc"
+        controls
+        autoplay
+      ></audio>
+    </div>
+
+    <!-- </div> -->
+
+    <!-- <video
       ref="video"
       :src="videoSrc"
       :poster="videoPoster"
@@ -30,35 +89,73 @@
       @timeupdate="onTimeUpdate"
     ></video>
     <div class="controls">
-        <div v-if="isInitial" class="initial">
-            <v-btn class="play-btn" icon :size="previewSize" @click="playOrPause" :loading="!isPlaying && !isInitial" theme="dark">
-                <v-icon color="white" size="small" class="ml-1">fas fa-play</v-icon>
-            </v-btn>
+      <div v-if="isInitial" class="initial">
+        <v-btn
+          class="play-btn"
+          icon
+          :size="previewSize"
+          @click="playOrPause"
+          :loading="!isPlaying && !isInitial"
+          theme="dark"
+        >
+          <v-icon color="white" size="small" class="ml-1">fas fa-play</v-icon>
+        </v-btn>
+      </div>
+      <div v-if="!isInitial" class="playing">
+        <v-btn variant="compact" icon :size="previewSize" @click="playOrPause">
+          <v-icon color=" background-scrim-dark">{{
+            isPlaying ? "fas fa-pause-circle" : "fas fa-play-circle"
+          }}</v-icon>
+        </v-btn>
+        <div class="time">
+          {{ convertMinsToHrsMins(currentTime) }} /
+          {{ convertMinsToHrsMins(duration) }}
         </div>
-        <div v-if="!isInitial" class="playing">
-            <v-btn variant="compact" icon :size="previewSize" @click="playOrPause">
-                <v-icon color=" background-scrim-dark">{{ isPlaying ? 'fas fa-pause-circle' : 'fas fa-play-circle' }}</v-icon>
-            </v-btn>
-            <div class="time">{{ currentTime }} / {{ duration }}</div>
-            <div class="progress-bar">
-                <div class="progress" :style="{ width: progress + '%' }"></div>
-            </div>
-            <div>
-                <v-btn variant="compact" icon size="x-small" @click="playOrPause">
-                    <v-icon size="x-small">fas fa-step-forward</v-icon>
-                </v-btn>
-                <v-btn variant="compact" icon size="x-small" @click="mute">
-                    <v-icon size="x-small">{{ !isMuted ? 'fas fa-volume-up' : 'fas fa-volume-mute' }}</v-icon>
-                </v-btn>
-                <v-btn variant="compact" icon size="x-small" @click="playOrPause">
-                    <v-icon size="x-small">fa fa-cog</v-icon>
-                </v-btn>
-                <v-btn variant="compact" icon size="x-small" @click="fullScreen">
-                    <v-icon size="x-small">fas fa-expand</v-icon>
-                </v-btn>
-            </div>
+        <div class="progress-bar">
+          <div class="progress" :style="{ width: progress + '%' }"></div>
         </div>
-    </div>
+        <div>
+          <v-btn
+            v-if="options.includes('forward')"
+            variant="compact"
+            icon
+            size="x-small"
+            @click="playOrPause"
+          >
+            <v-icon size="x-small">fas fa-step-forward</v-icon>
+          </v-btn>
+          <v-btn
+            v-if="options.includes('volume')"
+            variant="compact"
+            icon
+            size="x-small"
+            @click="mute"
+          >
+            <v-icon size="x-small">{{
+              !isMuted ? "fas fa-volume-up" : "fas fa-volume-mute"
+            }}</v-icon>
+          </v-btn>
+          <v-btn
+            v-if="options.includes('cog')"
+            variant="compact"
+            icon
+            size="x-small"
+            @click="playOrPause"
+          >
+            <v-icon size="x-small">fa fa-cog</v-icon>
+          </v-btn>
+          <v-btn
+            v-if="options.includes('fullScreen')"
+            variant="compact"
+            icon
+            size="x-small"
+            @click="fullScreen"
+          >
+            <v-icon size="x-small">fas fa-expand</v-icon>
+          </v-btn>
+        </div>
+      </div>
+    </div> -->
     <slot />
   </v-card>
 </template>
@@ -67,11 +164,13 @@
 import { useDisplay } from "vuetify";
 export default {
   props: {
+    audioOnly: Boolean,
     videoSrc: String,
     videoPoster: String,
     maxHeight: String,
     small: Boolean,
-    isHeader:Boolean
+    isHeader: Boolean,
+    options: Array,
   },
   data() {
     return {
@@ -127,22 +226,29 @@ export default {
       this.duration = Math.floor(this.$refs.video.duration);
       this.progress = (this.currentTime / this.duration) * 100;
     },
+    convertMinsToHrsMins(mins) {
+      let h = Math.floor(mins / 60);
+      let m = mins % 60;
+      h = h < 10 ? "0" + h : h; // (or alternatively) h = String(h).padStart(2, '0')
+      m = m < 10 ? "0" + m : m; // (or alternatively) m = String(m).padStart(2, '0')
+      return `${h}:${m}`;
+    },
   },
   computed: {
-        previewSize() {
-            let size = 'default'
-            if(!this.small) {
-                size = 'x-large'
-            } else if (this.$vuetify.display.smAndDown) {
-                size = 'x-small'
-            }
-            return size;
-        }
-    }
+    previewSize() {
+      let size = "default";
+      if (!this.small) {
+        size = "x-large";
+      } else if (this.$vuetify.display.smAndDown) {
+        size = "x-small";
+      }
+      return size;
+    },
+  },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .h_iframe-aparat_embed_frame {
   position: relative;
 }
@@ -162,13 +268,11 @@ export default {
   border: none;
 }
 </style>
-
-<style lang="scss" scoped>
+<style lang="scss">
 .video-player {
   position: relative;
   width: 100%;
-  height: 0;
-  padding-top: 56.25%;
+  height: 500px;
   display: flex;
   transition: all 0.2s;
 
@@ -194,6 +298,10 @@ export default {
     .play-btn {
       background-color: rgba(var(--v-theme-background-scrim-dark), 30%);
     }
+  }
+
+  .playing {
+    display: none;
   }
 
   &:hover .controls {
@@ -229,7 +337,7 @@ export default {
       }
 
       .progress-bar {
-        width: 40%;
+        width: 10%;
         height: 3px;
         background-color: rgba(255, 255, 255, 0.5);
         flex-grow: 1;
@@ -241,5 +349,9 @@ export default {
       }
     }
   }
+}
+
+audio::-webkit-media-controls-panel {
+  // background-color: rgba(45, 45, 45, 65%);
 }
 </style>
