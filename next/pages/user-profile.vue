@@ -1,16 +1,17 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" lg="9">
+      <v-col cols="12" lg="9" order-sm="1" order-lg="0">
         <NuxtPage :user="user.info" />
       </v-col>
-      <v-col cols="12" lg="3">
+      <v-col cols="12" lg="3" order-sm="0" order-lg="1">
         <profile-user-preview
           :user="user"
           class="mb-8"
           @update:followStatus="follow(user.info, true)"
         >
         </profile-user-preview>
+        <div class="d-none d-lg-block">
         <h4>
           {{ $t("following") }}
         </h4>
@@ -60,6 +61,7 @@
         >
           {{ $t("see_more") }}
         </v-btn>
+      </div>
       </v-col>
     </v-row>
   </v-container>
