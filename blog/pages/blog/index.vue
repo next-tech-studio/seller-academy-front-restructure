@@ -69,6 +69,7 @@
           ></app-content-card-listing>
         </v-container>
       </v-col>
+      <v-divider vertical class="my-8" v-if="blogHomepageSidebar == 'true' && !mdAndDown"></v-divider>
       <v-col cols="3" v-if="blogHomepageSidebar == 'true' && !mdAndDown">
         <v-card>
           <v-card-title>{{ $t("top_users") }}</v-card-title>
@@ -104,6 +105,7 @@
                   slim
                   size="small"
                   color="primary-base"
+                  :variant="item.isFollowed ? 'outlined' : 'flat'"
                   >{{ $t(item.isFollowed ? "unfollow" : "follow") }}</v-btn
                 >
               </template>

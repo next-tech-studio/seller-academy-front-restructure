@@ -65,6 +65,16 @@
       </div>
     </v-list-item>
     <v-divider />
+    <v-list-item>
+      <div class="d-flex flex-column">
+        <span class="text-text-low-emphasis text-body-1">
+          {{ $t("description") }}
+        </span>
+        <span class="text-text-heading text-body-1">
+          {{ information?.description }}
+        </span>
+      </div>
+    </v-list-item>
     <!-- <v-list-item>
       <div class="d-flex justify-space-between">
         <span class="text-text-low-emphasis text-body-1">
@@ -166,6 +176,16 @@ let dataForm = ref([
     validations: "",
     label: "job",
     size: 6,
+    sm: 12,
+    hint: true,
+  },
+  {
+    type: "text-area",
+    name: "description",
+    modelValue: ref(""),
+    validations: "",
+    label: "description",
+    size: 12,
     sm: 12,
     hint: true,
   },

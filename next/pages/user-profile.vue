@@ -4,6 +4,7 @@
       <v-col cols="12" lg="9" order-sm="1" order-lg="0">
         <NuxtPage :user="user.info" />
       </v-col>
+      <v-divider vertical class="my-8"></v-divider>
       <v-col cols="12" lg="3" order-sm="0" order-lg="1">
         <profile-user-preview
           :user="user"
@@ -52,9 +53,9 @@
                 <v-btn
                   :text="$t('follow')"
                   @click="follow(item)"
-                  class="bg-background-primary"
                   slim
-                  variant="text"
+                  color="primary-base"
+                  :variant="item.isFollowed ? 'outlined' : 'flat'"
                   size="small"
                 />
               </template>

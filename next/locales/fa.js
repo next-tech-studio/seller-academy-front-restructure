@@ -927,4 +927,6 @@ export default {
   in_progress: "تکمیل نشده",
   bookmarked_courses: "ذخیره شده‌ها",
   resolve_account_suspension: "جهت رفع تعلیق حساب کاربری",
+  user_dashboard: "ناحیه کاربری",
+  no_result: "نتیجه‌ای یافت نشد!"
 };
