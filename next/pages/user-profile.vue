@@ -14,7 +14,7 @@
         <h4>
           {{ $t("following") }}
         </h4>
-        <template v-for="item in user.following" :key="item.id">
+        <template v-for="item in user.followers" :key="item.id">
           <app-profile-list-item
             avatar-size="48"
             :hover="false"
