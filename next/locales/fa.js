@@ -891,5 +891,7 @@ export default {
   following: "دنبال شونده",
   follow: "دنبال کردن",
   unfollow: "دنبال نکردن",
-  staff_picks: "منتخب دیجی‌نکست"
+  staff_picks: "منتخب دیجی‌نکست",
+  upload_video: "آپلود ویدیو",
+  upload_audio: "آپلود صوت"
 };
