@@ -52,7 +52,6 @@ export const useUploader = (uploaderArguments: upArguments) => {
 
     if (userInputArray?.value?.length === 0) return;
     if (userInputArray?.value?.length > uploaderArguments.max) {
-      console.log("mmmasssxx", uploaderArguments.max, chooseMultipleFile.value);
       if (chooseMultipleFile.value)
         toast.show({ text: "validation.max_limit_images" }, "error");
       else if (e.target.files[0]) {
@@ -153,6 +152,7 @@ export const useUploader = (uploaderArguments: upArguments) => {
             ...res.data
           );
         } else if (!uploaderArguments.multiple) {
+          console.log
           Object.assign(uploaderArguments.uploadedFiles, ...res.data);
           uploaderArguments.emit(
             "update:modelValue",

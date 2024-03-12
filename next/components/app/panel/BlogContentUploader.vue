@@ -42,7 +42,7 @@
             cover
             width="100%"
             :height="blogContent ? '80%' : '100%'"
-            :src="uploadedFiles?.url"
+            :src="uploadedFiles?.url || uploadedFiles"
           >
             <div class="d-flex justify-end ma-4">
               <v-btn
