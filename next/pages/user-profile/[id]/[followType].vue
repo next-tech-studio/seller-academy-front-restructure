@@ -17,7 +17,7 @@
       class="mb-4 px-1 rounded"
     >
       <template #title>
-        <span class="text-caption font-weight-bold">{{
+        <span @click.self="toUser(item)" class="text-caption font-weight-bold">{{
           item?.displayName
         }}</span>
       </template>
@@ -30,9 +30,9 @@
         <v-btn
           :text="$t(item.isFollowed ? 'unfollow' : 'follow')"
           @click="follow(item)"
-          class="bg-background-primary"
           slim
-          variant="text"
+          color="primary-base"
+          :variant="item.isFollowed ? 'outlined' : 'flat'"
           size="small"
         />
       </template>
@@ -64,6 +64,7 @@ let page = reactive(1);
 let lastPage = ref(false);
 let totalPages = ref(1);
 let followingOrFollower = ref([]);
+const localePath = useLocalePath()
 
 const getFollowingList = (e) => {
   $repos.other
@@ -102,7 +103,9 @@ const follow = (item) => {
     });
 };
 const toUser = (item) => {
-  navigateTo(localePath({ name: "user-profile-id", params: { id: item.id } }));
+  navigateTo(localePath({ name: "user-profile-id", params: { id: item.id } }), {
+    external: true,
+  });
 };
 onMounted(() => {
   route.params.followType == "followers"

@@ -18,6 +18,7 @@
         :image-square="true"
         @to:item="toItem($event)"
         :show-filter="false"
+        :show-see-more="!lastPage"
       ></app-content-card-listing>
     </v-window-item>
     <v-window-item value="about">
@@ -31,7 +32,7 @@
 let tabs = ref(null);
 const menu = ref([
   { title: "posts", value: "posts" },
-  { title: "about", value: "about" },
+  // { title: "about", value: "about" },
 ]);
 const props = defineProps({
   user: Object,
@@ -43,7 +44,6 @@ let page = reactive(1);
 let lastPage = ref(false);
 let totalPages = ref(1);
 const getUserPosts = async (e) => {
-
   await $repos.other
     .getUserPosts({
       page,
