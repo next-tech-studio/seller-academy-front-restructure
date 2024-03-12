@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12" md="8">
+  <v-container fluid class="mt-16">
+    <v-row justify="space-between">
+      <v-col cols="12" lg="6">
         <v-card>
           <div class="text-h3 mb-6">
             <span class="text-n400">{{ $t("result_for") }}</span>
@@ -81,7 +81,7 @@
           </v-window>
         </v-card>
       </v-col>
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="4" v-if="!mdAndDown">
         <v-card>
           <template v-if="tab != 1">
             <v-card-title>{{ $t("top_users") }}</v-card-title>
@@ -176,11 +176,14 @@
 </template>
 
 <script setup>
+import { useDisplay } from 'vuetify';
+
 const { isClient } = useSsrCorrection();
 const route = useRoute();
 const tab = ref(0);
 let lastPage = ref(false);
 const { $repos } = useNuxtApp();
+const { mdAndDown } = useDisplay()
 const tabs = ref([
   {
     title: "users",
