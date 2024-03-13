@@ -51,8 +51,12 @@
     "@tiptap/extension-table-cell": "^2.1.16",
     "@tiptap/extension-table-header": "^2.1.16",
     "@tiptap/extension-table-row": "^2.1.16",
+    "hls.js": "^1.5.7",
     "jalali-moment": "^3.3.11",
     "tus-js-client": "^4.0.1",
+    "video.js": "^8.10.0",
+    "videojs-contrib-quality-levels": "^4.1.0",
+    "videojs-hls-quality-selector": "^1.1.4",
     "vue3-persian-datetime-picker": "^1.2.2"
   },
   "overrides": {

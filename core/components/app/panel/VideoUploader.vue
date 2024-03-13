@@ -25,6 +25,10 @@
       small
     >
     </app-video-player>
+    <!-- <app-custom-video-player
+      v-if="/https/.test(uploadedFiles.url) && type == 'video'"
+    >
+    </app-custom-video-player> -->
 
     <app-audio-player
       v-if="type == 'audio' && /https/.test(uploadedFiles.url)"
