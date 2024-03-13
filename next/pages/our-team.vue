@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { useRequestFormStore } from "@core/stores/requestForm";
+import { useRequestFormStore } from "~/stores/requestForm";
 const { $repos } = useNuxtApp();
 const requestFormStore = useRequestFormStore();
 const members = ref([]);

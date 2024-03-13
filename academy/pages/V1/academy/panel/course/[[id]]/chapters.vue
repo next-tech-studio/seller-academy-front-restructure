@@ -177,7 +177,7 @@
 </template>
 <script setup>
 import { useAcademyStore } from "@core/stores/academy";
-import {useSharedPanelStore} from "@core/stores/sharedPanel"
+import {useSharedPanelStore} from "~/stores/sharedPanel"
 let academyStore = useAcademyStore();
 let sharedStore = useSharedPanelStore();
 const localePath = useLocalePath();

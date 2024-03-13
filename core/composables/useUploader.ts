@@ -1,4 +1,4 @@
-import { useToastStore } from "@core/stores/toast";
+import { useToastStore } from "~/stores/toast";
 interface upArguments {
   uploadedFiles: Array<Object> | Object;
   blogContent: Boolean;

@@ -126,7 +126,7 @@
 </template>
 
 <script setup>
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 const props = defineProps({
   items: Array,

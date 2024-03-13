@@ -213,7 +213,7 @@
 
 <script setup>
 const emit = defineEmits(['send'])
-import { useRequestFormStore } from "@core/stores/requestForm";
+import { useRequestFormStore } from "~/stores/requestForm";
 import { useDisplay } from "vuetify";
 import { useAuthStore } from "@core/stores/auth";
 const auth = useAuthStore();

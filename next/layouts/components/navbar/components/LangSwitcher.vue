@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { useLocaleStore } from "@core/stores/locale";
+import { useLocaleStore } from "~/stores/locale";
 const route = useRoute();
 const switchLocalePath = useSwitchLocalePath();
 const localeStore = useLocaleStore();

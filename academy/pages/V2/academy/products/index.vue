@@ -52,8 +52,8 @@
 
 <script setup>
 import { useAuthStore } from "@core/stores/auth";
-import { useFilterStore } from "@core/stores/filter";
-import { useRequestFormStore } from "@core/stores/requestForm";
+import { useFilterStore } from "~/stores/filter";
+import { useRequestFormStore } from "~/stores/requestForm";
 const requestFormStore = useRequestFormStore();
 const { $repos } = useNuxtApp();
 const store = useFilterStore();

@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 const { $repos } = useNuxtApp();
 const route = useRoute();

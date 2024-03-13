@@ -145,18 +145,18 @@
 </template>
 
 <script setup>
-import { usePanelStore } from "@core/stores/panel";
-import TextEditor from "@core/components/app/panel/TextEditor.vue";
-import Divider from "@core/components/app/panel/Divider.vue";
-import BlogContentUploader from "@core/components/app/panel/BlogContentUploader.vue";
-import Banner from "@core/components/app/panel/Banner.vue";
-import Exam from "@core/components/app/panel/Exam.vue";
-import VideoUploader from "@core/components/app/panel/VideoUploader.vue"
-import Reference from "@core/components/app/panel/Reference.vue";
-import Media from "@core/components/app/panel/Media.vue";
+import { usePanelStore } from "~/stores/panel";
+import TextEditor from "~/components/app/panel/TextEditor.vue";
+import Divider from "~/components/app/panel/Divider.vue";
+import BlogContentUploader from "~/components/app/panel/BlogContentUploader.vue";
+import Banner from "~/components/app/panel/Banner.vue";
+import Exam from "~/components/app/panel/Exam.vue";
+import VideoUploader from "~/components/app/panel/VideoUploader.vue"
+import Reference from "~/components/app/panel/Reference.vue";
+import Media from "~/components/app/panel/Media.vue";
 import draggable from "vuedraggable";
 let panelStore = usePanelStore();
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 import { storeToRefs } from "pinia";
 const UPLOAD_ARTICLE_PATH = "/panel/articles/inline_media";

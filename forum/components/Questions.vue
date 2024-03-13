@@ -58,7 +58,7 @@
 </template>
 <script setup>
 const emit = defineEmits(["react:message", "filter:questions"]);
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 let store = useFilterStore();
 let questionReaction = ref({});

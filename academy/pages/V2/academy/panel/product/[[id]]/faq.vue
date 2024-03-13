@@ -148,7 +148,7 @@
 <script setup>
 import { useProductStore } from "@core/stores/product";
 let productStore = useProductStore();
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 import { storeToRefs } from "pinia";
 const route = useRoute();

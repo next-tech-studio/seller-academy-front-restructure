@@ -46,7 +46,7 @@
 
 <script setup>
 import { useDisplay } from "vuetify";
-import { useGlobalStore } from "~/core/stores/global";
+import { useGlobalStore } from "~/stores/global";
 const { mdAndUp } = useDisplay();
 const store = useGlobalStore();
 </script>

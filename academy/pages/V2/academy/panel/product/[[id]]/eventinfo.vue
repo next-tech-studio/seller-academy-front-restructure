@@ -230,7 +230,7 @@
 // import DatePicker from 'vue3-persian-datetime-picker'
 import { useProductStore } from "@core/stores/product";
 let productStore = useProductStore();
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 const { $moment } = useNuxtApp();
 const sharedStore = useSharedPanelStore();
 import { storeToRefs } from "pinia";

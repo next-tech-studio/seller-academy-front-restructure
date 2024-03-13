@@ -107,11 +107,11 @@
 </template>
 
 <script setup>
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
-import { useLocaleStore } from "@core/stores/locale";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
+import { useLocaleStore } from "~/stores/locale";
 const localeStore = useLocaleStore();
 const sharedStore = useSharedPanelStore();
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 let filterStore = useFilterStore();
 const localePath = useLocalePath();
 const { t } = useI18n();

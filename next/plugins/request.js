@@ -1,4 +1,4 @@
-import APIHandler from "~/services/APIHandler";
+import APIHandler from "@core/services/APIHandler";
 import HttpRequest from "~/services/HttpRequest";
 import createRepository from "~/repositories/Repository";
 import { mapper } from "~/mappers";

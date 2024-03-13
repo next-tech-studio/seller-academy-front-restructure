@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { useLocaleStore } from "@core/stores/locale";
+import { useLocaleStore } from "~/stores/locale";
 import { useDisplay } from "vuetify";
 const { isClient } = useSsrCorrection();
 // const { news } = await queryContent("/news").findOne();

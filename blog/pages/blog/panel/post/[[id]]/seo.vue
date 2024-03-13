@@ -121,8 +121,8 @@
 </template>
 
 <script setup>
-import { usePanelStore } from "@core/stores/panel";
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { usePanelStore } from "~/stores/panel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 import { useAuthStore } from "@core/stores/auth";
 const auth = useAuthStore();
 let panelStore = usePanelStore();

@@ -36,7 +36,7 @@
   </v-card>
 </template>
 <script setup>
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 import { useAuthStore } from "@core/stores/auth";
 const auth = useAuthStore();
 const sharedStore = useSharedPanelStore();

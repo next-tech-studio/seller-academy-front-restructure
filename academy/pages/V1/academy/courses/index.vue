@@ -76,7 +76,7 @@
 
 <script setup>
 import { useAuthStore } from "@core/stores/auth";
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 const { $repos } = useNuxtApp();
 const { t } = useI18n();
 const store = useFilterStore();

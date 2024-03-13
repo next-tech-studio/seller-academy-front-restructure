@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 const store = useFilterStore();
 const { $repos } = useNuxtApp();
 const localePath = useLocalePath();

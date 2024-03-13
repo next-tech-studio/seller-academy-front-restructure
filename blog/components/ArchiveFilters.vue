@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 const store = useFilterStore();
 const emit = defineEmits(["filter"]);
 // let filter = ref({ category: [], sort: "recent", tag:"" });

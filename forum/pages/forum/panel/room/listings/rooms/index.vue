@@ -68,8 +68,8 @@
 </template>
 
 <script setup>
-import { useFilterStore } from "@core/stores/filter";
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useFilterStore } from "~/stores/filter";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 const { $repos } = useNuxtApp();
 let filterStore = useFilterStore();

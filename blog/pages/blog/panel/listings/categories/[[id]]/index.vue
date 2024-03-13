@@ -68,9 +68,9 @@
 </template>
 
 <script setup>
-import {useSharedPanelStore} from "@core/stores/sharedPanel";
+import {useSharedPanelStore} from "~/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 let filterStore = useFilterStore();
 const localePath = useLocalePath();
 const { t } = useI18n();

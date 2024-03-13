@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 const UPLOAD_PATH = "/panel/articles/inline_media";
 const props = defineProps({

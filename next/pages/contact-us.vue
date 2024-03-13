@@ -96,7 +96,7 @@
 </template>
 
 <script setup>
-import { useRequestFormStore } from "@core/stores/requestForm";
+import { useRequestFormStore } from "~/stores/requestForm";
 const requestFormStore = useRequestFormStore();
 const showSuccessMessage = ref(false);
 const send = () => {

@@ -151,7 +151,7 @@
 
 <script setup>
 import { useAuthStore } from "@core/stores/auth";
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 import { useDisplay } from "vuetify";
 const { mdAndDown } = useDisplay();
 const store = useFilterStore();

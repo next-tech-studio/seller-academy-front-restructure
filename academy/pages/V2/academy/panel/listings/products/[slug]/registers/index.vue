@@ -91,7 +91,7 @@
 </template>
 
 <script setup>
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 let store = useSharedPanelStore();
 const localePath = useLocalePath();
 const route = useRoute();

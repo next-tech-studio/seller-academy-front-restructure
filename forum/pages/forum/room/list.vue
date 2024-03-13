@@ -100,7 +100,7 @@ const { $repos } = useNuxtApp();
 const localePath = useLocalePath();
 const { isClient } = useSsrCorrection();
 const { t } = useI18n();
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 const store = useFilterStore();
 let page = reactive(1);
 let rooms = ref([]);

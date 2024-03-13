@@ -97,7 +97,7 @@
 </template>
 
 <script setup>
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 import { useDisplay } from "vuetify";
 const localePath = useLocalePath()
 const { mdAndUp } = useDisplay();

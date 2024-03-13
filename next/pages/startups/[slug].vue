@@ -40,8 +40,8 @@
   </div>
 </template>
 <script setup>
-import { useLocaleStore } from "@core/stores/locale";
-import { useRequestFormStore } from "@core/stores/requestForm";
+import { useLocaleStore } from "~/stores/locale";
+import { useRequestFormStore } from "~/stores/requestForm";
 let requestFormStore = useRequestFormStore();
 let localeStore = useLocaleStore();
 const route = useRoute();

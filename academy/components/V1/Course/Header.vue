@@ -13,6 +13,7 @@
         color="transparent"
         class="d-flex flex-column"
         :class="{ 'justify-center w-50': lgAndUp }"
+        style="z-index: 1;"
       >
         <app-breadcrumbs color="text-light" page="article" :data="item" />
         <div class="text-text-light text-h2 text-lg-h1 font-weight-bold mb-2">
@@ -64,7 +65,7 @@
       :alt="item?.title"
       style="flex: 0 0 auto; position: absolute; left: 0"
       :style="lgAndUp ? 'top: 0' : 'bottom: 0'"
-      :class="{ 'w-100': mdAndUp && !lgAndUp }"
+      :class="{ 'w-100': (mdAndUp && !lgAndUp) || smAndDown, 'h-100': lgAndUp }"
     ></v-img>
   </div>
 </template>
@@ -72,7 +73,7 @@
 <script setup>
 import { useDisplay } from "vuetify";
 
-const { lgAndUp, mdAndUp } = useDisplay();
+const { lgAndUp, mdAndUp, smAndDown } = useDisplay();
 const props = defineProps({
   item: Object,
 });

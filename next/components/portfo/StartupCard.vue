@@ -21,7 +21,7 @@
   </v-card>
 </template>
 <script setup>
-import { useLocaleStore } from "@core/stores/locale";
+import { useLocaleStore } from "~/stores/locale";
 let localeStore = useLocaleStore();
 const props = defineProps({
   item: Object,

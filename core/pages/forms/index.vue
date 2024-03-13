@@ -24,6 +24,7 @@
       </v-col>
     </v-row>
     <v-btn
+      v-if="!lastPage"
       flat
       @click="getAllForms"
       class="align-self-center text-button mt-6"
@@ -47,7 +48,7 @@ const getAllForms = async () => {
     })
     .then((res) => {
       Object.assign(items, [...items, ...res.data]);
-      lastPage.value = res.lastPage === res.currentPage ? true : false;
+      lastPage.value = res.last_page === res.current_page ? true : false;
       totalPages = res.total;
       if (res.total != page) page++;
     });

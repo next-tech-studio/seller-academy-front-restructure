@@ -1,8 +1,8 @@
-import APIHandler from "~/services/APIHandler";
+import APIHandler from "@core/services/APIHandler";
 import HttpRequest from "~/services/HttpRequest";
 import createRepository from "~/repositories/Repository";
 import { mapper } from "~/mappers";
-import { useGlobalStore } from "~/core/stores/global";
+import { useGlobalStore } from "~/stores/global";
 import collection from "~/mappers/models/schema/collection";
 import noPaginationCollection from "~/mappers/models/schema/noPaginationCollection";
 

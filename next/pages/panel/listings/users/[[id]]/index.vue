@@ -116,8 +116,8 @@
 </template>
 
 <script setup>
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
-import { useFilterStore } from "@core/stores/filter";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
+import { useFilterStore } from "~/stores/filter";
 const sharedStore = useSharedPanelStore();
 const filterStore = useFilterStore();
 const { t } = useI18n();

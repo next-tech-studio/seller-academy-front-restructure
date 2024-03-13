@@ -17,7 +17,7 @@
 
 <script setup>
 import { useDisplay } from "vuetify";
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 const store = useFilterStore();
 let page = reactive(1);
 let total_pages = reactive();

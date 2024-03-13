@@ -152,9 +152,9 @@
 
 <script setup>
 const { t } = useI18n();
-// import { usePanelStore } from "@core/stores/panel";
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
-import { useFilterStore } from "@core/stores/filter";
+// import { usePanelStore } from "~/stores/panel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
+import { useFilterStore } from "~/stores/filter";
 const sharedStore = useSharedPanelStore();
 let filterStore = useFilterStore();
 // let sharedStore = usePanelStore();

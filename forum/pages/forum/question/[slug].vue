@@ -161,7 +161,7 @@
 </template>
 
 <script setup>
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 import { useAuthStore } from "@core/stores/auth";
 import { useDisplay } from "vuetify";
 let filterStore = useFilterStore();

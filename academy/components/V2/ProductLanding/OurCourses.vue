@@ -61,7 +61,7 @@
 </template>
 
 <script setup>
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 import { useDisplay } from "vuetify";
 const { mdAndUp } = useDisplay();
 const store = useFilterStore();

@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { useRequestFormStore } from "@core/stores/requestForm";
+import { useRequestFormStore } from "~/stores/requestForm";
 import { useAuthStore } from "@core/stores/auth";
 import { useDisplay } from "vuetify";
 const requestFormStore = useRequestFormStore();

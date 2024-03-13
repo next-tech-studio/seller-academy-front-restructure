@@ -63,7 +63,7 @@
 
 <script setup>
 // import { useAcademyStore } from "@core/stores/academy";
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 // const sharedStore = useSharedPanelStore();
 let store = useSharedPanelStore();
 const localePath = useLocalePath();

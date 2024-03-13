@@ -46,7 +46,7 @@
 definePageMeta({
   middleware: ["auth"],
 });
-import { useSharedPanelStore } from '~/core/stores/sharedPanel';
+import { useSharedPanelStore } from '~/stores/sharedPanel';
 const sharedStore = useSharedPanelStore()
 const localePath = useLocalePath();
 const emit = defineEmits(["update:sidebar"]);

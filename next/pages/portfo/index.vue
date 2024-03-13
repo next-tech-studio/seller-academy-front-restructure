@@ -49,11 +49,11 @@
   </v-container>
 </template>
 <script setup>
-import { useRequestFormStore } from "@core/stores/requestForm";
+import { useRequestFormStore } from "~/stores/requestForm";
 const requestFormStore = useRequestFormStore();
 const localePath = useLocalePath();
 const { $repos } = useNuxtApp();
-import { useLocaleStore } from "@core/stores/locale";
+import { useLocaleStore } from "~/stores/locale";
 import { useDisplay } from "vuetify";
 let localeStore = useLocaleStore();
 let statistics = ref([]);

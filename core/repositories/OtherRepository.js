@@ -66,7 +66,7 @@ export default (request) => ({
       method: "get",
       page: payload.page,
       path: "/forms/list",
-      loading: true,
+      loading: {show: payload.page == 1, skeleton: 'loading-indicator'},
       alert: false,
       model: { name: panelTable, collection: true, pagination: true },
     });

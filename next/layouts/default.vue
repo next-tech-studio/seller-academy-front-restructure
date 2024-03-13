@@ -39,7 +39,7 @@
 import Navbar from "./components/navbar/Navbar.vue";
 import Footer from "./components/Footer.vue";
 import Search from "./components/navbar/components/Search.vue";
-import { useLocaleStore } from "@core/stores/locale";
+import { useLocaleStore } from "~/stores/locale";
 import { useDisplay } from "vuetify";
 import { useLoadingStore } from "~/stores/loading";
 import { watch } from "vue";

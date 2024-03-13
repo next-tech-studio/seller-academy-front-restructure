@@ -99,8 +99,8 @@
 <script setup>
 import { useDisplay } from "vuetify";
 import { useAuthStore } from "@core/stores/auth";
-import { useFilterStore } from "@core/stores/filter";
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useFilterStore } from "~/stores/filter";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 const { t } = useI18n();
 const sharedStore = useSharedPanelStore();
 const { lgAndUp } = useDisplay();

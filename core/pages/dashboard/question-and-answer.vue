@@ -89,7 +89,7 @@
   </v-card>
 </template>
 <script setup>
-import { useSharedPanelStore } from "@core/stores/sharedPanel";
+import { useSharedPanelStore } from "~/stores/sharedPanel";
 const sharedStore = useSharedPanelStore();
 const localePath = useLocalePath();
 let questions = ref({});

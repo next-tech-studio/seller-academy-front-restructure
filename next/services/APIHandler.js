@@ -1,5 +1,5 @@
 import LocalStorage from "./LocalStorage";
-import { useLocaleStore } from "@core/stores/locale";
+import { useLocaleStore } from "~/stores/locale";
 
 class APIHandler {
     getRoute(path, params) {

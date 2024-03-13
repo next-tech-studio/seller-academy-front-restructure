@@ -18,7 +18,7 @@
 <script setup>
 import Sidebar from "./components/sidebar/Sidebar.vue";
 import Navbar from "./components/navbar/Navbar.vue";
-import { useLocaleStore } from "@core/stores/locale";
+import { useLocaleStore } from "~/stores/locale";
 let localeStore = useLocaleStore();
 watch(localeStore, async (newValue) => {
   localeStore.setLocale(localeStore.locale);

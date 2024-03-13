@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { useFilterStore } from "@core/stores/filter";
+import { useFilterStore } from "~/stores/filter";
 let store = useFilterStore();
 let props = defineProps({
   modelValue: String,

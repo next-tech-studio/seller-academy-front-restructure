@@ -68,7 +68,7 @@
 </template>
 
 <script setup>
-import { useToastStore } from "~/core/stores/toast";
+import { useToastStore } from "~/stores/toast";
 const toast = useToastStore();
 let search = ref("");
 let chosenUser = ref({});
