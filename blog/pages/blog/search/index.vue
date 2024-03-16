@@ -117,7 +117,9 @@
                 </app-profile-list-item>
               </template>
             </div>
-            <small class="text-text-low-emphasis pa-4" v-else>{{ $t("no_result") }}</small>
+            <small class="text-text-low-emphasis pa-4" v-else>{{
+              $t("no_result")
+            }}</small>
           </template>
 
           <template v-if="tab != 2">
@@ -155,24 +157,36 @@
                 </app-profile-list-item>
               </template>
             </div>
-            <small class="text-text-low-emphasis pa-4" v-else>{{ $t("no_result") }}</small>
+            <small class="text-text-low-emphasis pa-4" v-else>{{
+              $t("no_result")
+            }}</small>
           </template>
 
           <template v-if="tab != 3">
-            <v-card-title class="mt-10">{{
-              $t("top_tags")
-            }}</v-card-title>
-            <v-chip-group v-if="tags.length > 0" selected-class="text-primary" column>
+            <v-card-title class="mt-10">{{ $t("top_tags") }}</v-card-title>
+            <v-chip-group
+              v-if="tags.length > 0"
+              selected-class="text-primary"
+              column
+            >
               <v-chip v-for="tag in tags.slice(0, 10)" :key="tag">
                 {{ tag.title }}
               </v-chip>
             </v-chip-group>
-            <small class="text-text-low-emphasis pa-4" v-else>{{ $t("no_result") }}</small>
+            <small class="text-text-low-emphasis pa-4" v-else>{{
+              $t("no_result")
+            }}</small>
           </template>
 
           <template v-if="tab != 4">
-            <v-card-title class="mt-10">{{ $t("top_categories") }}</v-card-title>
-            <v-chip-group v-if="categories.length > 0" selected-class="text-primary" column>
+            <v-card-title class="mt-10">{{
+              $t("top_categories")
+            }}</v-card-title>
+            <v-chip-group
+              v-if="categories.length > 0"
+              selected-class="text-primary"
+              column
+            >
               <v-chip
                 v-for="category in categories.slice(0, 10)"
                 :key="category"
@@ -180,7 +194,9 @@
                 {{ category.title }}
               </v-chip>
             </v-chip-group>
-            <small class="text-text-low-emphasis pa-4" v-else>{{ $t("no_result") }}</small>
+            <small class="text-text-low-emphasis pa-4" v-else>{{
+              $t("no_result")
+            }}</small>
           </template>
         </v-card>
       </v-col>
@@ -219,6 +235,7 @@ const users = ref([]);
 const articles = ref([]);
 const tags = ref([]);
 const categories = ref([]);
+const showExtra = ref(true);
 
 const follow = (item) => {
   let itemIndex = users.value.findIndex((element) => element.id === item.id);
@@ -248,5 +265,17 @@ Promise.all([
   useAsyncData(async () => await search("user")),
   useAsyncData(async () => await search("article")),
   useAsyncData(async () => await search("tag")),
+  useAsyncData(async () => await search("category")),
 ]);
+
+watch(
+  () => route.query,
+  () => {
+    search("user");
+    search("article");
+    search("tag");
+    search("category");
+  },
+  { deep: true, immediate: true, flush: "pre" }
+);
 </script>
