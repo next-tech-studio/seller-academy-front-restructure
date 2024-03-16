@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12" md="8">
+  <v-container fluid class="mt-16">
+    <v-row justify="space-between">
+      <v-col cols="12" lg="7">
         <v-card>
           <div class="text-h3 mb-6">
             <span class="text-n400">{{ $t("result_for") }}</span>
@@ -39,8 +39,10 @@
                       <v-btn
                         @click="follow(user)"
                         flat
+                        slim
                         size="small"
                         color="primary-base"
+                        :variant="item.isFollowed ? 'outlined' : 'flat'"
                         >{{
                           $t(user.isFollowed ? "unfollow" : "follow")
                         }}</v-btn
@@ -81,86 +83,96 @@
           </v-window>
         </v-card>
       </v-col>
-      <v-col cols="12" md="4">
+      <v-divider vertical class="my-8"></v-divider>
+      <v-col cols="12" md="4" v-if="!mdAndDown">
         <v-card>
-          <template v-if="tab != 1">
+          <template v-if="tab != 0">
             <v-card-title>{{ $t("top_users") }}</v-card-title>
-            <template v-for="(user, index) in users.slice(0, 5)" :key="index">
-              <app-profile-list-item
-                :item="user"
-                subtitle-key="description"
-                :avatar="user.avatarUrl"
-                avatar-size="48"
-                :hover="false"
-                class="mb-4 px-1 rounded"
-              >
-                <template #title>
-                  <div class="ps-1 text-caption font-weight-bold">
-                    {{ user.displayName }}
-                  </div>
-                </template>
-                <template #append>
-                  <v-btn
-                    @click="follow(user)"
-                    flat
-                    size="small"
-                    variant="outlined"
-                    >{{ $t(user.isFollowed ? "unfollow" : "follow") }}</v-btn
-                  >
-                </template>
-              </app-profile-list-item>
-            </template>
+            <div v-if="users.length > 0">
+              <template v-for="(user, index) in users.slice(0, 5)" :key="index">
+                <app-profile-list-item
+                  :item="user"
+                  subtitle-key="description"
+                  :avatar="user.avatarUrl"
+                  avatar-size="48"
+                  :hover="false"
+                  class="mb-4 px-1 rounded"
+                >
+                  <template #title>
+                    <div class="ps-1 text-caption font-weight-bold">
+                      {{ user.displayName }}
+                    </div>
+                  </template>
+                  <template #append>
+                    <v-btn
+                      @click="follow(user)"
+                      color="primary-base"
+                      flat
+                      slim
+                      size="small"
+                      :variant="item.isFollowed ? 'outlined' : 'flat'"
+                      >{{ $t(user.isFollowed ? "unfollow" : "follow") }}</v-btn
+                    >
+                  </template>
+                </app-profile-list-item>
+              </template>
+            </div>
+            <small class="text-text-low-emphasis pa-4" v-else>{{ $t("no_result") }}</small>
           </template>
 
           <template v-if="tab != 2">
             <v-card-title class="mt-10">{{ $t("top_posts") }}</v-card-title>
-            <template
-              v-for="(article, index) in articles.slice(0, 5)"
-              :key="index"
-            >
-              <app-profile-list-item
-                :item="article"
-                subtitle-key="description"
-                avatar-size="48"
-                :hover="false"
-                class="mb-4 px-1 rounded"
+            <div v-if="articles.length > 0">
+              <template
+                v-for="(article, index) in articles.slice(0, 5)"
+                :key="index"
               >
-                <template #prepend>
-                  <div></div>
-                </template>
-                <template #title>
-                  <v-avatar color="n050" size="36">
-                    <v-img
-                      cover
-                      :alt="article.title"
-                      :src="article.bannerUrl"
-                    ></v-img>
-                  </v-avatar>
-                  <small class="ps-1">{{ article.title }}</small>
-                </template>
-                <template v-slot:subtitle>
-                  <div class="font-weight-bold text-body-1">
-                    {{ article.description }}
-                  </div>
-                </template>
-              </app-profile-list-item>
-            </template>
+                <app-profile-list-item
+                  :item="article"
+                  subtitle-key="description"
+                  avatar-size="48"
+                  :hover="false"
+                  class="mb-4 px-1 rounded"
+                >
+                  <template #prepend>
+                    <div></div>
+                  </template>
+                  <template #title>
+                    <v-avatar color="n050" size="36">
+                      <v-img
+                        cover
+                        :alt="article.title"
+                        :src="article.bannerUrl"
+                      ></v-img>
+                    </v-avatar>
+                    <small class="ps-1">{{ article.title }}</small>
+                  </template>
+                  <template v-slot:subtitle>
+                    <div class="font-weight-bold text-body-1">
+                      {{ article.description }}
+                    </div>
+                  </template>
+                </app-profile-list-item>
+              </template>
+            </div>
+            <small class="text-text-low-emphasis pa-4" v-else>{{ $t("no_result") }}</small>
           </template>
 
           <template v-if="tab != 3">
             <v-card-title class="mt-10">{{
-              $t("top_categories")
+              $t("top_tags")
             }}</v-card-title>
-            <v-chip-group selected-class="text-primary" column>
+            <v-chip-group v-if="tags.length > 0" selected-class="text-primary" column>
               <v-chip v-for="tag in tags.slice(0, 10)" :key="tag">
                 {{ tag.title }}
               </v-chip>
             </v-chip-group>
+            <small class="text-text-low-emphasis pa-4" v-else>{{ $t("no_result") }}</small>
           </template>
 
           <template v-if="tab != 4">
-            <v-card-title class="mt-10">{{ $t("top_tags") }}</v-card-title>
-            <v-chip-group selected-class="text-primary" column>
+            <v-card-title class="mt-10">{{ $t("top_categories") }}</v-card-title>
+            <v-chip-group v-if="categories.length > 0" selected-class="text-primary" column>
               <v-chip
                 v-for="category in categories.slice(0, 10)"
                 :key="category"
@@ -168,6 +180,7 @@
                 {{ category.title }}
               </v-chip>
             </v-chip-group>
+            <small class="text-text-low-emphasis pa-4" v-else>{{ $t("no_result") }}</small>
           </template>
         </v-card>
       </v-col>
@@ -176,11 +189,14 @@
 </template>
 
 <script setup>
+import { useDisplay } from "vuetify";
+
 const { isClient } = useSsrCorrection();
 const route = useRoute();
-const tab = ref(0);
+const tab = ref(null);
 let lastPage = ref(false);
 const { $repos } = useNuxtApp();
+const { mdAndDown } = useDisplay();
 const tabs = ref([
   {
     title: "users",
@@ -205,16 +221,13 @@ const tags = ref([]);
 const categories = ref([]);
 
 const follow = (item) => {
-  let itemIndex = users.value.findIndex(
-    (element) => element.id === item.id
-  );
+  let itemIndex = users.value.findIndex((element) => element.id === item.id);
   $repos.other
     .follow({
       body: { followId: item.id, do: item.isFollowed ? "unfollow" : "follow" },
     })
     .then((res) => {
-      users.value[itemIndex].isFollowed =
-        !users.value[itemIndex].isFollowed;
+      users.value[itemIndex].isFollowed = !users.value[itemIndex].isFollowed;
     });
 };
 

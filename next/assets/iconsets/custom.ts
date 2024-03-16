@@ -126,6 +126,7 @@ import radioFalse from "../../components/icons/radioFalse.vue";
 import article from "../../components/icons/article.vue";
 import audio from "../../components/icons/audio.vue";
 import location from "../../components/icons/location.vue"
+import simplePlay from "../../components/icons/simplePlay.vue";
 
 const aliases: any = {
   search,
@@ -253,7 +254,8 @@ const aliases: any = {
   radioFalse,
   article,
   audio,
-  location
+  location,
+  simplePlay
 };
 
 const custom: IconSet = {

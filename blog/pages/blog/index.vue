@@ -30,18 +30,25 @@
     </h2>
   </v-container>
 
-  <div v-if="blog?.categories?.length">
-    <app-filterings
-      arrow-bg-gradient-end="--v-theme-light"
-      @filter="getHomeData"
-      class="mb-2"
-      :filters="filters"
-    >
-    </app-filterings>
-  </div>
+  <v-container v-if="blog?.categories?.length" class="py-lg-0 py-2">
+    <v-row>
+      <v-col cols="12" class="py-lg-0 py-2">
+        <app-filterings
+          arrow-bg-gradient-end="--v-theme-light"
+          @filter="getHomeData"
+          class="mb-2"
+          :filters="filters"
+        >
+        </app-filterings>
+      </v-col>
+    </v-row>
+  </v-container>
   <v-container>
     <v-row>
-      <v-col :cols="blogHomepageHorizontalShow == 'true' ? 9 : 12" class="pa-0">
+      <v-col
+        :cols="blogHomepageHorizontalShow == 'true' && !mdAndDown ? 9 : 12"
+        class="pa-0"
+      >
         <v-container
           id="blog"
           :class="{ 'mb-8': blogHomepageHorizontalShow == 'false' }"
@@ -62,7 +69,8 @@
           ></app-content-card-listing>
         </v-container>
       </v-col>
-      <v-col cols="3" v-if="blogHomepageSidebar == 'true'">
+      <v-divider vertical class="my-8" v-if="blogHomepageSidebar == 'true' && !mdAndDown"></v-divider>
+      <v-col cols="3" v-if="blogHomepageSidebar == 'true' && !mdAndDown">
         <v-card>
           <v-card-title>{{ $t("top_users") }}</v-card-title>
           <template
@@ -97,6 +105,7 @@
                   slim
                   size="small"
                   color="primary-base"
+                  :variant="item.isFollowed ? 'outlined' : 'flat'"
                   >{{ $t(item.isFollowed ? "unfollow" : "follow") }}</v-btn
                 >
               </template>
@@ -143,7 +152,8 @@
 <script setup>
 import { useAuthStore } from "@core/stores/auth";
 import { useFilterStore } from "@core/stores/filter";
-import category from "~/core/mappers/models/schema/category";
+import { useDisplay } from "vuetify";
+const { mdAndDown } = useDisplay();
 const store = useFilterStore();
 const auth = useAuthStore();
 let blog = reactive([]);

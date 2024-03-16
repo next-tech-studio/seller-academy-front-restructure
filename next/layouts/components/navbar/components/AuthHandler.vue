@@ -103,7 +103,42 @@ const goToPanel = () => {
     { external: true }
   );
 };
+const goToDashboard = () => {
+  navigateTo(
+    localePath({
+      path: "/dashboard/user-account",
+    }),
+    { external: true }
+  );
+};
+const goToPageBuilder = (item) => {
+  navigateTo(
+    localePath({
+      name: `blog-panel-post-id-draft`,
+    })
+  );
+};
+// const items = [
+//   {
+//     title: "admin_panel",
+//     icon: "custom:userSolid",
+//     action: goToPanel,
+//     show: auth.hasPermission(["blogs", "community", "academy"]),
+//   },
+//   {
+//     title: "logout",
+//     icon: "custom:logout",
+//     action: logout,
+//     show: true,
+//   },
+// ];
 const items = [
+  {
+    title: "user_dashboard",
+    icon: "custom:dashboard",
+    action: goToDashboard,
+    show: !auth.loggedIn,
+  },
   {
     title: "admin_panel",
     icon: "custom:userSolid",
@@ -111,11 +146,17 @@ const items = [
     show: auth.hasPermission(["blogs", "community", "academy"]),
   },
   {
+    title: "add_new_post",
+    icon: "custom:plus",
+    action: goToPageBuilder,
+    show: auth.hasPermission(["create-article"]),
+  },
+  {
     title: "logout",
     icon: "custom:logout",
     action: logout,
     show: true,
-  },
+  }
 ];
 
 const color = computed(() => {

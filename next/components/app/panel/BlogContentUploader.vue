@@ -22,9 +22,9 @@
           >
             <span class="text-button">{{ $t("add_picture") }}</span>
           </v-btn>
-          <v-btn variant="outlined" class="me-3 mb-3" color="button-primary">
+          <!-- <v-btn variant="outlined" class="me-3 mb-3" color="button-primary">
             <span class="text-button">{{ $t("add_from_gallery") }}</span>
-          </v-btn>
+          </v-btn> -->
         </div>
         <div class="w-100 text-center" v-if="sendingRequest">
           <v-progress-circular
@@ -42,7 +42,7 @@
             cover
             width="100%"
             :height="blogContent ? '80%' : '100%'"
-            :src="uploadedFiles?.url"
+            :src="uploadedFiles?.url || uploadedFiles"
           >
             <div class="d-flex justify-end ma-4">
               <v-btn

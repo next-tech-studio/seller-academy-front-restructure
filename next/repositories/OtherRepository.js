@@ -1,4 +1,6 @@
 import uploader from "~/mappers/models/schema/uploader";
+import userDashboard from "~/mappers/models/dto/userDashboard";
+
 export default (request) => ({
   search(payload) {
     return request({
@@ -141,4 +143,81 @@ export default (request) => ({
       },
     );
   },
+  //user-dashboard
+  userInfo() {
+    return request({
+      name: "userInfo",
+      method: "get",
+      path: "/panel/user/data",
+      loading: true,
+      alert: false,
+      model: { name: userDashboard },
+    });
+  },
+  editUserInfo(payload) {
+    return request(
+      {
+        name: "editUserInfo",
+        method: "put",
+        path: "/panel/user/edit-data",
+        loading: true,
+        alert: false,
+      },
+      payload.body
+    );
+  },
+  comments(payload) {
+    return request({
+      name: "dashboardComments",
+      method: "get",
+      path: "/panel/user/comments/list",
+      query: `?data=${payload?.data}&search=${payload?.search}&page=${payload?.page}`,
+      loading: true,
+      alert: false,
+      model: { name: panelTable, collection: true, pagination: true },
+    });
+  },
+  questionAndAnswers(payload) {
+    return request({
+      name: "dashboardQA",
+      method: "get",
+      path: "/panel/user/questions/list",
+      query: `?data=${payload?.data}&search=${payload?.search}&page=${payload?.page}`,
+      loading: true,
+      alert: false,
+      model: { name: panelTable, collection: true, pagination: true },
+    });
+  },
+  posts(payload) {
+    console.log("poossttss", payload);
+    return request({
+      name: "posts",
+      method: "get",
+      path: "/panel/user/posts/list",
+      query: `?data=${payload?.data}&search=${payload?.search}&page=${payload?.page}`,
+      loading: true,
+      alert: false,
+    });
+  },
+  rooms(payload) {
+    return request({
+      name: "rooms",
+      method: "get",
+      path: "/panel/user/rooms/list",
+      query: `?search=${payload?.search}&page=${payload?.page}`,
+      loading: true,
+      alert: false,
+    });
+  },
+  courses(payload) {
+    return request({
+      name: "courses",
+      method: "get",
+      path: "/panel/user/courses/list",
+      query: `?data=${payload?.data}&search=${payload?.search}&page=${payload?.page}`,
+      loading: true,
+      alert: false,
+    });
+  },
+  //
 });

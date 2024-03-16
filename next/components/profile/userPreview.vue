@@ -10,10 +10,12 @@
       {{ user?.info?.displayName}}
     </v-card-title> -->
     <v-card-text class="text-text-low-emphasisi">
-      <span class="me-4">
+      <span class="me-4" @click="$emit('to:followers')" style="cursor: pointer">
         {{ user?.info?.followersCount }} {{ $t("followers") }}
       </span>
-      <span> {{ user?.info?.followingCount }} {{ $t("following") }} </span>
+      <span @click="$emit('to:followings')" style="cursor: pointer">
+        {{ user?.info?.followingCount }} {{ $t("following") }}
+      </span>
     </v-card-text>
     <v-card-subtitle
       class="text-text-low-emphasis mb-4"
